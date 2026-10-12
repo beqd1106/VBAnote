@@ -1,0 +1,952 @@
+{
+  "lessonId": "l-f3",
+  "lesson": {
+    "title": "ダイアログ表示とその他の関数",
+    "summary": "MsgBoxとInputBoxで利用者とやり取りする方法、IsNumericやCLngなどの判定・変換関数、WorksheetFunctionでExcelの関数を使う方法を学びます。",
+    "estimatedMinutes": 12,
+    "sections": [
+      {
+        "heading": "MsgBox関数でメッセージを表示する",
+        "body": "MsgBoxは、画面に小さなメッセージ窓を出して、利用者に知らせたり確認したりする命令です。ホテルの受付で「お部屋の鍵をお渡ししてよろしいですか」と聞かれて返事をする場面に似ています。書式は MsgBox(メッセージ, ボタンの種類, タイトル) で、ボタンの種類には vbOKOnly（OKのみ）、vbOKCancel（OKとキャンセル）、vbYesNo（はいといいえ）、vbYesNoCancel（はい・いいえ・キャンセル）などの定数を指定します。アイコンには vbInformation（情報）、vbExclamation（警告）、vbCritical（重大なエラー）、vbQuestion（問い合わせ）があり、ボタンとアイコンは + でつないで同時に指定できます。"
+      },
+      {
+        "heading": "MsgBoxの戻り値とステートメントとしての使い方",
+        "body": "利用者がどのボタンを押したかは、MsgBoxの戻り値で分かります。「はい」なら vbYes、「いいえ」なら vbNo、OKなら vbOK、キャンセルなら vbCancel という定数が返ります。戻り値を変数に受け取るときは、ans = MsgBox(\"削除しますか\", vbYesNo) のように引数全体を括弧で囲みます。一方、結果を使わず知らせるだけなら MsgBox \"処理が完了しました\" と括弧なしで書けます。この形をステートメントとしての使い方と呼びます。戻り値を受け取るのに括弧を付けない書き方は、構文エラーになるので注意してください。"
+      },
+      {
+        "heading": "InputBox関数と判定関数",
+        "body": "InputBoxは、入力欄のついた小窓を出して、利用者に文字を入力してもらう関数です。窓口で用紙に名前を書いてもらうイメージです。InputBox(\"お名前は\") のように使い、入力した内容が文字列で返ります。数字を入力しても戻り値は文字列で、［キャンセル］を押すと空文字列（長さ0の文字列）が返ります。入力値の確認には判定関数が役立ちます。IsNumeric は数値として扱えるか、IsDate は日付として扱えるか、IsEmpty は変数に一度も値が入っていないか（Variant型の初期状態か）を、True または False で返します。"
+      },
+      {
+        "heading": "型変換関数とワークシート関数",
+        "body": "型変換関数は、値を別のデータ型に変えます。CStr は文字列型へ、CLng は長整数型（Long）へ、CDate は日付型へ変換します。InputBoxで入力された「100」は文字列なので、計算に使う前に CLng で数値にすると安全です。TypeName(値) は、その値のデータ型名（Integer や String など）を文字列で返します。また、Excelのシート関数は WorksheetFunction を付けて呼び出せます。たとえば WorksheetFunction.Sum(Range(\"A1:A5\")) で、A1からA5の合計が求まります。電卓を借りて計算するようなものです。なお Left や Len などVBA自身の関数には付けません。"
+      }
+    ]
+  },
+  "basic": [
+    {
+      "question": "MsgBox 関数の働きとして正しいものはどれか。",
+      "choices": [
+        "メッセージを画面に表示し、押されたボタンを戻り値で返す",
+        "セルに入力された文字を取得し、文字列として返す",
+        "指定した範囲の数値を合計し、計算結果として返す",
+        "変数に格納された値のデータ型名を、文字列で返す"
+      ],
+      "answer": 0,
+      "explanation": "MsgBox は画面にメッセージ窓を出し、利用者が押したボタンを戻り値で返す関数です。確認や通知に使います。入力欄で文字を受け取るのは InputBox、型名を調べるのは TypeName で、役割が異なります。",
+      "wrong": {
+        "1": "セルの値の取得は Range(...).Value などで行います。MsgBox は窓を出す関数で、セルの値は取得しません。",
+        "2": "範囲の合計は WorksheetFunction.Sum などの仕事です。MsgBox は計算ではなく表示用の関数です。",
+        "3": "データ型名を返すのは TypeName 関数です。MsgBox は型ではなく押したボタンを返します。"
+      },
+      "service": "MsgBoxの基本",
+      "difficulty": 1,
+      "tags": [
+        "MsgBox",
+        "戻り値"
+      ],
+      "beginnerNote": "MsgBox は「メッセージ窓を出す命令」です。"
+    },
+    {
+      "question": "MsgBox のボタンの種類に vbYesNo を指定したとき、表示されるボタンはどれか。",
+      "choices": [
+        "「OK」と「キャンセル」の2つ",
+        "「はい」と「いいえ」の2つ",
+        "「中止」「再試行」「無視」の3つ",
+        "「はい」「いいえ」「キャンセル」"
+      ],
+      "answer": 1,
+      "explanation": "vbYesNo は「はい」と「いいえ」の2つのボタンを表示する定数です。確認の質問に向いています。「OK」と「キャンセル」は vbOKCancel、キャンセルも加えた3つは vbYesNoCancel と、別の定数になります。",
+      "wrong": {
+        "0": "「OK」と「キャンセル」の組合せを表示するのは vbOKCancel です。vbYesNo では出ません。",
+        "2": "「中止」「再試行」「無視」の3つは vbAbortRetryIgnore を指定したときの表示です。",
+        "3": "「はい」「いいえ」「キャンセル」の3つは vbYesNoCancel を指定したときの表示です。"
+      },
+      "service": "ボタンとアイコンの定数",
+      "difficulty": 1,
+      "tags": [
+        "vbYesNo",
+        "ボタン"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "黄色い三角形の警告アイコンを表示する、MsgBox のアイコン定数はどれか。",
+      "choices": [
+        "vbInformation",
+        "vbQuestion",
+        "vbCritical",
+        "vbExclamation"
+      ],
+      "answer": 3,
+      "explanation": "vbExclamation は警告アイコン（黄色い三角形に感嘆符）を表示します。注意を促す場面で使います。vbInformation は情報、vbQuestion は問い合わせ、vbCritical は重大なエラーを表す別のアイコンです。",
+      "wrong": {
+        "0": "vbInformation は「i」マークの情報アイコンです。警告の三角形ではありません。",
+        "1": "vbQuestion は「？」マークの問い合わせアイコンです。警告を示す三角形ではありません。",
+        "2": "vbCritical は赤い「×」の重大エラーのアイコンです。黄色い三角形とは異なります。"
+      },
+      "service": "ボタンとアイコンの定数",
+      "difficulty": 1,
+      "tags": [
+        "vbExclamation",
+        "アイコン"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox の戻り値が vbYes になるのは、利用者が何をしたときか。",
+      "choices": [
+        "「いいえ」ボタンをクリックしたとき",
+        "「OK」ボタンをクリックしたとき",
+        "「はい」ボタンをクリックしたとき",
+        "「キャンセル」ボタンをクリックしたとき"
+      ],
+      "answer": 2,
+      "explanation": "戻り値 vbYes は、利用者が「はい」ボタンを押したことを表します。変数に受け取り、If 文で処理を分けるのが定番です。「いいえ」は vbNo、OK は vbOK、キャンセルは vbCancel と、ボタンごとに別の値が返ります。",
+      "wrong": {
+        "0": "「いいえ」を押したときに返るのは vbNo です。vbYes とは反対の結果になります。",
+        "1": "「OK」を押したときの戻り値は vbOK です。vbYes は「はい」ボタン専用の値です。",
+        "3": "「キャンセル」を押したときの戻り値は vbCancel です。vbYes ではありません。"
+      },
+      "service": "MsgBoxの戻り値",
+      "difficulty": 1,
+      "tags": [
+        "vbYes",
+        "戻り値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "戻り値を使わず、メッセージだけを表示する MsgBox の正しい書き方はどれか。",
+      "choices": [
+        "MsgBox = \"処理が完了しました\"",
+        "MsgBox \"処理が完了しました\"",
+        "ans = MsgBox \"処理が完了しました\"",
+        "Call MsgBox \"処理が完了しました\""
+      ],
+      "answer": 1,
+      "explanation": "結果を使わないときは、括弧を付けずに MsgBox \"メッセージ\" と書くステートメント形式にします。戻り値を受け取るなら括弧が必須です。= で代入する形や、括弧なしの Call は構文エラーになります。",
+      "wrong": {
+        "0": "MsgBox は変数ではなく命令なので、= を使って文字列を代入する書き方はできません。",
+        "2": "戻り値を変数に受け取るときは括弧が必要です。括弧なしで代入する形は構文エラーです。",
+        "3": "Call を使うときも引数は括弧で囲む必要があります。括弧なしの Call は構文エラーです。"
+      },
+      "service": "MsgBoxとステートメント",
+      "difficulty": 1,
+      "tags": [
+        "ステートメント",
+        "MsgBox"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox の戻り値を変数 ans に受け取る、正しい書き方はどれか。",
+      "choices": [
+        "ans = MsgBox \"削除しますか\", vbYesNo",
+        "MsgBox ans(\"削除しますか\", vbYesNo)",
+        "ans = MsgBox(\"削除しますか\", vbYesNo)",
+        "MsgBox(\"削除しますか\", vbYesNo) = ans"
+      ],
+      "answer": 2,
+      "explanation": "戻り値を受け取るときは、引数全体を括弧で囲んで ans = MsgBox(\"削除しますか\", vbYesNo) と書きます。関数の戻り値は = の右辺で受けます。括弧なしの代入や、左辺に MsgBox を置く書き方は誤りです。",
+      "wrong": {
+        "0": "戻り値を代入する形で括弧を付けていないため、構文エラーになります。",
+        "1": "ans を関数のように呼ぶ書き方で、意味が通りません。ans は受け取る側の変数です。",
+        "3": "MsgBox の呼出しを左辺に置く書き方で、代入の向きが逆です。値は右辺から左辺へ入ります。"
+      },
+      "service": "MsgBoxの戻り値",
+      "difficulty": 1,
+      "tags": [
+        "MsgBox",
+        "括弧"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "InputBox で利用者が［キャンセル］をクリックしたとき、戻り値はどれか。",
+      "choices": [
+        "数値の 0 が返る",
+        "空文字列が返る",
+        "Null 値が返る",
+        "Empty 値が返る"
+      ],
+      "answer": 1,
+      "explanation": "InputBox は、［キャンセル］を押すと空文字列（長さ0の文字列）を返します。入力欄を空にして［OK］を押した場合も同じ値になり、両者は区別できません。Null や Empty、0 が返ることはありません。",
+      "wrong": {
+        "0": "戻り値は文字列型なので、数値の 0 が返ることはありません。空文字列とは別物です。",
+        "2": "Null はデータベースなどで使う「無効な値」を表す特殊な値で、InputBox は返しません。",
+        "3": "Empty は未初期化の Variant 変数の状態です。InputBox の戻り値としては返りません。"
+      },
+      "service": "InputBox",
+      "difficulty": 1,
+      "tags": [
+        "InputBox",
+        "キャンセル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "InputBox 関数の戻り値のデータ型として、正しいものはどれか。",
+      "choices": [
+        "Integer（整数型）",
+        "Date（日付型）",
+        "Boolean（真偽型）",
+        "String（文字列型）"
+      ],
+      "answer": 3,
+      "explanation": "InputBox の戻り値は String（文字列型）です。「100」と入力しても数値ではなく文字列の \"100\" として返るため、計算に使うなら CLng などで変換します。Integer や Date、Boolean では返りません。",
+      "wrong": {
+        "0": "数字を入力しても戻り値は整数型になりません。文字列として返るので、変換が必要です。",
+        "1": "日付を入力しても Date 型にはならず、文字列のままです。変換は CDate で行います。",
+        "2": "真偽値で返ることはありません。入力内容はそのまま文字列として返されます。"
+      },
+      "service": "InputBox",
+      "difficulty": 1,
+      "tags": [
+        "InputBox",
+        "String"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "IsNumeric 関数の説明として正しいものはどれか。",
+      "choices": [
+        "値を数値型に変換して返す",
+        "値が数値として扱えるか判定する",
+        "値の桁数を整数で返す",
+        "値が空かどうかを判定する"
+      ],
+      "answer": 1,
+      "explanation": "IsNumeric は、値が数値として扱えるかを True または False で返す判定関数です。InputBox の入力チェックに使います。値の変換は CLng などの型変換関数、空かの判定は IsEmpty が担当します。",
+      "wrong": {
+        "0": "値を数値型に変換して返すのは CLng や CDbl などの型変換関数です。IsNumeric は判定のみです。",
+        "2": "桁数を返す関数ではありません。文字数を数えるのは Len 関数です。",
+        "3": "空かどうかを調べるのは IsEmpty の役割です。IsNumeric は数値かどうかを調べます。"
+      },
+      "service": "判定関数",
+      "difficulty": 1,
+      "tags": [
+        "IsNumeric",
+        "判定"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "IsDate 関数が True を返す値はどれか。",
+      "choices": [
+        "\"2026/13/45\"",
+        "\"2026-10-33\"",
+        "\"2026/10/13\"",
+        "\"10/13/ABC\""
+      ],
+      "answer": 2,
+      "explanation": "IsDate は、日付として扱える値なら True を返します。\"2026/10/13\" は正しい年月日なので True です。13月45日や10月33日は存在せず、英字を含む文字列も日付と認識されないので、他の3つは False です。",
+      "wrong": {
+        "0": "13月45日は存在しない日付なので、IsDate は False を返します。",
+        "1": "10月に33日はないので、IsDate は False を返します。",
+        "3": "英字の ABC を含むため日付として解釈できず、False になります。"
+      },
+      "service": "判定関数",
+      "difficulty": 1,
+      "tags": [
+        "IsDate",
+        "判定"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "IsEmpty 関数が True を返すのは、どの場合か。",
+      "choices": [
+        "Variant型変数に空文字列を代入した",
+        "Variant型変数に数値の 0 を代入した",
+        "Variant型変数に何も代入していない",
+        "Variant型変数に Null を代入した"
+      ],
+      "answer": 2,
+      "explanation": "IsEmpty は、Variant 型の変数に一度も値が入っていない（初期化されていない）ときに True を返します。空文字列や 0、Null は「値が入っている」状態なので False です。空文字列との違いが重要です。",
+      "wrong": {
+        "0": "空文字列は「長さ0の文字列」という値が入った状態です。IsEmpty は False を返します。",
+        "1": "0 も立派な値なので、代入後の IsEmpty は False です。未代入とは別の状態です。",
+        "3": "Null は「無効なデータ」という特殊な値で、代入後の IsEmpty は False になります。"
+      },
+      "service": "判定関数",
+      "difficulty": 1,
+      "tags": [
+        "IsEmpty",
+        "Variant"
+      ],
+      "beginnerNote": "IsEmpty は「まだ何も入れていない箱」かどうかを調べます。"
+    },
+    {
+      "question": "CStr 関数の働きはどれか。",
+      "choices": [
+        "値の文字数を数えて返す",
+        "値を日付型に変換する",
+        "値を文字列型に変換する",
+        "値を Long 型に変換する"
+      ],
+      "answer": 2,
+      "explanation": "CStr は、与えた値を String（文字列型）に変換する関数です。数値を文字列として連結したいときなどに使います。文字数を数えるのは Len、日付型への変換は CDate、Long 型への変換は CLng の役割です。",
+      "wrong": {
+        "0": "文字数を数える関数は Len です。CStr は文字数ではなく型を変換します。",
+        "1": "日付型に変換する関数は CDate です。CStr は文字列型への変換用です。",
+        "3": "Long 型へ変換する関数は CLng です。CStr の変換先は文字列型です。"
+      },
+      "service": "型変換関数",
+      "difficulty": 1,
+      "tags": [
+        "CStr",
+        "型変換"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "CLng 関数の働きはどれか。",
+      "choices": [
+        "値を Long 型に変換する",
+        "文字列の長さを Long 型で返す",
+        "値を String 型に変換する",
+        "値を Date 型に変換する"
+      ],
+      "answer": 0,
+      "explanation": "CLng は、値を Long 型（長整数型）に変換する関数です。InputBox で得た文字列の数字を、計算できる数値にするときに使います。文字列の長さを調べるのは Len、文字列型への変換は CStr です。",
+      "wrong": {
+        "1": "文字列の長さを返すのは Len 関数です。CLng は長さではなく型の変換を行います。",
+        "2": "文字列型へ変換するのは CStr です。CLng の変換先は Long 型です。",
+        "3": "日付型へ変換するのは CDate です。CLng の変換先は長整数型です。"
+      },
+      "service": "型変換関数",
+      "difficulty": 1,
+      "tags": [
+        "CLng",
+        "型変換"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "TypeName 関数の戻り値はどれか。",
+      "choices": [
+        "値のバイト数を表す数値",
+        "変数の名前を表す文字列",
+        "値が数値かを示す真偽値",
+        "値のデータ型名を表す文字列"
+      ],
+      "answer": 3,
+      "explanation": "TypeName は、値のデータ型名（\"Integer\"、\"String\" など）を文字列で返す関数です。変数の中身の型を確かめたいときに使います。数値かどうかを True/False で返すのは IsNumeric で、役割が違います。",
+      "wrong": {
+        "0": "バイト数を返す関数ではありません。TypeName が返すのは型の名前です。",
+        "1": "変数名は返しません。返るのは、変数に入っている値の型名です。",
+        "2": "真偽値で返すのは IsNumeric などの判定関数です。TypeName は型名の文字列です。"
+      },
+      "service": "型変換関数",
+      "difficulty": 1,
+      "tags": [
+        "TypeName",
+        "データ型"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range 型の変数 rng にセル A1:A5 が入っているとき、その合計を求める正しい書き方はどれか。",
+      "choices": [
+        "WorksheetFunction.Sum(rng)",
+        "Worksheet.Sum(rng)",
+        "WorksheetFunctions.Sum(rng)",
+        "Application.Total(rng)"
+      ],
+      "answer": 0,
+      "explanation": "Excelのシート関数は WorksheetFunction.Sum(rng) のように WorksheetFunction を付けて呼びます。VBA には Sum 関数がないので、付けずに書くとエラーです。名前は単数形で、Worksheet とも別物です。",
+      "wrong": {
+        "1": "Worksheet はシートを表すオブジェクトで、Sum メソッドを持ちません。関数の入口は WorksheetFunction です。",
+        "2": "WorksheetFunctions と複数形にしたものは存在しない名前です。正しくは単数形の WorksheetFunction です。",
+        "3": "Application に Total というメソッドはありません。合計は WorksheetFunction.Sum で求めます。"
+      },
+      "service": "ワークシート関数",
+      "difficulty": 1,
+      "tags": [
+        "WorksheetFunction",
+        "Sum"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "confirm": [
+    {
+      "question": "確認用に「はい」「いいえ」のボタンと、問い合わせ（？）のアイコンを同時に表示する書き方はどれか。",
+      "choices": [
+        "MsgBox \"続けますか\", vbYesNo + vbQuestion",
+        "MsgBox \"続けますか\", vbYesNo, vbQuestion",
+        "MsgBox \"続けますか\", vbYesNo * vbQuestion",
+        "MsgBox \"続けますか\", vbQuestion & vbYesNo"
+      ],
+      "answer": 0,
+      "explanation": "ボタンとアイコンの定数は、第2引数で + を使ってつなぎ、vbYesNo + vbQuestion と指定します。定数は数値なので足し算で合成できます。カンマで区切ると第3引数のタイトルになり、意図した表示になりません。",
+      "wrong": {
+        "1": "カンマで区切ると vbQuestion は第3引数のタイトル扱いになり、タイトルに 32 と出ます。",
+        "2": "* で掛けると別の数値になり、意図したボタンとアイコンの組合せになりません。",
+        "3": "& は文字列連結の演算子です。数値を足す + の代わりには使えず、結果が文字列になります。"
+      },
+      "service": "ボタンとアイコンの定数",
+      "difficulty": 2,
+      "tags": [
+        "vbYesNo",
+        "vbQuestion"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードで、利用者が「いいえ」を押したときの動作はどれか。\nIf MsgBox(\"保存しますか\", vbYesNo) = vbYes Then\n  Call Hozon\nEnd If\nMsgBox \"終了\"",
+      "choices": [
+        "Hozon が呼ばれた後に、「終了」が表示される",
+        "実行時エラーになり、「終了」は表示されない",
+        "Hozon は呼ばれず、「終了」だけが表示される",
+        "処理が中断され、「終了」は表示されない"
+      ],
+      "answer": 2,
+      "explanation": "「いいえ」の戻り値は vbNo なので、条件 = vbYes は成立せず、If の中の Hozon は呼ばれません。End If の後の MsgBox \"終了\" は条件に関係なく実行されます。戻り値で処理を分ける基本形です。",
+      "wrong": {
+        "0": "Hozon が呼ばれるのは vbYes のときだけです。vbNo では If の中が実行されません。",
+        "1": "MsgBox の戻り値を条件式に使うのは正しい書き方で、エラーにはなりません。",
+        "3": "If の外側にある MsgBox は常に実行されるので、処理は中断されず表示されます。"
+      },
+      "service": "MsgBoxの戻り値",
+      "difficulty": 2,
+      "tags": [
+        "MsgBox",
+        "If"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox \"保存しました\", vbInformation, \"結果\" を実行したとき、「結果」が表示される場所はどれか。",
+      "choices": [
+        "メッセージ本文の1行目の文字",
+        "メッセージ窓の上部にあるタイトルバー",
+        "ボタンの上に表示される文字",
+        "アイコンの下に出る注釈の文字"
+      ],
+      "answer": 1,
+      "explanation": "MsgBox の第3引数はタイトルで、窓の上部のタイトルバーに表示されます。第1引数が本文、第2引数がボタンとアイコンの指定です。引数の順序は「メッセージ、ボタン、タイトル」と覚えておくと、読み間違えません。",
+      "wrong": {
+        "0": "本文として表示されるのは第1引数の \"保存しました\" です。第3引数は本文ではありません。",
+        "2": "ボタンの文字は第2引数の指定で決まります。第3引数の文字は載りません。",
+        "3": "アイコンの下に注釈を出す機能はありません。第3引数はタイトル専用です。"
+      },
+      "service": "MsgBoxの基本",
+      "difficulty": 2,
+      "tags": [
+        "MsgBox",
+        "タイトル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "vbYesNoCancel を指定した MsgBox で、利用者が右上の［×］ボタンで閉じたときの戻り値はどれか。",
+      "choices": [
+        "vbYes（はい）が返る",
+        "vbNo（いいえ）が返る",
+        "vbIgnore が返る",
+        "vbCancel が返る"
+      ],
+      "answer": 3,
+      "explanation": "［×］ボタンや Esc キーで閉じると、キャンセル扱いとなり vbCancel が返ります。vbYesNoCancel にはキャンセルボタンがあるためです。はい・いいえは明示的に押したときだけ返り、vbIgnore はこの形式にありません。",
+      "wrong": {
+        "0": "「はい」を押したときだけ vbYes が返ります。閉じる操作では返りません。",
+        "1": "「いいえ」を押したときだけ vbNo が返ります。閉じる操作では返りません。",
+        "2": "vbIgnore は vbAbortRetryIgnore のときの「無視」ボタンの値で、この形式にはありません。"
+      },
+      "service": "MsgBoxの戻り値",
+      "difficulty": 2,
+      "tags": [
+        "vbCancel",
+        "vbYesNoCancel"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "文字列型の変数 s に InputBox の戻り値を受けている。［キャンセル］の判定として適切な条件式はどれか。",
+      "choices": [
+        "If s = \"\" Then",
+        "If s = 0 Then",
+        "If IsNull(s) Then",
+        "If s = Nothing Then"
+      ],
+      "answer": 0,
+      "explanation": "キャンセル時は空文字列が返るので、s = \"\" で判定します。入力欄を空のまま［OK］を押した場合も同じ結果になりますが、通常は同じ扱いで問題ありません。Nothing はオブジェクト変数用の値です。",
+      "wrong": {
+        "1": "文字列と数値 0 の比較は、s が数字でない場合に型の不一致エラーになります。",
+        "2": "String 型の変数は Null にならないので、IsNull(s) は常に False になります。",
+        "3": "Nothing は Set で扱うオブジェクト変数の値で、文字列の比較には使えません。"
+      },
+      "service": "InputBox",
+      "difficulty": 2,
+      "tags": [
+        "InputBox",
+        "キャンセル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "InputBox の戻り値 s が数値のときだけ Long 型の変数 n に代入する、正しいコードはどれか。",
+      "choices": [
+        "If IsDate(s) Then n = CLng(s)",
+        "If IsEmpty(s) Then n = CLng(s)",
+        "If IsNumeric(s) Then n = CLng(s)",
+        "If IsNumeric(n) Then s = CLng(s)"
+      ],
+      "answer": 2,
+      "explanation": "数値かどうかを IsNumeric(s) で確かめ、True のときだけ CLng(s) で Long 型に変換します。文字列のまま計算する事故を防げます。判定の対象は入力値 s で、代入先 n ではありません。",
+      "wrong": {
+        "0": "IsDate は日付かどうかの判定です。数字の入力でも日付とは限らず、数値の判定になりません。",
+        "1": "IsEmpty は未代入かの判定です。入力済みの s では False になり、変換されません。",
+        "3": "判定の対象と代入の向きが逆です。調べるのは入力値 s で、結果を n に入れます。"
+      },
+      "service": "判定関数",
+      "difficulty": 2,
+      "tags": [
+        "IsNumeric",
+        "CLng"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "IsNumeric の結果が True になる式はどれか。",
+      "choices": [
+        "IsNumeric(\"12abc\")",
+        "IsNumeric(\"\")",
+        "IsNumeric(\"三十\")",
+        "IsNumeric(\"-3.5\")"
+      ],
+      "answer": 3,
+      "explanation": "IsNumeric は数値として解釈できる文字列で True を返します。\"-3.5\" は符号と小数点を含む正しい数値表記です。英字が混じる文字列、空文字列、漢数字の文字列は数値と認識されず、いずれも False になります。",
+      "wrong": {
+        "0": "英字の abc が混じっているので数値と解釈できず、False になります。",
+        "1": "空文字列は数値として解釈できないため、False を返します。",
+        "2": "漢数字は数値として認識されません。数字は半角などの数字表記が必要で、False になります。"
+      },
+      "service": "判定関数",
+      "difficulty": 2,
+      "tags": [
+        "IsNumeric",
+        "判定"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox TypeName(70000) を実行したとき、表示される文字列はどれか。",
+      "choices": [
+        "Integer が表示される",
+        "Long が表示される",
+        "Double が表示される",
+        "String が表示される"
+      ],
+      "answer": 1,
+      "explanation": "整数リテラルが Integer の範囲（-32768〜32767）を超えると、Long として扱われます。70000 は範囲外なので TypeName は Long を返します。Double は小数を含む値のときに現れる型名です。",
+      "wrong": {
+        "0": "Integer は -32768〜32767 の範囲の整数です。70000 はこれを超えるため Integer になりません。",
+        "2": "Double は小数点を含む数値の型名です。小数のない 70000 は Double にはなりません。",
+        "3": "String は文字列の型名です。引用符で囲んでいない 70000 は数値として扱われます。"
+      },
+      "service": "型変換関数",
+      "difficulty": 3,
+      "tags": [
+        "TypeName",
+        "Long"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox CLng(2.5) を実行したとき、表示される値はどれか。",
+      "choices": [
+        "2 が表示される",
+        "3 が表示される",
+        "2.5 が表示される",
+        "エラーが発生する"
+      ],
+      "answer": 0,
+      "explanation": "CLng は小数を Long 型に変換するとき、四捨五入ではなく偶数への丸め（銀行丸め）を行います。2.5 は偶数の 2 に丸められるため、結果は 2 です。3.5 なら 4 になります。切り捨ての Int や Fix とは別の動きです。",
+      "wrong": {
+        "1": "単純な四捨五入なら 3 ですが、CLng は .5 のとき偶数側へ丸めるため 2 になります。",
+        "2": "CLng の戻り値は整数のLong型です。小数部が残ることはありません。",
+        "3": "小数を渡しても CLng はエラーにならず、整数へ丸めて変換します。"
+      },
+      "service": "型変換関数",
+      "difficulty": 3,
+      "tags": [
+        "CLng",
+        "丸め"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox TypeName(CDate(\"2026/10/13\")) を実行したとき、表示される文字列はどれか。",
+      "choices": [
+        "Date が表示される",
+        "String が表示される",
+        "Long が表示される",
+        "Variant が表示される"
+      ],
+      "answer": 0,
+      "explanation": "CDate は日付として解釈できる文字列を Date 型に変換する関数で、その戻り値の型名は Date です。もとの文字列は String ですが、変換後は日付型に変わっています。Variant は TypeName の結果には現れません。",
+      "wrong": {
+        "1": "String は変換前の型です。CDate を通した結果は文字列ではなく日付型になります。",
+        "2": "Long は整数の型名です。日付は内部で数値ですが、型名は Date と報告されます。",
+        "3": "Variant は変数の宣言上の型で、TypeName は中身の実際の型名を返します。"
+      },
+      "service": "型変換関数",
+      "difficulty": 2,
+      "tags": [
+        "CDate",
+        "TypeName"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range 型の変数 rng にセル範囲 B2:B10 が入っている。その最大値を MsgBox に表示する、正しい書き方はどれか。",
+      "choices": [
+        "MsgBox Application.Max(rng)",
+        "MsgBox WorksheetFunction.Max(rng)",
+        "MsgBox rng.WorksheetFunction",
+        "MsgBox WorksheetFunction.Maximum(rng)"
+      ],
+      "answer": 1,
+      "explanation": "最大値を求めるシート関数 MAX は、WorksheetFunction.Max として呼び出せます。VBA 自身には Max 関数がなく、Application にも Max はありません。Maximum という名前のシート関数も存在しません。",
+      "wrong": {
+        "0": "Application に Max メソッドはありません。シート関数は WorksheetFunction 経由で呼びます。",
+        "2": "Range に WorksheetFunction プロパティはなく、最大値を返す書き方にもなりません。",
+        "3": "シート関数の名前は Max です。Maximum は存在しないため、メソッドが見つからずエラーになります。"
+      },
+      "service": "ワークシート関数",
+      "difficulty": 2,
+      "tags": [
+        "WorksheetFunction",
+        "Max"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Dim v だけを書いて値を代入していない変数について、MsgBox TypeName(v) で表示される文字列はどれか。",
+      "choices": [
+        "Null と表示される",
+        "Integer と表示される",
+        "String と表示される",
+        "Empty と表示される"
+      ],
+      "answer": 3,
+      "explanation": "型を省略した変数は Variant 型で、未代入の間は Empty という状態です。TypeName(v) は Empty を返し、IsEmpty(v) も True になります。Null は「無効な値」を代入した場合の別の状態です。",
+      "wrong": {
+        "0": "Null は Null 値を代入したときの状態です。未代入の変数は Null ではなく Empty です。",
+        "1": "Integer は整数を代入した後の型名です。未代入では整数として扱われません。",
+        "2": "String は文字列を代入した後の型名です。未代入の状態は空文字列とも異なります。"
+      },
+      "service": "判定関数",
+      "difficulty": 3,
+      "tags": [
+        "TypeName",
+        "Empty"
+      ],
+      "beginnerNote": "Empty は「箱はあるが中身が空」の状態です。"
+    },
+    {
+      "question": "削除の確認で、Enter キーを押すと「いいえ」が選ばれる（既定のボタンになる）ようにする指定はどれか。",
+      "choices": [
+        "vbYesNo + vbDefaultButton2",
+        "vbYesNo + vbDefaultButton1",
+        "vbYesNo + vbCritical",
+        "vbYesNo + vbApplicationModal"
+      ],
+      "answer": 0,
+      "explanation": "vbDefaultButton2 は左から2番目のボタンを既定にします。vbYesNo では2番目が「いいえ」なので、誤って Enter を押しても削除されません。既定のボタンの指定には vbDefaultButton1〜4 の定数を使います。",
+      "wrong": {
+        "1": "vbDefaultButton1 は1番目の「はい」を既定にする指定で、誤操作で削除されやすくなります。",
+        "2": "vbCritical はアイコンの指定です。既定のボタンは変わらず、「はい」が選ばれたままです。",
+        "3": "vbApplicationModal は窓を閉じるまで Excel 操作を止める指定で、既定のボタンとは無関係です。"
+      },
+      "service": "ボタンとアイコンの定数",
+      "difficulty": 2,
+      "tags": [
+        "vbDefaultButton2",
+        "既定ボタン"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "InputBox(\"氏名を入力\", \"登録\", \"山田\") の第3引数 \"山田\" の意味はどれか。",
+      "choices": [
+        "ダイアログのタイトルバーに表示される文字",
+        "［キャンセル］を押したときに返る値",
+        "入力欄にあらかじめ表示される初期値",
+        "入力できる文字数の上限を表す名前"
+      ],
+      "answer": 2,
+      "explanation": "InputBox の引数は「メッセージ、タイトル、既定値」の順です。第3引数は入力欄に最初から入っている文字（既定値）で、そのまま［OK］を押すと既定値が返ります。タイトルは第2引数の \"登録\" です。",
+      "wrong": {
+        "0": "タイトルバーに出るのは第2引数の \"登録\" です。第3引数は別の役割を持ちます。",
+        "1": "キャンセル時には空文字列が返ります。第3引数の既定値が返ることはありません。",
+        "3": "入力文字数を制限する引数はありません。第3引数は初期表示の文字です。"
+      },
+      "service": "InputBox",
+      "difficulty": 2,
+      "tags": [
+        "InputBox",
+        "既定値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードで、1つ目の InputBox に 3、2つ目に 4 を入力した。最後の MsgBox に表示される値はどれか。\na = InputBox(\"1つ目\")\nb = InputBox(\"2つ目\")\nMsgBox a + b",
+      "choices": [
+        "7 が表示される",
+        "34 が表示される",
+        "3 + 4 が表示される",
+        "型の不一致エラーになる"
+      ],
+      "answer": 1,
+      "explanation": "InputBox の戻り値は文字列なので、a は \"3\"、b は \"4\" です。文字列どうしの + は連結になり、結果は \"34\" です。足し算にしたいときは CLng(a) + CLng(b) のように数値へ変換します。",
+      "wrong": {
+        "0": "7 になるのは数値どうしの足し算のときです。ここでは両方とも文字列なので連結になります。",
+        "2": "式がそのまま文字として出ることはなく、a と b の中身が連結されて表示されます。",
+        "3": "文字列どうしの + は連結として正しく動くため、エラーにはなりません。"
+      },
+      "service": "InputBox",
+      "difficulty": 3,
+      "tags": [
+        "InputBox",
+        "文字列連結"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "drill": [
+    {
+      "question": "利用者に文字を入力してもらうための、入力欄つきの小窓を表示する関数はどれか。",
+      "choices": [
+        "MsgBox 関数",
+        "TypeName 関数",
+        "InputBox 関数",
+        "IsEmpty 関数"
+      ],
+      "answer": 2,
+      "explanation": "入力欄つきの小窓を出して、利用者が入力した文字列を受け取るのは InputBox 関数です。MsgBox はメッセージを表示してボタンの結果を返す関数で、入力欄は持ちません。TypeName は型名、IsEmpty は未代入の判定用です。",
+      "wrong": {
+        "0": "MsgBox は知らせや確認に使う窓で、文字を入力する欄はありません。",
+        "1": "TypeName は値のデータ型名を返す関数で、窓は表示しません。",
+        "3": "IsEmpty は変数が未代入かを True/False で返す関数で、窓は表示しません。"
+      },
+      "service": "InputBox",
+      "difficulty": 1,
+      "tags": [
+        "InputBox",
+        "用途"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "文字列 \"2026/10/13\" を Date 型の値に変換するときに使う関数はどれか。",
+      "choices": [
+        "CDate 関数",
+        "CLng 関数",
+        "IsDate 関数",
+        "CStr 関数"
+      ],
+      "answer": 0,
+      "explanation": "文字列を Date 型へ変換するのは CDate 関数です。変換前に IsDate で日付として正しいか確認すると安全です。IsDate は判定だけで変換せず、CLng は Long 型、CStr は文字列型への変換用です。",
+      "wrong": {
+        "1": "CLng は Long 型への変換用で、結果は日付型ではなく整数になります。",
+        "2": "IsDate は日付か True/False で判定するだけで、値の型は変換しません。",
+        "3": "CStr は文字列型への変換用です。もともと文字列の値を日付にはできません。"
+      },
+      "service": "型変換関数",
+      "difficulty": 1,
+      "tags": [
+        "CDate",
+        "型変換"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "MsgBox に関する説明として、正しいものはどれか。",
+      "choices": [
+        "vbYesNo のとき、［キャンセル］ボタンも表示される",
+        "vbOKCancel のとき、［OK］を押すと vbOK が返る",
+        "ステートメント形式でも、戻り値を変数に受け取れる",
+        "アイコンの定数は、第3引数のタイトル欄に指定する"
+      ],
+      "answer": 1,
+      "explanation": "vbOKCancel では［OK］と［キャンセル］が表示され、［OK］を押すと vbOK が返ります。vbYesNo にキャンセルはなく、戻り値を受けるには括弧が必要です。アイコン定数はボタンと同じ第2引数に + で足して指定します。",
+      "wrong": {
+        "0": "vbYesNo は「はい」「いいえ」の2つだけです。キャンセルも出すのは vbYesNoCancel です。",
+        "2": "括弧なしのステートメント形式は戻り値を使えません。受け取るには括弧が必要です。",
+        "3": "アイコン定数は第2引数でボタンの定数と + でつなぎます。第3引数はタイトルです。"
+      },
+      "service": "MsgBoxとステートメント",
+      "difficulty": 2,
+      "tags": [
+        "MsgBox",
+        "vbOKCancel"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次の説明のうち、誤っているものはどれか。",
+      "choices": [
+        "IsDate は、日付として扱える値のとき True を返す",
+        "CStr は、与えた値を文字列型へ変換して返す",
+        "TypeName は、値のデータ型名を文字列で返す",
+        "IsEmpty は、空文字列を代入した変数でも True を返す"
+      ],
+      "answer": 3,
+      "explanation": "誤りは IsEmpty の説明です。IsEmpty が True になるのは Variant 変数に一度も値を代入していないときで、空文字列を代入した変数は False を返します。「未代入」と「長さ0の文字列」は別の状態です。",
+      "wrong": {
+        "0": "IsDate の説明は正しく、日付として解釈できる値のときに True を返します。",
+        "1": "CStr の説明は正しく、値を文字列型に変換して返す関数です。",
+        "2": "TypeName の説明は正しく、\"Integer\" や \"String\" などの型名を返します。"
+      },
+      "service": "判定関数",
+      "difficulty": 2,
+      "tags": [
+        "IsEmpty",
+        "空文字列"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "InputBox で入力された日付の文字列 s を、エラーを避けて Date 型に変換する手順として適切なものはどれか。",
+      "choices": [
+        "CDate(s) で変換してから、IsDate で確認する",
+        "IsNumeric(s) で確認してから、CDate(s) で変換する",
+        "IsDate(s) で確認してから、CDate(s) で変換する",
+        "CStr(s) で変換してから、IsDate で確認する"
+      ],
+      "answer": 2,
+      "explanation": "変換の前に IsDate(s) で日付として正しいかを確認し、True のときだけ CDate(s) で変換します。先に変換すると、日付でない文字列で実行時エラーになります。数値の判定は日付の判定とは別です。",
+      "wrong": {
+        "0": "変換が先だと、日付でない入力のときに CDate が実行時エラーを起こします。確認は変換の前です。",
+        "1": "IsNumeric は数値の判定です。日付の文字列は数値でないので、判定が False になります。",
+        "3": "s はすでに文字列なので CStr は意味がなく、変換前の確認という目的も果たしません。"
+      },
+      "service": "判定関数",
+      "difficulty": 2,
+      "tags": [
+        "IsDate",
+        "CDate"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "［キャンセル］の戻り値を受けて処理を中止するコードの空欄に入る定数はどれか。\nIf MsgBox(\"実行しますか\", [　]) = vbCancel Then Exit Sub",
+      "choices": [
+        "vbYesNo + vbQuestion",
+        "vbOKCancel + vbCritical",
+        "vbOKOnly + vbInformation",
+        "vbAbortRetryIgnore"
+      ],
+      "answer": 1,
+      "explanation": "戻り値 vbCancel が得られるのは、キャンセルボタンを含む指定のときです。vbOKCancel なら［OK］と［キャンセル］が出ます。+ vbCritical はアイコンの追加なので問題ありません。他の3つにはキャンセルボタンがありません。",
+      "wrong": {
+        "0": "vbYesNo は「はい」「いいえ」だけなので、vbCancel は返ってきません。",
+        "2": "vbOKOnly は［OK］だけのため、vbCancel が返ることはなく、判定が働きません。",
+        "3": "vbAbortRetryIgnore は中止・再試行・無視のボタンで、キャンセルは含みません。"
+      },
+      "service": "MsgBoxの戻り値",
+      "difficulty": 2,
+      "tags": [
+        "vbOKCancel",
+        "穴埋め"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したとき、表示される文字列はどれか。\nDim n As Long\nn = 5\nMsgBox TypeName(n) & TypeName(\"5\")",
+      "choices": [
+        "IntegerString",
+        "LongInteger",
+        "StringString",
+        "LongString"
+      ],
+      "answer": 3,
+      "explanation": "n は Long 型で宣言されているので TypeName(n) は Long、\"5\" は引用符で囲まれた文字列なので String を返します。& で連結されて LongString です。値が数字でも、型は書き方で決まります。",
+      "wrong": {
+        "0": "n は Long で宣言されており、代入された値が小さくても Integer にはなりません。",
+        "1": "\"5\" は引用符で囲まれた文字列なので、Integer ではなく String になります。",
+        "2": "n は Long 型の変数なので、型名は String ではなく Long になります。"
+      },
+      "service": "型変換関数",
+      "difficulty": 3,
+      "tags": [
+        "TypeName",
+        "データ型"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "何も入力されていない空白のセル A1 について、IsEmpty(Range(\"A1\").Value) と Range(\"A1\").Value = \"\" の結果の組合せはどれか。",
+      "choices": [
+        "どちらの式も True になる",
+        "IsEmpty の式だけ True になる",
+        "空文字列との比較だけ True になる",
+        "どちらの式も False になる"
+      ],
+      "answer": 0,
+      "explanation": "空白のセルの Value は Empty です。そのため IsEmpty は True になり、Empty を空文字列と比較する式も True になります。変数と同じく「未入力」が Empty で、数値比較では 0 とも等しく扱われます。",
+      "wrong": {
+        "1": "比較の式も True になります。Empty は空文字列と比較すると等しいと判定されます。",
+        "2": "IsEmpty の式も、空白セルの Value が Empty なので True になります。",
+        "3": "空白のセルは未入力の Empty なので、どちらの式も False にはなりません。"
+      },
+      "service": "判定関数",
+      "difficulty": 3,
+      "tags": [
+        "IsEmpty",
+        "セル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したとき、MsgBox に表示される内容はどれか。\nMsgBox CLng(\"12\") + CLng(\"30\")",
+      "choices": [
+        "合計の 42 が表示される",
+        "連結の 1230 が表示される",
+        "12 + 30 が表示される",
+        "型の不一致エラーが発生する"
+      ],
+      "answer": 0,
+      "explanation": "CLng は文字列 \"12\" や \"30\" を Long 型の数値に変換します。数値どうしの + は足し算になるので、結果は 42 です。変換しないまま文字列どうしを + すると、連結されて 1230 になります。",
+      "wrong": {
+        "1": "1230 になるのは、文字列のまま + で連結した場合です。CLng で数値化しているため足し算です。",
+        "2": "式がそのまま文字として出ることはなく、計算結果の値が表示されます。",
+        "3": "数字だけの文字列は CLng で変換できるので、型の不一致エラーにはなりません。"
+      },
+      "service": "型変換関数",
+      "difficulty": 2,
+      "tags": [
+        "CLng",
+        "足し算"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "WorksheetFunction を付けなくても呼び出せる、VBA 自身の関数を使った式はどれか。",
+      "choices": [
+        "Sum(Range(\"A1:A3\"))",
+        "Average(Range(\"A1:A3\"))",
+        "Len(Range(\"A1\").Value)",
+        "Max(Range(\"A1:A3\"))"
+      ],
+      "answer": 2,
+      "explanation": "Len は VBA 自身が持つ関数なので、そのまま呼べます。Sum・Average・Max はワークシート関数で、VBA 自身にはありません。WorksheetFunction.Sum のように付けて呼ぶ必要があり、付けないとエラーです。",
+      "wrong": {
+        "0": "Sum はワークシート関数です。WorksheetFunction.Sum と書かないと使えません。",
+        "1": "Average はワークシート関数です。WorksheetFunction.Average と書く必要があります。",
+        "3": "Max はワークシート関数です。WorksheetFunction.Max と書かないと使えません。"
+      },
+      "service": "ワークシート関数",
+      "difficulty": 2,
+      "tags": [
+        "WorksheetFunction",
+        "Len"
+      ],
+      "beginnerNote": null
+    }
+  ]
+}

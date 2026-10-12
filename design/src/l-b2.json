@@ -1,0 +1,951 @@
+{
+  "lessonId": "l-b2",
+  "lesson": {
+    "title": "シートの操作",
+    "summary": "WorksheetsとSheetsの違い、シートの追加・削除・コピー・移動、名前変更、表示と非表示、ActivateとSelect、シートの指定方法を学びます。",
+    "estimatedMinutes": 14,
+    "sections": [
+      {
+        "heading": "WorksheetsとSheets、シートの指定方法",
+        "body": "Excelのブックは、複数のシートが重なったファイルです。VBAでシートの集まりを扱うときは、Worksheetsコレクションを使います。Worksheetsにはワークシートだけが入っていて、グラフシートは含まれません。これに対してSheetsコレクションには、ワークシートとグラフシートの両方が入ります。たとえば、出席簿だけを並べた棚がWorksheets、出席簿と図鑑の両方を並べた棚がSheetsというイメージです。\nシートを1枚だけ取り出すには、Worksheets(\"Sheet1\")のように名前で指定するか、Worksheets(1)のように左から数えた番号（インデックス）で指定します。もう一つ、VBEのプロジェクトエクスプローラーに表示されるコード名（Sheet1など）でも指定できます。コード名はシート見出しの名前を変えても変わりません。"
+      },
+      {
+        "heading": "シートの追加と削除",
+        "body": "シートを増やすにはWorksheets.Addメソッドを使います。引数を何も付けないと、アクティブシートの前に新しいシートが挿入されます。位置を決めたいときは、Before:=で「このシートの前」、After:=で「このシートの後ろ」を指定します。どちらか一方だけを使い、両方を同時に書くことはできません。一番右の端に追加したいときは、After:=Worksheets(Worksheets.Count)と書きます。Worksheets.Countは、ブック内のワークシートの枚数を返すプロパティです。\nシートを消すにはDeleteメソッドを使います。実行すると「データが完全に削除されます」という確認メッセージが出て、マクロが止まります。これを出さないときは、削除の前にApplication.DisplayAlerts = Falseと書き、削除が終わったらTrueに戻します。"
+      },
+      {
+        "heading": "コピー・移動・シート名・表示と非表示",
+        "body": "シートの複製にはCopyメソッド、位置の入れ替えにはMoveメソッドを使います。どちらもBeforeまたはAfterで行き先を指定します。コピーは元のシートが残り、Moveは元の場所からなくなります。BeforeとAfterの両方を省略すると、新しいブックが作られ、そこにそのシートだけが入ります。同じブックにコピーしたシートには、「Sheet1 (2)」のような名前が自動で付きます。\nシート見出しの名前を変えるにはNameプロパティに文字列を代入します。たとえばWorksheets(\"Sheet1\").Name = \"売上\"です。シートを隠したいときはVisibleプロパティにFalse（xlSheetHidden）を入れ、再表示はTrueです。xlSheetVeryHiddenにすると、［再表示］の一覧にも出ず、VBEのプロパティウィンドウからしか戻せません。"
+      },
+      {
+        "heading": "ActivateとSelect",
+        "body": "シートを操作対象にするには、ActivateかSelectを使います。Activateは、指定した1枚のシートをアクティブにします。画面の前面に出る「今見ているシート」を切り替えるイメージで、複数のシートに対して同時には使えません。Selectは選択状態にするメソッドで、Worksheets(Array(\"Sheet1\", \"Sheet2\")).Selectのように配列で渡すと、複数のシートをまとめて選択できます。ただし、複数選択してもアクティブシートは1枚だけです。\n実際のマクロでは、シートを切り替えなくてもWorksheets(\"Sheet1\").Range(\"A1\").Value = 10のように直接書けます。Activateを多用しない方が、速く読みやすいコードになります。非表示のシートはActivateもSelectもできず、エラーになります。"
+      }
+    ]
+  },
+  "basic": [
+    {
+      "question": "Sheetsコレクションに含まれるシートの種類として、正しいものはどれか。",
+      "choices": [
+        "ワークシートとグラフシートの両方",
+        "ワークシートだけで、グラフシートは除く",
+        "グラフシートだけで、ワークシートは除く",
+        "表示中のワークシートだけを集めたもの"
+      ],
+      "answer": 0,
+      "explanation": "Sheetsコレクションは、ブック内のワークシートとグラフシートをまとめて扱います。Worksheetsはワークシートだけを扱い、グラフシートを含みません。グラフシートが無いブックでは枚数が一致するため、違いに気付きにくい点に注意が必要です。",
+      "wrong": {
+        "1": "これはWorksheetsコレクションの説明です。Sheetsはグラフシートも含むので、ワークシートだけではありません。",
+        "2": "グラフシートだけを扱うコレクションはChartsです。Sheetsはワークシートも含んでいるため当てはまりません。",
+        "3": "非表示のシートもSheetsやWorksheetsの要素に含まれ、表示状態では分けられません。状態はVisibleで切り替えます。"
+      },
+      "service": "シートの種類",
+      "difficulty": 1,
+      "tags": [
+        "Sheets",
+        "Worksheets"
+      ],
+      "beginnerNote": "グラフシートは、グラフだけを大きく表示する専用のシートです。"
+    },
+    {
+      "question": "Sheet1の後ろに新しいシートを追加するコードはどれか。",
+      "choices": [
+        "Worksheets.Add Before:=Worksheets(\"Sheet1\")",
+        "Worksheets.Add After:=Worksheets(\"Sheet1\")",
+        "Worksheets.Insert After:=Worksheets(\"Sheet1\")",
+        "Worksheets.Add Next:=Worksheets(\"Sheet1\")"
+      ],
+      "answer": 1,
+      "explanation": "Addメソッドは、After:=で指定したシートの後ろに新しいシートを挿入します。位置指定に使える引数はBeforeとAfterの2つで、どちらか一方だけを書きます。前に入れたいときはBeforeを使うので、混同しないようにします。",
+      "wrong": {
+        "0": "Beforeは指定シートの前に挿入する引数です。Sheet1の左側に追加され、後ろにはなりません。",
+        "2": "WorksheetsコレクションにInsertメソッドはありません。シートの追加はAddメソッドで行います。",
+        "3": "AddメソッドにNextという引数はありません。位置の指定に使えるのはBeforeとAfterだけです。"
+      },
+      "service": "シートの追加",
+      "difficulty": 1,
+      "tags": [
+        "Worksheets.Add",
+        "After"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "引数を付けずに Worksheets.Add を実行したとき、新しいシートが挿入される位置はどれか。",
+      "choices": [
+        "最後のシートの右隣（右端）",
+        "最初のシートの左隣（左端）",
+        "アクティブシートの直後（右隣）",
+        "アクティブシートの直前（左隣）"
+      ],
+      "answer": 3,
+      "explanation": "BeforeもAfterも省略したAddは、アクティブシートの直前、つまり左隣に新しいシートを入れます。位置を決めたい場合はBeforeかAfterを指定します。右端に入れたいときはAfter:=Worksheets(Worksheets.Count)と書く点が試験でよく問われます。",
+      "wrong": {
+        "0": "右端に入るのは、After:=Worksheets(Worksheets.Count)と明示した場合です。引数なしでは右端になりません。",
+        "1": "左端に入れるには、Before:=Worksheets(1)と明示します。引数なしではアクティブシートの位置が基準です。",
+        "2": "アクティブシートの右隣に入れるにはAfter:=ActiveSheetと明示します。引数なしでは左隣になります。"
+      },
+      "service": "シートの追加",
+      "difficulty": 1,
+      "tags": [
+        "Worksheets.Add",
+        "既定の挿入位置"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Sheet2という名前のシートを削除するコードはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet2\").Remove",
+        "Worksheets(\"Sheet2\").Close",
+        "Worksheets(\"Sheet2\").Delete",
+        "Worksheets(\"Sheet2\").Clear"
+      ],
+      "answer": 2,
+      "explanation": "ワークシートを削除するメソッドはDeleteです。削除時は確認メッセージが表示されます。Closeはブックを閉じるメソッド、Clearはセルの内容を消すメソッドで、シートそのものを削除する働きはありません。",
+      "wrong": {
+        "0": "Worksheetオブジェクトに削除用のRemoveメソッドはありません。シートを消すメソッドの名前はDeleteです。",
+        "1": "Closeはブックやウィンドウを閉じるメソッドです。ワークシートにはCloseメソッドがなく、削除にも使えません。",
+        "3": "Clearはセル範囲の内容や書式を消すRangeのメソッドです。シートを削除せず、ワークシートにも存在しません。"
+      },
+      "service": "シートの削除",
+      "difficulty": 1,
+      "tags": [
+        "Delete"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シートの削除時に出る確認メッセージを表示させないために、削除の前に実行する設定はどれか。",
+      "choices": [
+        "Application.ScreenUpdating = False",
+        "Application.EnableEvents = False",
+        "Application.Calculation = xlCalculationManual",
+        "Application.DisplayAlerts = False"
+      ],
+      "answer": 3,
+      "explanation": "DisplayAlertsをFalseにすると、削除の確認などのメッセージが出ずに処理が進みます。確認メッセージには既定の選択肢が自動で適用されます。削除後はTrueに戻しておかないと、以降のマクロでも警告が出なくなります。",
+      "wrong": {
+        "0": "ScreenUpdatingは画面の再描画を止める設定で、速度改善に使います。確認メッセージの表示には影響しません。",
+        "1": "EnableEventsはイベントプロシージャの実行を止める設定です。確認メッセージは抑止されず、削除時も表示されます。",
+        "2": "Calculationは再計算を手動にする設定で、数式の計算タイミングが変わります。確認メッセージとは関係がありません。"
+      },
+      "service": "シートの削除",
+      "difficulty": 1,
+      "tags": [
+        "DisplayAlerts",
+        "確認メッセージ"
+      ],
+      "beginnerNote": "終わったらApplication.DisplayAlerts = Trueに戻すのが基本です。"
+    },
+    {
+      "question": "Worksheets(\"Sheet1\").Copy のようにBeforeとAfterの両方を省略して実行すると、どうなるか。",
+      "choices": [
+        "同じブックの右端にSheet1のコピーが追加される",
+        "同じブックのアクティブシートの前にコピーが入る",
+        "新しいブックが作られ、Sheet1のコピーだけが入る",
+        "コピー先が決まらないので実行時エラーになる"
+      ],
+      "answer": 2,
+      "explanation": "Copyメソッドで行き先を省略すると、新しいブックが自動で作られ、そこにコピーされたシートだけが入ります。同じブック内で複製するときはBeforeかAfterが必要です。Moveも同様に省略すると新しいブックへ移動します。",
+      "wrong": {
+        "0": "同じブックの右端に入れるのは、After:=Worksheets(Worksheets.Count)を指定した場合です。省略時は別ブックになります。",
+        "1": "アクティブシートの前に入るのはAddメソッドの既定動作です。Copyは省略すると新しいブックを作ります。",
+        "3": "引数の省略はエラーになりません。BeforeとAfterは省略可能で、省略すると新しいブックへコピーされます。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 1,
+      "tags": [
+        "Copy",
+        "新規ブック"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Sheet1のシート見出しを「売上」に変更するコードはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet1\").Caption = \"売上\"",
+        "Worksheets(\"Sheet1\").Title = \"売上\"",
+        "Worksheets(\"Sheet1\").Name = \"売上\"",
+        "Worksheets(\"Sheet1\").Rename \"売上\""
+      ],
+      "answer": 2,
+      "explanation": "シート名の取得と変更にはNameプロパティを使い、文字列を代入すると見出しが変わります。ただし、コード名（VBEの（オブジェクト名））は変わりません。他のオブジェクトで使うCaptionやTitleと混同しないようにします。",
+      "wrong": {
+        "0": "Captionはフォームやコントロールの表示文字列に使うプロパティです。ワークシートの見出し名には使えません。",
+        "1": "Titleはグラフなどのタイトルを扱うプロパティです。ワークシートにはTitleがなく、見出しは変更できません。",
+        "3": "WorksheetにRenameメソッドはありません。名前の変更はメソッドではなく、Nameプロパティへの代入で行います。"
+      },
+      "service": "シート名と枚数",
+      "difficulty": 1,
+      "tags": [
+        "Name",
+        "シート名"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブック内のワークシートの枚数を求める式はどれか。",
+      "choices": [
+        "Worksheets.Count",
+        "Worksheets.Length",
+        "Worksheets.Number",
+        "Worksheets.Size"
+      ],
+      "answer": 0,
+      "explanation": "コレクションの要素数を返すのはCountプロパティです。Worksheets.Countはワークシートの枚数、Sheets.Countはグラフシートを含む枚数を返します。最後のシートはWorksheets(Worksheets.Count)で指定できます。",
+      "wrong": {
+        "1": "Lengthは配列や文字列の長さを返す他言語の名前で、VBAのコレクションにはありません。使うとエラーになります。",
+        "2": "NumberはErrオブジェクトのエラー番号などに使う名前です。Worksheetsコレクションにはこのプロパティがありません。",
+        "3": "SizeはFontのサイズなどに使う名前です。Worksheetsコレクションにはなく、枚数を求める用途にも使えません。"
+      },
+      "service": "シート名と枚数",
+      "difficulty": 1,
+      "tags": [
+        "Count",
+        "Worksheets"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Sheet3を非表示にするコードとして正しいものはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet3\").Hidden = True",
+        "Worksheets(\"Sheet3\").Display = False",
+        "Worksheets(\"Sheet3\").Enabled = False",
+        "Worksheets(\"Sheet3\").Visible = False"
+      ],
+      "answer": 3,
+      "explanation": "シートの表示と非表示はVisibleプロパティで切り替えます。FalseはxlSheetHiddenと同じで、再表示はTrueです。ほかにxlSheetVeryHiddenがあり、［再表示］の一覧に出ない深い隠し方になります。",
+      "wrong": {
+        "0": "WorksheetにHiddenプロパティはありません。行や列を隠すときにRowsやColumnsで使う名前と混同しています。",
+        "1": "WorksheetにDisplayプロパティはありません。表示の切り替えにはVisibleを使います。",
+        "2": "WorksheetにEnabledプロパティはありません。ActiveXコントロールの有効無効に使う名前と混同した書き方です。"
+      },
+      "service": "表示と非表示",
+      "difficulty": 1,
+      "tags": [
+        "Visible",
+        "非表示"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックに4枚のシートがあるとき、左から2番目のシートを指定する式はどれか。",
+      "choices": [
+        "Worksheets(2)",
+        "Worksheets(1)",
+        "Worksheets(0)",
+        "Worksheets(4)"
+      ],
+      "answer": 0,
+      "explanation": "インデックスは左端のシートが1で、右へ1ずつ増えます。左から2番目はWorksheets(2)です。0は存在しない番号でエラーになり、4は右端のシートを指します。最後のシートを番号で指すと、枚数が変わったときに書き換えが必要になるため、Worksheets.Countと組み合わせる方法もあります。",
+      "wrong": {
+        "1": "Worksheets(1)は左から1番目、つまり左端のシートです。2番目ではありません。",
+        "2": "インデックスは1から始まります。Worksheets(0)は存在しない番号で、実行時エラーになります。",
+        "3": "4枚あるブックでWorksheets(4)は4番目、つまり右端のシートを指します。"
+      },
+      "service": "シートの指定",
+      "difficulty": 1,
+      "tags": [
+        "インデックス",
+        "Worksheets(n)"
+      ],
+      "beginnerNote": "VBAのコレクションは、Worksheetsに限らず1から数えます。"
+    },
+    {
+      "question": "Activateメソッドの働きとして正しいものはどれか。",
+      "choices": [
+        "複数のシートをまとめて選択状態にする",
+        "指定したシートを非表示の状態にする",
+        "指定したシートを新しいブックへ移す",
+        "指定したシートを1枚だけアクティブにする"
+      ],
+      "answer": 3,
+      "explanation": "Activateは、指定したシート1枚をアクティブにして画面の前面に出します。複数のシートを同時に選ぶ処理はSelectで行います。両者を混同せず、用途で使い分けます。どちらも、非表示のシートに対して実行するとエラーになります。",
+      "wrong": {
+        "0": "複数シートをまとめて選択するのはSelectの使い方です。ActivateはArrayで複数を渡す使い方ができません。",
+        "1": "非表示にするのはVisibleプロパティの役割です。Activateはシートの表示状態を変更しません。",
+        "2": "新しいブックへ移すのは、行き先を省略したMoveやCopyの動作です。Activateにその働きはありません。"
+      },
+      "service": "ActivateとSelect",
+      "difficulty": 1,
+      "tags": [
+        "Activate",
+        "アクティブシート"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シートのコード名の説明として正しいものはどれか。",
+      "choices": [
+        "シート見出しに表示される名前で、Nameの変更に合わせてコード名も変わる",
+        "シートの左からの順番を表す番号で、移動のたびに値が変わる",
+        "VBEのプロジェクトエクスプローラーに表示される名前で、見出しを変えても変わらない",
+        "ブックの保存時に付くファイル名で、拡張子を除いた部分を指す"
+      ],
+      "answer": 2,
+      "explanation": "コード名は、VBEのプロジェクトエクスプローラーにSheet1のように表示されるオブジェクト名です。マクロ内でそのまま書いて指定でき、見出しを変えてもコード名は変わらないため、名前変更に強い指定方法です。",
+      "wrong": {
+        "0": "見出しの名前を表すのはNameプロパティです。Nameを変更してもコード名は変わらないので、別物です。",
+        "1": "シートの順番を表す番号はインデックスです。移動すると値が変わる点は正しいものの、コード名ではありません。",
+        "3": "ブックのファイル名はWorkbookのNameで表します。シートのコード名とは関係がありません。"
+      },
+      "service": "シートの指定",
+      "difficulty": 1,
+      "tags": [
+        "コード名",
+        "オブジェクト名"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Worksheets(\"Sheet1\").Move After:=Worksheets(\"Sheet3\") を実行した結果はどれか。",
+      "choices": [
+        "Sheet3がSheet1の後ろへ移動する",
+        "Sheet1がSheet3の後ろへ移動し、元の位置にはなくなる",
+        "Sheet1の複製がSheet3の後ろに作られ、元のSheet1も残る",
+        "Sheet1がSheet3の後ろへ移動し、元の位置に空のシートが残る"
+      ],
+      "answer": 1,
+      "explanation": "Moveはシートの位置を変えるメソッドで、After:=で指定したシートの後ろへ移します。元の位置には残りません。複製して元も残したいときはCopyを使います。移動するのはメソッドを呼んだ側のSheet1です。",
+      "wrong": {
+        "0": "移動するのはメソッドを呼び出したSheet1です。引数で指定したSheet3は基準になるだけで、動きません。",
+        "2": "複製を作って元も残すのはCopyメソッドの動作です。Moveは元の位置からシートがなくなります。",
+        "3": "Moveで空のシートが残ることはありません。シートは1枚のまま、位置だけが変わります。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 1,
+      "tags": [
+        "Move",
+        "After"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "一番右端（最後のシートの後ろ）に新しいシートを追加するコードはどれか。",
+      "choices": [
+        "Worksheets.Add Before:=Worksheets(Worksheets.Count)",
+        "Worksheets.Add After:=Worksheets(1)",
+        "Worksheets.Add Count:=Worksheets.Count",
+        "Worksheets.Add After:=Worksheets(Worksheets.Count)"
+      ],
+      "answer": 3,
+      "explanation": "Worksheets.Countは枚数なので、Worksheets(Worksheets.Count)は最後のシートを指します。その後ろに入れるAfter:=を組み合わせると右端に追加できます。Countは枚数を返すプロパティで、AddのCount引数とは別物です。",
+      "wrong": {
+        "0": "Beforeは最後のシートの前に入れるため、新しいシートは右端のひとつ手前になります。",
+        "1": "Worksheets(1)は左端のシートです。その後ろは左から2番目の位置で、右端にはなりません。",
+        "2": "AddのCount引数は追加するシートの枚数を指定します。位置の指定ではなく、枚数分のシートが増えます。"
+      },
+      "service": "シートの追加",
+      "difficulty": 1,
+      "tags": [
+        "Worksheets.Count",
+        "Worksheets.Add"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Sheet2を複製して、Sheet3の前に置くコードはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet2\").Move Before:=Worksheets(\"Sheet3\")",
+        "Worksheets(\"Sheet2\").Copy After:=Worksheets(\"Sheet3\")",
+        "Worksheets(\"Sheet3\").Copy Before:=Worksheets(\"Sheet2\")",
+        "Worksheets(\"Sheet2\").Copy Before:=Worksheets(\"Sheet3\")"
+      ],
+      "answer": 3,
+      "explanation": "複製はCopyメソッドで、行き先は呼び出した側の複製が置かれる位置としてBefore:=に指定します。Sheet2.CopyにBefore:=Sheet3と書けば、Sheet3の前に複製が入ります。Moveは複製ではなく移動です。",
+      "wrong": {
+        "0": "Moveは元のシートを動かすメソッドで、複製は作られません。複製したいのでCopyを使います。",
+        "1": "After:=は指定シートの後ろに複製を置きます。Sheet3の前ではなく後ろになってしまいます。",
+        "2": "これはSheet3を複製してSheet2の前に置く式です。複製の元と基準のシートが逆になっています。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 1,
+      "tags": [
+        "Copy",
+        "Before"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "confirm": [
+    {
+      "question": "あるブックには、ワークシートが3枚、グラフシートが1枚ある。Worksheets.Count と Sheets.Count の値の組合せとして正しいものはどれか。",
+      "choices": [
+        "Worksheets.Countは4、Sheets.Countは3",
+        "Worksheets.Countは4、Sheets.Countは4",
+        "Worksheets.Countは3、Sheets.Countは3",
+        "Worksheets.Countは3、Sheets.Countは4"
+      ],
+      "answer": 3,
+      "explanation": "Worksheetsはワークシートだけなので3、Sheetsはグラフシートも含めた全体なので3+1=4になります。グラフシートの有無で値が変わるのが両者の違いで、試験では枚数の組合せとして問われやすい点です。",
+      "wrong": {
+        "0": "Worksheetsはグラフシートを数えないため4にはなりません。数え方が逆になっています。",
+        "1": "Worksheets.Countにグラフシートは含まれず3です。両方とも4とするとコレクションの区別がなくなります。",
+        "2": "Sheetsはグラフシートも含むため4になります。ワークシートだけの3は、Worksheets側の値です。"
+      },
+      "service": "シートの種類",
+      "difficulty": 2,
+      "tags": [
+        "Count",
+        "Sheets"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したとき、名前が「予備」に変わるシートはどれか。\nWorksheets(\"Sheet1\").Copy After:=Worksheets(Worksheets.Count)\nActiveSheet.Name = \"予備\"",
+      "choices": [
+        "コピーで新しく作られたシート",
+        "コピー元のSheet1",
+        "実行前にアクティブだったシート",
+        "どのシートも変わらずエラーになる"
+      ],
+      "answer": 0,
+      "explanation": "Copyで作られた新しいシートは、コピー直後にアクティブになります。そのため次行のActiveSheetは新しいシートを指し、名前が「予備」になります。コピー元のSheet1の名前は変わりません。コピー後の対象を問う形でよく出ます。",
+      "wrong": {
+        "1": "コピー元は名前の変更対象になりません。ActiveSheetは、コピー直後にアクティブとなった新しいシートです。",
+        "2": "実行前のアクティブシートは、コピーによって新しいシートに切り替わるため、ActiveSheetの対象ではありません。",
+        "3": "ActiveSheetには新しいシートが入っており、名前の代入も正しい書き方です。エラーにはならず、そのまま実行されます。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 2,
+      "tags": [
+        "Copy",
+        "ActiveSheet"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "追加したシートを変数wsで受け取る書き方として、構文が正しいものはどれか。",
+      "choices": [
+        "Set ws = Worksheets.Add After:=Worksheets(1)",
+        "ws = Worksheets.Add(After:=Worksheets(1))",
+        "Set ws = Worksheets.Add(After:=Worksheets(1))",
+        "Set ws = Worksheets.Add(After = Worksheets(1))"
+      ],
+      "answer": 2,
+      "explanation": "Addの戻り値を受け取るときは、引数全体を括弧で囲みます。さらに、オブジェクトを変数に入れるのでSetも必要です。名前付き引数は:=で書きます。括弧なしでSetの右辺に書くと構文エラーになり、実行できません。",
+      "wrong": {
+        "0": "戻り値を使うのに引数を括弧で囲んでいません。この形はAddを単独の命令として呼ぶときの書き方です。",
+        "1": "オブジェクトを代入するSetが抜けています。Setなしでは実行時エラーとなり、変数にシートを入れられません。",
+        "3": "名前付き引数は:=で結ぶ決まりです。=だけだと比較式として扱われ、意図した引数の指定になりません。"
+      },
+      "service": "シートの追加",
+      "difficulty": 2,
+      "tags": [
+        "Set",
+        "戻り値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Application.DisplayAlerts = False を設定したあとで、Worksheets(\"Sheet2\").Delete を実行すると、どうなるか。",
+      "choices": [
+        "確認なしでSheet2が削除される",
+        "確認なしで削除が取り消され、Sheet2が残る",
+        "確認なしでSheet2が非表示になる",
+        "確認が出ないかわりにエラーで停止する"
+      ],
+      "answer": 0,
+      "explanation": "DisplayAlertsがFalseのとき、Excelは確認メッセージの既定の応答を自動で選びます。削除では［削除］に相当する応答が選ばれ、シートがそのまま削除されます。元に戻せない操作なので、使う前に必要なシートか確認します。",
+      "wrong": {
+        "1": "削除が取り消されるわけではありません。既定の応答は削除の実行側で、シートは残りません。",
+        "2": "非表示にするのはVisibleプロパティの働きです。警告の抑止は、Deleteの結果を非表示に変えません。",
+        "3": "確認が出なくても、削除そのものは正常に実行されます。エラーになるのは、最後の1枚を削除するような場合です。"
+      },
+      "service": "シートの削除",
+      "difficulty": 2,
+      "tags": [
+        "DisplayAlerts",
+        "Delete"
+      ],
+      "beginnerNote": "削除は元に戻せません。実行前にシート名をよく確認します。"
+    },
+    {
+      "question": "Visibleプロパティにxlの定数 xlSheetVeryHidden を設定したシートの説明として、正しいものはどれか。",
+      "choices": [
+        "VBAからでも再表示できず、ブックを開き直す必要がある",
+        "［再表示］の一覧に出ず、VBAかVBEのプロパティから再表示する",
+        "通常の非表示と同じで、［再表示］の一覧から選べる",
+        "シート見出しだけが消え、シートの内容は表示され続ける"
+      ],
+      "answer": 1,
+      "explanation": "xlSheetVeryHiddenは、Excelの［再表示］ダイアログの一覧に表示されない深い非表示です。再表示するにはVBAでVisibleを変更するか、VBEのプロパティウィンドウでVisibleを変えます。通常の非表示はxlSheetHiddenです。",
+      "wrong": {
+        "0": "VBAからVisibleをTrueにすれば再表示できます。ブックを開き直す必要はありません。",
+        "2": "［再表示］の一覧から選べるのはxlSheetHiddenのシートです。VeryHiddenは一覧に出ません。",
+        "3": "見出しだけが消える仕組みではありません。シート全体が表示対象から外れ、画面には出てきません。"
+      },
+      "service": "表示と非表示",
+      "difficulty": 2,
+      "tags": [
+        "xlSheetVeryHidden",
+        "Visible"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックに表示されているシートが Sheet1 の1枚だけ（他は非表示）のとき、Worksheets(\"Sheet1\").Visible = False を実行するとどうなるか。",
+      "choices": [
+        "Sheet1が非表示になり、ブックにはシートが残らない",
+        "実行時エラーとなり、Sheet1は表示されたままになる",
+        "非表示の別のシートが自動で再表示される",
+        "Sheet1は非表示になるが、保存時にエラーが出る"
+      ],
+      "answer": 1,
+      "explanation": "ブックには、表示されているシートが最低1枚必要です。表示中の最後の1枚を非表示にしようとすると実行時エラーになり、設定は反映されません。先に別のシートをVisible = Trueにしてから隠す順番にします。",
+      "wrong": {
+        "0": "表示シートがゼロになる状態は作れません。そのため、非表示の設定自体が受け付けられません。",
+        "2": "別のシートが自動で再表示されることはありません。処理がエラーで止まり、自動の救済もありません。",
+        "3": "非表示になるわけではありません。実行時にエラーとなるため、保存まで進む前に処理が止まります。"
+      },
+      "service": "表示と非表示",
+      "difficulty": 3,
+      "tags": [
+        "Visible",
+        "実行時エラー"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行した結果として正しいものはどれか。\nWorksheets(Array(\"Sheet1\", \"Sheet3\")).Select",
+      "choices": [
+        "Sheet1とSheet3が同時に選択される",
+        "Sheet1だけが選択され、Sheet3は無視される",
+        "Sheet1とSheet3の複製が作られる",
+        "Arrayは使えないため構文エラーになる"
+      ],
+      "answer": 0,
+      "explanation": "Worksheetsの引数にArrayでシート名を渡すと、複数のシートをまとめて指定できます。それにSelectを続けると、全シートが選択され、作業グループの状態になります。単独のActivateでは、このような複数指定はできません。",
+      "wrong": {
+        "1": "Arrayで渡した名前はすべて選択対象です。先頭だけが選ばれて、あとが無視されることはありません。",
+        "2": "Selectは選択するだけで、複製は作りません。複製を作るのはCopyメソッドの働きです。",
+        "3": "Arrayで複数のシートを指定する書き方は正しい構文です。構文エラーにはならず、実行できます。"
+      },
+      "service": "ActivateとSelect",
+      "difficulty": 2,
+      "tags": [
+        "Select",
+        "Array"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Sheet2が非表示のとき、Sheet2に対して実行するとエラーになるものはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet2\").Range(\"A1\").Value = 5",
+        "Worksheets(\"Sheet2\").Name = \"集計\"",
+        "Worksheets(\"Sheet2\").Activate",
+        "Worksheets(\"Sheet2\").Range(\"A1\").Copy"
+      ],
+      "answer": 2,
+      "explanation": "非表示のシートは、Activateでアクティブにすることも、Selectで選択することもできずエラーになります。一方、セルへの値の代入やNameの変更、Copyのようにシートを切り替えずに行う操作は、非表示のままでも実行できます。",
+      "wrong": {
+        "0": "非表示でもセルへの値の代入はできます。シートをアクティブにしなくても、直接参照して書き込めます。",
+        "1": "非表示でもNameの変更はできます。見出しの名前はシートの状態と関係なく変更できます。",
+        "3": "非表示のシートのセルをコピーすることは可能です。シートを選択状態にする必要がないためです。"
+      },
+      "service": "ActivateとSelect",
+      "difficulty": 2,
+      "tags": [
+        "Activate",
+        "非表示シート"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックにSheet1という名前のシートがあるとき、次のコードで追加されるシートの名前として、通常表示されるものはどれか。\nWorksheets(\"Sheet1\").Copy After:=Worksheets(\"Sheet1\")",
+      "choices": [
+        "Copy of Sheet1",
+        "Sheet1のコピー",
+        "Sheet1_Copy",
+        "Sheet1 (2)"
+      ],
+      "answer": 3,
+      "explanation": "同じブックにシートをコピーすると、名前の末尾に空白と括弧つきの連番が付き、Sheet1 (2)のようになります。同じ名前のシートは1つのブックに作れないため自動で付く名前で、後からNameで変更できます。",
+      "wrong": {
+        "0": "Copy ofを付ける形式はExcelのシートでは使われません。連番は括弧つきで付きます。",
+        "1": "コピーを意味する日本語が付くことはありません。同名の重複を避けるため、番号が付与されます。",
+        "2": "アンダースコアの形式は使われません。Excelは空白と括弧で連番を表します。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 2,
+      "tags": [
+        "Copy",
+        "シート名"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックに左から順にSheet1、Sheet2、Sheet3がある。次のコードを実行したあと、左から3番目のシートはどれか。\nWorksheets.Add After:=Worksheets(1)\nWorksheets.Add Before:=Worksheets(1)",
+      "choices": [
+        "1回目のAddで追加したシート",
+        "2回目のAddで追加したシート",
+        "もとから左端にあったSheet1",
+        "もとから2番目にあったSheet2"
+      ],
+      "answer": 0,
+      "explanation": "1回目のAddでSheet1の後ろに新シート(A)が入り、Sheet1、A、Sheet2、Sheet3の順になります。2回目で先頭に新シート(B)が入り、B、Sheet1、A、Sheet2、Sheet3となるので、3番目は1回目に追加したAです。",
+      "wrong": {
+        "1": "2回目のシートは、Before:=Worksheets(1)により左端に入ります。したがって1番目の位置になります。",
+        "2": "Sheet1は2回目の追加で右へずれ、左から2番目になります。3番目ではありません。",
+        "3": "Sheet2は2回の追加で右へずれ、左から4番目になります。3番目にはなりません。"
+      },
+      "service": "シートの追加",
+      "difficulty": 3,
+      "tags": [
+        "Worksheets.Add",
+        "Before"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Worksheets(\"Sheet1\").Move のようにBeforeとAfterの両方を省略して実行すると、どうなるか。",
+      "choices": [
+        "同じブックの右端へ移動して残る",
+        "新しいブックへ移り、元のブックからはなくなる",
+        "新しいブックに複製が作られ、元も残る",
+        "移動先が決まらず、実行時エラーになる"
+      ],
+      "answer": 1,
+      "explanation": "Moveの行き先を省略すると、新しいブックが作られ、そこへシートが移動します。元のブックからはシートがなくなります。ブックの中での位置は指定できません。Copyは新しいブックにコピーされるだけで元が残るので、両者の違いが問われます。",
+      "wrong": {
+        "0": "同じブック内で移動するには、BeforeかAfterで位置を指定する必要があります。省略時は別ブックです。",
+        "2": "元のシートが残るのはCopyの場合です。Moveは移動なので元のブックからはなくなります。",
+        "3": "BeforeとAfterの省略は許されており、エラーにはなりません。省略すると新しいブックが作られます。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 2,
+      "tags": [
+        "Move",
+        "新規ブック"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックには、左から順にSheet1（ワークシート）、グラフ1（グラフシート）、Sheet2（ワークシート）がある。Worksheets(2) と Sheets(2) が指すシートの組合せとして正しいものはどれか。",
+      "choices": [
+        "Worksheets(2)はグラフ1、Sheets(2)はSheet2",
+        "Worksheets(2)はSheet2、Sheets(2)はグラフ1",
+        "Worksheets(2)もSheets(2)もグラフ1を指す",
+        "Worksheets(2)もSheets(2)もSheet2を指す"
+      ],
+      "answer": 1,
+      "explanation": "Worksheetsはワークシートだけを数えるので、2番目はSheet2です。Sheetsはグラフシートも数えるので、2番目はグラフ1です。グラフシートがあると、インデックスのずれが生じるため、混在するブックでは注意します。",
+      "wrong": {
+        "0": "組合せが逆です。グラフシートはWorksheetsの数に入らないため、Worksheets(2)がグラフ1になることはありません。",
+        "2": "Sheetsはグラフシートも数えるので、Sheets(2)はグラフ1です。Worksheetsとは数え方が違います。",
+        "3": "Sheets(2)はグラフ1で、Worksheets(2)はグラフシートを除いて数えるためSheet2です。同じシートにはなりません。"
+      },
+      "service": "シートの種類",
+      "difficulty": 3,
+      "tags": [
+        "Worksheets",
+        "Sheets"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シート見出しの変更や、シートの並べ替えを行っても、同じシートを指し続ける書き方はどれか。",
+      "choices": [
+        "Sheets(\"Sheet1\").Range(\"A1\")",
+        "Worksheets(1).Range(\"A1\")",
+        "Sheet1.Range(\"A1\")",
+        "ActiveSheet.Range(\"A1\")"
+      ],
+      "answer": 2,
+      "explanation": "コード名（Sheet1）は、見出しを変えても並べ替えても変わらないので、同じシートを指し続けます。名前での指定は見出しの変更に、番号での指定は並べ替えに弱くなります。コード名はVBEのプロパティで変更できます。",
+      "wrong": {
+        "0": "名前での指定は、見出しを変更すると該当するシートが見つからず、実行時エラーになります。",
+        "1": "番号での指定は、並べ替えや追加で位置が変わると、別のシートを指してしまいます。",
+        "3": "ActiveSheetは、その時点でアクティブなシートを指します。切り替わるたびに対象が変わるため、固定の指定にはなりません。"
+      },
+      "service": "シートの指定",
+      "difficulty": 3,
+      "tags": [
+        "コード名",
+        "インデックス"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シートが1枚しかないブックで、次のコードを実行するとどうなるか。\nApplication.DisplayAlerts = False\nWorksheets(1).Delete",
+      "choices": [
+        "空のSheet1が自動で作られ、ブックは保たれる",
+        "実行時エラーとなり、シートは削除されない",
+        "シートが削除され、0枚のブックになる",
+        "シートが削除され、ブックも自動で閉じる"
+      ],
+      "answer": 1,
+      "explanation": "ブックには少なくとも1枚のシートが必要なため、最後の1枚は削除できず実行時エラーになります。DisplayAlertsをFalseにしても、この制限は変わりません。確認メッセージの抑止と、削除できる条件は別の話です。",
+      "wrong": {
+        "0": "自動で空のシートが作られる仕組みはありません。削除の処理がエラーで止まるだけです。",
+        "2": "シートが0枚のブックは存在できません。最後の1枚は削除自体が拒否されます。",
+        "3": "ブックが閉じられることはありません。エラーが発生し、ブックは開いたままです。"
+      },
+      "service": "シートの削除",
+      "difficulty": 2,
+      "tags": [
+        "Delete",
+        "DisplayAlerts"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したときの結果として正しいものはどれか。\nWorksheets.Add Before:=Worksheets(1), After:=Worksheets(2)",
+      "choices": [
+        "Worksheets(1)の前にシートが追加される",
+        "Worksheets(2)の後ろにシートが追加される",
+        "実行時エラーとなり、シートは追加されない",
+        "2枚のシートがそれぞれの位置に追加される"
+      ],
+      "answer": 2,
+      "explanation": "BeforeとAfterは、どちらか一方しか指定できません。同時に指定すると実行時エラーになります。位置の基準は1つだけなので、前に入れたいならBefore、後ろに入れたいならAfterのどちらかを選びます。",
+      "wrong": {
+        "0": "Beforeだけが採用されるような優先はありません。両方指定した時点でエラーになります。",
+        "1": "Afterだけが採用されるような優先もありません。エラーになるので追加は行われません。",
+        "3": "追加する枚数を決めるのはCount引数です。BeforeとAfterの2つを書いても枚数は増えません。"
+      },
+      "service": "シートの追加",
+      "difficulty": 2,
+      "tags": [
+        "Before",
+        "After"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "drill": [
+    {
+      "question": "次の説明のうち、誤っているものはどれか。",
+      "choices": [
+        "Worksheets.Addは引数を付けなくてもシートを追加できる",
+        "DisplayAlertsをFalseにするとDeleteの確認が出なくなる",
+        "VisibleにTrueを代入して非表示のシートを再表示できる",
+        "Moveは元のシートを残したまま複製を別の位置に作る"
+      ],
+      "answer": 3,
+      "explanation": "誤りはMoveの説明です。Moveはシートを移動するメソッドで、元の位置にはシートが残りません。元を残して複製を作るのはCopyです。AddやDisplayAlerts、Visibleについての他の説明は、いずれも正しい内容です。",
+      "wrong": {
+        "0": "Addは、Before、After、Count、Typeの引数をすべて省略できます。省略するとアクティブシートの前に1枚追加します。",
+        "1": "DisplayAlertsをFalseにすると確認メッセージが出ず、既定の応答で処理が進むので、説明は正しいです。",
+        "2": "VisibleにTrueを代入すると、非表示のシートが再表示されます。xlSheetVisibleと同じ意味で正しい説明です。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 2,
+      "tags": [
+        "Move",
+        "Copy"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "作業用のシートを確認なしで削除するコードである。空欄に入れる値はどれか。\nApplication.DisplayAlerts = (   )\nWorksheets(\"作業\").Delete\nApplication.DisplayAlerts = True",
+      "choices": [
+        "True",
+        "False",
+        "vbNo",
+        "Null"
+      ],
+      "answer": 1,
+      "explanation": "削除の前にDisplayAlertsへFalseを代入すると、確認メッセージが出ずに削除されます。最後の行でTrueに戻すのは、後続の処理で警告が必要になる場合に備えた定石です。値はブール値のFalseを使います。",
+      "wrong": {
+        "0": "Trueは既定の状態で、確認メッセージが表示されます。空欄にTrueを入れても、メッセージは抑止されません。",
+        "2": "vbNoはMsgBoxで押されたボタンを表す定数で、0以外の値です。DisplayAlertsには使わず、Trueと同じ扱いになります。",
+        "3": "Nullは、データがないことを表すVariantの値です。ブール型のプロパティに代入すると、型が合わずエラーになります。"
+      },
+      "service": "シートの削除",
+      "difficulty": 1,
+      "tags": [
+        "DisplayAlerts",
+        "穴埋め"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "テンプレートのシート「月次」を複製し、ブックの一番右端に置いて、名前を「10月」にしたい。正しいコードはどれか。",
+      "choices": [
+        "Worksheets(\"月次\").Copy After:=Worksheets(Worksheets.Count): ActiveSheet.Name = \"10月\"",
+        "Worksheets(\"月次\").Move After:=Worksheets(Worksheets.Count): ActiveSheet.Name = \"10月\"",
+        "Worksheets.Add After:=Worksheets(Worksheets.Count): ActiveSheet.Name = \"10月\"",
+        "Worksheets(\"月次\").Copy Before:=Worksheets(1): ActiveSheet.Name = \"10月\""
+      ],
+      "answer": 0,
+      "explanation": "Copyで、右端の後ろに複製を置くと、複製がアクティブになるので、続けてActiveSheet.Nameで名前を付けられます。Moveはテンプレート自体を動かし、Addは空白のシートを作り、Before:=Worksheets(1)は左端に置いてしまいます。",
+      "wrong": {
+        "1": "Moveはテンプレート自体を右端へ動かすため、複製は作られません。「月次」の名前が変わってしまいます。",
+        "2": "Addは中身が空の新しいシートを作ります。テンプレートの内容や書式は引き継がれません。",
+        "3": "Before:=Worksheets(1)は先頭に置く指定です。名前の付け方は合っていますが、置かれる位置が左端になります。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 2,
+      "tags": [
+        "Copy",
+        "ActiveSheet"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックにはワークシートが3枚、グラフシートが1枚ある。すべてのワークシートの名前をイミディエイトウィンドウに出力する次のコードの空欄に入れる式はどれか。\nFor i = 1 To (   )\n    Debug.Print Worksheets(i).Name\nNext i",
+      "choices": [
+        "Worksheets.Count",
+        "Worksheets.Count - 1",
+        "Worksheets.Count + 1",
+        "Sheets.Count"
+      ],
+      "answer": 0,
+      "explanation": "Worksheets(i)でインデックスを使うので、上限もワークシートの枚数であるWorksheets.Countにそろえます。Sheets.Countはグラフシートを含むため4になり、Worksheets(4)は存在せずエラーになります。",
+      "wrong": {
+        "1": "Count - 1までだと最後のワークシートが処理されません。全部の名前を出力する目的を満たしません。",
+        "2": "Count + 1までだと、存在しない番号のWorksheets(4)を参照して実行時エラーになります。",
+        "3": "Sheets.Countはグラフシートも含む4で、Worksheets(4)がなくエラーになります。ここではグラフシートは数えません。"
+      },
+      "service": "シート名と枚数",
+      "difficulty": 2,
+      "tags": [
+        "Count",
+        "For Next"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "非表示のSheet2を再表示して、アクティブにしたい。正しい順序のコードはどれか。",
+      "choices": [
+        "Worksheets(\"Sheet2\").Activate: Worksheets(\"Sheet2\").Visible = True",
+        "Worksheets(\"Sheet2\").Select: Worksheets(\"Sheet2\").Visible = True",
+        "Worksheets(\"Sheet2\").Visible = xlSheetHidden: Worksheets(\"Sheet2\").Activate",
+        "Worksheets(\"Sheet2\").Visible = True: Worksheets(\"Sheet2\").Activate"
+      ],
+      "answer": 3,
+      "explanation": "非表示のシートはActivateもSelectもできないので、先にVisible = Trueで再表示してからActivateします。順序を逆にすると、最初の命令で実行時エラーが発生します。再表示とアクティブ化は別々の操作です。",
+      "wrong": {
+        "0": "Activateを先にすると、シートがまだ非表示でエラーになります。再表示は先に行います。",
+        "1": "Selectも非表示のシートには実行できません。再表示より前に書くとエラーになります。",
+        "2": "xlSheetHiddenは非表示にする設定値です。再表示するにはTrue（xlSheetVisible）を代入します。"
+      },
+      "service": "表示と非表示",
+      "difficulty": 2,
+      "tags": [
+        "Visible",
+        "Activate"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Worksheets.Add メソッドの戻り値は何か。",
+      "choices": [
+        "追加されたシートを表すWorksheetオブジェクト",
+        "追加されたシートの名前を表す文字列",
+        "追加されたシートの位置を表す整数",
+        "追加に成功したかを表すBoolean値"
+      ],
+      "answer": 0,
+      "explanation": "Addメソッドは、追加したシートそのものを表すWorksheetオブジェクトを返します。Set ws = Worksheets.Add(…)のように変数で受け取れば、続けてws.Nameで名前を付けるなどの操作ができます。",
+      "wrong": {
+        "1": "名前は、返されたオブジェクトのNameプロパティから取得します。戻り値自体は文字列ではありません。",
+        "2": "位置はIndexプロパティで取得します。Addの戻り値が整数のインデックスということはありません。",
+        "3": "成功の可否は、エラーが起きるかどうかで判断します。Boolean値は返されません。"
+      },
+      "service": "シートの追加",
+      "difficulty": 2,
+      "tags": [
+        "Worksheets.Add",
+        "戻り値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Worksheets(\"Sheet1\").Copy Worksheets(\"Sheet3\") のように、引数名を書かずに指定すると、どうなるか。",
+      "choices": [
+        "Sheet3の後ろにSheet1の複製が置かれる",
+        "Sheet3の前にSheet1の複製が置かれる",
+        "新しいブックにSheet1の複製が作られる",
+        "引数名がないため構文エラーになる"
+      ],
+      "answer": 1,
+      "explanation": "Copyの先頭の引数はBeforeです。引数名を省略して1つだけ渡すと、Beforeとして扱われ、Sheet3の前に複製が置かれます。Afterを使いたいときは、After:=と名前を付けて書く必要があります。Addも同じ並びです。",
+      "wrong": {
+        "0": "後ろに置かれるのはAfterを指定した場合です。名前なしの1つ目の引数はBeforeです。",
+        "2": "新しいブックに作られるのは、BeforeもAfterも指定しない場合です。ここではSheet3が指定されています。",
+        "3": "引数名の省略は許される書き方で、構文エラーにはなりません。位置の順に引数として解釈されます。"
+      },
+      "service": "コピーと移動",
+      "difficulty": 3,
+      "tags": [
+        "Copy",
+        "位置引数"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シートを指定して直接セルに書き込む場合の説明として、正しいものはどれか。",
+      "choices": [
+        "書き込むシートを先にSelectで選んでおく必要がある",
+        "そのシートがアクティブでないと書き込めない",
+        "常にその時点のActiveSheetへ書き込まれる",
+        "シートを指定すればアクティブでなくても書き込める"
+      ],
+      "answer": 3,
+      "explanation": "シートを名前などで指定してRangeを書けば、そのシートがアクティブでなくても、セルの値を書き込めます。ActivateやSelectで切り替える必要はなく、切り替えを省くと画面のちらつきも減り、読みやすくなります。",
+      "wrong": {
+        "0": "Selectで選択する必要はありません。シートを指定したオブジェクトのまま、プロパティを設定できます。",
+        "1": "アクティブである必要はありません。非アクティブのシートでも、シートを指定すれば書き込めます。",
+        "2": "シートを指定したときは、指定したシートに書き込まれます。省略したときだけActiveSheetが対象になります。"
+      },
+      "service": "ActivateとSelect",
+      "difficulty": 1,
+      "tags": [
+        "Range",
+        "Activate"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Worksheets(\"Sheet1\").Name = \"○○\" の○○に入れる文字列のうち、実行時エラーになるものはどれか。",
+      "choices": [
+        "集計/月次",
+        "集計(月次)",
+        "集計 月次",
+        "2024集計"
+      ],
+      "answer": 0,
+      "explanation": "シート名には、コロン、円記号、スラッシュ、疑問符、アスタリスク、大括弧は使えません。これらを含むとエラーになります。括弧、空白、数字から始まる名前は使えます。空の名前や31文字超、重複した名前も不可です。",
+      "wrong": {
+        "1": "丸括弧はシート名に使えます。使えない記号は、スラッシュや円記号、疑問符などです。",
+        "2": "空白は使えます。見やすさのために、単語の間に空白を入れる名前も問題ありません。",
+        "3": "数字から始まる名前も使えます。VBAの変数名と違い、シート名には先頭の文字の制限がありません。"
+      },
+      "service": "シート名と枚数",
+      "difficulty": 3,
+      "tags": [
+        "Name",
+        "使えない文字"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックに「売上」というシートがある。新しいシートを追加し、次のコードを実行した。\nActiveSheet.Name = \"売上\"\nこの結果として正しいものはどれか。",
+      "choices": [
+        "実行時エラーとなり、名前は変わらない",
+        "既存の「売上」が「売上 (2)」に変わる",
+        "既存の「売上」に新しいシートの内容が統合される",
+        "新しいシートの名前が「売上 (2)」に自動で変わる"
+      ],
+      "answer": 0,
+      "explanation": "同じブックには同じ名前のシートを作れません。すでにある名前をNameへ代入すると実行時エラーになり、名前は変更されません。自動で連番が付くのは、Copyで複製したときの名前に限った動作で、既存の「売上」は変わりません。",
+      "wrong": {
+        "1": "既存のシートの名前は変更されません。名前が重複する時点で、処理がエラーで止まります。",
+        "2": "シート同士が統合される機能はありません。名前の代入では、データは結合されません。",
+        "3": "連番が付くのはCopyの場合です。Nameへの代入では連番は付かず、名前の重複でエラーになります。"
+      },
+      "service": "シート名と枚数",
+      "difficulty": 2,
+      "tags": [
+        "Name",
+        "重複"
+      ],
+      "beginnerNote": null
+    }
+  ]
+}

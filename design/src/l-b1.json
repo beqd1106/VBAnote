@@ -1,0 +1,952 @@
+{
+  "lessonId": "l-b1",
+  "lesson": {
+    "title": "ブックを開く・保存する・閉じる",
+    "summary": "Workbooks.Open と Add、Save と SaveAs、Close の SaveChanges、ThisWorkbook と ActiveWorkbook の違いを学びます。",
+    "estimatedMinutes": 12,
+    "sections": [
+      {
+        "heading": "ブックを開く・新規作成する",
+        "body": "ブックは Excel のファイルのことで、VBA では Workbook オブジェクトとして扱います。いま開いているブックの集まりが Workbooks コレクションです。既存のファイルを開くには Workbooks.Open メソッドを使い、引数 Filename にフルパスを文字列で渡します。例は Workbooks.Open Filename:=\"C:\\Data\\売上.xlsx\" です。パスの区切りには円記号（\\）を使い、ファイルが存在しないと実行時エラーになります。まっさらな新しいブックを作るときは Workbooks.Add を使います。作られたブックには Book2 のような仮の名前が付き、まだ保存はされていません。机にたとえると、Open は棚にしまってある書類を机に出す操作、Add は白紙のノートを机に置く操作です。開いたブックは自動的にアクティブになります。"
+      },
+      {
+        "heading": "保存と閉じる、確認メッセージの抑止",
+        "body": "ブックの保存には Save と SaveAs があります。Save は今のファイル名と保存場所のまま上書き保存します。SaveAs は名前を付けて保存で、引数 Filename に新しいファイル名をフルパスで渡します。例は ActiveWorkbook.SaveAs Filename:=\"C:\\Data\\控え.xlsx\" です。保存後、そのブックの名前は新しいファイル名に変わります。ブックを閉じるのは Close メソッドで、引数 SaveChanges に True を渡すと保存して閉じ、False なら変更を捨てて閉じます。省略したまま変更が残っていると、保存するかを尋ねる確認メッセージが出てマクロが止まります。同名ファイルへの上書きなどの確認を出さずに進めたいときは、Application.DisplayAlerts = False と書いて警告を抑止し、処理後に True へ戻します。"
+      },
+      {
+        "heading": "ThisWorkbook と ActiveWorkbook、Path",
+        "body": "ThisWorkbook は、そのマクロが書かれているブック自身を指します。ActiveWorkbook は、いま最前面で操作中のアクティブなブックを指します。マクロの入ったブックから別のブックを開くと、開いたブックがアクティブになるため、この2つは別のブックを指すことになります。ThisWorkbook はアクティブが変わっても動かないので、自分自身を確実に指したいときに向きます。住所にたとえると、ThisWorkbook は自分の家、ActiveWorkbook は今いる場所です。ThisWorkbook.Path はそのブックが保存されているフォルダのパスで、末尾に円記号は付きません。そのため、同じフォルダのファイルを開くときは ThisWorkbook.Path & \"\\売上.xlsx\" のように、円記号を自分で & を使って連結します。"
+      },
+      {
+        "heading": "複数のブックを扱う",
+        "body": "複数のブックを開いているときは、Workbooks(\"売上.xlsx\") のように拡張子付きのファイル名で指定するか、Workbooks(1) のように開いた順の番号で指定します。ブックを閉じると番号が詰まるので、名前での指定のほうが安全です。Set wb = Workbooks.Open(Filename:=\"...\") のように、戻り値を受け取るときは引数を括弧で囲みます。ブック間でセルをコピーするには、Workbooks(\"A.xlsx\").Worksheets(\"Sheet1\").Range(\"A1\").Copy Destination:=Workbooks(\"B.xlsx\").Worksheets(\"Sheet1\").Range(\"A1\") のように書きます。ブック名を省略するとアクティブなブックが対象になってしまうため、複数ブックを扱うときはブック名から明示して書くのが基本です。開いているブックの数は Workbooks.Count で分かります。"
+      }
+    ]
+  },
+  "basic": [
+    {
+      "question": "既存のExcelファイルを、パスを指定して開くメソッドはどれか。",
+      "choices": [
+        "Workbooks.Open",
+        "Workbooks.Add",
+        "Workbooks.Close",
+        "Workbooks.Item"
+      ],
+      "answer": 0,
+      "explanation": "Workbooks.Open は、Filename 引数に指定したパスの既存ファイルを開き、Workbooks コレクションに加えるメソッドです。ファイルが存在しないと実行時エラーになります。新しい空のブックを作るのは Add、開いているブックを閉じるのは Close と、役割が分かれている点に注意します。",
+      "wrong": {
+        "1": "Workbooks.Add は何も入っていない新規ブックを作るメソッドで、既存のファイルは開かない。",
+        "2": "Workbooks.Close は開いているブックを閉じるメソッドで、ファイルを開く働きはない。",
+        "3": "Workbooks.Item はコレクションから開いているブックを1つ取り出す書き方で、ファイルは開かない。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks.Open",
+        "ブックを開く"
+      ],
+      "beginnerNote": "Workbooks は「開いているブックの集まり」。その中にファイルを加える操作が Open です。"
+    },
+    {
+      "question": "何も入っていない新しいブックを作成するメソッドはどれか。",
+      "choices": [
+        "Workbooks.Open",
+        "Workbooks.Add",
+        "Worksheets.Add",
+        "Workbooks.Item"
+      ],
+      "answer": 1,
+      "explanation": "Workbooks.Add は、新しい空のブックを作成して開くメソッドです。作成直後は Book2 のような仮の名前で、まだ保存されていません。Worksheets.Add はブックではなくシートを追加するメソッドなので、名前が似ていても対象が違います。",
+      "wrong": {
+        "0": "Workbooks.Open は保存済みの既存ファイルを開くメソッドで、新規ブックは作らない。",
+        "2": "Worksheets.Add はシートを1枚追加するメソッドで、ブック自体は作られない。",
+        "3": "Workbooks.Item はコレクションから既存のブックを取り出す記述で、新規作成はしない。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks.Add",
+        "新規ブック"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks.Open の引数 Filename に指定する内容はどれか。",
+      "choices": [
+        "開く前にファイルを探す順番を表す整数",
+        "開いた直後に表示するシートの名前",
+        "ファイルの場所と名前を含むパス",
+        "読み取りのために設定するパスワード"
+      ],
+      "answer": 2,
+      "explanation": "Filename には、開きたいファイルの保存場所とファイル名をつなげたフルパスを文字列で渡します。例は Workbooks.Open Filename:=\"C:\\Data\\売上.xlsx\" です。パスワードは別の引数 Password、開いた後のシート選択は Open の引数ではなく Worksheets などで行います。",
+      "wrong": {
+        "0": "ファイルは整数では特定できない。Filename には文字列のパスを渡す。",
+        "1": "シートの選択は開いた後に Worksheets を使って行い、Filename では指定しない。",
+        "3": "読み取りパスワードは Password 引数で渡す。Filename はファイルの場所を示す引数である。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Filename",
+        "フルパス"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "今のファイル名と保存場所のまま、ブックを上書き保存するメソッドはどれか。",
+      "choices": [
+        "SaveAs",
+        "SaveCopyAs",
+        "Close",
+        "Save"
+      ],
+      "answer": 3,
+      "explanation": "Save は現在のファイル名・保存場所のまま内容を上書き保存するメソッドです。名前や場所を変えて保存したいときは SaveAs を使います。SaveCopyAs は別名の控えを作るだけで、開いているブック自体の名前は変わらない点で Save と区別します。",
+      "wrong": {
+        "0": "SaveAs は名前や保存場所を指定して保存するメソッドで、同名での上書きが目的ではない。",
+        "1": "SaveCopyAs はコピーを別名で保存するだけで、いま開いているブックは上書きされない。",
+        "2": "Close はブックを閉じるメソッドで、保存するかどうかは SaveChanges 引数で決まる。"
+      },
+      "service": "保存（Save・SaveAs）",
+      "difficulty": 1,
+      "tags": [
+        "Save",
+        "上書き保存"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックに名前を付けて保存するため、Filename を指定するコードとして正しいものはどれか。",
+      "choices": [
+        "ActiveWorkbook.Save Filename:=\"C:\\Data\\控え.xlsx\"",
+        "ActiveWorkbook.SaveAs Filename:=\"C:\\Data\\控え.xlsx\"",
+        "ActiveWorkbook.Open Filename:=\"C:\\Data\\控え.xlsx\"",
+        "ActiveWorkbook.Activate Filename:=\"C:\\Data\\控え.xlsx\""
+      ],
+      "answer": 1,
+      "explanation": "名前を付けて保存は SaveAs メソッドで、引数 Filename に保存先のフルパスを渡します。Save は引数なしで上書き保存するだけです。ファイルを開くのは Workbooks.Open であり、Workbook オブジェクトのメソッドではありません。",
+      "wrong": {
+        "0": "Save メソッドに Filename 引数はなく、名前を変えて保存する用途には使えない。",
+        "2": "Workbook オブジェクトに Open メソッドはなく、ファイルは Workbooks.Open で開く。",
+        "3": "Activate はブックを最前面にするメソッドで、保存の機能も Filename 引数もない。"
+      },
+      "service": "保存（Save・SaveAs）",
+      "difficulty": 1,
+      "tags": [
+        "SaveAs",
+        "Filename"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "開いているブックを、変更を保存せずに閉じるコードはどれか。",
+      "choices": [
+        "ActiveWorkbook.Close SaveChanges:=True",
+        "ActiveWorkbook.Save SaveChanges:=False",
+        "Application.DisplayAlerts = False",
+        "ActiveWorkbook.Close SaveChanges:=False"
+      ],
+      "answer": 3,
+      "explanation": "ブックを閉じるのは Close メソッドで、引数 SaveChanges に False を渡すと変更を保存せずに閉じます。True なら保存して閉じます。DisplayAlerts は確認メッセージの表示を切り替えるだけで、ブックは閉じません。",
+      "wrong": {
+        "0": "SaveChanges:=True は変更を保存してから閉じる指定で、保存しない動作にはならない。",
+        "1": "Save メソッドに SaveChanges 引数はなく、保存をしない指定としては成立しない。",
+        "2": "DisplayAlerts は警告表示を切り替える設定で、ブックを閉じる命令ではない。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 1,
+      "tags": [
+        "Close",
+        "SaveChanges"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Close メソッドの引数 SaveChanges に True を指定した場合の動作はどれか。",
+      "choices": [
+        "変更内容を保存してからブックを閉じる",
+        "変更内容を破棄してブックを閉じる",
+        "保存の確認メッセージを出してから閉じる",
+        "別名で保存する画面を開いてから閉じる"
+      ],
+      "answer": 0,
+      "explanation": "SaveChanges:=True は、変更内容を保存してからブックを閉じる指定です。False は破棄して閉じ、省略して変更が残っていると確認メッセージが表示されます。マクロを無人で動かすときは True か False を明示して確認を出さないようにします。",
+      "wrong": {
+        "1": "変更を破棄して閉じるのは SaveChanges:=False の動作で、True とは逆になる。",
+        "2": "確認メッセージが出るのは SaveChanges を省略して変更が残っている場合である。",
+        "3": "別名保存の画面は SaveChanges では開かない。名前を付けるには SaveAs を使う。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 1,
+      "tags": [
+        "SaveChanges",
+        "Close"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロが書かれているブック自身を指すのはどれか。",
+      "choices": [
+        "ActiveWorkbook",
+        "ThisWorkbook",
+        "Workbooks(1)",
+        "ActiveSheet"
+      ],
+      "answer": 1,
+      "explanation": "ThisWorkbook は、そのコードが書かれているブック自身を指し、他のブックをアクティブにしても変わりません。ActiveWorkbook はその時点で最前面のブック、Workbooks(1) は最初に開いたブックを指すため、マクロのブックとは限りません。",
+      "wrong": {
+        "0": "ActiveWorkbook は操作中のブックを指し、別のブックを開くとそちらに切り替わる。",
+        "2": "Workbooks(1) は最初に開いたブックで、マクロの入ったブックとは限らない。",
+        "3": "ActiveSheet はブックではなく、アクティブなシートを指すオブジェクトである。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 1,
+      "tags": [
+        "ThisWorkbook",
+        "ActiveWorkbook"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロの入ったブックAから Workbooks.Open で別のブックBを開いた直後に、アクティブなブックはどれか。",
+      "choices": [
+        "ブックA（マクロの入ったブック）",
+        "両方のブックが同時にアクティブ",
+        "どちらのブックもアクティブにならない",
+        "ブックB（いま開いたブック）"
+      ],
+      "answer": 3,
+      "explanation": "Workbooks.Open で開いたブックは、自動的にアクティブになります。そのため直後の ActiveWorkbook はブックBを指し、ThisWorkbook（ブックA）とは別になります。アクティブなブックは同時に1つだけで、ブックAを操作したいなら ThisWorkbook を使います。",
+      "wrong": {
+        "0": "マクロの入ったブックのままとは限らない。開いた直後はブックBが最前面になる。",
+        "1": "アクティブなブックは同時に1つだけで、2つが同時にアクティブにはならない。",
+        "2": "開いたブックは自動的にアクティブになるので、アクティブなブックが無い状態はない。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 1,
+      "tags": [
+        "ActiveWorkbook",
+        "Workbooks.Open"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ThisWorkbook.Path が返す値はどれか。",
+      "choices": [
+        "そのブックが保存されているフォルダのパス",
+        "ファイル名だけを取り出した部分の文字列",
+        "ファイル名を含めた保存場所の全体のパス",
+        "Excel 本体が置かれているフォルダのパス"
+      ],
+      "answer": 0,
+      "explanation": "Path は、そのブックが保存されているフォルダのパスを返し、末尾に円記号もファイル名も付きません。ファイル名だけなら Name、フォルダとファイル名を含めたフルパスなら FullName、Excel 本体の場所は Application.Path で取得します。",
+      "wrong": {
+        "1": "ファイル名だけを返すのは Name プロパティで、Path はフォルダの場所を返す。",
+        "2": "ファイル名まで含めたフルパスを返すのは FullName プロパティである。",
+        "3": "Excel 本体のフォルダを返すのは Application.Path で、ブックの Path とは別である。"
+      },
+      "service": "パスの扱い",
+      "difficulty": 1,
+      "tags": [
+        "Path",
+        "ThisWorkbook.Path"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロの入ったブックと同じフォルダにある 売上.xlsx を開くコードとして正しいものはどれか。",
+      "choices": [
+        "Workbooks.Open ThisWorkbook.Path & \"売上.xlsx\"",
+        "Workbooks.Open ThisWorkbook.Path & \"\\売上.xlsx\"",
+        "Workbooks.Open ThisWorkbook.Name & \"\\売上.xlsx\"",
+        "Workbooks.Open ThisWorkbook.FullName & \"\\売上.xlsx\""
+      ],
+      "answer": 1,
+      "explanation": "Path の値の末尾には円記号が付かないため、& で円記号とファイル名をつなげる必要があります。Path & \"\\売上.xlsx\" で同じフォルダのファイルを指せます。円記号を忘れるとフォルダ名とファイル名がくっつき、ファイルが見つからずエラーになります。",
+      "wrong": {
+        "0": "円記号が無いと、フォルダ名とファイル名がつながって別の名前になり開けない。",
+        "2": "Name はファイル名だけを返す。フォルダの場所ではないため、パスにならない。",
+        "3": "FullName はファイル名まで含むため、さらに連結すると正しいパスにならない。"
+      },
+      "service": "パスの扱い",
+      "difficulty": 1,
+      "tags": [
+        "ThisWorkbook.Path",
+        "& 連結"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks(\"売上.xlsx\") の括弧内に書いているものはどれか。",
+      "choices": [
+        "開いているブックの名前（拡張子付き）",
+        "ブックが保存されているフォルダ名",
+        "ブック内の最初のシートの名前",
+        "ブックを開くためのパスワード"
+      ],
+      "answer": 0,
+      "explanation": "Workbooks(\"名前\") は、開いているブックを名前で指定する書き方です。保存済みのブックは拡張子まで含めた名前で指定します。開いた順の番号で指定する Workbooks(1) とあわせて覚えます。フォルダ名やシート名、パスワードを書く場所ではありません。",
+      "wrong": {
+        "1": "フォルダを指定するのではなく、開いているブックの名前そのものを書く。",
+        "2": "シートの指定は Worksheets(\"シート名\") で行い、Workbooks の括弧には書かない。",
+        "3": "パスワードは Open の Password 引数で渡すもので、この括弧には書かない。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks",
+        "ブック名指定"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Application.DisplayAlerts = False を実行すると、どうなるか。",
+      "choices": [
+        "画面の更新が止まり、処理の実行速度が上がる",
+        "エラーが起きてもマクロが止まらず次の行へ進む",
+        "確認メッセージが表示されず、既定の応答で処理が進む",
+        "開いたブックが読み取り専用に切り替わる"
+      ],
+      "answer": 2,
+      "explanation": "DisplayAlerts を False にすると、確認などのメッセージが表示されなくなり、既定の応答で処理が続きます。無人で動かすマクロで、上書き確認などに止められないようにするために使います。画面更新の停止は ScreenUpdating、エラーの無視は On Error の役割です。",
+      "wrong": {
+        "0": "画面更新を止めるのは Application.ScreenUpdating で、警告の表示とは別の設定である。",
+        "1": "エラーを無視して進むのは On Error Resume Next で、DisplayAlerts の働きではない。",
+        "3": "読み取り専用にする設定ではなく、確認メッセージの表示だけを切り替える。"
+      },
+      "service": "警告の抑止",
+      "difficulty": 1,
+      "tags": [
+        "DisplayAlerts",
+        "確認メッセージ"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "いま開いているブックの集まりを表すコレクションはどれか。",
+      "choices": [
+        "Worksheets",
+        "Sheets",
+        "Workbooks",
+        "Windows"
+      ],
+      "answer": 2,
+      "explanation": "Workbooks は、いま Excel で開いているブックの集まりを表すコレクションです。Worksheets や Sheets は1つのブックの中のシートの集まりで、Windows はウィンドウの集まりです。ブックを指定するときは Workbooks(\"名前\") のように使います。",
+      "wrong": {
+        "0": "Worksheets は1つのブックに含まれるワークシートの集まりで、ブックの集まりではない。",
+        "1": "Sheets はブック内のシート全般の集まりで、ブックを束ねるものではない。",
+        "3": "Windows は開いているウィンドウの集まりで、ブックの集まりそのものではない。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks",
+        "コレクション"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "存在しないパスを指定して Workbooks.Open を実行すると、どうなるか。",
+      "choices": [
+        "空の新しいブックが自動的に作られる",
+        "エラーにならず黙って次の行へ進む",
+        "指定した名前のファイルが新しく作られて開く",
+        "実行時エラーとなりマクロが中断する"
+      ],
+      "answer": 3,
+      "explanation": "存在しないファイルを Workbooks.Open で開こうとすると、実行時エラーになりマクロが中断します。Open は既存のファイルを開くメソッドで、無ければ作る働きはありません。新しいブックを作りたいときは Workbooks.Add を使います。",
+      "wrong": {
+        "0": "新規ブックを作るのは Workbooks.Add で、Open は失敗しても空のブックを作らない。",
+        "1": "ファイルが見つからなければエラーになり、黙って次の行へ進むことはない。",
+        "2": "Open にはファイルを新規作成する働きはない。作るなら Add のあと SaveAs で保存する。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks.Open",
+        "実行時エラー"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "confirm": [
+    {
+      "question": "次のコードを実行した直後、ActiveWorkbook が指すブックはどれか。\nWorkbooks.Add\nWorkbooks.Open Filename:=\"C:\\Data\\売上.xlsx\"",
+      "choices": [
+        "追加した新規ブック",
+        "マクロが書かれたブック",
+        "開いた 売上.xlsx",
+        "どのブックも指さない"
+      ],
+      "answer": 2,
+      "explanation": "Add も Open も、作成または開いたブックを自動的にアクティブにします。2行を続けて実行すると、最後に開いた 売上.xlsx が最前面になり、ActiveWorkbook はそれを指します。新規ブックはアクティブでなくなり、ThisWorkbook はマクロのブックのままです。",
+      "wrong": {
+        "0": "Add で作った新規ブックは、次の行で売上.xlsx を開いた時点で最前面でなくなる。",
+        "1": "マクロのブックは ThisWorkbook で指す。開いた直後のアクティブは別のブックになる。",
+        "3": "アクティブなブックは必ず1つあり、どのブックも指さないという状態にはならない。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 2,
+      "tags": [
+        "ActiveWorkbook",
+        "Workbooks.Open"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "変更のあるブックに対し、ActiveWorkbook.Close だけを実行した（SaveChanges は省略、DisplayAlerts は既定の True）。どうなるか。",
+      "choices": [
+        "確認なしで変更が保存され、そのまま閉じる",
+        "保存するかを尋ねる確認が表示され、応答待ちになる",
+        "確認なしで変更が破棄され、そのまま閉じる",
+        "構文エラーとなり、実行すること自体ができない"
+      ],
+      "answer": 1,
+      "explanation": "SaveChanges を省略して変更が残っている場合、保存するかを尋ねる確認メッセージが表示され、利用者が答えるまでマクロは止まります。無人で動かすなら SaveChanges を True か False で明示します。引数の省略自体は構文エラーになりません。",
+      "wrong": {
+        "0": "保存されるのは SaveChanges:=True を指定した場合で、省略では自動保存されない。",
+        "2": "変更を破棄して閉じるのは SaveChanges:=False を指定した場合の動作である。",
+        "3": "SaveChanges は省略可能な引数なので、省略しても構文エラーにはならない。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 2,
+      "tags": [
+        "Close",
+        "SaveChanges 省略"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "同名のファイルが既にあるフォルダへ SaveAs で保存する直前に、Application.DisplayAlerts = False を実行した。保存時の動作はどれか。",
+      "choices": [
+        "別の名前が自動で付き、両方のファイルが残る",
+        "確認が表示され、利用者の応答を待つ",
+        "実行時エラーとなり、必ず処理が中断する",
+        "確認が出ず、既存のファイルが上書きされる"
+      ],
+      "answer": 3,
+      "explanation": "DisplayAlerts を False にすると、上書きの確認が表示されずに既存のファイルが上書きされます。確認を出して止まらせたくない無人処理で使いますが、意図せず上書きするおそれがあるため、処理後は True に戻し、対象のファイル名にも注意します。",
+      "wrong": {
+        "0": "自動で別名が付く機能はない。同名のファイルがあれば上書きの対象になる。",
+        "1": "確認が表示されるのは DisplayAlerts が既定の True のときの動作である。",
+        "2": "上書きの確認が出ないだけで、同名があること自体はエラーにならない。"
+      },
+      "service": "警告の抑止",
+      "difficulty": 2,
+      "tags": [
+        "DisplayAlerts",
+        "SaveAs"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロ有効ブック 月報.xlsm が C:\\Work\\月次 フォルダに保存されているとき、ThisWorkbook.Path の値はどれか。",
+      "choices": [
+        "C:\\Work\\月次\\",
+        "C:\\Work\\月次\\月報.xlsm",
+        "C:\\Work\\月次",
+        "C:\\Work\\月報.xlsm"
+      ],
+      "answer": 2,
+      "explanation": "Path はブックが保存されているフォルダのパスを返し、ファイル名も末尾の円記号も含みません。したがって C:\\Work\\月次 になります。ファイル名まで含むのは FullName です。末尾の円記号が無いので、ファイルを指すときは自分で \"\\\" を連結します。",
+      "wrong": {
+        "0": "末尾に円記号は付かない。付いていると思い込むと連結時に円記号が重なる。",
+        "1": "ファイル名まで含めたフルパスを返すのは FullName プロパティである。",
+        "3": "フォルダ名の月次が抜けており、実際の保存先とは異なるパスになっている。"
+      },
+      "service": "パスの扱い",
+      "difficulty": 2,
+      "tags": [
+        "Path",
+        "FullName"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックA、B、Cの順に開いている。ブックAを閉じた直後に、ブックCを開いた順の番号で指す記述はどれか。",
+      "choices": [
+        "Workbooks(1)",
+        "Workbooks(2)",
+        "Workbooks(3)",
+        "Workbooks(4)"
+      ],
+      "answer": 1,
+      "explanation": "ブックを閉じると、残ったブックの番号は前に詰まります。Aを閉じた後はBが1番、Cが2番になるため Workbooks(2) がCです。このように番号は状況で変わるので、Workbooks(\"C.xlsx\") と名前で指定するほうが安全です。",
+      "wrong": {
+        "0": "Workbooks(1) はAを閉じた後にBを指す。Cではない。",
+        "2": "閉じた後は2つしか開いていないため、3番は存在せず添字が範囲外のエラーになる。",
+        "3": "開いているのは2つだけなので、4番は存在せず範囲外のエラーになる。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 2,
+      "tags": [
+        "Workbooks(番号)",
+        "番号の変動"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードの結果として正しいものはどれか。\nWorkbooks(\"A.xlsx\").Worksheets(\"Sheet1\").Range(\"A1\").Copy _\n  Destination:=Workbooks(\"B.xlsx\").Worksheets(\"Sheet1\").Range(\"A1\")",
+      "choices": [
+        "B.xlsx の Sheet1 の A1 が、A.xlsx の Sheet1 の A1 へコピーされる",
+        "A.xlsx の Sheet1 の A1 が、B.xlsx の Sheet1 の A1 へ移動し、元は空になる",
+        "A.xlsx の Sheet1 の A1 が、B.xlsx の Sheet1 の A1 へコピーされる",
+        "アクティブなブックの Sheet1 の A1 から A1 へ、同じブック内でコピーされる"
+      ],
+      "answer": 2,
+      "explanation": "Copy の対象（コピー元）が A.xlsx の Sheet1 の A1 で、Destination に指定した B.xlsx の Sheet1 の A1 がコピー先です。コピーなので元のセルは残ります。ブック名から順に明示しているため、アクティブなブックには左右されません。",
+      "wrong": {
+        "0": "コピー元とコピー先が逆になっている。Copy の前にある側がコピー元である。",
+        "1": "Copy は複製を作るメソッドで、元のセルは残る。元を空にするのは切り取り（Cut）である。",
+        "3": "ブック名を明示しているので、アクティブなブックではなく指定どおりのブックが対象になる。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 2,
+      "tags": [
+        "ブック間コピー",
+        "Destination"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks.Open の結果を変数 wb に Set で代入するとき、Set wb = Workbooks.Open(Filename:=\"...\") のように引数を括弧で囲む理由はどれか。",
+      "choices": [
+        "括弧を付けないと、ファイルが読み取り専用で開かれてしまうため",
+        "括弧内に書いた引数だけが有効になり、ほかは無視されるため",
+        "Set で受けるときだけ、Filename を省略できるようにするため",
+        "戻り値を受け取って使う場合は、引数を括弧で囲む決まりのため"
+      ],
+      "answer": 3,
+      "explanation": "メソッドの戻り値（ここでは開いたブック）を変数などで受け取る場合は、引数を括弧で囲んで書きます。戻り値を使わない場合は括弧を付けずに書けます。括弧の有無で読み取り専用になったり、引数が無視されたりはしません。",
+      "wrong": {
+        "0": "括弧を付けるか付けないかで、ブックが読み取り専用で開かれることはない。",
+        "1": "括弧の内側の引数も、括弧なしで書いた引数も、どちらも有効に働く。",
+        "2": "Set で受ける場合でも、開くファイルを決める Filename の指定は必要である。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 2,
+      "tags": [
+        "Set",
+        "戻り値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロの入ったブックMから別のブックNを Workbooks.Open で開いた。続けて次の2行を実行したとき、各ブックの A1 に入る値の組合せはどれか。\nThisWorkbook.Worksheets(1).Range(\"A1\").Value = 10\nActiveWorkbook.Worksheets(1).Range(\"A1\").Value = 20",
+      "choices": [
+        "Mが20、Nが10",
+        "Mが10、Nが20",
+        "MもNも10",
+        "MもNも20"
+      ],
+      "answer": 1,
+      "explanation": "ThisWorkbook はマクロの入ったブックM、ActiveWorkbook は直前に開いたブックNを指します。したがって1行目でMのA1が10、2行目でNのA1が20になります。アクティブなブックが変わっても ThisWorkbook は常にMを指す点がポイントです。",
+      "wrong": {
+        "0": "ThisWorkbook がM、ActiveWorkbook がNなので、10と20の入るブックが逆になっている。",
+        "2": "2行は別々のブックを指しているため、両方が10になることはない。",
+        "3": "2行目の20は ActiveWorkbook が指すNだけに入り、Mには入らない。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 3,
+      "tags": [
+        "ThisWorkbook",
+        "ActiveWorkbook"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks(\"売上\") と書いたところ、売上.xlsx は開いているのに「インデックスが有効範囲にありません」というエラーが出た。原因はどれか。",
+      "choices": [
+        "ブックの名前に、拡張子 .xlsx を付けていない",
+        "売上.xlsx が、アクティブなブックになっていない",
+        "DisplayAlerts が、True のままである",
+        "売上.xlsx が、読み取り専用で開かれている"
+      ],
+      "answer": 0,
+      "explanation": "保存済みのブックを名前で指定するときは、拡張子まで含めて Workbooks(\"売上.xlsx\") と書きます。拡張子が無いと該当するブックが見つからず、インデックスが有効範囲にありませんというエラーになります。アクティブかどうかは指定には関係しません。",
+      "wrong": {
+        "1": "Workbooks(\"名前\") はアクティブかどうかに関係なく、開いているブックを探す。",
+        "2": "DisplayAlerts は確認メッセージの設定で、ブックの検索には影響しない。",
+        "3": "読み取り専用でもブックは名前で指定できる。エラーの原因ではない。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 2,
+      "tags": [
+        "Workbooks(名前)",
+        "拡張子"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "他のブックを開いたり閉じたりするマクロの最後に、マクロの入ったブック自身を確実に上書き保存したい。適切な記述はどれか。",
+      "choices": [
+        "ActiveWorkbook.Save",
+        "Workbooks(1).Save",
+        "Workbooks(\"Book1\").Save",
+        "ThisWorkbook.Save"
+      ],
+      "answer": 3,
+      "explanation": "ThisWorkbook はマクロの書かれたブック自身を常に指すため、他のブックを操作したあとでも確実にそのブックを保存できます。ActiveWorkbook や番号の指定は、その時点の状況で別のブックを指すことがあり、意図しないブックを保存するおそれがあります。",
+      "wrong": {
+        "0": "ActiveWorkbook は最前面のブックなので、他のブックが前面にあるとそちらを保存する。",
+        "1": "Workbooks(1) は最初に開いたブックで、マクロの入ったブックとは限らない。",
+        "2": "名前が一致しないと実行時エラーになり、固定の名前に頼る書き方は不適切である。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 3,
+      "tags": [
+        "ThisWorkbook.Save",
+        "ActiveWorkbook"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したとき、コピー先となるのはどのシートか。\nWorkbooks.Add\nThisWorkbook.Worksheets(1).Range(\"A1:A10\").Copy _\n  Destination:=ActiveWorkbook.Worksheets(1).Range(\"A1\")",
+      "choices": [
+        "マクロのブックの1枚目のシート",
+        "最初に開いたブックの1枚目のシート",
+        "新規に作られたブックの1枚目のシート",
+        "最後に保存したブックの1枚目のシート"
+      ],
+      "answer": 2,
+      "explanation": "Workbooks.Add で作ったブックはアクティブになるため、ActiveWorkbook は新規ブックを指します。コピー元は ThisWorkbook（マクロのブック）、コピー先は新規ブックの1枚目のシートの A1 になります。2つのブックを使い分ける典型的な書き方です。",
+      "wrong": {
+        "0": "マクロのブックはコピー元で、コピー先は ActiveWorkbook が指す別のブックである。",
+        "1": "ActiveWorkbook は最初に開いたブックではなく、直前に作ったブックを指す。",
+        "3": "保存の順番とは関係なく、ActiveWorkbook はその時点で最前面のブックを指す。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 2,
+      "tags": [
+        "Workbooks.Add",
+        "ブック間コピー"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "変更のあるブックを、確認メッセージを出さずに保存して閉じたい。最も確実で意図が明確な書き方はどれか。",
+      "choices": [
+        "Close SaveChanges:=True と引数で保存を明示する",
+        "Close の前に Application.DisplayAlerts = False を置く",
+        "Close SaveChanges:=False と引数で破棄を明示する",
+        "Close の前に ActiveWorkbook.Activate を書いておく"
+      ],
+      "answer": 0,
+      "explanation": "Close の SaveChanges に True を指定すると、確認なしで保存してから閉じます。引数で意図を明示するのが最も確実です。DisplayAlerts を切ると確認は消えますが、既定の応答に任せるため保存するとは限りません。False は破棄になります。",
+      "wrong": {
+        "1": "警告を消しても保存する指定にはならず、既定の応答に任せる不明確な書き方になる。",
+        "2": "False は変更を破棄して閉じる指定で、保存して閉じる目的とは逆になる。",
+        "3": "Activate は最前面にするだけで、保存の有無とは無関係である。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 2,
+      "tags": [
+        "SaveChanges",
+        "DisplayAlerts"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "マクロの入った 本体.xlsm と同じフォルダに 入力.xlsx がある。他のブックは開いていないとき、次のコードで表示される名前はどれか。\nSub Test()\n  Dim wb As Workbook\n  Set wb = Workbooks.Open(ThisWorkbook.Path & \"\\入力.xlsx\")\n  wb.Close SaveChanges:=False\n  MsgBox ActiveWorkbook.Name\nEnd Sub",
+      "choices": [
+        "入力.xlsx と表示される",
+        "本体.xlsm と表示される",
+        "Book1 と表示される",
+        "エラーで何も表示されない"
+      ],
+      "answer": 1,
+      "explanation": "入力.xlsx を開くとアクティブになりますが、wb.Close で閉じると、残っている本体.xlsm が最前面に戻ってアクティブになります。したがって MsgBox には本体.xlsm が表示されます。閉じたブックの名前は ActiveWorkbook には残りません。",
+      "wrong": {
+        "0": "入力.xlsx は直前に閉じているので、ActiveWorkbook ではなくなっている。",
+        "2": "Book1 は新規ブックを作ったときの仮の名前で、このコードでは作られない。",
+        "3": "同じフォルダの入力.xlsx は開け、閉じた後もブックが残るためエラーにならない。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 3,
+      "tags": [
+        "ActiveWorkbook",
+        "Close"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ThisWorkbook と ActiveWorkbook の使い分けとして適切なものはどれか。",
+      "choices": [
+        "どちらも常に同じブックを指すので、状況に関係なく好きなほうでよい",
+        "ThisWorkbook は保存済みのブック用、ActiveWorkbook は新規のブック用",
+        "自身の場所は ActiveWorkbook、他ブックの操作は ThisWorkbook を使う",
+        "自身の場所は ThisWorkbook、前面のブックの操作は ActiveWorkbook を使う"
+      ],
+      "answer": 3,
+      "explanation": "マクロ自身のブックの場所を知りたいときは、常に自分を指す ThisWorkbook を使います。利用者が前面に出したブックを対象にしたいときは ActiveWorkbook を使います。2つは別のブックを指すことがあり、目的に応じた使い分けが必要です。",
+      "wrong": {
+        "0": "別のブックを開くと2つは別のブックを指す。好きなほうでは結果が変わる。",
+        "1": "保存済みかどうかで使い分けるのではなく、自分自身か前面かの違いである。",
+        "2": "指すブックが逆になっている。自分自身は ThisWorkbook、前面は ActiveWorkbook である。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 3,
+      "tags": [
+        "ThisWorkbook",
+        "ActiveWorkbook"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks.Count が返す値として正しいものはどれか。",
+      "choices": [
+        "保存済みのブックの数",
+        "マクロを含むブックの数",
+        "いま開いているブックの数",
+        "アクティブなブックのシートの数"
+      ],
+      "answer": 2,
+      "explanation": "Workbooks は開いているブックの集まりで、Count はその個数を返します。保存の有無やマクロの有無は関係ありません。ブック内のシート数は Worksheets.Count で数えるため、どのコレクションの Count かに注意します。",
+      "wrong": {
+        "0": "保存済みかどうかは問わず、開いているブックをすべて数えて返す。",
+        "1": "マクロを含むかどうかは問わず、開いているブックをすべて数えて返す。",
+        "3": "シートの数は Worksheets.Count で数える。Workbooks.Count はブックの数を返す。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 2,
+      "tags": [
+        "Workbooks.Count",
+        "コレクション"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "drill": [
+    {
+      "question": "次の空欄に入る引数名はどれか。\nWorkbooks.Open ______:=\"C:\\Data\\売上.xlsx\"",
+      "choices": [
+        "Path",
+        "Name",
+        "Filename",
+        "FullName"
+      ],
+      "answer": 2,
+      "explanation": "Workbooks.Open で開くファイルのパスを渡す引数名は Filename です。名前付き引数は「引数名:=値」の形で書きます。Path・Name・FullName はブックの場所や名前を取り出すプロパティの名前で、Open に渡す引数名ではありません。",
+      "wrong": {
+        "0": "Path はブックの保存フォルダを返すプロパティで、Open の引数名ではない。",
+        "1": "Name はブックのファイル名を返すプロパティで、Open の引数名ではない。",
+        "3": "FullName はブックのフルパスを返すプロパティで、Open の引数名ではない。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Filename",
+        "名前付き引数"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックの操作に関する記述のうち、誤っているものはどれか。",
+      "choices": [
+        "Workbooks.Add は、新しい空のブックを作成してアクティブにする",
+        "Close の SaveChanges には、True か False を指定できる",
+        "SaveAs を実行すると、そのブックの名前は指定した名前に変わる",
+        "ThisWorkbook は、別のブックをアクティブにすると指すブックも変わる"
+      ],
+      "answer": 3,
+      "explanation": "ThisWorkbook はコードが書かれているブック自身を常に指し、別のブックをアクティブにしても変わりません。アクティブな状態に合わせて指す先が変わるのは ActiveWorkbook のほうです。この2つの違いは出題されやすいので、はっきり区別しておきます。",
+      "wrong": {
+        "0": "この記述は正しい。Add は新規ブックを作り、そのブックがアクティブになる。",
+        "1": "この記述は正しい。True なら保存して閉じ、False なら破棄して閉じる。",
+        "2": "この記述は正しい。SaveAs の後、ブックの名前は新しい名前に変わる。"
+      },
+      "service": "ThisWorkbookとActiveWorkbook",
+      "difficulty": 2,
+      "tags": [
+        "ThisWorkbook",
+        "ActiveWorkbook"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "一度も保存していない新規ブックの中に書かれたマクロで ThisWorkbook.Path を取得すると、何が返るか。",
+      "choices": [
+        "実行時エラーで処理が中断する",
+        "空文字列（長さ0の文字列）が返る",
+        "C:\\ だけの文字列が返る",
+        "既定の文書フォルダのパスが返る"
+      ],
+      "answer": 1,
+      "explanation": "保存されていないブックには保存先のフォルダが無いため、Path は空文字列を返します。そのまま & \"\\売上.xlsx\" と連結すると \\売上.xlsx という不完全なパスになり、ファイルが開けません。Path を使うマクロは、先に保存しておく必要があります。",
+      "wrong": {
+        "0": "エラーにはならず、保存先が無いことを示す空文字列が返るだけである。",
+        "2": "ドライブ直下を返す仕様はない。保存されていなければ保存先を示す値は無い。",
+        "3": "文書フォルダが自動で返ることはない。保存前の Path は空文字列である。"
+      },
+      "service": "パスの扱い",
+      "difficulty": 3,
+      "tags": [
+        "Path",
+        "未保存ブック"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "SaveAs の説明として正しいものはどれか。",
+      "choices": [
+        "保存後、ブックの名前が指定した名前に変わる",
+        "元のブックの名前は変わらず、コピーだけが別名で作られる",
+        "ブックを閉じたあとで、別の名前で自動的に保存し直される",
+        "同名のファイルがあれば、常に確認なしで上書きされる"
+      ],
+      "answer": 0,
+      "explanation": "SaveAs は名前を付けて保存するメソッドで、保存後は開いているブックの名前も新しいファイル名に変わります。元の名前を保ったまま控えだけを作るのは SaveCopyAs です。同名ファイルがある場合の確認は、DisplayAlerts の設定で表示が変わります。",
+      "wrong": {
+        "1": "名前を変えずに複製だけを作るのは SaveCopyAs の働きで、SaveAs とは異なる。",
+        "2": "SaveAs は閉じる処理を行わない。開いたまま新しい名前で保存する。",
+        "3": "既定では上書きの確認が表示される。確認が出ないのは DisplayAlerts が False の場合である。"
+      },
+      "service": "保存（Save・SaveAs）",
+      "difficulty": 2,
+      "tags": [
+        "SaveAs",
+        "SaveCopyAs"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ブックの保存場所とファイル名をつなげたフルパスを返すプロパティはどれか。",
+      "choices": [
+        "Name プロパティ",
+        "Path プロパティ",
+        "FullName プロパティ",
+        "Application プロパティ"
+      ],
+      "answer": 2,
+      "explanation": "FullName は、ブックの保存場所とファイル名をつなげたフルパスを返します。Name はファイル名だけ、Path はフォルダのパスだけを返します。Application は Excel 本体を表すオブジェクトを返すもので、パスの文字列は返しません。",
+      "wrong": {
+        "0": "Name はファイル名の部分だけを返し、保存場所は含まない。",
+        "1": "Path はフォルダのパスだけを返し、ファイル名は含まない。",
+        "3": "Application は Excel 本体のオブジェクトを返し、パスの文字列は返さない。"
+      },
+      "service": "パスの扱い",
+      "difficulty": 1,
+      "tags": [
+        "FullName",
+        "Name"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Workbooks.Add で作成した直後の、まだ保存していないブックの名前について正しいものはどれか。",
+      "choices": [
+        "Book2 のような仮の連番名が付く",
+        "名前は空で、保存するまで付かない",
+        "直前に開いたブックと同じ名前が付く",
+        "Sheet1 のような連番付きの名前が付く"
+      ],
+      "answer": 0,
+      "explanation": "Workbooks.Add で作ったブックには、保存するまで Book2 のような連番付きの仮の名前が付きます。保存して初めて拡張子付きのファイル名になります。Sheet1 のような名前はシートの既定名であり、ブックの名前ではありません。",
+      "wrong": {
+        "1": "名前は空にならず、保存前でも連番の付いた仮の名前が自動で付く。",
+        "2": "別のブックと同じ名前は付かない。ブック名はそれぞれ異なる名前になる。",
+        "3": "Sheet1 のような名前はシートの既定名で、ブックの名前とは別のものである。"
+      },
+      "service": "ブックを開く・新規作成",
+      "difficulty": 1,
+      "tags": [
+        "Workbooks.Add",
+        "仮の名前"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Application.DisplayAlerts を使い、上書きの確認だけを一時的に消して SaveAs したい。手順として適切なものはどれか。",
+      "choices": [
+        "False にする → SaveAs を実行する → True に戻す",
+        "SaveAs を実行する → False にする → True に戻す",
+        "True にする → SaveAs を実行する → False に戻す",
+        "SaveAs を実行する → True にする → False に戻す"
+      ],
+      "answer": 0,
+      "explanation": "確認を消したい処理の前に False にし、処理の後で True に戻すのが基本の手順です。SaveAs の後で False にしても、すでに確認が表示されています。処理後に True へ戻さないと、後続の処理でも警告が出ない状態が続くため注意します。",
+      "wrong": {
+        "1": "SaveAs の後で False にしても、すでに確認は出た後で効果がない。",
+        "2": "True のままでは確認が表示され、False に戻すと以降の警告も消えてしまう。",
+        "3": "SaveAs の後で True にしても、保存時の確認は消せず、False に戻すのも誤りである。"
+      },
+      "service": "警告の抑止",
+      "difficulty": 2,
+      "tags": [
+        "DisplayAlerts",
+        "処理の順序"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したときの問題点として正しいものはどれか。\nSub Test()\n  Workbooks.Add\n  ActiveWorkbook.SaveAs \"C:\\Data\\新規.xlsx\"\n  ThisWorkbook.Close SaveChanges:=False\n  MsgBox \"完了\"\nEnd Sub",
+      "choices": [
+        "Workbooks.Add の直後は ActiveWorkbook が未定で、実行時エラーになる",
+        "マクロ自身のブックを閉じた時点で処理が終わり、MsgBox が実行されない",
+        "SaveAs に Filename:= を付けていないため、構文エラーになる",
+        "Close に False を渡すと、必ず実行時エラーになる"
+      ],
+      "answer": 1,
+      "explanation": "ThisWorkbook はマクロの書かれたブック自身です。それを Close すると、実行中のコードごと閉じられて処理が終わるため、次の MsgBox は実行されません。Add で作ったブックはアクティブになり、SaveAs の第1引数は Filename なので値だけでも渡せます。",
+      "wrong": {
+        "0": "Add で作ったブックは自動的にアクティブになり、ActiveWorkbook は未定にならない。",
+        "2": "SaveAs の第1引数は Filename なので、名前を省略して値だけを渡しても動く。",
+        "3": "SaveChanges には False を指定でき、実行時エラーにはならない。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 3,
+      "tags": [
+        "ThisWorkbook.Close",
+        "処理の終了"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Excel 本体は終了させず、指定したブックだけを閉じる記述はどれか。",
+      "choices": [
+        "Application.Quit",
+        "ActiveWorkbook.Close",
+        "ActiveWorkbook.Activate",
+        "ActiveWorkbook.Save"
+      ],
+      "answer": 1,
+      "explanation": "Close はブックを閉じるメソッドで、Excel 本体は動いたままです。Application.Quit は Excel そのものを終了させます。Activate は最前面にするだけ、Save は上書き保存するだけで、どちらもブックを閉じません。",
+      "wrong": {
+        "0": "Application.Quit は Excel 全体を終了させるため、ブックだけを閉じる記述ではない。",
+        "2": "Activate はブックを最前面にするだけで、閉じる働きはない。",
+        "3": "Save は上書き保存するだけで、ブックは開いたままになる。"
+      },
+      "service": "閉じる（Close）",
+      "difficulty": 1,
+      "tags": [
+        "Close",
+        "Application.Quit"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "複数のブックを扱うマクロで、別のブックの操作を誤りにくく書く方法として適切なものはどれか。",
+      "choices": [
+        "Workbooks(\"名前\") から始めてブックを明示して書く",
+        "ブック名を省略し、常にアクティブなブックに処理を任せて書く",
+        "Workbooks(1) を使い、開く順番が変わらない前提で書く",
+        "ThisWorkbook を使い、他のブックの処理にも同じ書き方をする"
+      ],
+      "answer": 0,
+      "explanation": "ブック名を Workbooks(\"名前\") のように先頭から明示すれば、アクティブなブックが変わっても対象がぶれません。省略するとアクティブなブックが対象になり、番号指定は閉じると詰まって変わります。ThisWorkbook はマクロ自身専用です。",
+      "wrong": {
+        "1": "省略するとアクティブなブックが対象になり、状況によって別のブックを操作する。",
+        "2": "番号は他のブックを閉じると詰まって変わるため、順番を前提にするのは危険である。",
+        "3": "ThisWorkbook はマクロ自身のブックだけを指し、他のブックは指せない。"
+      },
+      "service": "複数ブックの操作",
+      "difficulty": 2,
+      "tags": [
+        "ブックの明示",
+        "Workbooks(名前)"
+      ],
+      "beginnerNote": null
+    }
+  ]
+}

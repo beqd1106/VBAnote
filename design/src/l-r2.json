@@ -1,0 +1,949 @@
+{
+  "lessonId": "l-r2",
+  "lesson": {
+    "title": "Offset・Resize・Copy・最終セル",
+    "summary": "基準セルからのずらし方(Offset)と範囲の広げ方(Resize)、Copyと貼り付け、表の最終行を求めるEnd・CurrentRegion・UsedRangeの使い方が分かります。",
+    "estimatedMinutes": 14,
+    "sections": [
+      {
+        "heading": "Offset と Resize：ずらす・広げる",
+        "body": "Offset は、基準にしたセルから「行数, 列数」だけ離れたセルを指すプロパティです。Range(\"B2\").Offset(1, 2) は、B2 から1行下・2列右にずれた D3 を表します。マイナスの数を使うと上や左へ動け、引数を省略すると 0 として扱われるため、Offset(, 1) は同じ行の1列右です。住所に例えると、自宅から『南へ1軒、東へ2軒』と相対的に隣家を指す言い方です。一方 Resize は、範囲の大きさを「行数, 列数」で作り直します。左上のセルは動かず、Range(\"A1\").Resize(3, 2) は3行2列の A1:B3 になります。移動するのが Offset、大きさを変えるのが Resize と覚えましょう。"
+      },
+      {
+        "heading": "Copy メソッドと貼り付け",
+        "body": "Range.Copy は、セルの内容と書式をコピーするメソッドです。引数 Destination に貼り付け先を指定すると、コピーと貼り付けが1行で済みます。例えば Range(\"A1:B3\").Copy Destination:=Range(\"D1\") は、D1 を左上として D1:E3 に貼り付けます。貼り付け先は左上のセル1つで構いません。Destination を省略するとクリップボードに入れるだけで、貼り付けは行われません。その場合は PasteSpecial で貼り付け、Paste:=xlPasteValues なら値だけ、xlPasteFormats なら書式だけ、xlPasteFormulas なら数式だけを貼れます。コピー後の点滅枠は Application.CutCopyMode = False で解除します。"
+      },
+      {
+        "heading": "最終行・最終セルを求める",
+        "body": "データが何行あるかは、マクロを動かすたびに変わります。そこで End プロパティを使い、キーボードの Ctrl+矢印キーと同じ動きをさせます。xlUp は上、xlDown は下、xlToRight は右、xlToLeft は左です。表の最終行は Cells(Rows.Count, 1).End(xlUp).Row で求めます。Rows.Count はシートの最下行の番号で、A列の一番下から上へ向かい、最初にデータのあるセルで止まります。途中に空白があっても最終行が取れるのが利点です。一方 Range(\"A1\").End(xlDown) は、空白セルの手前で止まります。また CurrentRegion は、基準セルを含み、空白行と空白列で囲まれた連続範囲をまとめて取得します。"
+      },
+      {
+        "heading": "UsedRange と最終セル",
+        "body": "UsedRange は、ワークシートの中で実際に使われた範囲を返すプロパティです。ws.UsedRange.Rows.Count のように、使用済みの行数を調べるときにも使います。ただし、値が空でも書式や罫線を設定したセルは使用済みとみなされるため、見た目より範囲が大きくなることがあります。また SpecialCells(xlCellTypeLastCell) は、最後のセルを返します。これは最終行と最終列の交差するセルで、A1:D6 にデータがあり F2 にも値があるなら F6 です。最終行を求めるだけなら、列を指定する End(xlUp) の方が目的に合っています。どの方法も、空白や書式の有無で結果が変わる点を意識しましょう。"
+      }
+    ]
+  },
+  "basic": [
+    {
+      "question": "Range(\"A1\").Offset(1, 0) が指すセルはどれか。",
+      "choices": [
+        "B1",
+        "A1",
+        "A2",
+        "B2"
+      ],
+      "answer": 2,
+      "explanation": "Offset の第1引数は行方向の移動量で、1行下へ動くため A2 です。Offset は基準セルから相対的に別のセルを指すプロパティです。Resize のように範囲の大きさは変えず、移動先の位置だけを指します。",
+      "wrong": {
+        "0": "B1 は1列右にずれた位置で、Offset(0, 1) の結果です。行と列の引数を逆にした勘違いです。",
+        "1": "A1 は基準セルそのもので、Offset(0, 0) と同じです。移動量が 0 のときの結果です。",
+        "3": "B2 は1行下かつ1列右で、Offset(1, 1) の結果です。列は動かしていません。"
+      },
+      "service": "Offset",
+      "difficulty": 1,
+      "tags": [
+        "Offset"
+      ],
+      "beginnerNote": "引数の順番は(行, 列)です。行が先と覚えましょう。"
+    },
+    {
+      "question": "Range(\"B3\").Offset(0, 2) が指すセルはどれか。",
+      "choices": [
+        "D3",
+        "B5",
+        "D5",
+        "B1"
+      ],
+      "answer": 0,
+      "explanation": "第1引数が 0 で行は動かず、第2引数の 2 で2列右の D3 になります。Offset は行数, 列数の順に指定します。行と列を入れ替えた Offset(2, 0) だと B5 になるので注意します。",
+      "wrong": {
+        "1": "B5 は2行下に動いた位置で、Offset(2, 0) の結果です。引数の順番を逆に読んでいます。",
+        "2": "D5 は2行下かつ2列右で、Offset(2, 2) の結果です。行は動かしていません。",
+        "3": "B1 は2行上で、Offset(-2, 0) の結果です。列方向の移動を無視しています。"
+      },
+      "service": "Offset",
+      "difficulty": 1,
+      "tags": [
+        "Offset",
+        "列の移動"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"C5\").Offset(-1, 0) が指すセルはどれか。",
+      "choices": [
+        "C6",
+        "B5",
+        "D5",
+        "C4"
+      ],
+      "answer": 3,
+      "explanation": "第1引数が -1 なので1行上へ動き、C4 になります。Offset はマイナスの値で上や左へ動けるプロパティです。行方向が負なら上、列方向が負なら左と整理でき、プラスなら下や右へ動くので、符号で向きを判断します。",
+      "wrong": {
+        "0": "C6 は1行下で、Offset(1, 0) の結果です。マイナスは上方向なので向きが逆です。",
+        "1": "B5 は1列左で、Offset(0, -1) の結果です。-1 を行ではなく列に当てはめています。",
+        "2": "D5 は1列右で、Offset(0, 1) の結果です。行方向の移動を読み違えています。"
+      },
+      "service": "Offset",
+      "difficulty": 1,
+      "tags": [
+        "Offset",
+        "負の値"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").Resize(2, 3) が表す範囲はどれか。",
+      "choices": [
+        "A1:B3",
+        "A1:C2",
+        "B2:D3",
+        "A1:D3"
+      ],
+      "answer": 1,
+      "explanation": "Resize(行数, 列数) は範囲の大きさを指定し直し、2行3列の A1:C2 になります。左上のセルは A1 のまま動きません。Offset が位置を動かすのに対し、Resize は大きさを変える点が違います。",
+      "wrong": {
+        "0": "A1:B3 は3行2列の範囲で、行数と列数を逆にした場合の結果です。",
+        "2": "B2:D3 は左上が B2 にずれており、Offset を併用した場合の範囲です。Resize 単体では左上は動きません。",
+        "3": "A1:D3 は3行4列で、引数の数を足したような誤りです。指定どおり2行3列にします。"
+      },
+      "service": "Resize",
+      "difficulty": 1,
+      "tags": [
+        "Resize"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Resize プロパティの説明として正しいものはどれか。",
+      "choices": [
+        "基準セルの位置を指定行数だけ動かす",
+        "連続したデータ範囲を自動で取得する",
+        "範囲の左上を変えずに大きさを変更する",
+        "最終行のセル位置を上方向に検索する"
+      ],
+      "answer": 2,
+      "explanation": "Resize は左上のセルを固定したまま、行数と列数で範囲の大きさを指定し直します。数セルだけ範囲を広げたいときに使います。位置を動かす Offset や、連続範囲を取る CurrentRegion と混同しないようにします。",
+      "wrong": {
+        "0": "これは Offset の説明で、位置をずらすプロパティです。Resize は位置ではなく大きさを変えます。",
+        "1": "これは CurrentRegion の説明で、空白行と空白列で囲まれた範囲を取得します。",
+        "3": "これは End(xlUp) の説明で、Ctrl+↑ と同じ動きで最終セルを探します。"
+      },
+      "service": "Resize",
+      "difficulty": 1,
+      "tags": [
+        "Resize",
+        "Offset"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").Copy Destination:=Range(\"C1\") の動作はどれか。",
+      "choices": [
+        "A1 をコピーして C1 に貼り付ける",
+        "A1 を切り取って C1 へ移動する",
+        "C1 をコピーして A1 に貼り付ける",
+        "A1 の値だけを C1 に入力し直す"
+      ],
+      "answer": 0,
+      "explanation": "Copy メソッドはコピー元のオブジェクトに対して実行し、Destination が貼り付け先です。A1 の内容と書式が C1 に入ります。切り取りは Cut メソッドであり、Copy とは別のメソッドです。",
+      "wrong": {
+        "1": "切り取って移動するのは Cut メソッドです。Copy なら元のセルにも内容が残ります。",
+        "2": "コピー元はピリオドの前の A1 で、Destination 側は貼り付け先です。向きが逆になっています。",
+        "3": "Copy は値だけでなく書式も含めてコピーします。値のみは PasteSpecial で指定します。"
+      },
+      "service": "Copy",
+      "difficulty": 1,
+      "tags": [
+        "Copy",
+        "Destination"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").Copy のように Destination を省略した場合の動作はどれか。",
+      "choices": [
+        "アクティブセルに自動で貼り付ける",
+        "A1 の隣のセルに貼り付ける",
+        "A1 の内容を削除してコピーする",
+        "A1 をクリップボードにコピーするだけ"
+      ],
+      "answer": 3,
+      "explanation": "Destination を省略すると、コピーしたデータはクリップボードに入るだけで貼り付けは行われません。貼り付けるには Paste か PasteSpecial を別に実行します。自動で貼り付け先が決まることはありません。",
+      "wrong": {
+        "0": "アクティブセルへの自動貼り付けは行われません。貼り付けは Paste などで明示します。",
+        "1": "隣のセルへ自動で貼り付けることもありません。貼り付け先は指定が必要です。",
+        "2": "コピーでは元のセルの内容は消えません。消えるのは切り取りの場合です。"
+      },
+      "service": "Copy",
+      "difficulty": 1,
+      "tags": [
+        "Copy",
+        "クリップボード"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "PasteSpecial で、値だけを貼り付けるときに指定する定数はどれか。",
+      "choices": [
+        "xlPasteFormats",
+        "xlPasteValues",
+        "xlPasteFormulas",
+        "xlPasteColumnWidths"
+      ],
+      "answer": 1,
+      "explanation": "xlPasteValues は、数式ではなく計算結果の値だけを貼り付ける定数です。数式を値に変換したいときによく使います。書式のみは xlPasteFormats、数式のみは xlPasteFormulas で、貼り付ける内容が異なります。",
+      "wrong": {
+        "0": "xlPasteFormats は書式だけを貼り付ける定数で、値は貼り付けません。",
+        "2": "xlPasteFormulas は数式を貼り付ける定数で、計算結果の値ではありません。",
+        "3": "xlPasteColumnWidths は列幅だけを貼り付ける定数で、値は入りません。"
+      },
+      "service": "PasteSpecial",
+      "difficulty": 1,
+      "tags": [
+        "PasteSpecial",
+        "xlPasteValues"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").CurrentRegion が返す範囲はどれか。",
+      "choices": [
+        "A1 から最終行までの1列分の範囲",
+        "ワークシートで使用済みのすべての範囲",
+        "A1 を含み空白行と空白列で囲まれた連続範囲",
+        "A1 の右にある空白までのセルの範囲"
+      ],
+      "answer": 2,
+      "explanation": "CurrentRegion は、基準セルを含む空白行・空白列で囲まれたアクティブセル領域を返します。Ctrl+Shift+* と同じ範囲取得です。UsedRange はシート全体の使用範囲で、基準セルに依存しない点が違います。",
+      "wrong": {
+        "0": "1列分とは限らず、CurrentRegion は行方向にも列方向にも連続範囲を広げます。",
+        "1": "これは UsedRange の説明で、シート全体の使用済み範囲を返します。",
+        "3": "これは End(xlToRight) に近い説明で、1行分の移動先です。CurrentRegion は表全体を返します。"
+      },
+      "service": "CurrentRegion",
+      "difficulty": 1,
+      "tags": [
+        "CurrentRegion"
+      ],
+      "beginnerNote": "表の周りを空白行・空白列で囲んでおくと、表全体をまとめて取得できます。"
+    },
+    {
+      "question": "Range(\"A10\").End(xlUp) と同じ動きをするキー操作はどれか。",
+      "choices": [
+        "Ctrl+↑",
+        "Ctrl+↓",
+        "Ctrl+→",
+        "Ctrl+Home"
+      ],
+      "answer": 0,
+      "explanation": "End(xlUp) は上方向へ、データの切れ目まで移動した先のセルを返します。キーボードの Ctrl+↑ と同じ動きです。xlDown は Ctrl+↓、xlToRight は Ctrl+→ に対応し、方向の定数で使い分けます。",
+      "wrong": {
+        "1": "Ctrl+↓ は End(xlDown) に対応し、下方向への移動です。",
+        "2": "Ctrl+→ は End(xlToRight) に対応し、右方向への移動です。",
+        "3": "Ctrl+Home は A1 に戻る操作で、End プロパティとは対応しません。"
+      },
+      "service": "End",
+      "difficulty": 1,
+      "tags": [
+        "End",
+        "xlUp"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Cells(Rows.Count, 1).End(xlUp).Row が求めるものはどれか。",
+      "choices": [
+        "A列で最初に空白になる行の番号",
+        "シート全体で使用済みの行数",
+        "1行目でデータがある最終列の番号",
+        "A列でデータがある最終行の行番号"
+      ],
+      "answer": 3,
+      "explanation": "Rows.Count は最下行で、A列の最下端から上へ End(xlUp) するとデータがある最終セルに止まります。その .Row がA列の最終行番号です。途中に空白行があっても、最終行を正しく取得できます。",
+      "wrong": {
+        "0": "最初の空白行を探す方法は End(xlDown) の領域で、途中の空白で止まります。ここでは最終行です。",
+        "1": "シート全体の使用済み行数は UsedRange で調べます。この式はA列だけを見ます。",
+        "2": "最終列は Cells(1, Columns.Count).End(xlToLeft).Column で求めます。この式は行を返します。"
+      },
+      "service": "最終行",
+      "difficulty": 1,
+      "tags": [
+        "最終行",
+        "Rows.Count"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").End(xlToRight) の動作として正しいものはどれか。",
+      "choices": [
+        "A1 から左へ、先頭列のセルへ移動する",
+        "A1 から下へ、データの末尾のセルへ移動する",
+        "A1 から右へ、データの切れ目のセルへ移動する",
+        "A1 から右へ、最終列のセルへ必ず移動する"
+      ],
+      "answer": 2,
+      "explanation": "End(xlToRight) は Ctrl+→ と同じで、右方向へデータの途切れ目まで進んだセルを返します。途中に空白があると、その手前で止まります。左は xlToLeft、下は xlDown と、方向定数で動きが決まります。",
+      "wrong": {
+        "0": "左方向は xlToLeft の動きです。xlToRight は右方向へ進みます。",
+        "1": "下方向は xlDown の動きです。xlToRight は列方向に進みます。",
+        "3": "必ず最終列まで行くわけではなく、空白セルの手前で止まる場合があります。"
+      },
+      "service": "End",
+      "difficulty": 1,
+      "tags": [
+        "End",
+        "xlToRight"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "ワークシートの UsedRange の説明として正しいものはどれか。",
+      "choices": [
+        "アクティブセルを含む連続範囲を返す",
+        "実際に使われたセルを含む範囲を返す",
+        "選択されているセル範囲だけを返す",
+        "最後にコピーしたセル範囲を返す"
+      ],
+      "answer": 1,
+      "explanation": "UsedRange は、値や書式が設定されたセルを含む、シート上の使用済み範囲を返します。行数や列数を調べるときに使えます。アクティブセルを基準とする CurrentRegion や、Selection とは対象が異なります。",
+      "wrong": {
+        "0": "これは CurrentRegion の説明です。UsedRange は基準セルに関係なくシート全体を見ます。",
+        "2": "選択範囲は Selection プロパティで取得します。UsedRange は選択状態に影響されません。",
+        "3": "コピー元の範囲を返す機能ではありません。クリップボードの状態とは無関係です。"
+      },
+      "service": "UsedRange",
+      "difficulty": 1,
+      "tags": [
+        "UsedRange"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "SpecialCells(xlCellTypeLastCell) が返すセルはどれか。",
+      "choices": [
+        "使用済み範囲の最後のセル",
+        "選択範囲の最初のセル",
+        "A列の最初の空白セル",
+        "アクティブセルの下のセル"
+      ],
+      "answer": 0,
+      "explanation": "xlCellTypeLastCell を指定すると、使用済みの範囲の最終行と最終列が交わるセルを返します。最終行を調べる用途にも使えますが、書式だけのセルが影響するため、End(xlUp) と結果が異なることがあります。",
+      "wrong": {
+        "1": "選択範囲の最初のセルは Selection の先頭で、最後のセルではありません。",
+        "2": "A列の空白セルを探すものではなく、使用済み範囲の最後を返す定数です。",
+        "3": "アクティブセルの位置とは無関係です。Offset(1, 0) とは別の機能です。"
+      },
+      "service": "SpecialCells",
+      "difficulty": 1,
+      "tags": [
+        "SpecialCells",
+        "最終セル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"B2\").Offset(, 1) が指すセルはどれか。",
+      "choices": [
+        "B3",
+        "A2",
+        "C3",
+        "C2"
+      ],
+      "answer": 3,
+      "explanation": "Offset の行数を省略すると 0 として扱われ、列数 1 だけ右へ動くため C2 です。カンマは残す必要があります。行を省略しても行の位置は変わらず、Offset(0, 1) と同じ意味になります。",
+      "wrong": {
+        "0": "B3 は1行下で、Offset(1) や Offset(1, 0) の結果です。カンマの位置を読み違えています。",
+        "1": "A2 は1列左で、Offset(, -1) の結果です。ここでは正の値なので右へ動きます。",
+        "2": "C3 は1行下かつ1列右で、Offset(1, 1) の結果です。行は省略されています。"
+      },
+      "service": "Offset",
+      "difficulty": 1,
+      "tags": [
+        "Offset",
+        "引数の省略"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "confirm": [
+    {
+      "question": "次のコードで文字列 X が入力されるセルはどれか。\nRange(\"B2\").Offset(2, 1).Value = \"X\"",
+      "choices": [
+        "D3",
+        "C4",
+        "B4",
+        "C3"
+      ],
+      "answer": 1,
+      "explanation": "B2 から2行下・1列右へ動くので C4 です。Offset の引数は(行, 列)の順で、行を先に足して考えます。Offset は位置を移動するだけで範囲の大きさを変えるものではない点が、Resize との違いです。",
+      "wrong": {
+        "0": "D3 は1行下・2列右で、Offset(1, 2) の結果です。行と列の数を入れ替えています。",
+        "2": "B4 は2行下だけ動いた位置で、Offset(2, 0) の結果です。列の移動を見落としています。",
+        "3": "C3 は1行下・1列右で、Offset(1, 1) の結果です。行の移動量を読み違えています。"
+      },
+      "service": "Offset",
+      "difficulty": 2,
+      "tags": [
+        "Offset",
+        "セルの特定"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1:B2\").Offset(1, 1) が指す範囲はどれか。",
+      "choices": [
+        "A2:B3",
+        "B1:C2",
+        "A1:C3",
+        "B2:C3"
+      ],
+      "answer": 3,
+      "explanation": "複数セルの範囲に Offset を使うと、大きさはそのままで範囲全体が動きます。2行2列の A1:B2 が1行下・1列右へ動くため B2:C3 です。範囲の広さを変えるのは Resize であり、Offset ではありません。",
+      "wrong": {
+        "0": "A2:B3 は行だけ動いた結果で、Offset(1, 0) に当たります。列の移動が抜けています。",
+        "1": "B1:C2 は列だけ動いた結果で、Offset(0, 1) に当たります。行の移動が抜けています。",
+        "2": "A1:C3 は範囲が3行3列に広がっていますが、Offset は大きさを変えません。"
+      },
+      "service": "Offset",
+      "difficulty": 2,
+      "tags": [
+        "Offset",
+        "範囲の移動"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"C3\").Resize(2, 2).Select で選択される範囲はどれか。",
+      "choices": [
+        "C3:D4",
+        "D4:E5",
+        "C3:E5",
+        "B2:C3"
+      ],
+      "answer": 0,
+      "explanation": "Resize(2, 2) は C3 を左上に固定したまま2行2列にするので、C3:D4 です。基準セルが動かない点が重要で、位置を動かしたいときは Offset を組み合わせます。大きさだけを変えるのが Resize の役割です。",
+      "wrong": {
+        "1": "D4:E5 は1行1列ずらした範囲で、Offset を併用した場合の結果です。",
+        "2": "C3:E5 は3行3列の範囲で、指定した行数と列数より1ずつ大きくなっています。",
+        "3": "B2:C3 は左上が B2 に動いています。Resize は左上のセルを動かしません。"
+      },
+      "service": "Resize",
+      "difficulty": 2,
+      "tags": [
+        "Resize",
+        "Select"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1:C3\").Resize(2) が表す範囲はどれか。",
+      "choices": [
+        "A1:B3",
+        "A1:B2",
+        "A1:C2",
+        "A1:C5"
+      ],
+      "answer": 2,
+      "explanation": "Resize の第1引数だけを指定し第2引数を省略すると、列数は元のままです。A1:C3 の3列を保ち、行数を2にするので A1:C2 です。省略した引数は元の大きさになる点を、Offset の省略と区別して押さえましょう。",
+      "wrong": {
+        "0": "A1:B3 は3行2列で、第1引数を列数と読んだ結果です。第1引数は行数です。",
+        "1": "A1:B2 は列数も2に変わっていますが、第2引数を省略すると列数は変わりません。",
+        "3": "A1:C5 は行数が5に増えており、指定した2行と一致しません。"
+      },
+      "service": "Resize",
+      "difficulty": 2,
+      "tags": [
+        "Resize",
+        "引数の省略"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Cells(5, 1).Offset(-2, 3) が指すセルはどれか。",
+      "choices": [
+        "D7",
+        "D3",
+        "B3",
+        "D8"
+      ],
+      "answer": 1,
+      "explanation": "Cells(5, 1) は5行目1列目の A5 です。そこから2行上の3行目、3列右の D列へ動くので D3 になります。Cells は(行, 列)の順で、Offset も同じ順なので、基準セルを先に確定させてから動かします。",
+      "wrong": {
+        "0": "D7 は2行下に動いた位置で、-2 を上方向ではなく下方向に読んだ結果です。",
+        "2": "B3 は列方向に1しか動いていません。右へ3列動くと B列ではなく D列です。",
+        "3": "D8 は3行下に動いた位置で、行と列の移動量を取り違えた結果です。"
+      },
+      "service": "Offset",
+      "difficulty": 2,
+      "tags": [
+        "Offset",
+        "Cells"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:C5 と A7:C9 に値があり、6行目はすべて空白である。Range(\"A1\").CurrentRegion が返す範囲はどれか。",
+      "choices": [
+        "A1:C9",
+        "A1:C6",
+        "A1:A5",
+        "A1:C5"
+      ],
+      "answer": 3,
+      "explanation": "CurrentRegion は空白行と空白列で囲まれた連続範囲を返すため、6行目の空白行で区切られた A1:C5 です。表を区切る空白行があると、その先のデータは含まれません。シート全体なら UsedRange を使います。",
+      "wrong": {
+        "0": "A1:C9 は空白行を越えた範囲で、UsedRange に近い結果です。CurrentRegion は空白行で止まります。",
+        "1": "A1:C6 は空白行を含んでいます。CurrentRegion は空白行を範囲に含めません。",
+        "2": "A1:A5 は1列だけの範囲です。隣の B、C列にも連続したデータがあれば範囲に含まれます。"
+      },
+      "service": "CurrentRegion",
+      "difficulty": 2,
+      "tags": [
+        "CurrentRegion",
+        "空白行"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A列の A1:A8、A10、A12 に値があり、他は空白である。次の式の結果はどれか。\nCells(Rows.Count, 1).End(xlUp).Row",
+      "choices": [
+        "8",
+        "10",
+        "12",
+        "13"
+      ],
+      "answer": 2,
+      "explanation": "最下行から上へ進むと、最初にデータがある A12 で止まるので、結果は 12 です。途中の空白に影響されないのが End(xlUp) の利点です。上から下へ進む End(xlDown) だと、空白で止まって 8 になります。",
+      "wrong": {
+        "0": "8 は A1 から End(xlDown) を使ったときの結果です。xlUp では最下行から検索します。",
+        "1": "10 は途中のセルの行番号です。最終行はさらに下の A12 にデータがあります。",
+        "3": "13 はデータの次の空白行です。End(xlUp) が返すのはデータのある最終セルの行です。"
+      },
+      "service": "最終行",
+      "difficulty": 2,
+      "tags": [
+        "最終行",
+        "End(xlUp)"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:A5 と A7:A9 に値があり、A6 は空白である。Range(\"A1\").End(xlDown) が指すセルはどれか。",
+      "choices": [
+        "A9",
+        "A5",
+        "A6",
+        "A7"
+      ],
+      "answer": 1,
+      "explanation": "End(xlDown) は Ctrl+↓ と同じ動きで、連続したデータの末尾である A5 で止まります。A6 の空白を越えて A9 まで進むことはありません。最終行を確実に取りたいときは、下端から End(xlUp) を使います。",
+      "wrong": {
+        "0": "A9 は空白を越えた先の最終行で、End(xlUp) を最下行から使った場合の結果です。",
+        "2": "A6 は空白セルです。End は連続データの末尾セルで止まり、空白セルには止まりません。",
+        "3": "A7 は空白の次のデータの先頭です。一方 A1 からの End(xlDown) は手前の A5 で止まります。"
+      },
+      "service": "End",
+      "difficulty": 2,
+      "tags": [
+        "End",
+        "xlDown"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:A9 に値がある。次のコードを実行したとき、\"新\" が入力されるセルはどれか。\nCells(Rows.Count, 1).End(xlUp).Offset(1, 0).Value = \"新\"",
+      "choices": [
+        "A10",
+        "A9",
+        "A11",
+        "A1"
+      ],
+      "answer": 0,
+      "explanation": "End(xlUp) で最終行の A9 を取得し、Offset(1, 0) で1行下の A10 へ動くので、データの次の空白行に入力されます。最終セルを求めて Offset でずらす形は、表の末尾にデータを追加する定番の書き方です。",
+      "wrong": {
+        "1": "A9 は最終セルそのもので、Offset(1, 0) を付けないと既存データが上書きされます。",
+        "2": "A11 は2行下で、Offset(2, 0) の結果です。移動量は 1 行です。",
+        "3": "A1 は先頭のセルです。End(xlUp) は最下行から上へ進み、最終のデータ行で止まります。"
+      },
+      "service": "最終行",
+      "difficulty": 2,
+      "tags": [
+        "最終行",
+        "Offset"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "次のコードを実行したとき、貼り付け先となる範囲はどれか。\nRange(\"A1:B3\").Copy Destination:=Range(\"D1\")",
+      "choices": [
+        "D1:D3",
+        "D1:F2",
+        "A1:D3",
+        "D1:E3"
+      ],
+      "answer": 3,
+      "explanation": "Destination に単一セルを指定すると、そのセルが貼り付け範囲の左上になります。A1:B3 は3行2列なので、D1 を起点に D1:E3 へ貼り付けます。貼り付け先の範囲を全部指定する必要はありません。",
+      "wrong": {
+        "0": "D1:D3 は1列分です。コピー元は2列あるので、貼り付けも2列分になります。",
+        "1": "D1:F2 は2行3列で、行数と列数を入れ替えた範囲です。元は3行2列です。",
+        "2": "A1:D3 はコピー元を含んでおり、Destination に指定した D1 から始まっていません。"
+      },
+      "service": "Copy",
+      "difficulty": 2,
+      "tags": [
+        "Copy",
+        "Destination"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "コピー後に表示される点滅する枠線を解除する文はどれか。",
+      "choices": [
+        "Application.ScreenUpdating = False",
+        "Application.CutCopyMode = False",
+        "Application.DisplayAlerts = False",
+        "Application.EnableEvents = False"
+      ],
+      "answer": 1,
+      "explanation": "CutCopyMode に False を設定すると、コピーや切り取りの点滅枠が解除されます。PasteSpecial の後によく付ける処理です。ScreenUpdating は画面更新、DisplayAlerts は確認メッセージの制御で、役割が異なります。",
+      "wrong": {
+        "0": "ScreenUpdating は画面更新の停止で、点滅枠は消えません。マクロの高速化に使います。",
+        "2": "DisplayAlerts は確認メッセージの表示を制御します。コピーの点滅枠とは無関係です。",
+        "3": "EnableEvents はイベントの発生を制御します。コピーモードの解除はできません。"
+      },
+      "service": "PasteSpecial",
+      "difficulty": 2,
+      "tags": [
+        "CutCopyMode",
+        "PasteSpecial"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:C5 に値があり、A100 には値がなく罫線だけが設定されている。ws.UsedRange.Rows.Count の値はどれか。",
+      "choices": [
+        "5",
+        "95",
+        "100",
+        "1"
+      ],
+      "answer": 2,
+      "explanation": "書式だけのセルも使用済みとみなされるため、UsedRange は A1:C100 になり、行数は 100 です。見た目のデータは5行でも、罫線などの設定が最終行を押し広げます。実データの最終行は End(xlUp) で調べると確実です。",
+      "wrong": {
+        "0": "5 は値のある行数です。UsedRange は書式のみのセルも使用済みに含めるので一致しません。",
+        "1": "95 は A6 から A100 の行数です。UsedRange は先頭の1行目から数えます。",
+        "3": "1 は A1 だけの場合の行数です。ここでは A100 までが使用済みになります。"
+      },
+      "service": "UsedRange",
+      "difficulty": 3,
+      "tags": [
+        "UsedRange",
+        "書式"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:D6 に値があり、さらに F2 にも値がある。SpecialCells(xlCellTypeLastCell) が返すセルはどれか。",
+      "choices": [
+        "F6",
+        "F2",
+        "D6",
+        "D2"
+      ],
+      "answer": 0,
+      "explanation": "最後のセルは、使用済み範囲の最終行(6行目)と最終列(F列)が交わる F6 です。実際に値がある最後の位置とは限りません。F6 自体が空でも返る点が、データのある最終セルを探す End(xlUp) との違いです。",
+      "wrong": {
+        "1": "F2 は値のあるセルですが、最後のセルは最終行と最終列の交点で決まります。",
+        "2": "D6 は表の右下隅ですが、F列に値があるため最終列は D ではなく F です。",
+        "3": "D2 は最終行も最終列も満たしていません。交点の行は6行目です。"
+      },
+      "service": "SpecialCells",
+      "difficulty": 3,
+      "tags": [
+        "SpecialCells",
+        "最終セル"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:D1 に値があり、E1 は空白で、F1 に値がある。Range(\"A1\").End(xlToRight) が指すセルはどれか。",
+      "choices": [
+        "E1",
+        "F1",
+        "XFD1",
+        "D1"
+      ],
+      "answer": 3,
+      "explanation": "End(xlToRight) は Ctrl+→ と同じで、連続したデータの右端である D1 で止まります。空白の E1 で止まるのではなく、その手前のセルを返す点に注意します。F1 に到達するには、さらにもう一度移動します。",
+      "wrong": {
+        "0": "E1 は空白セルです。End は連続データの端のセルを返し、空白セルには止まりません。",
+        "1": "F1 は空白を越えた先のデータです。1回の End では空白の手前で止まります。",
+        "2": "XFD1 は最終列で、右側に全くデータがない場合の移動先です。F1 に値があるため該当しません。"
+      },
+      "service": "End",
+      "difficulty": 2,
+      "tags": [
+        "End",
+        "xlToRight"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A1:A8 に値があるとき、次の式が表す範囲はどれか。\nRange(\"A1\").Resize(Cells(Rows.Count, 1).End(xlUp).Row, 3)",
+      "choices": [
+        "A1:C3",
+        "A1:C8",
+        "A1:H3",
+        "A1:C9"
+      ],
+      "answer": 1,
+      "explanation": "Resize の第1引数に最終行 8 が入り、第2引数が 3 なので、A1 を左上とする8行3列の A1:C8 です。最終行を求める式を Resize の行数に渡すと、データの量に合わせて範囲を自動で変えられます。",
+      "wrong": {
+        "0": "A1:C3 は行数と列数を入れ替えた範囲で、第1引数は行数、第2引数が列数です。",
+        "2": "A1:H3 は8列3行の範囲で、Resize の引数の順番を逆にしています。",
+        "3": "A1:C9 は最終行の次の行まで含んでいます。最終行の値は 8 なので行数も 8 です。"
+      },
+      "service": "Resize",
+      "difficulty": 3,
+      "tags": [
+        "Resize",
+        "最終行"
+      ],
+      "beginnerNote": null
+    }
+  ],
+  "drill": [
+    {
+      "question": "空白行と空白列で囲まれた表全体を、基準セルからまとめて取得したいときに使うプロパティはどれか。",
+      "choices": [
+        "UsedRange",
+        "SpecialCells",
+        "EntireColumn",
+        "CurrentRegion"
+      ],
+      "answer": 3,
+      "explanation": "CurrentRegion は基準セルを含む連続範囲を返すので、表全体を一度に取得できます。UsedRange はシート全体の使用範囲、Resize は大きさの変更、Offset は位置の移動で、表を自動で捉える働きはありません。",
+      "wrong": {
+        "0": "UsedRange はシート上の使用済み範囲全体を返すため、基準セルの周囲の表だけを取得できません。",
+        "1": "SpecialCells は数式や空白など種類を指定してセルを絞り込みます。表の連続範囲は取得しません。",
+        "2": "EntireColumn は基準セルを含む列全体を返します。データの広がりは判断しません。"
+      },
+      "service": "CurrentRegion",
+      "difficulty": 1,
+      "tags": [
+        "CurrentRegion",
+        "用途"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Offset プロパティの説明として正しいものはどれか。",
+      "choices": [
+        "範囲の大きさは変えずに位置だけを動かす",
+        "範囲の左上を固定して大きさを変える",
+        "行数を省略するとエラーが発生する",
+        "行数にマイナスを指定するとエラーになる"
+      ],
+      "answer": 0,
+      "explanation": "Offset は指定した行数・列数だけ範囲を動かし、大きさは変わりません。省略した引数は 0、マイナスの値は上や左への移動になるので、どちらもエラーにはなりません。範囲の大きさを変更するのは Resize の役割です。",
+      "wrong": {
+        "1": "これは Resize の説明です。左上を固定したまま行数と列数を変えます。",
+        "2": "行数は省略でき、Offset(, 1) のように書けば 0 として扱われます。",
+        "3": "マイナスは有効で、上方向や左方向へ移動できます。エラーにはなりません。"
+      },
+      "service": "Offset",
+      "difficulty": 2,
+      "tags": [
+        "Offset",
+        "説明の正誤"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A列の最終行の次の行に、文字列 新 を追加するコードとして適切なものはどれか。",
+      "choices": [
+        "Cells(Rows.Count, 1).End(xlUp).Value = \"新\"",
+        "Range(\"A1\").End(xlUp).Offset(1, 0).Value = \"新\"",
+        "Cells(Rows.Count, 1).End(xlUp).Offset(1, 0).Value = \"新\"",
+        "Cells(Rows.Count, 1).End(xlDown).Offset(1, 0).Value = \"新\""
+      ],
+      "answer": 2,
+      "explanation": "最下行から End(xlUp) で最終行へ進み、Offset(1, 0) で1行下へ動いて入力するので、データの次の行に追加できます。Offset を付けないと最終行のデータを上書きし、基準を A1 にすると位置がずれます。",
+      "wrong": {
+        "0": "Offset がないため、最終行のセルを上書きします。次の行には入力されません。",
+        "1": "A1 から上へ進んでも A1 のままで、結果として A2 に入力されます。最下行が基準です。",
+        "3": "最下行から下へ進む End(xlDown) は動けず、追加位置を求める式になりません。"
+      },
+      "service": "最終行",
+      "difficulty": 2,
+      "tags": [
+        "最終行",
+        "データ追加"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").(3, 2) で A1:B3 の範囲を表したい。空欄に入るのはどれか。",
+      "choices": [
+        "Offset",
+        "Resize",
+        "UsedRange",
+        "SpecialCells"
+      ],
+      "answer": 1,
+      "explanation": "Resize(3, 2) は3行2列の範囲を作り、A1 を左上とする A1:B3 になります。Offset(3, 2) は C4 のセルを指す式で、範囲の大きさは作りません。行数と列数を指定する点が Resize の特徴です。",
+      "wrong": {
+        "0": "Offset(3, 2) は3行下・2列右の C4 という単一のセルを指します。範囲は広がりません。",
+        "2": "UsedRange は引数を取らず、シートの使用済み範囲を返します。行数や列数は指定できません。",
+        "3": "SpecialCells は種類を指定してセルを絞り込みます。行数・列数の指定には使いません。"
+      },
+      "service": "Resize",
+      "difficulty": 1,
+      "tags": [
+        "Resize",
+        "穴埋め"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Copy メソッドの説明として誤っているものはどれか。",
+      "choices": [
+        "Destination には貼り付け先の左上のセルだけを指定できる",
+        "Destination を省略すると、クリップボードにコピーされる",
+        "クリップボードの内容は PasteSpecial で形式を選んで貼れる",
+        "Destination を省略すると、アクティブセルに貼り付けられる"
+      ],
+      "answer": 3,
+      "explanation": "Destination を省略した場合は貼り付けられず、クリップボードにコピーされるだけです。貼り付けるには Paste や PasteSpecial を実行します。アクティブセルへ自動で貼り付けるという動作はありません。",
+      "wrong": {
+        "0": "これは正しい説明です。単一セルを指定すれば、それが貼り付け範囲の左上になります。",
+        "1": "これは正しい説明です。省略時はクリップボードに格納するだけです。",
+        "2": "これは正しい説明です。PasteSpecial なら値や書式など形式を選択できます。"
+      },
+      "service": "Copy",
+      "difficulty": 2,
+      "tags": [
+        "Copy",
+        "誤りを探す"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "A列に途中の空白行を含む表がある。空白に関係なく、データのある最終行の番号を取得する式はどれか。",
+      "choices": [
+        "Cells(Rows.Count, 1).End(xlUp).Row",
+        "Range(\"A1\").End(xlDown).Row",
+        "Range(\"A1\").CurrentRegion.Rows.Count",
+        "Range(\"A1\").End(xlToRight).Row"
+      ],
+      "answer": 0,
+      "explanation": "最下行から End(xlUp) で上へ進めば、途中の空白行を越えて最後のデータ行に止まります。A1 から下へ進む End(xlDown) や CurrentRegion は空白行で区切られるため、最終行まで届きません。",
+      "wrong": {
+        "1": "A1 から End(xlDown) すると、最初の空白行の手前で止まり、最終行にならない場合があります。",
+        "2": "CurrentRegion は空白行で範囲が区切られ、その先のデータは数えられません。",
+        "3": "xlToRight は右方向へ進みます。同じ行を移動するだけで、行番号は 1 のままです。"
+      },
+      "service": "最終行",
+      "difficulty": 2,
+      "tags": [
+        "最終行",
+        "シナリオ"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"C3\") の右隣にあるセル(D3)を指す式はどれか。",
+      "choices": [
+        "Range(\"C3\").Offset(1, 0)",
+        "Range(\"C3\").Offset(0, -1)",
+        "Range(\"C3\").Offset(-1, 0)",
+        "Range(\"C3\").Offset(0, 1)"
+      ],
+      "answer": 3,
+      "explanation": "右隣のセルは列方向に +1 動かすので、Offset(0, 1) です。引数は(行, 列)の順で、行は動かさないため 0 にします。Offset(1, 0) は1行下の C4 になるため、向きの取り違えに注意します。",
+      "wrong": {
+        "0": "Offset(1, 0) は1行下の C4 を指します。右ではなく下へ動いています。",
+        "1": "Offset(0, -1) は1列左の B3 を指します。マイナスは左方向への移動です。",
+        "2": "Offset(-1, 0) は1行上の C2 を指します。列方向には動いていません。"
+      },
+      "service": "Offset",
+      "difficulty": 1,
+      "tags": [
+        "Offset",
+        "方向"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "シートの B2:D6 にだけ値があり、他のセルは空で書式もない。ws.UsedRange.Address が返す範囲はどれか。",
+      "choices": [
+        "$A$1:$D$6",
+        "$B$2:$D$6",
+        "$B$2:$D$7",
+        "$A$2:$D$6"
+      ],
+      "answer": 1,
+      "explanation": "UsedRange は実際に使われたセルを囲む最小の範囲なので、先頭は A1 ではなく B2 から始まり、$B$2:$D$6 になります。Address は絶対参照の形式で返ります。空白の行や列は範囲に含まれません。",
+      "wrong": {
+        "0": "$A$1:$D$6 は、UsedRange が必ず A1 から始まると誤解した結果です。先頭は最初の使用済みセルです。",
+        "2": "$B$2:$D$7 は最終行が1行多い範囲です。値があるのは6行目までです。",
+        "3": "$A$2:$D$6 は先頭列が A になっています。使用済みの最初の列は B 列です。"
+      },
+      "service": "UsedRange",
+      "difficulty": 2,
+      "tags": [
+        "UsedRange",
+        "Address"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"A1\").Copy の後、E1 に A1 の書式だけを貼り付ける文はどれか。",
+      "choices": [
+        "Range(\"E1\").PasteSpecial xlPasteValues",
+        "Range(\"E1\").PasteSpecial xlPasteFormulas",
+        "Range(\"E1\").PasteSpecial xlPasteFormats",
+        "Range(\"E1\").PasteSpecial xlPasteColumnWidths"
+      ],
+      "answer": 2,
+      "explanation": "xlPasteFormats は罫線・色・表示形式など書式だけを貼り付けます。値だけなら xlPasteValues、数式だけなら xlPasteFormulas です。書式を貼るときは値が変わらないため、見た目だけをそろえたいときに使います。",
+      "wrong": {
+        "0": "xlPasteValues は値だけを貼り付けます。書式は貼り付けられません。",
+        "1": "xlPasteFormulas は数式を貼り付けます。書式は貼り付けられません。",
+        "3": "xlPasteColumnWidths は列幅を貼り付けます。セルの書式とは別の項目です。"
+      },
+      "service": "PasteSpecial",
+      "difficulty": 1,
+      "tags": [
+        "PasteSpecial",
+        "xlPasteFormats"
+      ],
+      "beginnerNote": null
+    },
+    {
+      "question": "Range(\"B2\").Offset(1, 1).Resize(2, 2) が表す範囲はどれか。",
+      "choices": [
+        "C3:D4",
+        "B2:C3",
+        "C3:E5",
+        "D4:E5"
+      ],
+      "answer": 0,
+      "explanation": "まず Offset(1, 1) で B2 が C3 に動き、次に Resize(2, 2) で C3 を左上とする2行2列の C3:D4 になります。メソッドは左から順に評価され、Resize は左上のセルを動かさない点を押さえます。",
+      "wrong": {
+        "1": "B2:C3 は Offset の移動を無視した範囲です。Offset(1, 1) により基準は C3 になります。",
+        "2": "C3:E5 は3行3列の範囲で、Resize(2, 2) の指定より1ずつ大きくなっています。",
+        "3": "D4:E5 は Resize の後でさらに移動した位置です。Resize は左上のセルを動かしません。"
+      },
+      "service": "Offset",
+      "difficulty": 3,
+      "tags": [
+        "Offset",
+        "Resize",
+        "組み合わせ"
+      ],
+      "beginnerNote": null
+    }
+  ]
+}

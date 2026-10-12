@@ -1,1 +1,782 @@
-[]
+[
+ {
+  "id": "t-key1",
+  "term": "VBE（Visual Basic Editor）",
+  "shortDescription": "VBAコードを書いて編集する専用の画面",
+  "beginnerExplanation": "マクロの中身であるVBAのコードを書くための専用の作業部屋です。Excelとは別ウィンドウで開き、Alt+F11で行き来できます。台所と食卓のような関係です。",
+  "useCase": "マクロの記録で作られたコードを読んだり、手でSubプロシージャを書いたり、F8で1行ずつ動かして確認したりするときに使います。",
+  "examPoint": "プロジェクトエクスプローラー、プロパティウィンドウ、コードウィンドウ、イミディエイトウィンドウの4つの役割を区別して覚えます。起動のショートカットはAlt+F11です。",
+  "relatedServices": [
+   "プロジェクトエクスプローラー",
+   "イミディエイトウィンドウ",
+   "Alt+F11"
+  ],
+  "domain": "concept",
+  "difficulty": 1
+ },
+ {
+  "id": "t-key2",
+  "term": "Subプロシージャ",
+  "shortDescription": "Sub〜End Subで囲む実行単位",
+  "beginnerExplanation": "VBAの命令をひとまとめにした料理のレシピのようなものです。Subで始まりEnd Subで終わり、この間に書いた命令が上から順に実行されます。",
+  "useCase": "マクロとして実行できる処理の基本単位です。マクロ記録で作られるのもSubプロシージャで、ボタンや［マクロ］ダイアログから呼び出せます。",
+  "examPoint": "書式は Sub プロシージャ名() から End Sub までです。値を返せるFunctionプロシージャとの違い、Callで別のSubを呼び出せる点が問われます。",
+  "relatedServices": [
+   "Functionプロシージャ",
+   "Call",
+   "標準モジュール"
+  ],
+  "domain": "syntax",
+  "difficulty": 1
+ },
+ {
+  "id": "t-key3",
+  "term": "Dim（変数の宣言）",
+  "shortDescription": "変数の名前とデータ型を宣言する",
+  "beginnerExplanation": "変数は値を入れておく名札付きの箱です。Dimはその箱を使う前に、名前と入れてよい中身の種類を決めて用意する宣言です。",
+  "useCase": "Dim 変数名 As Long のように書き、数値や文字列を一時的に保存します。型を指定すると計算が安定し、間違いも見つけやすくなります。",
+  "examPoint": "As を省略すると Variant 型になります。Dim a, b As Long では b だけが Long で a は Variant になる点が頻出です。",
+  "relatedServices": [
+   "Option Explicit",
+   "データ型",
+   "Variant型"
+  ],
+  "domain": "variable",
+  "difficulty": 2
+ },
+ {
+  "id": "t-key4",
+  "term": "Range プロパティ",
+  "shortDescription": "セルやセル範囲を文字で指定する",
+  "beginnerExplanation": "Excelの住所表記でセルを指す方法です。Range(\"A1\")なら1つのセル、Range(\"A1:C3\")なら表のような範囲を指します。",
+  "useCase": "セルに値を入れたり書式を変えたりする最初の一歩です。Range(\"A1\").Value = 100 のように、続けてプロパティやメソッドを書きます。",
+  "examPoint": "Range(\"A1\", \"C3\") と Range(\"A1:C3\") は同じ範囲です。行と列の番号で指定するCellsとの書き分けが問われます。",
+  "relatedServices": [
+   "Cells プロパティ",
+   "Value・Text・Formula",
+   "Offset プロパティ"
+  ],
+  "domain": "cell",
+  "difficulty": 1
+ },
+ {
+  "id": "t-key5",
+  "term": "If ステートメント",
+  "shortDescription": "条件によって処理を分ける",
+  "beginnerExplanation": "「雨なら傘を持つ、そうでなければ持たない」のように、条件が成り立つかどうかで実行する処理を切り替える仕組みです。",
+  "useCase": "セルの値が基準を超えたかで表示を変える、入力が空かどうかで警告を出すなど、あらゆる判定に使います。",
+  "examPoint": "If…Then…ElseIf…Else…End If の構造と、Thenの後に1行で書く形式の違いが問われます。複数条件はAndやOrで組み立てます。",
+  "relatedServices": [
+   "ElseIf",
+   "演算子の優先順位",
+   "For…Next ステートメント"
+  ],
+  "domain": "control",
+  "difficulty": 1
+ },
+ {
+  "id": "t-key6",
+  "term": "ThisWorkbook と ActiveWorkbook",
+  "shortDescription": "マクロのあるブックと操作中のブック",
+  "beginnerExplanation": "ThisWorkbookはマクロが書かれているブックそのもの、ActiveWorkbookはいま画面で手前に出ているブックです。自宅と今いる場所のような違いです。",
+  "useCase": "複数のブックを開いて操作するとき、マクロ自身のブックを確実に指したい場面はThisWorkbookを使います。",
+  "examPoint": "別ブックを開くと ActiveWorkbook は切り替わりますが、ThisWorkbook は変わりません。この違いを使った出題が典型です。",
+  "relatedServices": [
+   "Workbooks.Open",
+   "Workbooks.Open",
+   "コレクション"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-001",
+  "term": "マクロの記録",
+  "shortDescription": "操作をそのままVBAコードにする機能",
+  "beginnerExplanation": "Excelで行った操作を録画のように覚えさせ、あとで同じ動きを再現できるようにする機能です。VBAの知識がなくても自動化の第一歩になります。",
+  "useCase": "毎回同じ書式設定をする作業や、コードの書き方が分からない操作を記録し、出てきたコードを読んで学んだり修正したりします。",
+  "examPoint": "［マクロの記録］ダイアログで、マクロ名・ショートカットキー・保存先・説明を指定します。マクロ名の先頭に数字やスペースは使えません。",
+  "relatedServices": [
+   "相対参照で記録",
+   "個人用マクロブック",
+   "［開発］タブ"
+  ],
+  "domain": "concept",
+  "difficulty": 1
+ },
+ {
+  "id": "t-002",
+  "term": "相対参照で記録",
+  "shortDescription": "いまのセルを基準に動きを記録する",
+  "beginnerExplanation": "「A1をクリックした」ではなく「いまの位置から2つ下へ動いた」と覚えさせる方法です。どこから始めても同じ動きをさせたいときに便利です。",
+  "useCase": "選択中のセルから見て決まった位置に入力や書式を行いたいとき、［相対参照で記録］をオンにして記録します。",
+  "examPoint": "既定の記録は絶対参照で、特定のセル番地がコードに残ります。相対参照では Offset を使ったコードになる点が問われます。",
+  "relatedServices": [
+   "マクロの記録",
+   "Offset プロパティ",
+   "ActiveCell"
+  ],
+  "domain": "concept",
+  "difficulty": 2
+ },
+ {
+  "id": "t-003",
+  "term": "個人用マクロブック",
+  "shortDescription": "どのブックでも使えるマクロの保存先",
+  "beginnerExplanation": "自分専用の道具箱のようなブックです。ここに入れたマクロは、どのExcelファイルを開いていても呼び出せます。",
+  "useCase": "特定のファイルに限らず、書式をそろえる、選択範囲をクリアするなど、いつでも使いたいマクロを置くのに向いています。",
+  "examPoint": "ファイル名は PERSONAL.XLSB で、非表示のまま起動時に自動で開かれます。記録時の保存先で選べる点が頻出です。",
+  "relatedServices": [
+   "マクロの記録",
+   "PERSONAL.XLSB",
+   "保存先"
+  ],
+  "domain": "concept",
+  "difficulty": 2
+ },
+ {
+  "id": "t-004",
+  "term": "マクロ有効ブック（.xlsm）",
+  "shortDescription": "マクロを保存できるExcelファイル形式",
+  "beginnerExplanation": "通常のExcelブック（.xlsx）にはマクロを保存できません。マクロ入りのファイルは別の形式である.xlsmで保存します。",
+  "useCase": "マクロを書いたブックを保存するときに選びます。.xlsxで保存するとマクロは消えるため、警告が表示されます。",
+  "examPoint": "拡張子は .xlsm で、.xlsx と取り違えるとマクロが失われます。保存の種類をマクロ有効ブックにする手順が問われます。",
+  "relatedServices": [
+   "保存形式",
+   "Save と SaveAs",
+   "マクロのセキュリティ設定"
+  ],
+  "domain": "concept",
+  "difficulty": 1
+ },
+ {
+  "id": "t-005",
+  "term": "マクロのセキュリティ設定",
+  "shortDescription": "マクロの実行を制限する安全の仕組み",
+  "beginnerExplanation": "マクロにはパソコンを壊すものを仕込めてしまうため、勝手に動かさないよう段階的な鍵をかける仕組みがあります。",
+  "useCase": "トラストセンターで設定します。既定では警告を表示してマクロを無効にし、必要なときだけ［コンテンツの有効化］を選びます。",
+  "examPoint": "既定は「警告を表示してすべてのマクロを無効にする」です。信頼できる場所に置いたファイルは警告なしで実行できます。",
+  "relatedServices": [
+   "トラストセンター",
+   "信頼できる場所",
+   "マクロ有効ブック（.xlsm）"
+  ],
+  "domain": "concept",
+  "difficulty": 2
+ },
+ {
+  "id": "t-006",
+  "term": "［開発］タブ",
+  "shortDescription": "マクロ関連の機能がまとまったタブ",
+  "beginnerExplanation": "マクロの記録やVBE、ボタンの配置など、開発向けの機能を集めたタブです。初期状態では隠れているので表示設定が必要です。",
+  "useCase": "マクロの記録や［マクロ］ダイアログの起動、フォームコントロールのボタン配置の際に使います。",
+  "examPoint": "表示するには［ファイル］→［オプション］→［リボンのユーザー設定］で［開発］にチェックを入れます。初期は非表示という点が問われます。",
+  "relatedServices": [
+   "VBE（Visual Basic Editor）",
+   "フォームコントロール",
+   "マクロの記録"
+  ],
+  "domain": "concept",
+  "difficulty": 1
+ },
+ {
+  "id": "t-007",
+  "term": "プロジェクトエクスプローラー",
+  "shortDescription": "ブックの構成要素を一覧するウィンドウ",
+  "beginnerExplanation": "VBEの左側にある、ブックの中身を階層で見せる目次のようなウィンドウです。シートやモジュールが並び、ダブルクリックでコードを開けます。",
+  "useCase": "標準モジュールの挿入や削除、シートモジュールやThisWorkbookのコード画面を開くときに使います。",
+  "examPoint": "プロパティウィンドウ（選択対象の設定値）、コードウィンドウ（コード入力）、イミディエイトウィンドウ（即時実行）との役割の区別が問われます。",
+  "relatedServices": [
+   "VBE（Visual Basic Editor）",
+   "プロパティウィンドウ",
+   "イミディエイトウィンドウ"
+  ],
+  "domain": "concept",
+  "difficulty": 1
+ },
+ {
+  "id": "t-008",
+  "term": "Functionプロシージャ",
+  "shortDescription": "値を返せるプロシージャ",
+  "beginnerExplanation": "Subが「作業をする人」なら、Functionは「作業をして結果を持ち帰る人」です。計算結果などを呼び出し元に返せます。",
+  "useCase": "消費税込みの金額を求めるなど、結果を別の処理で使いたい計算を部品化するのに使います。ワークシート上の関数としても使えます。",
+  "examPoint": "Subは値を返せず、Functionは戻り値を返せます。Function名に結果を代入して戻す書き方と、End Functionで閉じる点が問われます。",
+  "relatedServices": [
+   "Subプロシージャ",
+   "Call",
+   "戻り値"
+  ],
+  "domain": "syntax",
+  "difficulty": 2
+ },
+ {
+  "id": "t-009",
+  "term": "標準モジュール",
+  "shortDescription": "一般的なマクロを書く基本の置き場",
+  "beginnerExplanation": "マクロのコードをしまうための引き出しです。特定のシートに属さず、ブック全体から使える処理を置くのに向いています。",
+  "useCase": "マクロ記録で作られたコードは標準モジュール（Module1など）に入ります。共通で使う処理はここにまとめます。",
+  "examPoint": "シートモジュールやThisWorkbookはイベント処理向きで、標準モジュールとは用途が違います。挿入は［挿入］→［標準モジュール］です。",
+  "relatedServices": [
+   "シートモジュール",
+   "ThisWorkbook",
+   "プロジェクトエクスプローラー"
+  ],
+  "domain": "syntax",
+  "difficulty": 1
+ },
+ {
+  "id": "t-010",
+  "term": "オブジェクト・プロパティ・メソッド",
+  "shortDescription": "操作対象と、その性質と、動作",
+  "beginnerExplanation": "Excelの部品がオブジェクト、その色や値などの性質がプロパティ、動かす命令がメソッドです。車に例えると、車、色、走るに当たります。",
+  "useCase": "Range(\"A1\").Value = 5 は性質の設定、Range(\"A1\").Clear は動作の実行です。VBAの文はこの組み合わせでできています。",
+  "examPoint": "オブジェクト.プロパティ = 値 と オブジェクト.メソッド の書き方の違いが問われます。メソッドの引数は名前付き引数でも渡せます。",
+  "relatedServices": [
+   "コレクション",
+   "名前付き引数",
+   "Range プロパティ"
+  ],
+  "domain": "syntax",
+  "difficulty": 1
+ },
+ {
+  "id": "t-011",
+  "term": "コレクション",
+  "shortDescription": "同じ種類のオブジェクトの集まり",
+  "beginnerExplanation": "同じ種類の部品をまとめて扱う入れ物です。開いているブック全体がWorkbooks、シート全体がWorksheetsにあたります。",
+  "useCase": "Worksheets(\"Sheet1\") や Workbooks(1) のように、名前や番号で目的の1つを取り出して操作します。",
+  "examPoint": "要素は名前（文字列）か番号（インデックス）で指定します。Workbooks と Workbook のように、複数形と単数形の区別が問われます。",
+  "relatedServices": [
+   "Workbooks",
+   "Worksheets",
+   "インデックス"
+  ],
+  "domain": "syntax",
+  "difficulty": 2
+ },
+ {
+  "id": "t-012",
+  "term": "名前付き引数",
+  "shortDescription": "引数名を := で指定して渡す書き方",
+  "beginnerExplanation": "引数の順番を覚えなくても、「Before:=○○」のように名札を付けて渡せる書き方です。読みやすく、途中の引数を省いても書けます。",
+  "useCase": "Worksheets.Add After:=Worksheets(1) のように、複数ある引数のうち必要なものだけを分かりやすく指定できます。",
+  "examPoint": "記号は := で、= ではありません。名前付き引数を使うときは、メソッドの引数全体を括弧で囲まない書き方になる点が問われます。",
+  "relatedServices": [
+   "メソッド",
+   "Worksheets.Add",
+   "Close と SaveChanges"
+  ],
+  "domain": "syntax",
+  "difficulty": 2
+ },
+ {
+  "id": "t-013",
+  "term": "行継続文字",
+  "shortDescription": "長い1行を複数行に分けて書く記号",
+  "beginnerExplanation": "長い文を途中で折り返して読みやすくするための目印です。半角スペースに続けてアンダースコア（_）を書きます。",
+  "useCase": "引数が多いメソッドや長い条件式を見やすく整理するときに使います。コードの動作は1行で書いた場合と変わりません。",
+  "examPoint": "必ず直前に半角スペースが必要で、_ の後ろに文字を書くとエラーになります。コメントの途中での継続はできない点にも注意します。",
+  "relatedServices": [
+   "コメント",
+   "インデント",
+   "自動構文チェック"
+  ],
+  "domain": "syntax",
+  "difficulty": 2
+ },
+ {
+  "id": "t-014",
+  "term": "演算子の優先順位",
+  "shortDescription": "計算や判定を行う順番のルール",
+  "beginnerExplanation": "算数で掛け算が足し算より先なのと同じで、VBAにも演算の順番があります。括弧で囲むと、そこを先に計算できます。",
+  "useCase": "金額計算や条件判定の式を正しく書くために必要です。迷うときは括弧を付けて順番を明示します。",
+  "examPoint": "算術演算子が先、次に比較演算子、最後に論理演算子の順です。算術の中では ^、* /、\\、Mod、+ - の順に評価されます。",
+  "relatedServices": [
+   "算術演算子",
+   "比較演算子",
+   "論理演算子"
+  ],
+  "domain": "syntax",
+  "difficulty": 3
+ },
+ {
+  "id": "t-015",
+  "term": "文字列連結演算子（&）",
+  "shortDescription": "文字列同士をつなぐ演算子",
+  "beginnerExplanation": "言葉を貼り合わせる演算子です。\"山田\" & \"さん\" と書くと\"山田さん\"になります。足し算の+とは別物として使い分けます。",
+  "useCase": "メッセージの組み立てやファイルパスの連結など、変数の中身を文章に埋め込むときに使います。",
+  "examPoint": "数値と文字列をつなぐときも & なら安全です。+ は数値同士なら加算になるため混同しやすく、問題の定番です。",
+  "relatedServices": [
+   "算術演算子",
+   "MsgBox 関数",
+   "ThisWorkbook.Path"
+  ],
+  "domain": "syntax",
+  "difficulty": 1
+ },
+ {
+  "id": "t-016",
+  "term": "Option Explicit",
+  "shortDescription": "変数宣言を強制する指定",
+  "beginnerExplanation": "宣言していない変数を使うとエラーにしてくれる安全装置です。綴りの打ち間違いによるミスを早い段階で見つけられます。",
+  "useCase": "モジュールの先頭に書きます。自動で入れる設定は VBE の［オプション］にある［変数の宣言を強制する］です。",
+  "examPoint": "モジュールの宣言セクション（先頭）に書きます。これがないと未宣言の変数は自動的に Variant 型として扱われます。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "Variant型",
+   "宣言セクション"
+  ],
+  "domain": "variable",
+  "difficulty": 1
+ },
+ {
+  "id": "t-017",
+  "term": "データ型",
+  "shortDescription": "変数に入れる値の種類",
+  "beginnerExplanation": "変数に入れてよい値の種類を決める仕組みです。整数、小数、文字列、日付などごとに専用の型があります。",
+  "useCase": "整数はLong、小数はDouble、文字はString、日付はDate、真偽はBooleanが基本です。用途に合う型を選びます。",
+  "examPoint": "Integer は約±3万までの整数、Long はより大きな整数です。Currency は金額向けの固定小数点型である点も区別して覚えます。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "Variant型",
+   "Long"
+  ],
+  "domain": "variable",
+  "difficulty": 2
+ },
+ {
+  "id": "t-018",
+  "term": "Variant型",
+  "shortDescription": "どんな値も入れられる型",
+  "beginnerExplanation": "数値でも文字でも日付でも何でも入る万能の箱です。ただし便利な反面、中身が分かりにくく、処理もやや重くなります。",
+  "useCase": "型を省略して宣言した変数は自動でこの型になります。意図せず使うと、予期しない動作の原因になります。",
+  "examPoint": "Dim a のように As を省略した変数は Variant です。Dim a, b As Long の a が Variant になる点が頻出です。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "データ型",
+   "Option Explicit"
+  ],
+  "domain": "variable",
+  "difficulty": 2
+ },
+ {
+  "id": "t-019",
+  "term": "オブジェクト変数とSet",
+  "shortDescription": "オブジェクトを代入するときのSet",
+  "beginnerExplanation": "数値ではなくセルやシートそのものを持たせる変数です。値の代入と区別するために、代入には Set という言葉が必要です。",
+  "useCase": "Dim ws As Worksheet のように宣言し、Set ws = Worksheets(\"Sheet1\") と代入します。長い指定を短く書けます。",
+  "examPoint": "オブジェクト変数への代入には必ず Set が必要で、Set を付けずに代入するとエラーになります。値の代入との違いが問われます。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "Worksheets",
+   "Range プロパティ"
+  ],
+  "domain": "variable",
+  "difficulty": 3
+ },
+ {
+  "id": "t-020",
+  "term": "Const（定数）",
+  "shortDescription": "値を固定して名前を付ける宣言",
+  "beginnerExplanation": "途中で値が変わらない数字に名前を付けておく宣言です。消費税率のように、後から変えないものに向いています。",
+  "useCase": "Const TAX As Double = 0.1 のように書くと、コード中の同じ数値を名前で扱えます。変更時は1か所を直すだけで済みます。",
+  "examPoint": "宣言と同時に値を決める必要があり、後から代入し直すとエラーになります。変数 Dim との違いが問われます。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "組み込み定数",
+   "Public"
+  ],
+  "domain": "variable",
+  "difficulty": 2
+ },
+ {
+  "id": "t-021",
+  "term": "モジュールレベル変数",
+  "shortDescription": "モジュール内のどのプロシージャでも使う変数",
+  "beginnerExplanation": "ひとつのモジュールという部屋の中なら、どのプロシージャからでも見える共有の変数です。宣言セクションに書きます。",
+  "useCase": "複数のプロシージャで同じ値を受け渡したいときに使います。ただし多用すると原因の追跡が難しくなります。",
+  "examPoint": "プロシージャ内の Dim は、そのプロシージャが終わると消えます。モジュール先頭の Dim や Private はそのモジュール内で有効です。",
+  "relatedServices": [
+   "宣言セクション",
+   "Public",
+   "プロシージャレベル変数"
+  ],
+  "domain": "variable",
+  "difficulty": 2
+ },
+ {
+  "id": "t-022",
+  "term": "Public（全モジュール共通）",
+  "shortDescription": "他のモジュールからも参照できる宣言",
+  "beginnerExplanation": "宣言セクションに Public を付けると、同じブック内のほかのモジュールからも使える変数になります。全員で共有する掲示板のようなものです。",
+  "useCase": "複数のモジュールにまたがる設定値などを共有したいときに、宣言セクションで Public 変数として宣言します。",
+  "examPoint": "Private は宣言したモジュール内だけ、Public は他のモジュールからも参照できます。プロシージャの中には Public は書けません。",
+  "relatedServices": [
+   "モジュールレベル変数",
+   "Private",
+   "宣言セクション"
+  ],
+  "domain": "variable",
+  "difficulty": 3
+ },
+ {
+  "id": "t-023",
+  "term": "Static（変数の有効期間）",
+  "shortDescription": "プロシージャ終了後も値を保持する宣言",
+  "beginnerExplanation": "通常の変数は処理が終わると中身を忘れますが、Static を付けると次に呼び出されたときも前回の値を覚えています。",
+  "useCase": "呼び出された回数を数えたいときなどに使います。宣言は Static 変数名 As Long のように書きます。",
+  "examPoint": "通常の Dim 変数は終了で破棄されます。Static は破棄されず値が残るため、有効範囲と有効期間の違いとして出題されます。",
+  "relatedServices": [
+   "Dim（変数の宣言）",
+   "プロシージャレベル変数",
+   "モジュールレベル変数"
+  ],
+  "domain": "variable",
+  "difficulty": 3
+ },
+ {
+  "id": "t-024",
+  "term": "Cells プロパティ",
+  "shortDescription": "行番号と列番号でセルを指定する",
+  "beginnerExplanation": "Cells(行, 列) と書き、表の何行目の何列目かを数字で指します。ループで順に動かしたいときに便利な指定方法です。",
+  "useCase": "Cells(2, 3) はC3を指します。For…Next の変数を行に使えば、1行ずつ順に処理できます。列は Cells(2, \"C\") のように文字でも指定できます。",
+  "examPoint": "引数の順は行、列です。Range(Cells(1,1), Cells(3,3)) のように Range の引数に Cells を入れて範囲を作る形が問われます。",
+  "relatedServices": [
+   "Range プロパティ",
+   "Rows・Columns",
+   "For…Next ステートメント"
+  ],
+  "domain": "cell",
+  "difficulty": 1
+ },
+ {
+  "id": "t-025",
+  "term": "Value・Text・Formula",
+  "shortDescription": "セルの値、表示文字、数式の取り出し",
+  "beginnerExplanation": "セルの中身を3通りに取り出せます。Valueは実際の値、Textは画面に見えている文字、Formulaは数式の文字列です。",
+  "useCase": "表示形式付きの見た目を取りたいときは Text、計算に使う値は Value、数式そのものを入れたいときは Formula を使います。",
+  "examPoint": "Text は読み取り専用で、設定はできません。Value は表示形式の影響を受けず、Formula は数式を返す点が混同しやすい点です。",
+  "relatedServices": [
+   "NumberFormat",
+   "Range プロパティ",
+   "Cells プロパティ"
+  ],
+  "domain": "cell",
+  "difficulty": 2
+ },
+ {
+  "id": "t-026",
+  "term": "ClearContents と Clear",
+  "shortDescription": "セルを消す範囲の違い",
+  "beginnerExplanation": "ClearContentsは文字や数式だけ消し、Clearは書式も含めて全部まっさらにします。消しゴムと洗い流しの違いです。",
+  "useCase": "表の入力欄を空にしたいときは ClearContents、書式も初期化したいときは Clear を使います。",
+  "examPoint": "ClearContents は値と数式のみを消し、書式は残ります。Clear は値・書式などすべてを消します。この違いが定番の出題です。",
+  "relatedServices": [
+   "Range プロパティ",
+   "Interior",
+   "NumberFormat"
+  ],
+  "domain": "cell",
+  "difficulty": 1
+ },
+ {
+  "id": "t-027",
+  "term": "Offset プロパティ",
+  "shortDescription": "基準のセルから行・列ずらした位置を指す",
+  "beginnerExplanation": "いまの位置から「下へ2つ、右へ1つ」のように相対的に動いた先のセルを指します。地図の道案内のような指定です。",
+  "useCase": "Range(\"A1\").Offset(1, 0) で1つ下のセルを指せます。表を1行ずつ処理するときや、相対参照のコードで使います。",
+  "examPoint": "引数は Offset(行, 列) の順で、下と右がプラス、上と左がマイナスです。Resize との違いも問われます。",
+  "relatedServices": [
+   "Resize プロパティ",
+   "相対参照で記録",
+   "ActiveCell"
+  ],
+  "domain": "cell",
+  "difficulty": 2
+ },
+ {
+  "id": "t-028",
+  "term": "Resize プロパティ",
+  "shortDescription": "範囲の大きさを指定し直す",
+  "beginnerExplanation": "基準セルから数えて、行数と列数で範囲の大きさを決め直します。Offset が位置を動かすのに対し、Resize は広さを変えます。",
+  "useCase": "Range(\"A1\").Resize(3, 2) はA1:B3の範囲になります。表全体の範囲を作ってコピーなどを行うときに使います。",
+  "examPoint": "Resize(行数, 列数) は大きさの指定で、開始位置は動きません。Offset(行, 列) は位置の移動です。ここが混同の典型です。",
+  "relatedServices": [
+   "Offset プロパティ",
+   "Range プロパティ",
+   "CurrentRegion プロパティ"
+  ],
+  "domain": "cell",
+  "difficulty": 2
+ },
+ {
+  "id": "t-029",
+  "term": "最終行の求め方（End(xlUp)）",
+  "shortDescription": "データの最後の行を見つける定番の書き方",
+  "beginnerExplanation": "表の一番下から上へ「Ctrl+↑」を押す動きをVBAで再現します。データの件数が変わっても、最後の行を見つけられます。",
+  "useCase": "Cells(Rows.Count, 1).End(xlUp).Row で、A列の最終行番号を求められます。ループの終点を決めるのに多用します。",
+  "examPoint": "シートの最終行から上方向へ進むため、途中に空白があっても最後のデータ行を取れます。xlDown では空白で止まってしまいます。",
+  "relatedServices": [
+   "End プロパティ",
+   "UsedRange",
+   "Rows.Count"
+  ],
+  "domain": "cell",
+  "difficulty": 3
+ },
+ {
+  "id": "t-030",
+  "term": "CurrentRegion プロパティ",
+  "shortDescription": "隣接するデータの塊をまとめて指す",
+  "beginnerExplanation": "空白の行と列で囲まれた、ひとかたまりの表全体を自動で取り出します。Ctrl+Shift+*と同じイメージです。",
+  "useCase": "見出しを含む表全体をコピーしたり書式を変えたりするとき、範囲を計算せずに Range(\"A1\").CurrentRegion で指定できます。",
+  "examPoint": "空白行や空白列で範囲が途切れます。シート全体で使用済みの範囲を返す UsedRange との違いが問われます。",
+  "relatedServices": [
+   "UsedRange",
+   "Resize プロパティ",
+   "End プロパティ"
+  ],
+  "domain": "cell",
+  "difficulty": 3
+ },
+ {
+  "id": "t-031",
+  "term": "Copy メソッドと PasteSpecial",
+  "shortDescription": "セルのコピーと貼り付けの方法",
+  "beginnerExplanation": "セルの内容を複製するのが Copy です。Destination を指定すれば1行で貼り付け先まで決められ、形式を選ぶなら PasteSpecial を使います。",
+  "useCase": "Range(\"A1\").Copy Destination:=Range(\"C1\") のように書きます。値だけ貼り付けたいときは PasteSpecial を使います。",
+  "examPoint": "Destination を省略するとクリップボードにコピーされ、あとで貼り付けが必要です。値のみなどの貼り付け形式は PasteSpecial で指定します。",
+  "relatedServices": [
+   "名前付き引数",
+   "Range プロパティ",
+   "Select と Activate"
+  ],
+  "domain": "cell",
+  "difficulty": 2
+ },
+ {
+  "id": "t-032",
+  "term": "For…Next ステートメント",
+  "shortDescription": "決まった回数だけ繰り返す",
+  "beginnerExplanation": "「1から10まで数えながら同じ作業を繰り返す」仕組みです。回数を数えるカウンタ変数が1つずつ変化しながら進みます。",
+  "useCase": "表の1行目から最終行まで順に処理するなど、同じ作業を繰り返すときの基本です。Step で増減幅を、Exit For で途中終了を指定できます。",
+  "examPoint": "For i = 1 To 10 Step 2 は1,3,5,7,9の5回です。Step -1 なら大きい方から減らします。ループ回数の計算が頻出です。",
+  "relatedServices": [
+   "Step",
+   "Exit For",
+   "入れ子"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-033",
+  "term": "With…End With",
+  "shortDescription": "同じオブジェクトの記述をまとめて省略",
+  "beginnerExplanation": "毎回同じ主語を書く手間を省く書き方です。「With 対象」と宣言すると、中では対象を省略してドットから書けます。",
+  "useCase": "同じセルの文字色・太字・背景色を続けて設定するときなど、記述が短くなり読みやすくなります。",
+  "examPoint": "With の内側は、先頭のドット（.Value など）で対象のプロパティを表します。ドットを忘れるとエラーになる点が問われます。",
+  "relatedServices": [
+   "Font・Interior",
+   "オブジェクト・プロパティ・メソッド",
+   "Range プロパティ"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-034",
+  "term": "MsgBox 関数",
+  "shortDescription": "メッセージを表示して選択結果を受け取る",
+  "beginnerExplanation": "画面に小さな確認ウィンドウを出す命令です。「はい」「いいえ」などのボタンを付けて、押された結果を受け取れます。",
+  "useCase": "処理の完了通知や、削除前の確認に使います。vbYesNo などの定数でボタンを、vbQuestion などでアイコンを指定します。",
+  "examPoint": "結果を受け取るときは引数を括弧で囲み、戻り値は vbYes や vbNo です。単に表示するだけなら括弧なしのステートメントで書けます。",
+  "relatedServices": [
+   "InputBox 関数",
+   "組み込み定数",
+   "vbYesNo"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-035",
+  "term": "InputBox 関数",
+  "shortDescription": "利用者に文字を入力してもらう",
+  "beginnerExplanation": "入力用のダイアログを表示し、利用者が打ち込んだ内容を受け取る命令です。名前や数値を実行中に聞く場面で使います。",
+  "useCase": "InputBox(\"検索する名前を入力\") のように使い、戻り値を変数に入れて後続の処理に利用します。",
+  "examPoint": "キャンセルボタンを押したときは空文字列（\"\"）が返ります。入力された値は文字列として返る点も押さえます。",
+  "relatedServices": [
+   "MsgBox 関数",
+   "IsNumeric",
+   "型変換関数と判定関数"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-036",
+  "term": "文字列関数（Left・Mid・InStr）",
+  "shortDescription": "文字列の一部を取り出す、探す",
+  "beginnerExplanation": "Leftは先頭、Rightは末尾、Midは途中から文字を切り出します。InStrは探したい文字が何文字目にあるかを調べます。",
+  "useCase": "社員番号の頭の文字を取る、住所から都道府県を切り出すなど、文字列の加工に使います。",
+  "examPoint": "Mid(文字列, 開始位置, 文字数) の引数の順番と、InStr が見つからないと 0 を返す点が頻出です。Len は文字数を返します。",
+  "relatedServices": [
+   "Len",
+   "Replace",
+   "Trim"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-037",
+  "term": "日付関数（DateAdd・DateDiff）",
+  "shortDescription": "日付の加算と差の計算",
+  "beginnerExplanation": "DateAddは「3か月後の日付」を、DateDiffは「2つの日付の間が何日か」を求めます。単位を指定して計算できます。",
+  "useCase": "契約期限の算出や経過日数の計算に使います。Now や Date で現在日時を取り、基準日と組み合わせます。",
+  "examPoint": "単位は \"d\"（日）、\"m\"（月）、\"yyyy\"（年）などで指定します。引数の順は DateAdd(単位, 加算数, 日付) です。",
+  "relatedServices": [
+   "Now",
+   "Format",
+   "Weekday"
+  ],
+  "domain": "control",
+  "difficulty": 3
+ },
+ {
+  "id": "t-038",
+  "term": "Int・Fix・Round（数値の丸め）",
+  "shortDescription": "数値を整数にそろえる関数",
+  "beginnerExplanation": "Intは小数を切り下げ、Fixは小数部を切り捨て、Roundは丸めます。負の数では結果が変わる点に注意が必要です。",
+  "useCase": "金額の端数処理や平均値の整形に使います。ワークシート関数と挙動が違う場合があるため、丸め方の確認が欠かせません。",
+  "examPoint": "Int(-2.5) は -3、Fix(-2.5) は -2 です。VBAのRoundは偶数丸め（銀行丸め）で、四捨五入と結果が違うことがあります。",
+  "relatedServices": [
+   "Abs",
+   "Val",
+   "Rnd"
+  ],
+  "domain": "control",
+  "difficulty": 3
+ },
+ {
+  "id": "t-039",
+  "term": "型変換関数と判定関数",
+  "shortDescription": "値の型を変える、中身を調べる",
+  "beginnerExplanation": "CLngやCStrなどは値を別の型に変換します。IsNumericやIsDateは、その値が数値や日付として扱えるかを判定します。",
+  "useCase": "InputBox の入力を数値として使う前に IsNumeric で確認し、CLng で変換するなど、入力チェックでよく組み合わせます。",
+  "examPoint": "IsNumeric は数値とみなせるかを True/False で返します。TypeName は変数の型名を文字列で返す点も区別して覚えます。",
+  "relatedServices": [
+   "InputBox 関数",
+   "TypeName",
+   "IsEmpty"
+  ],
+  "domain": "control",
+  "difficulty": 2
+ },
+ {
+  "id": "t-040",
+  "term": "Workbooks.Open",
+  "shortDescription": "既存のブックを開く",
+  "beginnerExplanation": "保存済みのExcelファイルをプログラムから開きます。ファイルの場所を示すパスを渡すと、そのブックが画面に開きます。",
+  "useCase": "Workbooks.Open Filename:=\"C:\\data\\売上.xlsx\" のように使い、他のブックからデータを取り込む処理の起点になります。",
+  "examPoint": "パスの区切りは \\ で、ThisWorkbook.Path & \"\\\" & ファイル名 のように連結して指定する形が定番です。新規作成は Workbooks.Add です。",
+  "relatedServices": [
+   "Workbooks.Add",
+   "ThisWorkbook.Path",
+   "Close と SaveChanges"
+  ],
+  "domain": "book",
+  "difficulty": 1
+ },
+ {
+  "id": "t-041",
+  "term": "Save と SaveAs",
+  "shortDescription": "上書き保存と名前を付けて保存",
+  "beginnerExplanation": "Saveは現在のファイル名のまま上書き保存し、SaveAsは名前や保存場所を指定して別名で保存します。",
+  "useCase": "処理後に結果を保存する、日付入りのファイル名で保存するなどの場面で使います。",
+  "examPoint": "SaveAs は Filename 引数で保存先を指定します。新規ブックは Save では場所が決まらないため、SaveAs で名前を付ける必要があります。",
+  "relatedServices": [
+   "Filename",
+   "Workbooks.Add",
+   "マクロ有効ブック（.xlsm）"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-042",
+  "term": "Close と SaveChanges",
+  "shortDescription": "ブックを閉じるときの保存の指定",
+  "beginnerExplanation": "ブックを閉じるメソッドです。SaveChanges に True か False を渡すと、保存確認のメッセージを出さずに保存するかを決められます。",
+  "useCase": "処理が終わったブックを保存して閉じる、保存せずに閉じるといった後始末に使います。",
+  "examPoint": "SaveChanges:=True で保存して閉じ、False なら保存せずに閉じます。この引数を省くと確認メッセージが表示されることがあります。",
+  "relatedServices": [
+   "名前付き引数",
+   "Save と SaveAs",
+   "Application.DisplayAlerts"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-043",
+  "term": "Application.DisplayAlerts",
+  "shortDescription": "確認メッセージの表示を切り替える",
+  "beginnerExplanation": "Excelが出す警告や確認のダイアログを、一時的に非表示にするスイッチです。False にすると質問されずに進みます。",
+  "useCase": "シートの削除や上書き保存の確認で処理が止まるのを防ぎたいときに False にし、処理後に True へ戻します。",
+  "examPoint": "削除時の確認を抑止するには Application.DisplayAlerts = False を設定します。元に戻さないと警告が出なくなるため、True への復帰が要点です。",
+  "relatedServices": [
+   "Delete",
+   "Close と SaveChanges",
+   "Worksheets.Add"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-044",
+  "term": "Worksheets と Sheets",
+  "shortDescription": "シートを扱うコレクションの違い",
+  "beginnerExplanation": "Worksheetsはワークシートだけの集まり、Sheetsはグラフシートも含めたすべてのシートの集まりです。",
+  "useCase": "通常のシート操作では Worksheets を使います。グラフシートも含めて扱いたい特殊な場面で Sheets を使います。",
+  "examPoint": "Worksheets はワークシートのみ、Sheets はグラフシートも含みます。両者の範囲の違いと、名前・番号での指定方法が問われます。",
+  "relatedServices": [
+   "コレクション",
+   "Worksheets.Count",
+   "Name プロパティ"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-045",
+  "term": "Worksheets.Add",
+  "shortDescription": "新しいシートを追加する",
+  "beginnerExplanation": "新しいワークシートを増やすメソッドです。Before や After を指定すると、どのシートの前後に作るかを決められます。",
+  "useCase": "月別のシートを自動で作るなど、必要に応じてシートを増やす処理で使います。追加直後のシートは自動的に選択されます。",
+  "examPoint": "位置は Before:= と After:= で指定し、どちらも省略すると現在のシートの前に追加されます。作成後は Name でシート名を付けます。",
+  "relatedServices": [
+   "名前付き引数",
+   "Name プロパティ",
+   "Delete"
+  ],
+  "domain": "book",
+  "difficulty": 2
+ },
+ {
+  "id": "t-046",
+  "term": "Copy と Move（シート）",
+  "shortDescription": "シートを複製する、移動する",
+  "beginnerExplanation": "Copyはシートの複製、Moveはシートの移動です。Before や After で場所を指定しますが、省略すると別の新規ブックに作られます。",
+  "useCase": "テンプレートのシートをコピーして月別のシートを作る、シートの並び順を整えるといった場面で使います。",
+  "examPoint": "引数の Before/After を省略すると、新しいブックが作られてそこに入ります。シートを元の位置に残すのが Copy、元から移すのが Move です。",
+  "relatedServices": [
+   "Worksheets.Add",
+   "Name プロパティ",
+   "Workbooks.Add"
+  ],
+  "domain": "book",
+  "difficulty": 3
+ }
+]

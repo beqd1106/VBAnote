@@ -1,0 +1,282 @@
+[
+ {
+  "term": "VBA",
+  "explanation": "ExcelなどのOfficeを自動化するためのプログラミング言語"
+ },
+ {
+  "term": "マクロ",
+  "explanation": "操作や処理を自動実行できるようにまとめたもの"
+ },
+ {
+  "term": "VBE",
+  "explanation": "VBAのコードを書く専用画面。Alt+F11で開く"
+ },
+ {
+  "term": "プロジェクトエクスプローラー",
+  "explanation": "ブックやモジュールを階層表示するVBEのウィンドウ"
+ },
+ {
+  "term": "プロパティウィンドウ",
+  "explanation": "選択中のオブジェクトの設定を表示するVBEのウィンドウ"
+ },
+ {
+  "term": "コードウィンドウ",
+  "explanation": "VBAのコードを入力・編集するウィンドウ"
+ },
+ {
+  "term": "イミディエイトウィンドウ",
+  "explanation": "コードの即時実行や値の確認ができるウィンドウ"
+ },
+ {
+  "term": "マクロ有効ブック",
+  "explanation": "マクロを保存できる形式のブック。拡張子は.xlsm"
+ },
+ {
+  "term": "トラストセンター",
+  "explanation": "マクロのセキュリティ設定を管理するExcelの設定画面"
+ },
+ {
+  "term": "信頼できる場所",
+  "explanation": "マクロが警告なしで実行できるよう登録したフォルダー"
+ },
+ {
+  "term": "個人用マクロブック",
+  "explanation": "全ブックで使えるマクロを保存するPERSONAL.XLSB"
+ },
+ {
+  "term": "相対参照",
+  "explanation": "アクティブセルを基準にした位置でセルを記録する方式"
+ },
+ {
+  "term": "標準モジュール",
+  "explanation": "どのブックからも使うマクロを書く基本のモジュール"
+ },
+ {
+  "term": "ThisWorkbook",
+  "explanation": "マクロが書かれているブック自身を指すオブジェクト"
+ },
+ {
+  "term": "ActiveWorkbook",
+  "explanation": "現在アクティブな（前面の）ブックを指すオブジェクト"
+ },
+ {
+  "term": "ActiveSheet",
+  "explanation": "現在アクティブなシートを指すオブジェクト"
+ },
+ {
+  "term": "ActiveCell",
+  "explanation": "現在アクティブなセルを指すオブジェクト"
+ },
+ {
+  "term": "Selection",
+  "explanation": "現在選択されているオブジェクトを指す"
+ },
+ {
+  "term": "Subプロシージャ",
+  "explanation": "Sub〜End Subで囲む、値を返さない処理のまとまり"
+ },
+ {
+  "term": "Functionプロシージャ",
+  "explanation": "Function〜End Functionで囲む、値を返す処理のまとまり"
+ },
+ {
+  "term": "プロシージャ",
+  "explanation": "一連の処理をまとめた単位。SubとFunctionがある"
+ },
+ {
+  "term": "オブジェクト",
+  "explanation": "操作の対象。ブック・シート・セルなど"
+ },
+ {
+  "term": "プロパティ",
+  "explanation": "オブジェクトの性質や状態。値の取得・設定ができる"
+ },
+ {
+  "term": "メソッド",
+  "explanation": "オブジェクトに対する動作の命令"
+ },
+ {
+  "term": "コレクション",
+  "explanation": "同種のオブジェクトの集まり。WorkbooksやWorksheetsなど"
+ },
+ {
+  "term": "名前付き引数",
+  "explanation": "引数名:=値の形で指定する引数。順序を問わない"
+ },
+ {
+  "term": "行継続文字",
+  "explanation": "長い1行を途中で折り返す、スペースとアンダースコア"
+ },
+ {
+  "term": "Option Explicit",
+  "explanation": "変数の宣言を強制する指定。モジュール先頭に書く"
+ },
+ {
+  "term": "Dim",
+  "explanation": "変数を宣言するステートメント"
+ },
+ {
+  "term": "Variant型",
+  "explanation": "あらゆる値を格納できるデータ型。宣言省略時の型"
+ },
+ {
+  "term": "Integer型",
+  "explanation": "-32768〜32767の整数を扱う型"
+ },
+ {
+  "term": "Long型",
+  "explanation": "約±21億の整数を扱う型"
+ },
+ {
+  "term": "Double型",
+  "explanation": "倍精度の浮動小数点数を扱う型"
+ },
+ {
+  "term": "Boolean型",
+  "explanation": "TrueまたはFalseを扱う型"
+ },
+ {
+  "term": "String型",
+  "explanation": "文字列を扱うデータ型"
+ },
+ {
+  "term": "Date型",
+  "explanation": "日付と時刻を扱うデータ型"
+ },
+ {
+  "term": "Currency型",
+  "explanation": "通貨用の固定小数点数を扱う型"
+ },
+ {
+  "term": "Object型",
+  "explanation": "オブジェクトへの参照を格納するデータ型"
+ },
+ {
+  "term": "Set",
+  "explanation": "オブジェクト変数にオブジェクトを代入するステートメント"
+ },
+ {
+  "term": "Const",
+  "explanation": "値が変わらない定数を宣言するステートメント"
+ },
+ {
+  "term": "Static",
+  "explanation": "プロシージャ終了後も変数の値を保持する宣言"
+ },
+ {
+  "term": "Public",
+  "explanation": "他のモジュールからも参照できるようにする宣言"
+ },
+ {
+  "term": "Private",
+  "explanation": "同じモジュール内だけで使えるようにする宣言"
+ },
+ {
+  "term": "組み込み定数",
+  "explanation": "VBAがあらかじめ用意している定数。vbYesNoなど"
+ },
+ {
+  "term": "モジュールレベル変数",
+  "explanation": "モジュールの宣言セクションで宣言した変数"
+ },
+ {
+  "term": "Range",
+  "explanation": "セルまたはセル範囲を表すオブジェクト"
+ },
+ {
+  "term": "Cells",
+  "explanation": "行番号と列番号でセルを指定するプロパティ"
+ },
+ {
+  "term": "Value",
+  "explanation": "セルに入力された値を取得・設定するプロパティ"
+ },
+ {
+  "term": "Formula",
+  "explanation": "セルの数式を取得・設定するプロパティ"
+ },
+ {
+  "term": "NumberFormat",
+  "explanation": "セルの表示形式を設定するプロパティ"
+ },
+ {
+  "term": "ClearContents",
+  "explanation": "書式を残して値や数式だけを消去するメソッド"
+ },
+ {
+  "term": "Offset",
+  "explanation": "基準セルから指定した行・列分ずらしたセルを返す"
+ },
+ {
+  "term": "Resize",
+  "explanation": "基準セルから指定した行数・列数に範囲を広げる"
+ },
+ {
+  "term": "CurrentRegion",
+  "explanation": "空白行・空白列で囲まれた連続するセル範囲"
+ },
+ {
+  "term": "UsedRange",
+  "explanation": "シートで使用されているセル範囲"
+ },
+ {
+  "term": "End",
+  "explanation": "Ctrl+矢印キーと同じ移動をするプロパティ"
+ },
+ {
+  "term": "PasteSpecial",
+  "explanation": "形式を選択して貼り付けるメソッド"
+ },
+ {
+  "term": "Destination",
+  "explanation": "Copyメソッドの貼り付け先を指定する引数"
+ },
+ {
+  "term": "With",
+  "explanation": "同一オブジェクトの記述を省略できるステートメント"
+ },
+ {
+  "term": "Mod",
+  "explanation": "割り算の余りを求める演算子"
+ },
+ {
+  "term": "Like",
+  "explanation": "ワイルドカードで文字列を比較する演算子"
+ },
+ {
+  "term": "MsgBox",
+  "explanation": "メッセージを表示するダイアログ。戻り値でボタンを判別"
+ },
+ {
+  "term": "InputBox",
+  "explanation": "入力を受け付けるダイアログ。キャンセルで空文字列"
+ },
+ {
+  "term": "WorksheetFunction",
+  "explanation": "ワークシート関数をVBAから呼び出すオブジェクト"
+ },
+ {
+  "term": "DisplayAlerts",
+  "explanation": "確認メッセージの表示のON/OFFを切り替えるプロパティ"
+ },
+ {
+  "term": "SaveChanges",
+  "explanation": "Closeで保存の有無を指定する引数"
+ },
+ {
+  "term": "SaveAs",
+  "explanation": "名前を付けて保存するメソッド"
+ },
+ {
+  "term": "ブック",
+  "explanation": "Excelのファイル。Workbookオブジェクトで表す"
+ },
+ {
+  "term": "コード名",
+  "explanation": "VBEで管理される、シート名変更の影響を受けない名前"
+ },
+ {
+  "term": "ステップイン",
+  "explanation": "F8キーで1行ずつコードを実行するデバッグ方法"
+ }
+]

@@ -1,1 +1,254 @@
-[]
+[
+ {
+  "id": "s-001",
+  "name": "VBE",
+  "category": "基本用語",
+  "oneLiner": "Alt+F11で開くVBAの編集画面",
+  "domain": "concept"
+ },
+ {
+  "id": "s-002",
+  "name": "マクロ有効ブック",
+  "category": "基本用語",
+  "oneLiner": "マクロを保存できる.xlsm形式のブック",
+  "domain": "concept"
+ },
+ {
+  "id": "s-003",
+  "name": "マクロの記録",
+  "category": "基本用語",
+  "oneLiner": "操作をそのままVBAコードとして記録する機能",
+  "domain": "concept"
+ },
+ {
+  "id": "s-004",
+  "name": "個人用マクロブック",
+  "category": "基本用語",
+  "oneLiner": "全ブックで使えるマクロを置くPERSONAL.XLSB",
+  "domain": "concept"
+ },
+ {
+  "id": "s-005",
+  "name": "Alt+F8",
+  "category": "基本用語",
+  "oneLiner": "［マクロ］ダイアログを開くショートカット",
+  "domain": "concept"
+ },
+ {
+  "id": "s-006",
+  "name": "F8キー",
+  "category": "基本用語",
+  "oneLiner": "ステップインで1行ずつ実行する",
+  "domain": "concept"
+ },
+ {
+  "id": "s-007",
+  "name": "Sub",
+  "category": "構文・演算子",
+  "oneLiner": "値を返さないプロシージャを宣言する",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-008",
+  "name": "Function",
+  "category": "構文・演算子",
+  "oneLiner": "値を返すプロシージャを宣言する",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-009",
+  "name": "Call",
+  "category": "構文・演算子",
+  "oneLiner": "他のプロシージャを呼び出す",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-010",
+  "name": "行継続文字",
+  "category": "構文・演算子",
+  "oneLiner": "スペース＋_ で長い行を折り返す",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-011",
+  "name": "Mod",
+  "category": "構文・演算子",
+  "oneLiner": "割り算の余りを求める",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-012",
+  "name": "&",
+  "category": "構文・演算子",
+  "oneLiner": "文字列を連結する",
+  "domain": "syntax"
+ },
+ {
+  "id": "s-013",
+  "name": "Dim",
+  "category": "宣言・データ型",
+  "oneLiner": "変数を宣言する",
+  "domain": "variable"
+ },
+ {
+  "id": "s-014",
+  "name": "Option Explicit",
+  "category": "宣言・データ型",
+  "oneLiner": "変数宣言を強制する",
+  "domain": "variable"
+ },
+ {
+  "id": "s-015",
+  "name": "Variant型",
+  "category": "宣言・データ型",
+  "oneLiner": "宣言しない変数の既定の型",
+  "domain": "variable"
+ },
+ {
+  "id": "s-016",
+  "name": "Set",
+  "category": "宣言・データ型",
+  "oneLiner": "オブジェクト変数への代入に使う",
+  "domain": "variable"
+ },
+ {
+  "id": "s-017",
+  "name": "Const",
+  "category": "宣言・データ型",
+  "oneLiner": "定数を宣言する",
+  "domain": "variable"
+ },
+ {
+  "id": "s-018",
+  "name": "Static",
+  "category": "宣言・データ型",
+  "oneLiner": "実行後も変数の値を保持する",
+  "domain": "variable"
+ },
+ {
+  "id": "s-019",
+  "name": "Range",
+  "category": "セル操作",
+  "oneLiner": "セル範囲を指定するプロパティ",
+  "domain": "cell"
+ },
+ {
+  "id": "s-020",
+  "name": "Cells",
+  "category": "セル操作",
+  "oneLiner": "行番号・列番号でセルを指定する",
+  "domain": "cell"
+ },
+ {
+  "id": "s-021",
+  "name": "Offset",
+  "category": "セル操作",
+  "oneLiner": "基準セルから行・列をずらす",
+  "domain": "cell"
+ },
+ {
+  "id": "s-022",
+  "name": "Resize",
+  "category": "セル操作",
+  "oneLiner": "範囲を指定の行数・列数に広げる",
+  "domain": "cell"
+ },
+ {
+  "id": "s-023",
+  "name": "End(xlUp)",
+  "category": "セル操作",
+  "oneLiner": "下から上へ最終データ行を探す",
+  "domain": "cell"
+ },
+ {
+  "id": "s-024",
+  "name": "ClearContents",
+  "category": "セル操作",
+  "oneLiner": "値・数式のみ消去する",
+  "domain": "cell"
+ },
+ {
+  "id": "s-025",
+  "name": "If",
+  "category": "制御構文・関数",
+  "oneLiner": "条件で処理を分岐する",
+  "domain": "control"
+ },
+ {
+  "id": "s-026",
+  "name": "For…Next",
+  "category": "制御構文・関数",
+  "oneLiner": "指定回数だけ処理を繰り返す",
+  "domain": "control"
+ },
+ {
+  "id": "s-027",
+  "name": "With",
+  "category": "制御構文・関数",
+  "oneLiner": "同一オブジェクトの記述を省略する",
+  "domain": "control"
+ },
+ {
+  "id": "s-028",
+  "name": "MsgBox",
+  "category": "制御構文・関数",
+  "oneLiner": "メッセージを表示する",
+  "domain": "control"
+ },
+ {
+  "id": "s-029",
+  "name": "InputBox",
+  "category": "制御構文・関数",
+  "oneLiner": "文字入力を受け付ける",
+  "domain": "control"
+ },
+ {
+  "id": "s-030",
+  "name": "Format",
+  "category": "制御構文・関数",
+  "oneLiner": "値を指定した書式の文字列にする",
+  "domain": "control"
+ },
+ {
+  "id": "s-031",
+  "name": "Workbooks.Open",
+  "category": "ブック・シート操作",
+  "oneLiner": "既存のブックを開く",
+  "domain": "book"
+ },
+ {
+  "id": "s-032",
+  "name": "SaveAs",
+  "category": "ブック・シート操作",
+  "oneLiner": "名前を付けて保存する",
+  "domain": "book"
+ },
+ {
+  "id": "s-033",
+  "name": "ThisWorkbook",
+  "category": "ブック・シート操作",
+  "oneLiner": "マクロのあるブック自身",
+  "domain": "book"
+ },
+ {
+  "id": "s-034",
+  "name": "Worksheets.Add",
+  "category": "ブック・シート操作",
+  "oneLiner": "新しいシートを追加する",
+  "domain": "book"
+ },
+ {
+  "id": "s-035",
+  "name": "DisplayAlerts",
+  "category": "ブック・シート操作",
+  "oneLiner": "確認メッセージの表示を切り替える",
+  "domain": "book"
+ },
+ {
+  "id": "s-036",
+  "name": "Copy／Move",
+  "category": "ブック・シート操作",
+  "oneLiner": "シートの複製・移動を行う",
+  "domain": "book"
+ }
+]
