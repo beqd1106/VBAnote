@@ -1,0 +1,13 @@
+# Xcode / SwiftPM
+*.xcodeproj
+build/
+DerivedData/
+.build/
+*.xcuserstate
+xcuserdata/
+.DS_Store
+
+# XcodeGen が生成するため .xcodeproj はコミットしない
+design/_source_questions.json
+
+design/src/_*

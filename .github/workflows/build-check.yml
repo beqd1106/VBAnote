@@ -1,0 +1,44 @@
+name: build-check
+
+# Swift のコンパイル確認＋ユニットテストを署名なしで実行する。
+# macOS ランナーは課金が Linux の 10 倍で無料枠を消費しやすいため、
+# 毎 push では起動せず「手動実行（workflow_dispatch）」のみに限定している。
+# 配信前などに必要なときだけ手動で回す運用。
+#   gh workflow run build-check.yml -R beqd1106/VBAnote
+
+on:
+  workflow_dispatch:
+
+# 同じワークフローの実行が重なったら古い方をキャンセルし、無駄なmacOS分数消費を防ぐ。
+concurrency:
+  group: build-check
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      # build と test を別々に実行すると二度ビルドになるため、test 一発に統合。
+      # test のビルドフェーズでコンパイルエラーも検出できる（＝コンパイル確認も兼ねる）。
+      - name: Build & test (single build)
+        run: |
+          set -o pipefail
+          DEVICE=$(xcrun simctl list devices available | grep -oE 'iPhone [0-9]+( Pro( Max)?| Plus)?' | head -1)
+          echo "Using simulator: ${DEVICE:-iPhone 16}"
+          xcodebuild \
+            -project "VBAnote.xcodeproj" \
+            -scheme "VBAnote" \
+            -destination "platform=iOS Simulator,name=${DEVICE:-iPhone 16}" \
+            CODE_SIGNING_ALLOWED=NO \
+            test

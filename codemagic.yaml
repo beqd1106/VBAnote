@@ -1,0 +1,94 @@
+# Codemagic CI/CD 設定（VBAnote / VBAnote）
+#
+# 2つのワークフロー:
+#   1. ios-build-check … 署名なし・シミュレータ向けに「コンパイルが通るか」だけ確認（pushで自動実行）
+#   2. ios-testflight  … 署名あり・TestFlightへ配信（手動実行 or API トリガー）
+#
+# まず 1 でビルドできることを確認し、問題なければ 2 を回す流れ。
+# GitHub Actions(.github/workflows/build-check.yml)でも署名なしビルド＋テストを実行済み。
+
+workflows:
+
+  # ── ① コンパイル確認（署名不要・Apple Developer設定なしでOK）──────────────
+  ios-build-check:
+    name: コンパイル確認 (署名なし)
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    environment:
+      xcode: latest
+    # macOS ビルドの浪費を避けるため自動起動はせず、必要なとき手動で実行する。
+    # （Codemagic UI の Start new build、または API から起動）
+    scripts:
+      - name: Install XcodeGen
+        script: brew install xcodegen
+      - name: Generate Xcode project
+        script: xcodegen generate
+      - name: Build for simulator (no code signing)
+        script: |
+          xcodebuild \
+            -project "VBAnote.xcodeproj" \
+            -scheme "VBAnote" \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+    artifacts:
+      - /tmp/xcodebuild_logs/*.log
+
+  # ── ② TestFlight配信（署名あり・手動実行）─────────────────────────────
+  # 事前準備(すべてブラウザ):
+  #   1. App Store Connect で「Integrations用 APIキー(App Manager権限)」を発行
+  #   2. Codemagic の Teams > Integrations > App Store Connect に登録（名前: AppStoreConnect）
+  #   3. App Store Connect でアプリを新規作成し、Bundle ID を com.beqd1106.vbanote に一致させる
+  #   4. （初回のみ）Apple Developer の Identifiers に上記 Bundle ID を登録
+  ios-testflight:
+    name: iOS build & TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      app_store_connect: AppStoreConnect
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.beqd1106.vbanote
+      vars:
+        XCODE_SCHEME: "VBAnote"
+        APP_ID: "6789576927"          # App Store Connect のアプリApple ID（ビルド番号採番に使用）
+      xcode: latest
+      cocoapods: default
+    # バージョンタグ(v*)のpushで自動起動。手動Startも可。
+    # 例: git tag v1.0.0 && git push origin v1.0.0 でTestFlightビルドが走る。
+    triggering:
+      events:
+        - tag
+      tag_patterns:
+        - pattern: "v*"
+          include: true
+    scripts:
+      - name: Install XcodeGen
+        script: brew install xcodegen
+      - name: Generate Xcode project
+        script: xcodegen generate
+      - name: Set up code signing
+        script: xcode-project use-profiles
+      - name: Set build number
+        script: |
+          cd "$CM_BUILD_DIR"
+          # TestFlight の最新ビルド番号を取得して +1 する（App Store Connect の単調増加要件を満たす）。
+          # 新規アプリはビルドが無いため 0 → build 1 となる。
+          LATEST=$(app-store-connect get-latest-testflight-build-number "$APP_ID" 2>/dev/null || echo 0)
+          NEXT=$(( ${LATEST:-0} + 1 ))
+          echo "TestFlight latest build: ${LATEST:-0} -> setting build number to $NEXT"
+          agvtool new-version -all "$NEXT"
+      - name: Build ipa
+        script: |
+          xcode-project build-ipa \
+            --project "VBAnote.xcodeproj" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
