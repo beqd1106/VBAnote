@@ -99,6 +99,7 @@ struct QuizPlayerView: View {
                     VStack(spacing: Theme.Space.s) {
                         ForEach(Array(current.choices.enumerated()), id: \.offset) { i, choice in
                             choiceRow(i, choice)
+                                .accessibilityIdentifier("choice_\(i)")
                         }
                     }
 

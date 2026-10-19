@@ -16,6 +16,10 @@ settings:
 
 targets:
   VBAnote:
+    scheme:
+      testTargets:
+        - VBAnoteTests
+        - VBAnoteUITests
     type: application
     platform: iOS
     sources:
@@ -60,3 +64,16 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.beqd1106.vbanote.tests
         GENERATE_INFOPLIST_FILE: YES
+
+  VBAnoteUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - UITests
+    dependencies:
+      - target: VBAnote
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.beqd1106.vbanote.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: VBAnote

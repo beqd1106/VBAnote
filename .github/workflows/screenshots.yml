@@ -1,0 +1,44 @@
+name: screenshots
+
+# App Store 掲載用スクリーンショットを iPhone シミュレータで撮影し、artifact として保存する。
+#   gh workflow run screenshots.yml -R beqd1106/VBAnote
+
+on:
+  workflow_dispatch:
+
+jobs:
+  shots:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate Xcode project
+        run: xcodegen generate
+      - name: Capture
+        run: |
+          set -o pipefail
+          DEVICE=$(xcrun simctl list devices available | grep -oE 'iPhone [0-9]+ Pro Max' | head -1)
+          echo "Using simulator: ${DEVICE}"
+          mkdir -p "$RUNNER_TEMP/shots"
+          xcrun simctl boot "$DEVICE" || true
+          xcrun simctl status_bar "$DEVICE" override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3 || true
+          SCREENSHOT_DIR="$RUNNER_TEMP/shots" TEST_RUNNER_SCREENSHOT_DIR="$RUNNER_TEMP/shots" \
+          xcodebuild \
+            -project "VBAnote.xcodeproj" \
+            -scheme "VBAnote" \
+            -destination "platform=iOS Simulator,name=${DEVICE}" \
+            -only-testing:VBAnoteUITests/ScreenshotTests \
+            -resultBundlePath "$RUNNER_TEMP/shots.xcresult" \
+            CODE_SIGNING_ALLOWED=NO \
+            test || true
+          ls -la "$RUNNER_TEMP/shots"
+          mkdir -p "$RUNNER_TEMP/attach"
+          xcrun xcresulttool export attachments --path "$RUNNER_TEMP/shots.xcresult" --output-path "$RUNNER_TEMP/attach" || true
+          ls -la "$RUNNER_TEMP/attach" || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: |
+            ${{ runner.temp }}/shots
+            ${{ runner.temp }}/attach

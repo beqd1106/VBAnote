@@ -43,6 +43,12 @@ private struct RootRouterView: View {
 final class StudyStoreHolder: ObservableObject {
     @Published var store: StudyStore?
     func configure(context: ModelContext) {
-        if store == nil { store = StudyStore(context: context) }
+        if store == nil {
+            let s = StudyStore(context: context)
+            #if DEBUG
+            ScreenshotSeed.applyIfRequested(to: s)
+            #endif
+            store = s
+        }
     }
 }

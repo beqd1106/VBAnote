@@ -40,5 +40,6 @@ jobs:
             -project "VBAnote.xcodeproj" \
             -scheme "VBAnote" \
             -destination "platform=iOS Simulator,name=${DEVICE:-iPhone 16}" \
+            -skip-testing:VBAnoteUITests \
             CODE_SIGNING_ALLOWED=NO \
             test
