@@ -230,7 +230,7 @@ struct HomeView: View {
                                 Text("\(rec.domain.title)を集中的に固めよう")
                                     .font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.ink)
                                     .lineLimit(2).fixedSize(horizontal: false, vertical: true)
-                                Text("「\(rec.lesson.title)」の反復ドリルで基礎から").captionStyle()
+                                Text("「\(rec.lesson.title)」のランダム問題で基礎から").captionStyle()
                             }
                             Spacer(minLength: 0)
                             Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft).font(.system(size: 13))
@@ -390,6 +390,7 @@ enum HomeRoute: Hashable {
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）
 private struct AppWordmarkHeader: View {
+    @EnvironmentObject var catalog: ExamCatalog
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 3) {
@@ -397,10 +398,21 @@ private struct AppWordmarkHeader: View {
                     Text(ExamInfo.brandPrefix).font(.system(size: 30, weight: .heavy)).foregroundStyle(Theme.navy)
                     Text("note").font(.system(size: 30, weight: .regular)).foregroundStyle(Theme.navy.opacity(0.8))
                 }
-                // オレンジの手描き風アンダーライン
-                Capsule().fill(Theme.orange).frame(width: 60, height: 3)
+                // オレンジの手描き風アンダーライン（頭文字の長さに合わせる）
+                Capsule().fill(Theme.orange)
+                    .frame(width: CGFloat(24 + ExamInfo.brandPrefix.count * 18), height: 3)
             }
             Spacer()
+            Button { catalog.showPicker() } label: {
+                Image(systemName: "arrow.left.arrow.right")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(Theme.navy)
+                    .frame(width: 42, height: 42)
+                    .background(Theme.card)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Theme.line, lineWidth: 1))
+            }
+            .accessibilityLabel("資格を切り替える")
             NavigationLink(value: HomeRoute.termSearch) {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 18, weight: .semibold))

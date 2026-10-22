@@ -1,0 +1,647 @@
+[
+ {
+  "id": "t-ec2",
+  "term": "Amazon EC2",
+  "shortDescription": "AWS上で使える仮想サーバー。",
+  "beginnerExplanation": "自分でサーバー機器を買わなくても、必要なときにAWS上でサーバーを借りられるサービスです。OSやアプリを自由に入れられます。",
+  "useCase": "Webサイトや業務アプリを動かすサーバーが欲しいとき。",
+  "examPoint": "コンピューティングの代表格。自由度が高い反面、OSの更新やセキュリティ設定は利用者の責任（責任共有モデル）。",
+  "relatedServices": [
+   "EBS",
+   "Auto Scaling",
+   "ELB"
+  ],
+  "domain": "technology",
+  "difficulty": 1
+ },
+ {
+  "id": "t-s3",
+  "term": "Amazon S3",
+  "shortDescription": "画像やファイルを保存する箱のようなサービス。",
+  "beginnerExplanation": "写真・動画・バックアップなど、あらゆるファイルを容量を気にせず保存できるストレージです。データは「オブジェクト」として入れます。",
+  "useCase": "ファイルの保存・バックアップ、静的Webサイトの公開。",
+  "examPoint": "オブジェクトストレージ。非常に高い耐久性。ストレージクラスでコスト最適化（標準/IA/Glacierなど）。",
+  "relatedServices": [
+   "Glacier",
+   "CloudFront"
+  ],
+  "domain": "technology",
+  "difficulty": 1
+ },
+ {
+  "id": "t-iam",
+  "term": "AWS IAM",
+  "shortDescription": "誰に何をさせるかを管理する仕組み。",
+  "beginnerExplanation": "AWSの中で「このユーザーはこれをしてOK／これは禁止」と権限を細かく決める仕組みです。会社の入館証や権限管理のイメージです。",
+  "useCase": "メンバーごとに操作できる範囲を分けたいとき。",
+  "examPoint": "ユーザー/グループ/ロール/ポリシー。最小権限の原則。MFA。ルートユーザーは日常利用しない。",
+  "relatedServices": [
+   "Organizations",
+   "IAM Identity Center"
+  ],
+  "domain": "security",
+  "difficulty": 1
+ },
+ {
+  "id": "t-lambda",
+  "term": "AWS Lambda",
+  "shortDescription": "サーバー管理なしでコードを実行できるサービス。",
+  "beginnerExplanation": "サーバーを用意・管理しなくても、コードを置くだけで動かせる「サーバーレス」サービスです。動いた分だけ課金されます。",
+  "useCase": "ファイルがアップされたら自動処理、定期バッチ、APIの裏側。",
+  "examPoint": "サーバーレスの代表。実行回数・実行時間に応じた課金。待機中は無料。",
+  "relatedServices": [
+   "API Gateway",
+   "S3",
+   "DynamoDB"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-vpc",
+  "term": "Amazon VPC",
+  "shortDescription": "AWS内に作る自分専用のネットワーク空間。",
+  "beginnerExplanation": "AWSの中に、自分だけの仕切られたネットワーク（敷地）を作る仕組みです。中をサブネットで区切り、通信経路を設定できます。",
+  "useCase": "サーバーを外部から隔離したい、社内ネットワークと接続したいとき。",
+  "examPoint": "サブネット/ルートテーブル/IGW/NAT。セキュリティグループ（仮想FW）とセットで理解。",
+  "relatedServices": [
+   "セキュリティグループ",
+   "Route 53"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-rds",
+  "term": "Amazon RDS",
+  "shortDescription": "管理を任せられるリレーショナルDB。",
+  "beginnerExplanation": "MySQLやPostgreSQLなどの「表形式」のデータベースを、バックアップや障害対応をAWSに任せて使えるサービスです。",
+  "useCase": "業務アプリのデータをSQLで扱いたいとき。",
+  "examPoint": "マネージドなSQL DB。Multi-AZで高可用性、リードレプリカで読み取り拡張。NoSQLはDynamoDB。",
+  "relatedServices": [
+   "Aurora",
+   "DynamoDB"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-cloudfront",
+  "term": "Amazon CloudFront",
+  "shortDescription": "コンテンツを世界中へ高速配信するCDN。",
+  "beginnerExplanation": "世界中の拠点にデータをキャッシュして、ユーザーに一番近い場所から届けることで表示を速くするサービスです。",
+  "useCase": "海外ユーザーにも速くサイトや動画を届けたいとき。",
+  "examPoint": "CDN。エッジロケーションでキャッシュ。S3やELBと組み合わせる。",
+  "relatedServices": [
+   "S3",
+   "Route 53",
+   "AWS Shield"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-cloudwatch",
+  "term": "Amazon CloudWatch",
+  "shortDescription": "AWSの状態を監視・記録する仕組み。",
+  "beginnerExplanation": "サーバーのCPUやエラー数などを見張り、グラフ化したり、異常時にアラートを出したりするサービスです。",
+  "useCase": "システムの健康状態を監視し、異常を早く知りたいとき。",
+  "examPoint": "メトリクス/ログ/アラーム/ダッシュボード。『監視＝CloudWatch』。操作履歴はCloudTrail。",
+  "relatedServices": [
+   "CloudTrail",
+   "SNS"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-route53",
+  "term": "Amazon Route 53",
+  "shortDescription": "ドメイン名を管理するDNSサービス。",
+  "beginnerExplanation": "「example.com」のような名前を、実際のサーバーの住所（IPアドレス）に変換するサービスです。ドメインの購入もできます。",
+  "useCase": "独自ドメインでサイトを公開したいとき。",
+  "examPoint": "DNS＋ドメイン登録＋ヘルスチェック＋ルーティングポリシー。",
+  "relatedServices": [
+   "CloudFront",
+   "VPC"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-shared",
+  "term": "責任共有モデル",
+  "shortDescription": "AWSと利用者で守る範囲を分担する考え方。",
+  "beginnerExplanation": "AWSは『建物（データセンターや基盤）の安全』を守り、利用者は『部屋の中（自分のデータや設定）の安全』を守る、という役割分担です。",
+  "useCase": "セキュリティの責任範囲を判断するとき。",
+  "examPoint": "AWS＝of the cloud（物理・基盤）、利用者＝in the cloud（データ・設定・IAM）。最頻出テーマ。",
+  "relatedServices": [
+   "IAM",
+   "AWS Artifact"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-shield",
+  "term": "AWS Shield",
+  "shortDescription": "DDoS攻撃からアプリを守るサービス。",
+  "beginnerExplanation": "大量アクセスでサービスを止めようとする攻撃（DDoS）を防ぐサービスです。標準版は無料で自動的に守ってくれます。",
+  "useCase": "公開サービスをDDoSから守りたいとき。",
+  "examPoint": "Shield Standard（無料・自動）とAdvanced（有料・高度）。不正リクエスト遮断はWAF。",
+  "relatedServices": [
+   "AWS WAF",
+   "CloudFront"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-organizations",
+  "term": "AWS Organizations",
+  "shortDescription": "複数アカウントをまとめて管理する仕組み。",
+  "beginnerExplanation": "会社で複数のAWSアカウントを使うとき、それらをまとめて管理し、請求も一本化できるサービスです。",
+  "useCase": "部署ごとのアカウントを統制し、請求をまとめたいとき。",
+  "examPoint": "一括請求（Consolidated Billing）、ボリューム割引の合算、SCPで権限制御。",
+  "relatedServices": [
+   "IAM",
+   "AWS Budgets"
+  ],
+  "domain": "billing",
+  "difficulty": 3
+ },
+ {
+  "id": "t-budgets",
+  "term": "AWS Budgets",
+  "shortDescription": "予算を決めて超過をアラートする。",
+  "beginnerExplanation": "「今月は◯円まで」と予算を決めておき、超えそうになったらメールなどで知らせてくれるサービスです。使いすぎ防止に役立ちます。",
+  "useCase": "想定外の高額請求を避けたいとき。",
+  "examPoint": "予算設定＋アラート。過去コストの分析はCost Explorer。",
+  "relatedServices": [
+   "AWS Cost Explorer",
+   "AWS Organizations"
+  ],
+  "domain": "billing",
+  "difficulty": 2
+ },
+ {
+  "id": "t-trustedadvisor",
+  "term": "AWS Trusted Advisor",
+  "shortDescription": "改善ポイントを助言してくれる点検役。",
+  "beginnerExplanation": "コスト・セキュリティ・性能・耐障害性・上限などの観点で「ここを直すと良いですよ」と自動でアドバイスしてくれるサービスです。",
+  "useCase": "今の構成に無駄やリスクがないか点検したいとき。",
+  "examPoint": "5つの観点でベストプラクティスを自動チェック。プランによりチェック範囲が変わる。",
+  "relatedServices": [
+   "AWS Budgets",
+   "AWS Support"
+  ],
+  "domain": "billing",
+  "difficulty": 3
+ },
+ {
+  "id": "t-wellarchitected",
+  "term": "Well-Architected フレームワーク",
+  "shortDescription": "良い設計のための6つの柱。",
+  "beginnerExplanation": "AWSで「良いシステムの作り方」をまとめた指針です。6つの観点でシステムを点検し、改善するためのチェックリストのようなものです。",
+  "useCase": "設計が適切かを見直したいとき。",
+  "examPoint": "6つの柱＝運用上の優秀性/セキュリティ/信頼性/パフォーマンス効率/コスト最適化/持続可能性。",
+  "relatedServices": [
+   "AWS CAF",
+   "Trusted Advisor"
+  ],
+  "domain": "cloudConcepts",
+  "difficulty": 2
+ },
+ {
+  "id": "t-dynamodb",
+  "term": "Amazon DynamoDB",
+  "shortDescription": "フルマネージドのNoSQLデータベース。",
+  "beginnerExplanation": "表計算のような「行と列」ではなく、キーで超高速に読み書きできるデータベースです。サーバー管理不要で、アクセスが増えても自動で対応します。",
+  "useCase": "大量アクセスのアプリ、ゲームのスコア、IoTデータなど、高速・大規模なデータ保存。",
+  "examPoint": "キー・バリュー型NoSQL。サーバーレスで自動スケール。RDS（SQL）との対比で頻出。",
+  "relatedServices": [
+   "RDS",
+   "Aurora"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-aurora",
+  "term": "Amazon Aurora",
+  "shortDescription": "AWSが最適化した高性能なリレーショナルDB。",
+  "beginnerExplanation": "MySQLやPostgreSQLと互換性がありつつ、AWSが速度と可用性を大幅に高めたデータベースです。",
+  "useCase": "高い性能と可用性が必要な業務システムのSQLデータベース。",
+  "examPoint": "RDSの上位。高可用・高性能なマネージドSQL。MySQL/PostgreSQL互換。",
+  "relatedServices": [
+   "RDS",
+   "DynamoDB"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ebs",
+  "term": "Amazon EBS",
+  "shortDescription": "EC2に接続して使う仮想ディスク。",
+  "beginnerExplanation": "EC2（仮想サーバー）に取り付ける外付けハードディスクのようなもの。OSやデータを保存します。",
+  "useCase": "EC2で動くサーバーのシステム領域やデータ領域。",
+  "examPoint": "ブロックストレージ。基本1つのEC2に接続。スナップショットでバックアップ可能。EFSとの違いに注意。",
+  "relatedServices": [
+   "EC2",
+   "S3"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-efs",
+  "term": "Amazon EFS",
+  "shortDescription": "複数サーバーから共有できるファイルストレージ。",
+  "beginnerExplanation": "1つのファイル置き場を、たくさんのEC2から同時に読み書きできる共有フォルダのようなサービスです。",
+  "useCase": "複数サーバーで同じファイルを共有したいとき。",
+  "examPoint": "ファイルストレージ。多数のEC2から同時マウント可能。EBS（専用）との違いが定番。",
+  "relatedServices": [
+   "EBS",
+   "EC2"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-fargate",
+  "term": "AWS Fargate",
+  "shortDescription": "サーバー管理不要でコンテナを動かす仕組み。",
+  "beginnerExplanation": "コンテナ（アプリを箱詰めしたもの）を動かすとき、土台のサーバーを自分で用意・管理せずに済ませられるサービスです。",
+  "useCase": "コンテナを運用したいがサーバー管理はしたくないとき。",
+  "examPoint": "ECS/EKSのサーバーレス実行環境。サーバー管理不要＝Fargate。",
+  "relatedServices": [
+   "ECS",
+   "Lambda"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-beanstalk",
+  "term": "AWS Elastic Beanstalk",
+  "shortDescription": "コードを上げるだけでアプリを公開できるPaaS。",
+  "beginnerExplanation": "サーバーやロードバランサーの準備をAWSに任せ、プログラムをアップするだけでWebアプリを公開できるサービスです。",
+  "useCase": "インフラ構築に手間をかけず素早くアプリを公開したいとき。",
+  "examPoint": "PaaS。裏側のEC2/ELB等を自動構成。手早い公開＝Beanstalk。",
+  "relatedServices": [
+   "EC2",
+   "ELB"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-cloudformation",
+  "term": "AWS CloudFormation",
+  "shortDescription": "インフラ構成をコードで自動構築（IaC）。",
+  "beginnerExplanation": "サーバーやネットワークの構成をテンプレート（設計図のコード）に書いておけば、同じ環境を何度でも自動で作れます。",
+  "useCase": "同じ構成を再現したい、手作業のミスを無くしたいとき。",
+  "examPoint": "Infrastructure as Code（IaC）の代表。テンプレートから自動構築。",
+  "relatedServices": [
+   "Systems Manager"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-autoscaling",
+  "term": "Amazon EC2 Auto Scaling",
+  "shortDescription": "負荷に応じてサーバー台数を自動増減。",
+  "beginnerExplanation": "アクセスが増えたらEC2を自動で増やし、減ったら減らす仕組み。混雑にもコストにも対応します。",
+  "useCase": "アクセス変動の大きいサービスで、性能とコストを両立したいとき。",
+  "examPoint": "弾力性（エラスティシティ）の代表例。ELBと組み合わせて高可用性を実現。",
+  "relatedServices": [
+   "ELB",
+   "EC2"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-elb",
+  "term": "Elastic Load Balancing",
+  "shortDescription": "アクセスを複数サーバーに振り分ける装置。",
+  "beginnerExplanation": "たくさんの利用者からのアクセスを、複数のサーバーへ均等に配分します。1台が故障しても他へ回すので止まりにくくなります。",
+  "useCase": "サーバーを複数台に分散して可用性を上げたいとき。",
+  "examPoint": "ロードバランサー。ALB＝HTTP向け、NLB＝高速TCP向け。高可用性の要。",
+  "relatedServices": [
+   "EC2",
+   "Auto Scaling"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-athena",
+  "term": "Amazon Athena",
+  "shortDescription": "S3のデータを直接SQLで分析。",
+  "beginnerExplanation": "S3にためたデータを、データベースへ移さずそのままSQLで検索・集計できるサービスです。サーバー準備は不要。",
+  "useCase": "S3のログやデータを手軽に分析したいとき。",
+  "examPoint": "サーバーレス分析。S3を直接クエリ。手軽な分析＝Athena。",
+  "relatedServices": [
+   "S3",
+   "Glue"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-redshift",
+  "term": "Amazon Redshift",
+  "shortDescription": "大規模データを高速分析するデータウェアハウス。",
+  "beginnerExplanation": "膨大なデータをまとめて保管し、集計・分析に特化した高速なデータベースです。",
+  "useCase": "全社データの本格的な分析・BIレポート作成。",
+  "examPoint": "データウェアハウス（DWH）。大規模分析＝Redshift。Athenaとの使い分けが定番。",
+  "relatedServices": [
+   "Athena",
+   "QuickSight"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-kinesis",
+  "term": "Amazon Kinesis",
+  "shortDescription": "リアルタイムに流れるデータを処理。",
+  "beginnerExplanation": "センサーやログのように絶え間なく届くデータを、その場で受け取って処理・分析できるサービスです。",
+  "useCase": "リアルタイムのログ収集、ストリーミングデータ処理。",
+  "examPoint": "ストリーミングデータ処理。リアルタイム＝Kinesis。",
+  "relatedServices": [
+   "Redshift"
+  ],
+  "domain": "technology",
+  "difficulty": 3
+ },
+ {
+  "id": "t-sagemaker",
+  "term": "Amazon SageMaker",
+  "shortDescription": "機械学習モデルを作る総合環境。",
+  "beginnerExplanation": "AIの「学習・作成・公開」を一通り行える土台。自分でモデルを作りたいときに使います。",
+  "useCase": "独自の機械学習モデルを構築・運用したいとき。",
+  "examPoint": "MLの構築〜デプロイを一気通貫。自前でモデル作成＝SageMaker。",
+  "relatedServices": [
+   "Bedrock"
+  ],
+  "domain": "technology",
+  "difficulty": 3
+ },
+ {
+  "id": "t-bedrock",
+  "term": "Amazon Bedrock",
+  "shortDescription": "生成AIをAPIで手軽に使えるサービス。",
+  "beginnerExplanation": "文章や画像を生成するAI（基盤モデル）を、難しい準備なしにアプリから呼び出して使えるサービスです。",
+  "useCase": "チャットや文章生成などの生成AI機能をアプリに組み込みたいとき。",
+  "examPoint": "生成AIの入り口＝Bedrock。複数の基盤モデルをAPIで利用。",
+  "relatedServices": [
+   "SageMaker"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-apigateway",
+  "term": "Amazon API Gateway",
+  "shortDescription": "APIの受付窓口を作るサービス。",
+  "beginnerExplanation": "アプリの外部からのリクエストを受け付け、LambdaなどのバックエンドにつなぐAPIの玄関口です。",
+  "useCase": "サーバーレスAPIやマイクロサービスの入口を作りたいとき。",
+  "examPoint": "APIの窓口。Lambdaと組み合わせてサーバーレス構成に。",
+  "relatedServices": [
+   "Lambda"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-sqs",
+  "term": "Amazon SQS",
+  "shortDescription": "処理待ちメッセージをためるキュー。",
+  "beginnerExplanation": "処理をすぐに実行せず、いったん行列（キュー）に並べて、受け手が自分のペースで取り出せるようにする仕組みです。",
+  "useCase": "システム同士を切り離して、負荷の波を吸収したいとき。",
+  "examPoint": "メッセージキュー。疎結合の要。ためる＝SQS。",
+  "relatedServices": [
+   "SNS",
+   "Lambda"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-sns",
+  "term": "Amazon SNS",
+  "shortDescription": "1つの通知を複数へ一斉配信。",
+  "beginnerExplanation": "あるできごとを、メールや他サービスなど複数の宛先へ一度に知らせる仕組み（パブリッシュ／サブスクライブ）です。",
+  "useCase": "通知の一斉配信、イベントの複数箇所への連携。",
+  "examPoint": "パブサブ通知。配る＝SNS。SQS（ためる）との対比が頻出。",
+  "relatedServices": [
+   "SQS"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-directconnect",
+  "term": "AWS Direct Connect",
+  "shortDescription": "オンプレとAWSを結ぶ専用線。",
+  "beginnerExplanation": "インターネットを通さず、自社とAWSを専用の回線で直結します。安定して速く、大容量の通信ができます。",
+  "useCase": "安定・低遅延・大容量の接続が必要なハイブリッド構成。",
+  "examPoint": "専用線接続。安定重視＝Direct Connect、手軽さ＝VPN。",
+  "relatedServices": [
+   "VPC"
+  ],
+  "domain": "technology",
+  "difficulty": 2
+ },
+ {
+  "id": "t-kms",
+  "term": "AWS KMS",
+  "shortDescription": "暗号鍵を一元管理するサービス。",
+  "beginnerExplanation": "データを暗号化するための「鍵」を安全に作成・保管・管理できるサービスです。多くのサービスと連携します。",
+  "useCase": "S3やEBSなどのデータを暗号化したいとき。",
+  "examPoint": "Key Management Service。暗号鍵の管理＝KMS。保存データ暗号化の中心。",
+  "relatedServices": [
+   "S3",
+   "EBS"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-cloudtrail",
+  "term": "AWS CloudTrail",
+  "shortDescription": "誰が何を操作したかを記録。",
+  "beginnerExplanation": "「いつ・誰が・どの操作をしたか」を記録する、AWSの操作履歴（監査ログ）です。",
+  "useCase": "不正操作の調査、監査の証跡を残したいとき。",
+  "examPoint": "操作の記録＝CloudTrail。監視のCloudWatchと混同注意。",
+  "relatedServices": [
+   "Config",
+   "CloudWatch"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-config",
+  "term": "AWS Config",
+  "shortDescription": "リソース設定の変更を追跡・評価。",
+  "beginnerExplanation": "サーバーやストレージの設定が変わった履歴を記録し、決めたルールに違反していないかを継続的にチェックします。",
+  "useCase": "設定の正しさを保ちたい、コンプライアンスを維持したいとき。",
+  "examPoint": "設定の監視＝Config。あるべき状態からのズレを検知。",
+  "relatedServices": [
+   "CloudTrail"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-guardduty",
+  "term": "Amazon GuardDuty",
+  "shortDescription": "不審な挙動を自動検知する脅威検知。",
+  "beginnerExplanation": "ログを自動で分析し、不正アクセスや異常な通信などの怪しい動きを見つけて知らせてくれる見張り役です。",
+  "useCase": "アカウントへの脅威を継続的に監視したいとき。",
+  "examPoint": "脅威検知＝GuardDuty。Inspector（脆弱性診断）/Macie（機微データ）と区別。",
+  "relatedServices": [
+   "Inspector",
+   "Macie"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-cognito",
+  "term": "Amazon Cognito",
+  "shortDescription": "アプリのログイン機能を提供。",
+  "beginnerExplanation": "自分のアプリに「会員登録」「ログイン」の仕組みを簡単に追加できるサービスです。利用者の認証を担います。",
+  "useCase": "モバイル/Webアプリの利用者向けサインアップ・ログイン。",
+  "examPoint": "エンドユーザーの認証＝Cognito。社員向けはIAM Identity Center。",
+  "relatedServices": [
+   "IAM"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-secretsmanager",
+  "term": "AWS Secrets Manager",
+  "shortDescription": "パスワード等の機密情報を安全に保管。",
+  "beginnerExplanation": "データベースのパスワードやAPIキーなどの秘密情報を安全にしまい、自動で更新（ローテーション）もできます。",
+  "useCase": "アプリの認証情報をコードに直書きせず安全に管理したいとき。",
+  "examPoint": "機密情報の保管＝Secrets Manager。自動ローテーション対応。",
+  "relatedServices": [
+   "KMS"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-waf",
+  "term": "AWS WAF",
+  "shortDescription": "Webアプリを攻撃から守る盾。",
+  "beginnerExplanation": "SQLインジェクションなど、Webサイトを狙う攻撃をルールで見分けて遮断するファイアウォールです。",
+  "useCase": "公開Webアプリを不正アクセスから守りたいとき。",
+  "examPoint": "Web Application Firewall。CloudFront/ALBの前段。Shield（DDoS）と区別。",
+  "relatedServices": [
+   "Shield",
+   "CloudFront"
+  ],
+  "domain": "security",
+  "difficulty": 2
+ },
+ {
+  "id": "t-costexplorer",
+  "term": "AWS Cost Explorer",
+  "shortDescription": "コストをグラフで分析・可視化。",
+  "beginnerExplanation": "これまでにかかった費用を、グラフや内訳で振り返って分析できるツールです。",
+  "useCase": "コストの傾向を把握し、無駄を見つけたいとき。",
+  "examPoint": "振り返り＝Cost Explorer、先回りの管理＝Budgets。対で覚える。",
+  "relatedServices": [
+   "Budgets"
+  ],
+  "domain": "billing",
+  "difficulty": 1
+ },
+ {
+  "id": "t-savingsplans",
+  "term": "AWS Savings Plans",
+  "shortDescription": "一定利用のコミットで柔軟に割引。",
+  "beginnerExplanation": "「毎時いくら使う」と決めて契約すると、対象の料金が安くなる仕組み。リザーブドより使い方の縛りがゆるいのが特長です。",
+  "useCase": "継続利用が見込めるコンピュート費用を安くしたいとき。",
+  "examPoint": "コミットで割引。リザーブドより柔軟。コスト最適化の定番。",
+  "relatedServices": [
+   "EC2"
+  ],
+  "domain": "billing",
+  "difficulty": 2
+ },
+ {
+  "id": "t-pricingcalculator",
+  "term": "AWS Pricing Calculator",
+  "shortDescription": "使う前に料金を見積もるツール。",
+  "beginnerExplanation": "これから作る構成を入力して、月額のおよその費用を事前に試算できるツールです。",
+  "useCase": "導入前に予算を組みたいとき。",
+  "examPoint": "事前見積もり＝Pricing Calculator。導入前の試算に使う。",
+  "relatedServices": [
+   "Budgets"
+  ],
+  "domain": "billing",
+  "difficulty": 1
+ },
+ {
+  "id": "t-support",
+  "term": "AWSサポートプラン",
+  "shortDescription": "4段階のサポート提供レベル。",
+  "beginnerExplanation": "困ったときの支援レベルを選ぶプラン。Basic（無料）/Developer/Business/Enterpriseの4段階です。",
+  "useCase": "運用体制に合わせてサポートの手厚さを選びたいとき。",
+  "examPoint": "Basic/Developer/Business/Enterprise。24時間対応はBusiness以上、専任TAMはEnterprise。",
+  "relatedServices": [
+   "Trusted Advisor"
+  ],
+  "domain": "billing",
+  "difficulty": 1
+ },
+ {
+  "id": "t-region-az",
+  "term": "リージョンとアベイラビリティーゾーン",
+  "shortDescription": "AWSの世界的な拠点構造。",
+  "beginnerExplanation": "リージョンは東京・大阪などの地域、その中に物理的に離れた複数のデータセンター群（AZ）があります。",
+  "useCase": "障害に強い構成（複数AZ配置）を理解するとき。",
+  "examPoint": "リージョン＞AZ。複数AZ配置で高可用性。エッジロケーションはCDN用。",
+  "relatedServices": [
+   "CloudFront"
+  ],
+  "domain": "cloudConcepts",
+  "difficulty": 1
+ },
+ {
+  "id": "t-availability",
+  "term": "高可用性と弾力性",
+  "shortDescription": "止まらない・需要に合わせる設計思想。",
+  "beginnerExplanation": "高可用性＝壊れても止まらないこと、弾力性＝必要に応じて自動で増減すること。クラウド設計の基本です。",
+  "useCase": "システムを安定運用しつつコストも抑えたいとき。",
+  "examPoint": "単一障害点をなくす＝高可用性、自動増減＝弾力性。似た用語を区別。",
+  "relatedServices": [
+   "Auto Scaling",
+   "ELB"
+  ],
+  "domain": "cloudConcepts",
+  "difficulty": 1
+ },
+ {
+  "id": "t-caf",
+  "term": "AWS CAF（クラウド導入フレームワーク）",
+  "shortDescription": "組織のクラウド移行を導く枠組み。",
+  "beginnerExplanation": "会社全体でクラウドへ移るための道しるべ。技術だけでなく人や組織の準備も6つの視点で整理します。",
+  "useCase": "全社的なクラウド移行を計画するとき。",
+  "examPoint": "6つの視点（ビジネス/人材/ガバナンス/プラットフォーム/セキュリティ/オペレーション）。人の再教育＝People。",
+  "relatedServices": [
+   "Well-Architected フレームワーク"
+  ],
+  "domain": "cloudConcepts",
+  "difficulty": 2
+ }
+]

@@ -1,0 +1,254 @@
+[
+ {
+  "id": "s-001",
+  "name": "稼働率の計算",
+  "category": "計算式",
+  "oneLiner": "稼働率=MTBF÷(MTBF+MTTR)",
+  "domain": "computer"
+ },
+ {
+  "id": "s-002",
+  "name": "並列システムの稼働率",
+  "category": "計算式",
+  "oneLiner": "1-(1-A)×(1-B)で求める",
+  "domain": "computer"
+ },
+ {
+  "id": "s-003",
+  "name": "実効アクセス時間",
+  "category": "計算式",
+  "oneLiner": "ヒット率×キャッシュ時間+(1-ヒット率)×主記憶時間",
+  "domain": "computer"
+ },
+ {
+  "id": "s-004",
+  "name": "損益分岐点売上高",
+  "category": "計算式",
+  "oneLiner": "固定費÷(1-変動費率)",
+  "domain": "strategy"
+ },
+ {
+  "id": "s-005",
+  "name": "EVMの指標",
+  "category": "計算式",
+  "oneLiner": "SV=EV-PV、CV=EV-AC",
+  "domain": "mgmt"
+ },
+ {
+  "id": "s-006",
+  "name": "伝送時間",
+  "category": "計算式",
+  "oneLiner": "データ量÷(回線速度×伝送効率)",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-007",
+  "name": "ホスト数",
+  "category": "計算式",
+  "oneLiner": "2のホスト部ビット数乗-2",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-008",
+  "name": "LIFOとFIFO",
+  "category": "データ構造",
+  "oneLiner": "スタックは後入れ先出し、キューは先入れ先出し",
+  "domain": "theory"
+ },
+ {
+  "id": "s-009",
+  "name": "2分探索の計算量",
+  "category": "データ構造",
+  "oneLiner": "O(log n)。整列済みが前提",
+  "domain": "theory"
+ },
+ {
+  "id": "s-010",
+  "name": "バブルソートの計算量",
+  "category": "データ構造",
+  "oneLiner": "O(n²)。隣接要素を交換して整列",
+  "domain": "algoB"
+ },
+ {
+  "id": "s-011",
+  "name": "再帰関数",
+  "category": "データ構造",
+  "oneLiner": "自分自身を呼び出す関数。終了条件が必要",
+  "domain": "algoB"
+ },
+ {
+  "id": "s-012",
+  "name": "互除法",
+  "category": "データ構造",
+  "oneLiner": "余りを使って最大公約数を求める",
+  "domain": "algoB"
+ },
+ {
+  "id": "s-013",
+  "name": "TCP",
+  "category": "プロトコル",
+  "oneLiner": "接続型で再送制御を行う信頼性重視の通信",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-014",
+  "name": "UDP",
+  "category": "プロトコル",
+  "oneLiner": "接続なしで高速な通信",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-015",
+  "name": "DNS",
+  "category": "プロトコル",
+  "oneLiner": "ドメイン名をIPアドレスへ変換",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-016",
+  "name": "RAID1",
+  "category": "略語",
+  "oneLiner": "同じデータを2台に書き込むミラーリング",
+  "domain": "computer"
+ },
+ {
+  "id": "s-017",
+  "name": "RAID5",
+  "category": "略語",
+  "oneLiner": "分散パリティで1台故障まで耐える",
+  "domain": "computer"
+ },
+ {
+  "id": "s-018",
+  "name": "ACID",
+  "category": "略語",
+  "oneLiner": "トランザクションが満たすべき4つの性質",
+  "domain": "techElem"
+ },
+ {
+  "id": "s-019",
+  "name": "PDCA",
+  "category": "略語",
+  "oneLiner": "計画・実行・評価・改善の管理サイクル",
+  "domain": "security"
+ },
+ {
+  "id": "s-020",
+  "name": "SLA",
+  "category": "略語",
+  "oneLiner": "サービス水準を定めた合意書",
+  "domain": "mgmt"
+ },
+ {
+  "id": "s-021",
+  "name": "ISMS",
+  "category": "略語",
+  "oneLiner": "情報セキュリティマネジメントシステム",
+  "domain": "security"
+ },
+ {
+  "id": "s-022",
+  "name": "PPM",
+  "category": "略語",
+  "oneLiner": "製品を成長率とシェアで分類する手法",
+  "domain": "strategy"
+ },
+ {
+  "id": "s-023",
+  "name": "RSAの鍵",
+  "category": "セキュリティ",
+  "oneLiner": "公開鍵と秘密鍵の対を使う公開鍵暗号",
+  "domain": "security"
+ },
+ {
+  "id": "s-024",
+  "name": "共通鍵暗号の鍵数",
+  "category": "セキュリティ",
+  "oneLiner": "n人が通信するとn(n-1)/2個の鍵が必要",
+  "domain": "security"
+ },
+ {
+  "id": "s-025",
+  "name": "機密性・完全性・可用性",
+  "category": "セキュリティ",
+  "oneLiner": "情報セキュリティの3要素",
+  "domain": "security"
+ },
+ {
+  "id": "s-026",
+  "name": "同値分割と限界値分析",
+  "category": "開発手法",
+  "oneLiner": "ブラックボックステストの代表的な設計手法",
+  "domain": "dev"
+ },
+ {
+  "id": "s-027",
+  "name": "命令網羅と判定条件網羅",
+  "category": "開発手法",
+  "oneLiner": "ホワイトボックステストの網羅基準",
+  "domain": "dev"
+ },
+ {
+  "id": "s-028",
+  "name": "スクラムの役割",
+  "category": "開発手法",
+  "oneLiner": "PO、スクラムマスター、開発チームの3役",
+  "domain": "dev"
+ },
+ {
+  "id": "s-029",
+  "name": "UMLの図",
+  "category": "開発手法",
+  "oneLiner": "クラス図・シーケンス図・ユースケース図など",
+  "domain": "dev"
+ },
+ {
+  "id": "s-030",
+  "name": "クリティカルパス",
+  "category": "マネジメント・戦略",
+  "oneLiner": "工期を決める最長の作業経路",
+  "domain": "mgmt"
+ },
+ {
+  "id": "s-031",
+  "name": "バックアップ3方式",
+  "category": "マネジメント・戦略",
+  "oneLiner": "フル・差分・増分の違いを区別",
+  "domain": "mgmt"
+ },
+ {
+  "id": "s-032",
+  "name": "SWOT分析",
+  "category": "マネジメント・戦略",
+  "oneLiner": "強み・弱み・機会・脅威で整理",
+  "domain": "strategy"
+ },
+ {
+  "id": "s-033",
+  "name": "ファイブフォース",
+  "category": "マネジメント・戦略",
+  "oneLiner": "業界の競争要因を5つの力で分析",
+  "domain": "strategy"
+ },
+ {
+  "id": "s-034",
+  "name": "2の補数の範囲",
+  "category": "計算式",
+  "oneLiner": "nビットは-2の(n-1)乗〜2の(n-1)乗-1",
+  "domain": "theory"
+ },
+ {
+  "id": "s-035",
+  "name": "ハフマン符号",
+  "category": "データ構造",
+  "oneLiner": "出現頻度が高い文字ほど短い符号を割り当てる",
+  "domain": "theory"
+ },
+ {
+  "id": "s-036",
+  "name": "擬似言語の代入",
+  "category": "擬似言語",
+  "oneLiner": "代入は←で書き、配列の添字は1から始まる",
+  "domain": "algoB"
+ }
+]

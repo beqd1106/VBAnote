@@ -1,0 +1,114 @@
+[
+ {
+  "id": "s-chatgpt",
+  "name": "ChatGPT",
+  "category": "テキスト生成",
+  "oneLiner": "OpenAIの対話型生成AI。文章生成・要約・対話の定番。",
+  "domain": "genAI"
+ },
+ {
+  "id": "s-gpt4o",
+  "name": "GPT-4o",
+  "category": "テキスト生成",
+  "oneLiner": "OpenAIのマルチモーダルモデル。文章・画像・音声を扱う。",
+  "domain": "genAI"
+ },
+ {
+  "id": "s-gemini",
+  "name": "Gemini",
+  "category": "テキスト生成",
+  "oneLiner": "Googleの生成AI。マルチモーダルに対応。",
+  "domain": "genAI"
+ },
+ {
+  "id": "s-claude",
+  "name": "Claude",
+  "category": "テキスト生成",
+  "oneLiner": "Anthropicの生成AI。長文の扱いや安全性を重視。",
+  "domain": "genAI"
+ },
+ {
+  "id": "s-copilot",
+  "name": "Copilot",
+  "category": "テキスト生成",
+  "oneLiner": "MicrosoftのAIアシスタント。Officeなどと連携。",
+  "domain": "genAI"
+ },
+ {
+  "id": "s-perplexity",
+  "name": "Perplexity",
+  "category": "テキスト生成",
+  "oneLiner": "出典付きで回答する検索型AI（RAG的な仕組み）。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-notebooklm",
+  "name": "NotebookLM",
+  "category": "テキスト生成",
+  "oneLiner": "自分の資料をもとに回答するGoogleのAIノート。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-sora",
+  "name": "Sora",
+  "category": "動画生成",
+  "oneLiner": "OpenAIのテキストから動画を生成するモデル。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-veo",
+  "name": "Veo",
+  "category": "動画生成",
+  "oneLiner": "Googleの高品質な動画生成モデル。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-midjourney",
+  "name": "Midjourney",
+  "category": "画像生成",
+  "oneLiner": "高品質な画像を生成する定番サービス。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-sd",
+  "name": "Stable Diffusion",
+  "category": "画像生成",
+  "oneLiner": "オープンな画像生成モデル。ローカル実行も可能。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-dalle",
+  "name": "DALL·E",
+  "category": "画像生成",
+  "oneLiner": "OpenAIの画像生成モデル。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-suno",
+  "name": "Suno",
+  "category": "音楽生成",
+  "oneLiner": "歌詞や指示から楽曲を生成するAI。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-elevenlabs",
+  "name": "ElevenLabs",
+  "category": "音声生成",
+  "oneLiner": "自然な音声を合成する音声生成AI。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-genspark",
+  "name": "GenSpark",
+  "category": "AIエージェント",
+  "oneLiner": "自律的に調べて資料等を作るAIエージェント。",
+  "domain": "trends"
+ },
+ {
+  "id": "s-manus",
+  "name": "Manus",
+  "category": "AIエージェント",
+  "oneLiner": "タスクを自律実行する汎用AIエージェント。",
+  "domain": "trends"
+ }
+]

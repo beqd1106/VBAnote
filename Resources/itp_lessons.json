@@ -1,0 +1,1440 @@
+[
+ {
+  "id": "l-sc1",
+  "title": "企業活動とマネジメント",
+  "domain": "strategyCorp",
+  "estimatedMinutes": 10,
+  "summary": "PDCAなどのマネジメント手法、人材育成、業務分析の基礎を押さえます。",
+  "sections": [
+   {
+    "heading": "PDCAとマネジメント",
+    "body": "業務改善の基本はPDCA（計画→実行→評価→改善）を回すこと。BCP（事業継続計画）、CSR（社会的責任）、コーポレートガバナンスなど企業活動の基本用語も押さえます。"
+   },
+   {
+    "heading": "人材育成と業務分析",
+    "body": "OJT（実務を通じた教育）とOFF-JT、ナレッジマネジメント。在庫管理・ABC分析、QC7つ道具（パレート図・特性要因図）など業務分析の手法も学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-sc-001",
+   "q-sc-009",
+   "q-sc-010",
+   "q-sc-011",
+   "q-sc-012",
+   "q-sc-013",
+   "q-sc-014",
+   "q-sc-015",
+   "q-sc-016",
+   "d-sc-010",
+   "d-sc-003",
+   "d-sc-002",
+   "d-sc-001",
+   "qc-sc1-01",
+   "qc-sc1-02"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sc1-01",
+   "b-sc1-02",
+   "b-sc1-03",
+   "b-sc1-04",
+   "b-sc1-05",
+   "b-sc1-06",
+   "b-sc1-07",
+   "b-sc1-08",
+   "b-sc1-09",
+   "b-sc1-10",
+   "b-sc1-11",
+   "b-sc1-12",
+   "b-sc1-13",
+   "b-sc1-14",
+   "b-sc1-15"
+  ]
+ },
+ {
+  "id": "l-sc2",
+  "title": "会計と財務",
+  "domain": "strategyCorp",
+  "estimatedMinutes": 9,
+  "summary": "損益計算書・貸借対照表と、損益分岐点など採算の考え方を学びます。",
+  "sections": [
+   {
+    "heading": "財務諸表",
+    "body": "一定期間の利益を表す損益計算書(P/L)と、ある時点の資産・負債・純資産を表す貸借対照表(B/S)の違いが頻出です。"
+   },
+   {
+    "heading": "採算と指標",
+    "body": "売上と費用が等しくなる損益分岐点は固定費と変動費から求めます。ROI・ROEなど投資対効果の指標も押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-sc-002",
+   "q-sc-003",
+   "d-sc-007",
+   "qc-sc2-01",
+   "qc-sc2-02",
+   "qc-sc2-03",
+   "qc-sc2-04",
+   "qc-sc2-05",
+   "qc-sc2-06",
+   "qc-sc2-07",
+   "qc-sc2-08",
+   "qc-sc2-09",
+   "qc-sc2-10",
+   "qc-sc2-11",
+   "qc-sc2-12"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sc2-01",
+   "b-sc2-02",
+   "b-sc2-03",
+   "b-sc2-04",
+   "b-sc2-05",
+   "b-sc2-06",
+   "b-sc2-07",
+   "b-sc2-08",
+   "b-sc2-09",
+   "b-sc2-10",
+   "b-sc2-11",
+   "b-sc2-12",
+   "b-sc2-13",
+   "b-sc2-14",
+   "b-sc2-15"
+  ]
+ },
+ {
+  "id": "l-sc3",
+  "title": "法務と標準化",
+  "domain": "strategyCorp",
+  "estimatedMinutes": 11,
+  "summary": "知的財産権、個人情報保護法・労働関連法、標準化を押さえます。",
+  "sections": [
+   {
+    "heading": "知的財産権",
+    "body": "著作権は創作時点で自動発生（登録不要）。特許権・実用新案権・意匠権・商標権は出願・登録が必要な産業財産権です。不正競争防止法（営業秘密）も重要です。"
+   },
+   {
+    "heading": "個人情報・労働法・標準化",
+    "body": "個人情報保護法の要配慮個人情報、労働者派遣（指揮命令は派遣先）と請負の違い、PL法。ISO 9000(品質)・14000(環境)・27000(情報セキュリティ)も押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-sc-004",
+   "q-sc-005",
+   "q-sc-006",
+   "q-sc-007",
+   "q-sc-008",
+   "q-sc-017",
+   "q-sc-018",
+   "q-sc-019",
+   "q-sc-020",
+   "d-sc-009",
+   "d-sc-006",
+   "d-sc-008",
+   "d-sc-005",
+   "d-sc-004",
+   "qc-sc3-01"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sc3-01",
+   "b-sc3-02",
+   "b-sc3-03",
+   "b-sc3-04",
+   "b-sc3-05",
+   "b-sc3-06",
+   "b-sc3-07",
+   "b-sc3-08",
+   "b-sc3-09",
+   "b-sc3-10",
+   "b-sc3-11",
+   "b-sc3-12",
+   "b-sc3-13",
+   "b-sc3-14",
+   "b-sc3-15"
+  ]
+ },
+ {
+  "id": "l-sb1",
+  "title": "経営戦略",
+  "domain": "strategyBiz",
+  "estimatedMinutes": 10,
+  "summary": "SWOT・PPMなど経営戦略の分析フレームワークを学びます。",
+  "sections": [
+   {
+    "heading": "分析フレームワーク",
+    "body": "自社を強み・弱み・機会・脅威で見るSWOT分析、製品を市場成長率と占有率で分けるPPM（花形・金のなる木・問題児・負け犬）、3C分析、ファイブフォース分析が代表格です。"
+   },
+   {
+    "heading": "戦略の考え方",
+    "body": "コアコンピタンス、M&A・アライアンス、ベンチマーキング、アンゾフの成長マトリクスなど、競争優位を築く考え方を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-sb-001",
+   "q-sb-002",
+   "q-sb-007",
+   "q-sb-008",
+   "q-sb-009",
+   "q-sb-011",
+   "q-sb-012",
+   "q-sb-013",
+   "q-sb-016",
+   "q-sb-018",
+   "d-sb-004",
+   "d-sb-001",
+   "d-sb-010",
+   "qc-sb1-01",
+   "qc-sb1-02"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sb1-01",
+   "b-sb1-02",
+   "b-sb1-03",
+   "b-sb1-04",
+   "b-sb1-05",
+   "b-sb1-06",
+   "b-sb1-07",
+   "b-sb1-08",
+   "b-sb1-09",
+   "b-sb1-10",
+   "b-sb1-11",
+   "b-sb1-12",
+   "b-sb1-13",
+   "b-sb1-14",
+   "b-sb1-15"
+  ]
+ },
+ {
+  "id": "l-sb2",
+  "title": "マーケティング",
+  "domain": "strategyBiz",
+  "estimatedMinutes": 9,
+  "summary": "4P・STP・RFMなどマーケティング手法を学びます。",
+  "sections": [
+   {
+    "heading": "マーケティングの基本",
+    "body": "Product・Price・Place・Promotionの4P、市場を分けるSTP、顧客を最新購買日・頻度・金額で見るRFM分析を押さえます。"
+   },
+   {
+    "heading": "顧客との関係",
+    "body": "CRM（顧客関係管理）、ブランド戦略、サブスクリプションなど、顧客との関係を深める手法を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-sb-003",
+   "q-sb-004",
+   "q-sb-010",
+   "q-sb-014",
+   "q-sb-015",
+   "q-sb-017",
+   "d-sb-007",
+   "d-sb-008",
+   "d-sb-002",
+   "d-sb-006",
+   "d-sb-005",
+   "qc-sb2-01",
+   "qc-sb2-02",
+   "qc-sb2-03",
+   "qc-sb2-04"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sb2-01",
+   "b-sb2-02",
+   "b-sb2-03",
+   "b-sb2-04",
+   "b-sb2-05",
+   "b-sb2-06",
+   "b-sb2-07",
+   "b-sb2-08",
+   "b-sb2-09",
+   "b-sb2-10",
+   "b-sb2-11",
+   "b-sb2-12",
+   "b-sb2-13",
+   "b-sb2-14",
+   "b-sb2-15"
+  ]
+ },
+ {
+  "id": "l-sb3",
+  "title": "ビジネスとIT活用",
+  "domain": "strategyBiz",
+  "estimatedMinutes": 10,
+  "summary": "IoT・AI活用やeビジネスなど、ITを使ったビジネスの動向を学びます。",
+  "sections": [
+   {
+    "heading": "IoTとAI活用",
+    "body": "あらゆるモノをつなぐIoT、収集した大量データを活かすビッグデータとAI活用が産業を変えています。"
+   },
+   {
+    "heading": "eビジネス",
+    "body": "EC（BtoB/BtoC/CtoC）、ロングテール、ショールーミング、フィンテック、シェアリングエコノミーなどの動向を押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-sb-005",
+   "q-sb-006",
+   "d-sb-009",
+   "d-sb-003",
+   "qc-sb3-01",
+   "qc-sb3-02",
+   "qc-sb3-03",
+   "qc-sb3-04",
+   "qc-sb3-05",
+   "qc-sb3-06",
+   "qc-sb3-07",
+   "qc-sb3-08",
+   "qc-sb3-09",
+   "qc-sb3-10",
+   "qc-sb3-11"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sb3-01",
+   "b-sb3-02",
+   "b-sb3-03",
+   "b-sb3-04",
+   "b-sb3-05",
+   "b-sb3-06",
+   "b-sb3-07",
+   "b-sb3-08",
+   "b-sb3-09",
+   "b-sb3-10",
+   "b-sb3-11",
+   "b-sb3-12",
+   "b-sb3-13",
+   "b-sb3-14",
+   "b-sb3-15"
+  ]
+ },
+ {
+  "id": "l-ss1",
+  "title": "システム戦略",
+  "domain": "strategySys",
+  "estimatedMinutes": 10,
+  "summary": "BPRやERP・RPAなど、業務を支えるシステム戦略を学びます。",
+  "sections": [
+   {
+    "heading": "業務改革の手法",
+    "body": "業務プロセスを抜本的に見直すBPR、業務の可視化・改善を続けるBPM。ERP・SFA・CRM・SCMなど業務を支える仕組みを押さえます。"
+   },
+   {
+    "heading": "業務の自動化",
+    "body": "定型作業を自動化するRPA、情報を分析するBI、グループウェアなど、業務効率化のソリューションを学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-ss-001",
+   "q-ss-005",
+   "q-ss-008",
+   "q-ss-009",
+   "q-ss-010",
+   "q-ss-011",
+   "q-ss-012",
+   "q-ss-013",
+   "q-ss-014",
+   "d-ss-004",
+   "d-ss-007",
+   "d-ss-001",
+   "qc-ss1-01",
+   "qc-ss1-02",
+   "qc-ss1-03"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-ss1-01",
+   "b-ss1-02",
+   "b-ss1-03",
+   "b-ss1-04",
+   "b-ss1-05",
+   "b-ss1-06",
+   "b-ss1-07",
+   "b-ss1-08",
+   "b-ss1-09",
+   "b-ss1-10",
+   "b-ss1-11",
+   "b-ss1-12",
+   "b-ss1-13",
+   "b-ss1-14",
+   "b-ss1-15"
+  ]
+ },
+ {
+  "id": "l-ss2",
+  "title": "クラウドとソリューション",
+  "domain": "strategySys",
+  "estimatedMinutes": 9,
+  "summary": "SaaS/PaaS/IaaSなどクラウドの提供形態を理解します。",
+  "sections": [
+   {
+    "heading": "クラウドの提供形態",
+    "body": "ソフトを使うSaaS、開発環境のPaaS、インフラのIaaS。自社保有のオンプレミスとの違いを理解します。"
+   },
+   {
+    "heading": "クラウドの種類",
+    "body": "パブリック・プライベート・ハイブリッドクラウド、ホスティングとハウジング、SOAなど提供形態を押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-ss-002",
+   "q-ss-003",
+   "q-ss-006",
+   "q-ss-007",
+   "d-ss-008",
+   "d-ss-005",
+   "d-ss-002",
+   "qc-ss2-01",
+   "qc-ss2-02",
+   "qc-ss2-03",
+   "qc-ss2-04",
+   "qc-ss2-05",
+   "qc-ss2-06",
+   "qc-ss2-07",
+   "qc-ss2-08"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-ss2-01",
+   "b-ss2-02",
+   "b-ss2-03",
+   "b-ss2-04",
+   "b-ss2-05",
+   "b-ss2-06",
+   "b-ss2-07",
+   "b-ss2-08",
+   "b-ss2-09",
+   "b-ss2-10",
+   "b-ss2-11",
+   "b-ss2-12",
+   "b-ss2-13",
+   "b-ss2-14",
+   "b-ss2-15"
+  ]
+ },
+ {
+  "id": "l-ss3",
+  "title": "システム企画・調達",
+  "domain": "strategySys",
+  "estimatedMinutes": 8,
+  "summary": "要件定義とRFI→RFPの調達の流れを理解します。",
+  "sections": [
+   {
+    "heading": "システム企画",
+    "body": "利用者の要求を固める要件定義が出発点。何を作るかを明確にすることが重要です。"
+   },
+   {
+    "heading": "調達の流れ",
+    "body": "業者選定ではRFI（情報収集）→RFP（提案依頼）→提案書・見積書→ベンダ選定の流れを押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-ss-004",
+   "d-ss-003",
+   "d-ss-006",
+   "qc-ss3-01",
+   "qc-ss3-02",
+   "qc-ss3-03",
+   "qc-ss3-04",
+   "qc-ss3-05",
+   "qc-ss3-06",
+   "qc-ss3-07",
+   "qc-ss3-08",
+   "qc-ss3-09",
+   "qc-ss3-10",
+   "qc-ss3-11",
+   "qc-ss3-12"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-ss3-01",
+   "b-ss3-02",
+   "b-ss3-03",
+   "b-ss3-04",
+   "b-ss3-05",
+   "b-ss3-06",
+   "b-ss3-07",
+   "b-ss3-08",
+   "b-ss3-09",
+   "b-ss3-10",
+   "b-ss3-11",
+   "b-ss3-12",
+   "b-ss3-13",
+   "b-ss3-14",
+   "b-ss3-15"
+  ]
+ },
+ {
+  "id": "l-md1",
+  "title": "開発の流れと設計",
+  "domain": "mgmtDev",
+  "estimatedMinutes": 10,
+  "summary": "開発工程の流れとオブジェクト指向などの設計手法を学びます。",
+  "sections": [
+   {
+    "heading": "開発の流れ",
+    "body": "要件定義→設計→プログラミング→テスト→運用・保守と進みます。最上流の要件定義で「何を作るか」を固めることが重要です。"
+   },
+   {
+    "heading": "設計の考え方",
+    "body": "オブジェクト指向（クラス・継承・カプセル化・多相性）、モジュール分割、UML・DFD・E-R図など設計の基礎を押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-md-003",
+   "q-md-006",
+   "q-md-007",
+   "q-md-011",
+   "d-md-008",
+   "d-md-004",
+   "d-md-007",
+   "d-md-003",
+   "qc-md1-01",
+   "qc-md1-02",
+   "qc-md1-03",
+   "qc-md1-04",
+   "qc-md1-05",
+   "qc-md1-06",
+   "qc-md1-07"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-md1-01",
+   "b-md1-02",
+   "b-md1-03",
+   "b-md1-04",
+   "b-md1-05",
+   "b-md1-06",
+   "b-md1-07",
+   "b-md1-08",
+   "b-md1-09",
+   "b-md1-10",
+   "b-md1-11",
+   "b-md1-12",
+   "b-md1-13",
+   "b-md1-14",
+   "b-md1-15"
+  ]
+ },
+ {
+  "id": "l-md2",
+  "title": "開発モデル",
+  "domain": "mgmtDev",
+  "estimatedMinutes": 9,
+  "summary": "ウォーターフォールとアジャイルなど開発モデルを比較して学びます。",
+  "sections": [
+   {
+    "heading": "開発モデル",
+    "body": "後戻りしない順次型のウォーターフォール、短い反復で柔軟に進めるアジャイル（代表例はスクラム）。特徴と向き不向きを対比で覚えます。"
+   },
+   {
+    "heading": "アジャイルの実践",
+    "body": "スクラム（スプリント・バックログ）、XP（ペアプログラミング・テスト駆動）、DevOpsなど、変化に強い開発手法を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-md-001",
+   "q-md-002",
+   "q-md-008",
+   "q-md-009",
+   "d-md-005",
+   "d-md-002",
+   "d-md-001",
+   "qc-md2-01",
+   "qc-md2-02",
+   "qc-md2-03",
+   "qc-md2-04",
+   "qc-md2-05",
+   "qc-md2-06",
+   "qc-md2-07",
+   "qc-md2-08"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-md2-01",
+   "b-md2-02",
+   "b-md2-03",
+   "b-md2-04",
+   "b-md2-05",
+   "b-md2-06",
+   "b-md2-07",
+   "b-md2-08",
+   "b-md2-09",
+   "b-md2-10",
+   "b-md2-11",
+   "b-md2-12",
+   "b-md2-13",
+   "b-md2-14",
+   "b-md2-15"
+  ]
+ },
+ {
+  "id": "l-md3",
+  "title": "テストと見積り",
+  "domain": "mgmtDev",
+  "estimatedMinutes": 10,
+  "summary": "テストの種類・技法と、規模の見積り手法を学びます。",
+  "sections": [
+   {
+    "heading": "テストの種類",
+    "body": "単体→結合→システム→受入とテスト範囲が広がります。内部構造を見るホワイトボックス、入出力で確かめるブラックボックスの違いも頻出です。"
+   },
+   {
+    "heading": "レビューと見積り",
+    "body": "ウォークスルー・インスペクションなどのレビュー、ファンクションポイント法・LOCによる規模見積りを押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-md-004",
+   "q-md-005",
+   "q-md-010",
+   "q-md-012",
+   "d-md-006",
+   "qc-md3-01",
+   "qc-md3-02",
+   "qc-md3-03",
+   "qc-md3-04",
+   "qc-md3-05",
+   "qc-md3-06",
+   "qc-md3-07",
+   "qc-md3-08",
+   "qc-md3-09",
+   "qc-md3-10"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-md3-01",
+   "b-md3-02",
+   "b-md3-03",
+   "b-md3-04",
+   "b-md3-05",
+   "b-md3-06",
+   "b-md3-07",
+   "b-md3-08",
+   "b-md3-09",
+   "b-md3-10",
+   "b-md3-11",
+   "b-md3-12",
+   "b-md3-13",
+   "b-md3-14",
+   "b-md3-15"
+  ]
+ },
+ {
+  "id": "l-pm1",
+  "title": "PMの基礎",
+  "domain": "mgmtPm",
+  "estimatedMinutes": 9,
+  "summary": "QCDやステークホルダなどプロジェクト管理の基礎を押さえます。",
+  "sections": [
+   {
+    "heading": "プロジェクトとQCD",
+    "body": "プロジェクトは有期・独自の活動。品質(Q)・コスト(C)・納期(D)を両立させる管理が基本です。"
+   },
+   {
+    "heading": "体制とステークホルダ",
+    "body": "PMBOKの知識エリア、発注者・利用者・メンバーなど利害関係者（ステークホルダ）との調整、要員（体制図）の管理を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-pm-001",
+   "q-pm-004",
+   "q-pm-005",
+   "q-pm-010",
+   "d-pm-001",
+   "qc-pm1-01",
+   "qc-pm1-02",
+   "qc-pm1-03",
+   "qc-pm1-04",
+   "qc-pm1-05",
+   "qc-pm1-06",
+   "qc-pm1-07",
+   "qc-pm1-08",
+   "qc-pm1-09",
+   "qc-pm1-10"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-pm1-01",
+   "b-pm1-02",
+   "b-pm1-03",
+   "b-pm1-04",
+   "b-pm1-05",
+   "b-pm1-06",
+   "b-pm1-07",
+   "b-pm1-08",
+   "b-pm1-09",
+   "b-pm1-10",
+   "b-pm1-11",
+   "b-pm1-12",
+   "b-pm1-13",
+   "b-pm1-14",
+   "b-pm1-15"
+  ]
+ },
+ {
+  "id": "l-pm2",
+  "title": "スコープとスケジュール",
+  "domain": "mgmtPm",
+  "estimatedMinutes": 10,
+  "summary": "WBS・ガントチャート・クリティカルパスを学びます。",
+  "sections": [
+   {
+    "heading": "スコープ管理",
+    "body": "作業を階層分解するWBSで、やるべき作業を抜け漏れなく洗い出します。"
+   },
+   {
+    "heading": "スケジュール管理",
+    "body": "日程を横棒で示すガントチャート、作業順と日数を矢印で示すアローダイアグラム。最長経路がクリティカルパスです。"
+   }
+  ],
+  "quizIds": [
+   "q-pm-002",
+   "q-pm-003",
+   "q-pm-006",
+   "q-pm-007",
+   "d-pm-005",
+   "d-pm-008",
+   "d-pm-003",
+   "d-pm-004",
+   "d-pm-002",
+   "qc-pm2-01",
+   "qc-pm2-02",
+   "qc-pm2-03",
+   "qc-pm2-04",
+   "qc-pm2-05",
+   "qc-pm2-06"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-pm2-01",
+   "b-pm2-02",
+   "b-pm2-03",
+   "b-pm2-04",
+   "b-pm2-05",
+   "b-pm2-06",
+   "b-pm2-07",
+   "b-pm2-08",
+   "b-pm2-09",
+   "b-pm2-10",
+   "b-pm2-11",
+   "b-pm2-12",
+   "b-pm2-13",
+   "b-pm2-14",
+   "b-pm2-15"
+  ]
+ },
+ {
+  "id": "l-pm3",
+  "title": "コストとリスク",
+  "domain": "mgmtPm",
+  "estimatedMinutes": 9,
+  "summary": "EVMによるコスト管理とリスク対応の考え方を学びます。",
+  "sections": [
+   {
+    "heading": "コスト管理",
+    "body": "EVM（アーンドバリュー）で計画と実績を金額換算して進捗を管理します。"
+   },
+   {
+    "heading": "リスク管理",
+    "body": "リスクを洗い出し、回避・転嫁・軽減・受容のいずれで対応するかを決めます。定量的・定性的な分析も押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-pm-008",
+   "q-pm-009",
+   "d-pm-007",
+   "d-pm-006",
+   "qc-pm3-01",
+   "qc-pm3-02",
+   "qc-pm3-03",
+   "qc-pm3-04",
+   "qc-pm3-05",
+   "qc-pm3-06",
+   "qc-pm3-07",
+   "qc-pm3-08",
+   "qc-pm3-09",
+   "qc-pm3-10",
+   "qc-pm3-11"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-pm3-01",
+   "b-pm3-02",
+   "b-pm3-03",
+   "b-pm3-04",
+   "b-pm3-05",
+   "b-pm3-06",
+   "b-pm3-07",
+   "b-pm3-08",
+   "b-pm3-09",
+   "b-pm3-10",
+   "b-pm3-11",
+   "b-pm3-12",
+   "b-pm3-13",
+   "b-pm3-14",
+   "b-pm3-15"
+  ]
+ },
+ {
+  "id": "l-sv1",
+  "title": "サービスマネジメント",
+  "domain": "mgmtService",
+  "estimatedMinutes": 10,
+  "summary": "SLA・ITILとインシデント/問題/変更管理を学びます。",
+  "sections": [
+   {
+    "heading": "SLAとITIL",
+    "body": "品質水準を約束するSLA、それを維持・改善するSLM。運用の手本集がITIL。障害連絡の単一窓口がサービスデスクです。"
+   },
+   {
+    "heading": "運用のプロセス",
+    "body": "サービス復旧を急ぐインシデント管理、原因を根本解決する問題管理、変更を安全に行う変更管理を押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-sv-001",
+   "q-sv-002",
+   "q-sv-003",
+   "q-sv-005",
+   "q-sv-007",
+   "d-sv-004",
+   "d-sv-001",
+   "qc-sv1-01",
+   "qc-sv1-02",
+   "qc-sv1-03",
+   "qc-sv1-04",
+   "qc-sv1-05",
+   "qc-sv1-06",
+   "qc-sv1-07",
+   "qc-sv1-08"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sv1-01",
+   "b-sv1-02",
+   "b-sv1-03",
+   "b-sv1-04",
+   "b-sv1-05",
+   "b-sv1-06",
+   "b-sv1-07",
+   "b-sv1-08",
+   "b-sv1-09",
+   "b-sv1-10",
+   "b-sv1-11",
+   "b-sv1-12",
+   "b-sv1-13",
+   "b-sv1-14",
+   "b-sv1-15"
+  ]
+ },
+ {
+  "id": "l-sv2",
+  "title": "ファシリティと運用基盤",
+  "domain": "mgmtService",
+  "estimatedMinutes": 8,
+  "summary": "UPSなどファシリティマネジメントで安定運用を支えます。",
+  "sections": [
+   {
+    "heading": "ファシリティマネジメント",
+    "body": "データセンタなどIT設備の管理。停電に備えるUPS（無停電電源装置）や自家発電、免震・空調などを押さえます。"
+   },
+   {
+    "heading": "安定運用の工夫",
+    "body": "設備を守る仕組みで、システムを止めずに安定運用することの重要性を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-sv-006",
+   "d-sv-002",
+   "d-sv-006",
+   "qc-sv2-01",
+   "qc-sv2-02",
+   "qc-sv2-03",
+   "qc-sv2-04",
+   "qc-sv2-05",
+   "qc-sv2-06",
+   "qc-sv2-07",
+   "qc-sv2-08",
+   "qc-sv2-09",
+   "qc-sv2-10",
+   "qc-sv2-11",
+   "qc-sv2-12"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sv2-01",
+   "b-sv2-02",
+   "b-sv2-03",
+   "b-sv2-04",
+   "b-sv2-05",
+   "b-sv2-06",
+   "b-sv2-07",
+   "b-sv2-08",
+   "b-sv2-09",
+   "b-sv2-10",
+   "b-sv2-11",
+   "b-sv2-12",
+   "b-sv2-13",
+   "b-sv2-14",
+   "b-sv2-15"
+  ]
+ },
+ {
+  "id": "l-sv3",
+  "title": "システム監査と内部統制",
+  "domain": "mgmtService",
+  "estimatedMinutes": 9,
+  "summary": "システム監査の手順と内部統制の考え方を学びます。",
+  "sections": [
+   {
+    "heading": "システム監査",
+    "body": "独立・客観的な立場でシステムを点検するのがシステム監査。監査計画→実施→報告→フォローアップの流れと、監査証跡を押さえます。"
+   },
+   {
+    "heading": "内部統制",
+    "body": "業務の適正を保つ内部統制、職務分掌、ITガバナンスの考え方も重要です。"
+   }
+  ],
+  "quizIds": [
+   "q-sv-004",
+   "q-sv-008",
+   "d-sv-005",
+   "d-sv-003",
+   "qc-sv3-01",
+   "qc-sv3-02",
+   "qc-sv3-03",
+   "qc-sv3-04",
+   "qc-sv3-05",
+   "qc-sv3-06",
+   "qc-sv3-07",
+   "qc-sv3-08",
+   "qc-sv3-09",
+   "qc-sv3-10",
+   "qc-sv3-11"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-sv3-01",
+   "b-sv3-02",
+   "b-sv3-03",
+   "b-sv3-04",
+   "b-sv3-05",
+   "b-sv3-06",
+   "b-sv3-07",
+   "b-sv3-08",
+   "b-sv3-09",
+   "b-sv3-10",
+   "b-sv3-11",
+   "b-sv3-12",
+   "b-sv3-13",
+   "b-sv3-14",
+   "b-sv3-15"
+  ]
+ },
+ {
+  "id": "l-tb1",
+  "title": "数と論理",
+  "domain": "techBase",
+  "estimatedMinutes": 11,
+  "summary": "2進数・16進数の変換、論理演算、文字コードを学びます。",
+  "sections": [
+   {
+    "heading": "数の表現",
+    "body": "コンピュータは0と1の2進数を使います。桁の重み(1,2,4,8…)で10進数へ変換。16進数、補数による負数表現、シフト演算も押さえます。"
+   },
+   {
+    "heading": "論理演算と文字",
+    "body": "AND(両方1で1)・OR(どちらか1で1)・XOR(異なると1)。文字コード（ASCII・Unicode・シフトJIS）や文字化けの仕組みも学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-tb-001",
+   "q-tb-002",
+   "q-tb-007",
+   "q-tb-008",
+   "q-tb-009",
+   "q-tb-010",
+   "q-tb-011",
+   "q-tb-012",
+   "q-tb-013",
+   "q-tb-014",
+   "d-tb-007",
+   "d-tb-002",
+   "d-tb-010",
+   "d-tb-001",
+   "qc-tb1-01"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-tb1-01",
+   "b-tb1-02",
+   "b-tb1-03",
+   "b-tb1-04",
+   "b-tb1-05",
+   "b-tb1-06",
+   "b-tb1-07",
+   "b-tb1-08",
+   "b-tb1-09",
+   "b-tb1-10",
+   "b-tb1-11",
+   "b-tb1-12",
+   "b-tb1-13",
+   "b-tb1-14",
+   "b-tb1-15"
+  ]
+ },
+ {
+  "id": "l-tb2",
+  "title": "アルゴリズムとデータ構造",
+  "domain": "techBase",
+  "estimatedMinutes": 11,
+  "summary": "探索・整列アルゴリズムとスタック・キューなどのデータ構造を学びます。",
+  "sections": [
+   {
+    "heading": "アルゴリズム",
+    "body": "先頭から探す線形探索、半分ずつ絞る2分探索、バブルソートやクイックソートなどの整列。流れ図・擬似言語で表します。"
+   },
+   {
+    "heading": "データ構造と言語",
+    "body": "後入れ先出しのスタック、先入れ先出しのキュー、木構造。コンパイラとインタプリタ、API・ライブラリなどプログラミングの基礎も押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-tb-003",
+   "q-tb-004",
+   "q-tb-015",
+   "q-tb-016",
+   "q-tb-017",
+   "q-tb-018",
+   "q-tb-019",
+   "d-tb-009",
+   "d-tb-004",
+   "d-tb-008",
+   "d-tb-006",
+   "d-tb-005",
+   "d-tb-003",
+   "qc-tb2-01",
+   "qc-tb2-02"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-tb2-01",
+   "b-tb2-02",
+   "b-tb2-03",
+   "b-tb2-04",
+   "b-tb2-05",
+   "b-tb2-06",
+   "b-tb2-07",
+   "b-tb2-08",
+   "b-tb2-09",
+   "b-tb2-10",
+   "b-tb2-11",
+   "b-tb2-12",
+   "b-tb2-13",
+   "b-tb2-14",
+   "b-tb2-15"
+  ]
+ },
+ {
+  "id": "l-tb3",
+  "title": "確率統計とAI",
+  "domain": "techBase",
+  "estimatedMinutes": 9,
+  "summary": "確率・統計の基本と、機械学習などAIの基礎を学びます。",
+  "sections": [
+   {
+    "heading": "確率・統計",
+    "body": "該当数÷全体数で確率を求め、期待値や順列・組合せ、平均・分散などの基本を押さえます。"
+   },
+   {
+    "heading": "AIの基礎",
+    "body": "データから規則性を学ぶ機械学習（教師あり・なし・強化学習）、層を深くしたディープラーニング、生成AIは近年の頻出テーマです。"
+   }
+  ],
+  "quizIds": [
+   "q-tb-005",
+   "q-tb-006",
+   "q-tb-020",
+   "qc-tb3-01",
+   "qc-tb3-02",
+   "qc-tb3-03",
+   "qc-tb3-04",
+   "qc-tb3-05",
+   "qc-tb3-06",
+   "qc-tb3-07",
+   "qc-tb3-08",
+   "qc-tb3-09",
+   "qc-tb3-10",
+   "qc-tb3-11",
+   "qc-tb3-12"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-tb3-01",
+   "b-tb3-02",
+   "b-tb3-03",
+   "b-tb3-04",
+   "b-tb3-05",
+   "b-tb3-06",
+   "b-tb3-07",
+   "b-tb3-08",
+   "b-tb3-09",
+   "b-tb3-10",
+   "b-tb3-11",
+   "b-tb3-12",
+   "b-tb3-13",
+   "b-tb3-14",
+   "b-tb3-15"
+  ]
+ },
+ {
+  "id": "l-cs1",
+  "title": "ハードウェアとメモリ",
+  "domain": "techSystem",
+  "estimatedMinutes": 10,
+  "summary": "CPU・メモリ・記憶階層と入出力インタフェースを理解します。",
+  "sections": [
+   {
+    "heading": "ハードウェア",
+    "body": "演算・制御の中枢がCPU（クロックが高いほど高速、コア数も性能に影響）。GPUは並列演算を担います。"
+   },
+   {
+    "heading": "メモリと記憶階層",
+    "body": "揮発性のRAM、不揮発性のROM、速度差を埋めるキャッシュメモリ。補助記憶のHDD/SSD、USBなどのインタフェースも押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-cs-001",
+   "q-cs-002",
+   "q-cs-003",
+   "q-cs-006",
+   "q-cs-007",
+   "q-cs-008",
+   "q-cs-009",
+   "q-cs-010",
+   "q-cs-011",
+   "q-cs-012",
+   "d-cs-007",
+   "d-cs-001",
+   "d-cs-004",
+   "qc-cs1-01",
+   "qc-cs1-02"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-cs1-01",
+   "b-cs1-02",
+   "b-cs1-03",
+   "b-cs1-04",
+   "b-cs1-05",
+   "b-cs1-06",
+   "b-cs1-07",
+   "b-cs1-08",
+   "b-cs1-09",
+   "b-cs1-10",
+   "b-cs1-11",
+   "b-cs1-12",
+   "b-cs1-13",
+   "b-cs1-14",
+   "b-cs1-15"
+  ]
+ },
+ {
+  "id": "l-cs2",
+  "title": "ソフトウェアとシステム構成",
+  "domain": "techSystem",
+  "estimatedMinutes": 10,
+  "summary": "OS・OSSとシステム構成、バックアップ方式を学びます。",
+  "sections": [
+   {
+    "heading": "ソフトウェア",
+    "body": "ハードを管理するOS（タスク管理・仮想記憶）、自由に使えるOSS（Linux等）。バックアップのフル・差分・増分の違いも重要です。"
+   },
+   {
+    "heading": "システム構成",
+    "body": "クライアントサーバ、シンクライアント、仮想化、クラスタなど。冗長化（デュアル・デュプレックス）で可用性を高めます。"
+   }
+  ],
+  "quizIds": [
+   "q-cs-005",
+   "q-cs-013",
+   "q-cs-014",
+   "q-cs-020",
+   "d-cs-005",
+   "d-cs-002",
+   "d-cs-010",
+   "d-cs-008",
+   "d-cs-009",
+   "qc-cs2-01",
+   "qc-cs2-02",
+   "qc-cs2-03",
+   "qc-cs2-04",
+   "qc-cs2-05",
+   "qc-cs2-06"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-cs2-01",
+   "b-cs2-02",
+   "b-cs2-03",
+   "b-cs2-04",
+   "b-cs2-05",
+   "b-cs2-06",
+   "b-cs2-07",
+   "b-cs2-08",
+   "b-cs2-09",
+   "b-cs2-10",
+   "b-cs2-11",
+   "b-cs2-12",
+   "b-cs2-13",
+   "b-cs2-14",
+   "b-cs2-15"
+  ]
+ },
+ {
+  "id": "l-cs3",
+  "title": "システムの信頼性",
+  "domain": "techSystem",
+  "estimatedMinutes": 9,
+  "summary": "稼働率の計算と、故障に備える信頼性設計を学びます。",
+  "sections": [
+   {
+    "heading": "信頼性の指標",
+    "body": "信頼性はRASIS。稼働率＝MTBF÷(MTBF+MTTR)で、故障しにくく・早く直すほど高くなります。直列・並列システムの稼働率計算も頻出です。"
+   },
+   {
+    "heading": "信頼性設計",
+    "body": "フェールセーフ・フェールソフト・フォールトトレラント・フールプルーフなど、故障に備える設計の考え方を押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q-cs-004",
+   "q-cs-015",
+   "q-cs-016",
+   "q-cs-017",
+   "q-cs-018",
+   "q-cs-019",
+   "d-cs-003",
+   "d-cs-006",
+   "qc-cs3-01",
+   "qc-cs3-02",
+   "qc-cs3-03",
+   "qc-cs3-04",
+   "qc-cs3-05",
+   "qc-cs3-06",
+   "qc-cs3-07"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-cs3-01",
+   "b-cs3-02",
+   "b-cs3-03",
+   "b-cs3-04",
+   "b-cs3-05",
+   "b-cs3-06",
+   "b-cs3-07",
+   "b-cs3-08",
+   "b-cs3-09",
+   "b-cs3-10",
+   "b-cs3-11",
+   "b-cs3-12",
+   "b-cs3-13",
+   "b-cs3-14",
+   "b-cs3-15"
+  ]
+ },
+ {
+  "id": "l-te1",
+  "title": "情報セキュリティと脅威",
+  "domain": "techElement",
+  "estimatedMinutes": 12,
+  "summary": "情報セキュリティの3要素CIAと、代表的な脅威・攻撃を学びます。",
+  "sections": [
+   {
+    "heading": "情報セキュリティの基礎",
+    "body": "守るべき3要素は機密性・完全性・可用性（CIA）。リスクマネジメント（リスクアセスメント・対応）やISMSも押さえます。"
+   },
+   {
+    "heading": "脅威と攻撃",
+    "body": "マルウェア（ランサム・ワーム・トロイの木馬）、フィッシング、標的型攻撃、DoS/DDoS、SQLインジェクション、ソーシャルエンジニアリングなどの手口を学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-te-001",
+   "q-te-004",
+   "q-te-005",
+   "q-te-019",
+   "q-te-020",
+   "q-te-021",
+   "q-te-022",
+   "q-te-023",
+   "q-te-024",
+   "q-te-025",
+   "q-te-027",
+   "q-te-028",
+   "d-te-005",
+   "d-te-009",
+   "d-te-004"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [
+   "d-te-001",
+   "d-te-002",
+   "d-te-003",
+   "d-te-006",
+   "d-te-007",
+   "d-te-008"
+  ],
+  "basicQuizIds": [
+   "b-te1-01",
+   "b-te1-02",
+   "b-te1-03",
+   "b-te1-04",
+   "b-te1-05",
+   "b-te1-06",
+   "b-te1-07",
+   "b-te1-08",
+   "b-te1-09",
+   "b-te1-10",
+   "b-te1-11",
+   "b-te1-12",
+   "b-te1-13",
+   "b-te1-14",
+   "b-te1-15"
+  ]
+ },
+ {
+  "id": "l-te2",
+  "title": "暗号と認証",
+  "domain": "techElement",
+  "estimatedMinutes": 11,
+  "summary": "共通鍵・公開鍵暗号と、多要素認証などの認証を学びます。",
+  "sections": [
+   {
+    "heading": "暗号技術",
+    "body": "同じ鍵の共通鍵暗号、公開鍵と秘密鍵のペアを使う公開鍵暗号（相手の公開鍵で暗号化）。ハッシュ関数やディジタル署名、認証局（PKI）も押さえます。"
+   },
+   {
+    "heading": "認証",
+    "body": "多要素認証、ワンタイムパスワード、生体認証、シングルサインオンなど、本人確認を強くする仕組みを学びます。"
+   }
+  ],
+  "quizIds": [
+   "q-te-002",
+   "q-te-003",
+   "q-te-006",
+   "q-te-026",
+   "qc-te2-01",
+   "qc-te2-02",
+   "qc-te2-03",
+   "qc-te2-04",
+   "qc-te2-05",
+   "qc-te2-06",
+   "qc-te2-07",
+   "qc-te2-08",
+   "qc-te2-09",
+   "qc-te2-10",
+   "qc-te2-11"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-te2-01",
+   "b-te2-02",
+   "b-te2-03",
+   "b-te2-04",
+   "b-te2-05",
+   "b-te2-06",
+   "b-te2-07",
+   "b-te2-08",
+   "b-te2-09",
+   "b-te2-10",
+   "b-te2-11",
+   "b-te2-12",
+   "b-te2-13",
+   "b-te2-14",
+   "b-te2-15"
+  ]
+ },
+ {
+  "id": "l-te3",
+  "title": "データベースとネットワーク",
+  "domain": "techElement",
+  "estimatedMinutes": 12,
+  "summary": "データベースの正規化・SQLと、ネットワークの基礎を学びます。",
+  "sections": [
+   {
+    "heading": "データベース",
+    "body": "行を一意に識別する主キー、表を関連付ける外部キー。重複を避ける正規化、SQLでの操作、トランザクションのACID特性を押さえます。"
+   },
+   {
+    "heading": "ネットワーク",
+    "body": "インターネットの共通ルールがTCP/IP。ドメイン名をIPに変換するDNS、IPを自動割当てするDHCP、HTTP/SMTPなどのプロトコルやIPアドレスを理解します。"
+   }
+  ],
+  "quizIds": [
+   "q-te-007",
+   "q-te-008",
+   "q-te-009",
+   "q-te-010",
+   "q-te-011",
+   "q-te-012",
+   "q-te-013",
+   "q-te-014",
+   "q-te-015",
+   "q-te-016",
+   "q-te-017",
+   "q-te-018",
+   "d-te-012",
+   "d-te-011",
+   "d-te-010"
+  ],
+  "challengeQuizIds": null,
+  "drillQuizIds": [],
+  "basicQuizIds": [
+   "b-te3-01",
+   "b-te3-02",
+   "b-te3-03",
+   "b-te3-04",
+   "b-te3-05",
+   "b-te3-06",
+   "b-te3-07",
+   "b-te3-08",
+   "b-te3-09",
+   "b-te3-10",
+   "b-te3-11",
+   "b-te3-12",
+   "b-te3-13",
+   "b-te3-14",
+   "b-te3-15"
+  ]
+ }
+]

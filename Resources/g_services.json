@@ -1,0 +1,142 @@
+[
+ {
+  "id": "s-perceptron",
+  "name": "パーセプトロン",
+  "category": "基礎",
+  "oneLiner": "ニューラルネットの最小単位。単純では線形分離のみ。",
+  "domain": "dlBasic"
+ },
+ {
+  "id": "s-relu",
+  "name": "ReLU",
+  "category": "活性化関数",
+  "oneLiner": "負を0、正はそのまま。勾配消失を抑える主流の活性化関数。",
+  "domain": "dlBasic"
+ },
+ {
+  "id": "s-adam",
+  "name": "Adam",
+  "category": "最適化",
+  "oneLiner": "モーメンタムとRMSpropを組み合わせた定番の最適化手法。",
+  "domain": "dlBasic"
+ },
+ {
+  "id": "s-svm",
+  "name": "SVM（サポートベクターマシン）",
+  "category": "機械学習",
+  "oneLiner": "マージン最大化で分類する教師あり学習の手法。",
+  "domain": "ml"
+ },
+ {
+  "id": "s-kmeans",
+  "name": "k-means",
+  "category": "機械学習",
+  "oneLiner": "データをk個のクラスタに分ける教師なし学習の代表。",
+  "domain": "ml"
+ },
+ {
+  "id": "s-pca",
+  "name": "主成分分析(PCA)",
+  "category": "機械学習",
+  "oneLiner": "データの次元を情報を保ちつつ圧縮する手法。",
+  "domain": "ml"
+ },
+ {
+  "id": "s-cnn",
+  "name": "CNN",
+  "category": "DL要素技術",
+  "oneLiner": "畳み込みとプーリングで画像特徴を抽出するネットワーク。",
+  "domain": "dlTech"
+ },
+ {
+  "id": "s-resnet",
+  "name": "ResNet",
+  "category": "画像認識",
+  "oneLiner": "スキップ結合で超深層の学習を可能にした画像認識モデル。",
+  "domain": "dlTech"
+ },
+ {
+  "id": "s-lstm",
+  "name": "LSTM",
+  "category": "DL要素技術",
+  "oneLiner": "ゲート機構で長期依存を扱えるRNNの改良版。",
+  "domain": "dlTech"
+ },
+ {
+  "id": "s-transformer",
+  "name": "Transformer",
+  "category": "DL要素技術",
+  "oneLiner": "自己注意機構だけで系列を扱う。BERT・GPTの基盤。",
+  "domain": "dlTech"
+ },
+ {
+  "id": "s-alexnet",
+  "name": "AlexNet",
+  "category": "画像認識",
+  "oneLiner": "2012年ILSVRC優勝。ディープラーニング躍進の契機。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-yolo",
+  "name": "YOLO",
+  "category": "物体検出",
+  "oneLiner": "画像を一度見て物体位置と種類を高速に検出。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-bert",
+  "name": "BERT",
+  "category": "自然言語処理",
+  "oneLiner": "双方向Transformerで文脈を理解する言語モデル。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-gpt",
+  "name": "GPT",
+  "category": "自然言語処理",
+  "oneLiner": "生成寄りの大規模言語モデル。ChatGPTの基盤。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-word2vec",
+  "name": "word2vec",
+  "category": "自然言語処理",
+  "oneLiner": "単語を意味を反映したベクトルに変換する手法。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-gan",
+  "name": "GAN",
+  "category": "生成モデル",
+  "oneLiner": "生成器と識別器を競わせて本物らしいデータを生成。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-diffusion",
+  "name": "拡散モデル",
+  "category": "生成モデル",
+  "oneLiner": "ノイズ除去を学習して画像などを生成する主流手法。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-dqn",
+  "name": "DQN",
+  "category": "深層強化学習",
+  "oneLiner": "強化学習に深層学習を用い、Atariで人間超えを達成。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-alphago",
+  "name": "AlphaGo",
+  "category": "深層強化学習",
+  "oneLiner": "深層強化学習と探索で囲碁のトップ棋士を破ったAI。",
+  "domain": "dlApp"
+ },
+ {
+  "id": "s-gradcam",
+  "name": "Grad-CAM",
+  "category": "XAI",
+  "oneLiner": "CNNが画像のどこに注目したかを可視化する説明手法。",
+  "domain": "dlApp"
+ }
+]

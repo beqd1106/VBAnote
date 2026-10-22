@@ -8,7 +8,7 @@
 **足りないグループだけ** 作って追記保存する（既存の問題と論点を重複させない）。
 
 ## 出力ファイル
-指定されたパス（例 `C:/Users/user/Downloads/FEnote/design/src/l-th1.json`）に、UTF-8のJSONで保存。
+指定されたパス（例 `C:/Users/user/Desktop/note系アプリ/FEnote/design/src/l-th1.json`）に、UTF-8のJSONで保存。
 
 ```json
 {
@@ -94,4 +94,4 @@
 
 ## 作業用ファイル
 チェック用スクリプトなど一時ファイルを作るときは、他のエージェントと並行作業しているため、
-必ず C:/Users/user/Downloads/note_factory/tmp/ に置き、ファイル名に自分の lessonId（例 l-th1）を含める。他人のファイルは触らない。
+必ず C:/Users/user/Desktop/note系アプリ/note_factory/tmp/ に置き、ファイル名に自分の lessonId（例 l-th1）を含める。他人のファイルは触らない。

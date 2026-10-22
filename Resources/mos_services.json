@@ -1,0 +1,254 @@
+[
+ {
+  "id": "s-001",
+  "name": "Ctrl+T",
+  "category": "ショートカット",
+  "oneLiner": "セル範囲からテーブルを作る",
+  "domain": "xlTable"
+ },
+ {
+  "id": "s-002",
+  "name": "Ctrl+G",
+  "category": "ショートカット",
+  "oneLiner": "［ジャンプ］ダイアログを開く",
+  "domain": "xlBook"
+ },
+ {
+  "id": "s-003",
+  "name": "F4キー",
+  "category": "ショートカット",
+  "oneLiner": "参照形式を切り替える。繰り返しにも使う",
+  "domain": "xlFormula"
+ },
+ {
+  "id": "s-004",
+  "name": "背景の削除",
+  "category": "参考資料・図",
+  "oneLiner": "画像の背景を取り除く。［図の形式］タブ",
+  "domain": "wdGraphic"
+ },
+ {
+  "id": "s-005",
+  "name": "Ctrl+Home",
+  "category": "ショートカット",
+  "oneLiner": "文書の先頭、またはA1セルへ移動",
+  "domain": "wdDoc"
+ },
+ {
+  "id": "s-006",
+  "name": "Ctrl+Shift+E",
+  "category": "ショートカット",
+  "oneLiner": "変更履歴の記録をオン/オフ",
+  "domain": "wdCollab"
+ },
+ {
+  "id": "s-007",
+  "name": "名前ボックス",
+  "category": "画面・機能",
+  "oneLiner": "セル範囲に名前を付ける入力欄",
+  "domain": "xlCell"
+ },
+ {
+  "id": "s-008",
+  "name": "印刷タイトル",
+  "category": "画面・機能",
+  "oneLiner": "各ページに繰り返す見出しを指定",
+  "domain": "xlBook"
+ },
+ {
+  "id": "s-009",
+  "name": "ナビゲーションウィンドウ",
+  "category": "画面・機能",
+  "oneLiner": "見出しや検索結果を一覧で表示",
+  "domain": "wdDoc"
+ },
+ {
+  "id": "s-010",
+  "name": "書式設定作業ウィンドウ",
+  "category": "画面・機能",
+  "oneLiner": "グラフ要素の詳細な書式を設定する",
+  "domain": "xlChart"
+ },
+ {
+  "id": "s-011",
+  "name": "スタイル",
+  "category": "画面・機能",
+  "oneLiner": "書式のセットを登録して一括適用",
+  "domain": "wdText"
+ },
+ {
+  "id": "s-012",
+  "name": "SUM",
+  "category": "関数",
+  "oneLiner": "合計を求める基本の関数",
+  "domain": "xlFormula"
+ },
+ {
+  "id": "s-013",
+  "name": "文末脚注",
+  "category": "参考資料・図",
+  "oneLiner": "文書の最後に補足説明をまとめて表示",
+  "domain": "wdRef"
+ },
+ {
+  "id": "s-014",
+  "name": "IF",
+  "category": "関数",
+  "oneLiner": "条件に応じて結果を切り替える",
+  "domain": "xlFormula"
+ },
+ {
+  "id": "s-015",
+  "name": "TEXTJOIN",
+  "category": "関数",
+  "oneLiner": "区切り文字付きで文字列を連結する",
+  "domain": "xlFormula"
+ },
+ {
+  "id": "s-016",
+  "name": "SUBTOTAL",
+  "category": "関数",
+  "oneLiner": "表示行のみを集計する。集計行で使用",
+  "domain": "xlTable"
+ },
+ {
+  "id": "s-017",
+  "name": "集計行",
+  "category": "表・テーブル",
+  "oneLiner": "テーブルの最下行に集計欄を表示",
+  "domain": "xlTable"
+ },
+ {
+  "id": "s-018",
+  "name": "構造化参照",
+  "category": "表・テーブル",
+  "oneLiner": "テーブル名[列名]で範囲を参照する",
+  "domain": "xlTable"
+ },
+ {
+  "id": "s-019",
+  "name": "ドキュメント検査",
+  "category": "画面・機能",
+  "oneLiner": "配布前に隠れた情報を検査して削除",
+  "domain": "xlBook"
+ },
+ {
+  "id": "s-020",
+  "name": "条件付き書式",
+  "category": "書式・視覚化",
+  "oneLiner": "条件に合うセルの見た目を自動変更",
+  "domain": "xlCell"
+ },
+ {
+  "id": "s-021",
+  "name": "スパークライン",
+  "category": "書式・視覚化",
+  "oneLiner": "セル内に小さなグラフを表示する",
+  "domain": "xlCell"
+ },
+ {
+  "id": "s-022",
+  "name": "組み合わせグラフ",
+  "category": "書式・視覚化",
+  "oneLiner": "棒と折れ線など複数種類を1つに重ねる",
+  "domain": "xlChart"
+ },
+ {
+  "id": "s-023",
+  "name": "データラベル",
+  "category": "書式・視覚化",
+  "oneLiner": "グラフ要素に値を表示する",
+  "domain": "xlChart"
+ },
+ {
+  "id": "s-024",
+  "name": "クイックレイアウト",
+  "category": "書式・視覚化",
+  "oneLiner": "グラフ要素の配置を一括で変更",
+  "domain": "xlChart"
+ },
+ {
+  "id": "s-025",
+  "name": "セクション区切り",
+  "category": "文書構成",
+  "oneLiner": "ページ設定を分けるための区切り",
+  "domain": "wdText"
+ },
+ {
+  "id": "s-026",
+  "name": "段組み",
+  "category": "文書構成",
+  "oneLiner": "本文を複数の段に分けて配置する",
+  "domain": "wdText"
+ },
+ {
+  "id": "s-027",
+  "name": "ヘッダーとフッター",
+  "category": "文書構成",
+  "oneLiner": "各ページの上下に共通の情報を表示",
+  "domain": "wdDoc"
+ },
+ {
+  "id": "s-028",
+  "name": "文字列を表に変換",
+  "category": "表・テーブル",
+  "oneLiner": "区切られた文字列を表の形にする",
+  "domain": "wdTable"
+ },
+ {
+  "id": "s-029",
+  "name": "タイトル行の繰り返し",
+  "category": "表・テーブル",
+  "oneLiner": "見出し行を各ページの先頭に表示",
+  "domain": "wdTable"
+ },
+ {
+  "id": "s-030",
+  "name": "段落番号",
+  "category": "表・テーブル",
+  "oneLiner": "段落の先頭に連続した番号を付ける",
+  "domain": "wdTable"
+ },
+ {
+  "id": "s-031",
+  "name": "脚注",
+  "category": "参考資料・図",
+  "oneLiner": "ページ下部に補足説明を表示する",
+  "domain": "wdRef"
+ },
+ {
+  "id": "s-032",
+  "name": "目次",
+  "category": "参考資料・図",
+  "oneLiner": "見出しから目次を自動作成する",
+  "domain": "wdRef"
+ },
+ {
+  "id": "s-033",
+  "name": "SmartArt",
+  "category": "参考資料・図",
+  "oneLiner": "情報を図解にして表現する",
+  "domain": "wdGraphic"
+ },
+ {
+  "id": "s-034",
+  "name": "文字列の折り返し",
+  "category": "参考資料・図",
+  "oneLiner": "図と文章の位置関係を設定する",
+  "domain": "wdGraphic"
+ },
+ {
+  "id": "s-035",
+  "name": "変更履歴の記録",
+  "category": "校閲・共同作業",
+  "oneLiner": "編集内容を記録して残す",
+  "domain": "wdCollab"
+ },
+ {
+  "id": "s-036",
+  "name": "コメント",
+  "category": "校閲・共同作業",
+  "oneLiner": "本文とは別に意見やメモを付ける",
+  "domain": "wdCollab"
+ }
+]

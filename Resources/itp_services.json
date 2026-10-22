@@ -1,0 +1,170 @@
+[
+ {
+  "id": "s-pdca",
+  "name": "PDCA",
+  "category": "経営管理",
+  "oneLiner": "計画・実行・評価・改善を繰り返す管理サイクル。",
+  "domain": "strategyCorp"
+ },
+ {
+  "id": "s-roi",
+  "name": "ROI",
+  "category": "会計",
+  "oneLiner": "投資額に対する利益の割合。投資対効果の指標。",
+  "domain": "strategyCorp"
+ },
+ {
+  "id": "s-crm",
+  "name": "CRM",
+  "category": "経営・マーケ",
+  "oneLiner": "顧客関係管理。顧客情報を活かし関係を深める仕組み。",
+  "domain": "strategyBiz"
+ },
+ {
+  "id": "s-swot",
+  "name": "SWOT",
+  "category": "経営戦略",
+  "oneLiner": "強み・弱み・機会・脅威で自社を分析する手法。",
+  "domain": "strategyBiz"
+ },
+ {
+  "id": "s-iot",
+  "name": "IoT",
+  "category": "ビジネス",
+  "oneLiner": "あらゆるモノをインターネットにつなぐ仕組み。",
+  "domain": "strategyBiz"
+ },
+ {
+  "id": "s-erp",
+  "name": "ERP",
+  "category": "ソリューション",
+  "oneLiner": "会計・人事など基幹業務を統合管理する仕組み。",
+  "domain": "strategySys"
+ },
+ {
+  "id": "s-saas",
+  "name": "SaaS",
+  "category": "クラウド",
+  "oneLiner": "ソフトをネット経由でサービスとして使う形態。",
+  "domain": "strategySys"
+ },
+ {
+  "id": "s-rfp",
+  "name": "RFP",
+  "category": "調達",
+  "oneLiner": "要件を示して業者に提案を求める依頼書。",
+  "domain": "strategySys"
+ },
+ {
+  "id": "s-devops",
+  "name": "DevOps",
+  "category": "開発",
+  "oneLiner": "開発と運用が連携し迅速に改善を回す考え方。",
+  "domain": "mgmtDev"
+ },
+ {
+  "id": "s-scrum",
+  "name": "スクラム",
+  "category": "開発",
+  "oneLiner": "短い反復で進めるアジャイル開発の代表的手法。",
+  "domain": "mgmtDev"
+ },
+ {
+  "id": "s-wbs",
+  "name": "WBS",
+  "category": "PM",
+  "oneLiner": "作業を階層的に分解して洗い出す構成図。",
+  "domain": "mgmtPm"
+ },
+ {
+  "id": "s-qcd",
+  "name": "QCD",
+  "category": "PM",
+  "oneLiner": "品質・コスト・納期。プロジェクトの管理指標。",
+  "domain": "mgmtPm"
+ },
+ {
+  "id": "s-sla",
+  "name": "SLA",
+  "category": "サービス管理",
+  "oneLiner": "サービス品質の水準を合意した文書。",
+  "domain": "mgmtService"
+ },
+ {
+  "id": "s-itil",
+  "name": "ITIL",
+  "category": "サービス管理",
+  "oneLiner": "IT運用の成功事例をまとめたフレームワーク。",
+  "domain": "mgmtService"
+ },
+ {
+  "id": "s-cpu",
+  "name": "CPU",
+  "category": "ハードウェア",
+  "oneLiner": "演算・制御を担うコンピュータの中枢装置。",
+  "domain": "techSystem"
+ },
+ {
+  "id": "s-ram",
+  "name": "RAM",
+  "category": "ハードウェア",
+  "oneLiner": "電源を切ると消える揮発性の主記憶メモリ。",
+  "domain": "techSystem"
+ },
+ {
+  "id": "s-oss",
+  "name": "OSS",
+  "category": "ソフトウェア",
+  "oneLiner": "ソースが公開され自由に使えるソフトウェア。",
+  "domain": "techSystem"
+ },
+ {
+  "id": "s-ai",
+  "name": "機械学習",
+  "category": "基礎理論",
+  "oneLiner": "データから規則性を学ぶAIの中心技術。",
+  "domain": "techBase"
+ },
+ {
+  "id": "s-cia",
+  "name": "CIA",
+  "category": "セキュリティ",
+  "oneLiner": "機密性・完全性・可用性の情報セキュリティ3要素。",
+  "domain": "techElement"
+ },
+ {
+  "id": "s-pki",
+  "name": "公開鍵暗号",
+  "category": "セキュリティ",
+  "oneLiner": "公開鍵と秘密鍵のペアを使う暗号方式。",
+  "domain": "techElement"
+ },
+ {
+  "id": "s-sql",
+  "name": "SQL",
+  "category": "データベース",
+  "oneLiner": "関係データベースを操作するための言語。",
+  "domain": "techElement"
+ },
+ {
+  "id": "s-tcpip",
+  "name": "TCP/IP",
+  "category": "ネットワーク",
+  "oneLiner": "インターネットの標準通信プロトコル群。",
+  "domain": "techElement"
+ },
+ {
+  "id": "s-dns",
+  "name": "DNS",
+  "category": "ネットワーク",
+  "oneLiner": "ドメイン名とIPアドレスを変換する仕組み。",
+  "domain": "techElement"
+ },
+ {
+  "id": "s-vpn",
+  "name": "VPN",
+  "category": "ネットワーク",
+  "oneLiner": "公衆回線に仮想の専用線を作り安全に通信する技術。",
+  "domain": "techElement"
+ }
+]

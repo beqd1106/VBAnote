@@ -3,7 +3,12 @@ import Foundation
 /// バンドル内JSONから学習コンテンツを読み込み、メモリにキャッシュする。
 /// オフラインで完全に動作する（ネットワーク不要）。
 final class ContentRepository {
-    static let shared = ContentRepository()
+    /// 現在学習中の資格のコンテンツ。資格を切り替えたら reload() で読み直す。
+    private(set) static var shared = ContentRepository(examKey: ExamContext.current.key)
+
+    static func reload() {
+        shared = ContentRepository(examKey: ExamContext.current.key)
+    }
 
     let questions: [QuizQuestion]
     let terms: [TermCard]
@@ -18,13 +23,14 @@ final class ContentRepository {
     /// 分野ごとの (レッスン, キーワード集合)。未割当の問題を関連レッスンへ寄せる用。
     private let lessonKeywordsByDomain: [ExamDomain: [(lesson: Lesson, keywords: Set<String>)]]
 
-    private init() {
-        self.questions = Self.load("questions", as: [QuizQuestion].self)
-        self.terms     = Self.load("terms", as: [TermCard].self)
-        self.lessons   = Self.load("lessons", as: [Lesson].self)
-        self.services  = Self.load("services", as: [GenAIToolItem].self)
+    /// リソースは資格ごとに <key>_questions.json のように接頭辞付きでバンドルされている
+    private init(examKey: String) {
+        self.questions = Self.load("\(examKey)_questions", as: [QuizQuestion].self)
+        self.terms     = Self.load("\(examKey)_terms", as: [TermCard].self)
+        self.lessons   = Self.load("\(examKey)_lessons", as: [Lesson].self)
+        self.services  = Self.load("\(examKey)_services", as: [GenAIToolItem].self)
         // glossary.json が無い環境でも落ちないよう任意ロード
-        let g = Self.loadOptional("glossary", as: [GlossaryEntry].self) ?? []
+        let g = Self.loadOptional("\(examKey)_glossary", as: [GlossaryEntry].self) ?? []
         self.glossary  = g.sorted { $0.term.count > $1.term.count }
         let byId = Dictionary(uniqueKeysWithValues: questions.map { ($0.id, $0) })
         self.questionsById = byId
@@ -34,7 +40,8 @@ final class ContentRepository {
         var kwByDomain: [ExamDomain: [(lesson: Lesson, keywords: Set<String>)]] = [:]
         for lesson in lessons {
             var kw = Set<String>()
-            for qid in (lesson.basicQuizIds ?? []) + lesson.quizIds {
+            // 確認問題だけでなくランダム問題も対象にする（問題→解説レッスンのリンクとキーワードを痩せさせない）
+            for qid in (lesson.basicQuizIds ?? []) + lesson.quizIds + (lesson.drillQuizIds ?? []) {
                 qToLesson[qid] = lesson
                 if let q = byId[qid] {
                     kw.insert(Self.normKeyword(q.service))
@@ -58,7 +65,7 @@ final class ContentRepository {
     func question(id: String) -> QuizQuestion? { questionsById[id] }
 
     /// 指定した問題に最も関連する解説レッスンを返す（問題→レッスンの相互リンク用）。
-    /// ①その問題を確認問題に含むレッスン → ②同分野でタグ/サービスが最も重なるレッスン → ③同分野の先頭。
+    /// ①その問題を確認問題・ランダム問題に含むレッスン → ②同分野でタグ/サービスが最も重なるレッスン → ③同分野の先頭。
     func lesson(forQuestion q: QuizQuestion) -> Lesson? {
         if let l = lessonByQuestionId[q.id] { return l }
         let candidates = lessonKeywordsByDomain[q.domain] ?? []

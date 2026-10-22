@@ -12295,12 +12295,12 @@
  },
  {
   "id": "b-f2-06",
-  "question": "Trim(\"  Ex cel  \") の戻り値はどれか。",
+  "question": "Trim(\"␣␣Ex␣cel␣␣\") の戻り値はどれか。（␣は半角スペースを表す）",
   "choices": [
-   "Excel",
-   "Ex cel",
-   "Ex cel",
-   "Ex cel"
+   "\"Excel\"",
+   "\"Ex␣cel\"",
+   "\"Ex␣cel␣␣\"",
+   "\"␣␣Ex␣cel\""
   ],
   "correctAnswers": [
    1

@@ -1,0 +1,951 @@
+[
+ {
+  "id": "t-ml",
+  "term": "機械学習",
+  "shortDescription": "データからパターンを学び予測・分類する手法。",
+  "beginnerExplanation": "人がルールを全部書く代わりに、大量のデータからコンピュータが自分で規則性を見つけ出す仕組みです。",
+  "useCase": "迷惑メールの判定、需要予測など。",
+  "examPoint": "教師あり・教師なし・強化学習の3分類は頻出。",
+  "relatedServices": [
+   "ディープラーニング"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-deeplearning",
+  "term": "ディープラーニング",
+  "shortDescription": "層を深くしたニューラルネットワークによる学習。",
+  "beginnerExplanation": "人間の脳をまねたネットワークの層を深く重ねることで、画像や言葉など複雑なデータを高精度に扱えるようにした技術です。",
+  "useCase": "画像認識、音声認識、生成AIの基盤。",
+  "examPoint": "ニューラルネットワークの層を深くしたもの＝ディープラーニング。",
+  "relatedServices": [
+   "ニューラルネットワーク"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-supervised",
+  "term": "教師あり学習",
+  "shortDescription": "正解ラベル付きデータで学ぶ手法。",
+  "beginnerExplanation": "問題と答えのセットを見せて学ばせる方法です。答え（ラベル）があるのが特徴です。",
+  "useCase": "画像の分類、価格の予測など。",
+  "examPoint": "ラベルの有無で教師あり／なしを区別する。",
+  "relatedServices": [
+   "機械学習"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-reinforcement",
+  "term": "強化学習",
+  "shortDescription": "報酬を最大化するよう試行錯誤で学ぶ手法。",
+  "beginnerExplanation": "うまくいったら報酬を与え、繰り返すうちに良い行動を覚えさせる学び方です。",
+  "useCase": "ゲームAI、ロボット制御など。",
+  "examPoint": "RLHFの『RL』は強化学習のこと。",
+  "relatedServices": [
+   "RLHF"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ani-agi",
+  "term": "弱いAI(ANI)／強いAI(AGI)",
+  "shortDescription": "特化型AIと汎用型AIの区別。",
+  "beginnerExplanation": "特定の作業だけ得意なのが弱いAI(ANI)、人間のように何でもこなせるのが強いAI(AGI)です。今あるのは全部ANIです。",
+  "useCase": "現在の生成AIもANIに分類される。",
+  "examPoint": "現状実用化されているのは全て弱いAI(ANI)。",
+  "relatedServices": [],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-singularity",
+  "term": "シンギュラリティ",
+  "shortDescription": "AIが人間の知能を超える転換点。",
+  "beginnerExplanation": "AIが人間より賢くなり、社会が予測できないほど変わるとされる転換点の考え方です。",
+  "useCase": "AIの将来を論じる文脈で登場。",
+  "examPoint": "カーツワイルが2045年に到来と提唱（2045年問題）。",
+  "relatedServices": [],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-transformer",
+  "term": "Transformer",
+  "shortDescription": "Attentionを使う生成AIの基盤アーキテクチャ。",
+  "beginnerExplanation": "文中の単語同士の関係に『注意』を向けて意味をとらえる仕組みで、今の生成AIの土台になっています。",
+  "useCase": "GPT・BERTなど主要モデルの基盤。",
+  "examPoint": "Self-Attentionで単語の関係を捉える。GPTの土台。",
+  "relatedServices": [
+   "GPT",
+   "BERT"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "t-gan",
+  "term": "GAN",
+  "shortDescription": "生成器と識別器を競わせる生成モデル。",
+  "beginnerExplanation": "偽物を作る係（生成器）と見破る係（識別器）を競わせ、だんだん本物そっくりのデータを作れるようにします。",
+  "useCase": "画像生成、ディープフェイク等。",
+  "examPoint": "生成器(Generator)と識別器(Discriminator)が対立的に学習。",
+  "relatedServices": [
+   "VAE"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "t-vae",
+  "term": "VAE",
+  "shortDescription": "エンコーダ・デコーダで生成する確率モデル。",
+  "beginnerExplanation": "データを一度圧縮（エンコード）してから復元（デコード）する仕組みで、新しいデータを生み出します。",
+  "useCase": "画像生成、異常検知など。",
+  "examPoint": "潜在ベクトル・エンコーダ／デコーダが特徴。",
+  "relatedServices": [
+   "GAN"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "t-gpt",
+  "term": "GPT",
+  "shortDescription": "OpenAIの大規模言語モデル系列。",
+  "beginnerExplanation": "大量の文章を学習した文章生成AIで、ChatGPTの中身です。GPT-3.5、GPT-4などと進化してきました。",
+  "useCase": "文章生成、要約、対話など。",
+  "examPoint": "Transformerベース。BERTは理解寄り、GPTは生成寄り。",
+  "relatedServices": [
+   "ChatGPT",
+   "Transformer"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "t-hallucination",
+  "term": "ハルシネーション",
+  "shortDescription": "もっともらしい誤情報を生成する現象。",
+  "beginnerExplanation": "生成AIが、事実と違うことを自信ありげに答えてしまう現象です。うのみにせず確認が必要です。",
+  "useCase": "生成AIの回答を使う全ての場面。",
+  "examPoint": "出力は必ず人間がファクトチェックする。頻出の超重要語。",
+  "relatedServices": [],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "t-rlhf",
+  "term": "RLHF",
+  "shortDescription": "人間の評価で出力を好みに合わせる学習。",
+  "beginnerExplanation": "人が『この答えが良い』と評価した情報を使って、AIの返答を人間の意図に近づける仕組みです。",
+  "useCase": "ChatGPTなどの応答調整。",
+  "examPoint": "Reinforcement Learning from Human Feedbackの略。",
+  "relatedServices": [
+   "強化学習"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "t-multimodal",
+  "term": "マルチモーダル",
+  "shortDescription": "文章・画像・音声などを統合的に扱う性質。",
+  "beginnerExplanation": "文字だけでなく、画像や音声もまとめて理解・生成できる性質です。GPT-4oなどが対応します。",
+  "useCase": "画像を見て説明、音声で対話など。",
+  "examPoint": "複数モーダルを扱える＝マルチモーダル。GPT-4oが代表例。",
+  "relatedServices": [
+   "GPT"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "t-rag",
+  "term": "RAG",
+  "shortDescription": "検索して回答に反映する検索拡張生成。",
+  "beginnerExplanation": "AIが社内文書などを検索し、その内容を踏まえて答える仕組みです。最新・独自情報に強くなります。",
+  "useCase": "社内ヘルプ、FAQ回答など。",
+  "examPoint": "最新情報の反映とハルシネーション低減が主なメリット。",
+  "relatedServices": [
+   "ベクトルデータベース"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "t-aiagent",
+  "term": "AIエージェント",
+  "shortDescription": "自律的に計画・実行するAI。",
+  "beginnerExplanation": "目標を伝えると、自分で手順を考え、ツールを使いながら作業を進めてくれるAIです。",
+  "useCase": "情報収集や資料作成の自動化。",
+  "examPoint": "GenSpark・Manus等が例。MCPで外部ツールと連携。",
+  "relatedServices": [
+   "MCP"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "t-mcp",
+  "term": "MCP",
+  "shortDescription": "AIと外部ツールをつなぐ標準の仕組み。",
+  "beginnerExplanation": "AIが外部のデータやツールに決まったやり方で接続するための共通ルール（プロトコル）です。",
+  "useCase": "AIエージェントの外部連携。",
+  "examPoint": "Model Context Protocol。エージェントの外部連携で登場。",
+  "relatedServices": [
+   "AIエージェント"
+  ],
+  "domain": "trends",
+  "difficulty": 3
+ },
+ {
+  "id": "t-deepfake",
+  "term": "ディープフェイク",
+  "shortDescription": "本物そっくりの偽映像・音声を作る技術。",
+  "beginnerExplanation": "AIで人の顔や声を合成し、実際には無かった映像や音声を作り出す技術です。悪用が問題です。",
+  "useCase": "なりすまし・偽情報の拡散。",
+  "examPoint": "偽情報(ディスインフォメーション)の被害に注意。",
+  "relatedServices": [],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "t-personalinfo",
+  "term": "個人情報保護法",
+  "shortDescription": "個人情報の適正な取り扱いを定める法律。",
+  "beginnerExplanation": "名前や連絡先など個人を特定できる情報を、企業が正しく扱うためのルールを定めた法律です。",
+  "useCase": "顧客データの取り扱い全般。",
+  "examPoint": "要配慮個人情報・匿名加工情報の区別が頻出。",
+  "relatedServices": [],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-copyright",
+  "term": "著作権",
+  "shortDescription": "創作した表現を保護する権利。",
+  "beginnerExplanation": "文章・絵・音楽などの創作物を、無断で使われないように守る権利です。AI生成物でも侵害に注意します。",
+  "useCase": "生成物の商用利用の可否判断。",
+  "examPoint": "AI生成物が既存著作物に類似すると侵害の可能性。",
+  "relatedServices": [
+   "知的財産権"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ai-principles",
+  "term": "AI社会原則",
+  "shortDescription": "日本が示すAI活用の基本原則。",
+  "beginnerExplanation": "AIを社会で使うときに守るべき考え方で、人間中心・公平性・透明性・説明責任などがあります。",
+  "useCase": "AIガバナンス、企業のAI方針。",
+  "examPoint": "人間中心・透明性・アカウンタビリティ等。AI事業者ガイドラインと関連。",
+  "relatedServices": [
+   "AI新法"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "t-aishinpo",
+  "term": "AI新法",
+  "shortDescription": "AIの研究開発・活用を推進する日本の法律。",
+  "beginnerExplanation": "2025年6月に公布された、日本でAIの発展と適切な活用を進めるための基本的な法律です。",
+  "useCase": "国のAI政策の理解。",
+  "examPoint": "2025年6月4日公布。正式名称は長い（推進法）。",
+  "relatedServices": [
+   "AI社会原則"
+  ],
+  "domain": "ethics",
+  "difficulty": 3
+ },
+ {
+  "id": "t-llm",
+  "term": "LLM",
+  "shortDescription": "大規模言語モデル。",
+  "beginnerExplanation": "膨大な文章を学習して、文章の生成や質問応答ができる大きな言語モデルです。生成AIの中心技術です。",
+  "useCase": "文章生成、チャットボット。",
+  "examPoint": "Large Language Model。Transformerが基盤。",
+  "relatedServices": [
+   "GPT",
+   "Transformer"
+  ],
+  "domain": "prompt",
+  "difficulty": 1
+ },
+ {
+  "id": "t-fewshot",
+  "term": "Few-Shot／Zero-Shot",
+  "shortDescription": "例の有無で分けるプロンプト手法。",
+  "beginnerExplanation": "例を見せずに指示だけ出すのがZero-Shot、例をいくつか見せてから頼むのがFew-Shotです。",
+  "useCase": "回答形式を安定させたいとき。",
+  "examPoint": "例ゼロ＝Zero-Shot、例あり＝Few-Shot。",
+  "relatedServices": [
+   "プロンプトエンジニアリング"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "t-temperature",
+  "term": "Temperature",
+  "shortDescription": "出力の多様性を調整するパラメータ。",
+  "beginnerExplanation": "数値を上げると答えが多様で創造的に、下げると堅実で一貫した答えになります。",
+  "useCase": "創造的な文章 vs 正確な回答の調整。",
+  "examPoint": "Top-pと並ぶ多様性の調整パラメータ。",
+  "relatedServices": [
+   "Top-p"
+  ],
+  "domain": "prompt",
+  "difficulty": 3
+ },
+ {
+  "id": "t-prompt-eng",
+  "term": "プロンプトエンジニアリング",
+  "shortDescription": "良い出力を得る指示の工夫。",
+  "beginnerExplanation": "AIから望む答えを引き出すために、指示・文脈・例・出力形式を工夫することです。",
+  "useCase": "生成AI活用の実務全般。",
+  "examPoint": "Instruction/Context/Input/Output Indicatorが基本要素。",
+  "relatedServices": [
+   "Few-Shot"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-01",
+  "term": "ダートマス会議",
+  "shortDescription": "1956年、「人工知能」という言葉が初めて使われた会議",
+  "beginnerExplanation": "アメリカのダートマス大学で開かれた研究会で、ジョン・マッカーシーらが「Artificial Intelligence」という用語を提唱し、AI研究の出発点となりました。",
+  "useCase": "AIの歴史・年表を問う設問の冒頭で登場する。",
+  "examPoint": "AI研究の起点として年号（1956年）と提唱者名がセットで問われやすい。",
+  "relatedServices": [
+   "ジョン・マッカーシー",
+   "AIの冬"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-02",
+  "term": "ニューラルネットワーク",
+  "shortDescription": "人間の脳の神経細胞のつながりを模した計算モデル",
+  "beginnerExplanation": "入力層・隠れ層・出力層からなり、ニューロンを模した素子が信号を重み付けして伝えることでパターンを学習します。",
+  "useCase": "画像認識や音声認識、深層学習全般の基礎構造として使われる。",
+  "examPoint": "層を深くしたものがディープラーニングであるという関係性を理解しているか問われる。",
+  "relatedServices": [
+   "ディープラーニング",
+   "パラメータ"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-03",
+  "term": "過学習",
+  "shortDescription": "訓練データに適合しすぎて未知データに弱くなる現象",
+  "beginnerExplanation": "練習問題は完璧に解けるのに、初見の問題になると全く解けない状態に似ています。訓練データの細かい癖まで覚えてしまうことが原因です。",
+  "useCase": "モデルの精度評価やチューニングの場面で必ず注意される課題。",
+  "examPoint": "対策としての正則化やデータ拡張とセットで理解しておくこと。",
+  "relatedServices": [
+   "正則化",
+   "汎化性能"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-04",
+  "term": "正則化",
+  "shortDescription": "過学習を防ぐためにモデルを単純化する調整手法",
+  "beginnerExplanation": "モデルが複雑になりすぎないようにペナルティを与え、訓練データに過剰適合しないようバランスを取る技術です。",
+  "useCase": "機械学習モデルの学習過程でハイパーパラメータとして設定される。",
+  "examPoint": "過学習対策の代表的手法として、ドロップアウトなどと合わせて出題される。",
+  "relatedServices": [
+   "過学習",
+   "ハイパーパラメータ"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-05",
+  "term": "転移学習",
+  "shortDescription": "既に学習済みのモデルを別の課題に応用する手法",
+  "beginnerExplanation": "ある分野で学んだ知識を土台にして、少ないデータで別の分野の学習を効率よく進める考え方です。",
+  "useCase": "画像分類モデルを医療画像診断に応用する場合などに使われる。",
+  "examPoint": "少量データでも高精度が出せる理由として、既存モデルの再利用がポイント。",
+  "relatedServices": [
+   "ファインチューニング",
+   "事前学習"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-06",
+  "term": "クラスタリング",
+  "shortDescription": "似た性質のデータをグループに分ける教師なし学習の手法",
+  "beginnerExplanation": "正解ラベルがない状態で、データの特徴の近さをもとに自動でグループ分けを行う方法です。",
+  "useCase": "顧客のセグメント分析やマーケティングでの顧客分類に使われる。",
+  "examPoint": "教師なし学習の代表例として出題される。",
+  "relatedServices": [
+   "教師なし学習",
+   "次元削減"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-07",
+  "term": "システムプロンプト",
+  "shortDescription": "AIの役割や守るべきルールを事前に設定する裏側の指示文",
+  "beginnerExplanation": "ユーザーが入力する質問とは別に、AIの振る舞い方やキャラクター、回答してよい範囲をあらかじめ指定しておく指示のことです。",
+  "useCase": "チャットボット開発で、口調や回答範囲を固定する際に使われる。",
+  "examPoint": "ユーザーが入力するプロンプトとの違いや、Instruction要素との関係が問われる。",
+  "relatedServices": [
+   "プロンプトの4要素",
+   "プロンプトエンジニアリング"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-08",
+  "term": "コンテキストウィンドウ",
+  "shortDescription": "AIが一度に読み込み・記憶できる文章量の上限",
+  "beginnerExplanation": "会話や文書を入力する際、AIが一度に処理できるトークン数には上限があり、それを超えると古い内容から忘れられていきます。",
+  "useCase": "長文の要約や長い会話履歴を扱う際に制約として意識される。",
+  "examPoint": "上限を超えると古い文脈が失われるという実務上の注意点として問われる。",
+  "relatedServices": [
+   "Temperature",
+   "プロンプトエンジニアリング"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-09",
+  "term": "エキスパートシステム",
+  "shortDescription": "専門家の知識をルール化して判断を行う初期のAI",
+  "beginnerExplanation": "医師や専門家の知識を「もし〜ならば〜」というルールの形で蓄積し、それに基づいて診断や助言を行う仕組みです。",
+  "useCase": "第2次AIブーム時に医療診断や企業の意思決定支援に使われた。",
+  "examPoint": "知識ベースとルールに依存するため、未知の状況への対応が弱い点が弱点として問われる。",
+  "relatedServices": [
+   "AIの冬",
+   "ダートマス会議"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-10",
+  "term": "AIの冬",
+  "shortDescription": "AI研究への期待が失望に変わり資金や関心が急減した時期",
+  "beginnerExplanation": "過度な期待の後に技術的限界が明らかになり、研究予算や社会的関心が大きく落ち込んだ時期のことです。過去に複数回起きました。",
+  "useCase": "AIの歴史を振り返る際の重要な転換点として扱われる。",
+  "examPoint": "第1次・第2次AIブームの後にそれぞれ「冬」が来た流れを押さえる。",
+  "relatedServices": [
+   "ダートマス会議",
+   "エキスパートシステム"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-11",
+  "term": "AI効果",
+  "shortDescription": "AIが実現すると、それは「単なる自動化」とみなされ驚きが薄れる現象",
+  "beginnerExplanation": "できないうちは「すごい知能」と思われていた技術が、実際にできるようになると「それはただの計算だ」と見なされる心理現象です。",
+  "useCase": "AIの本質論やAI・人間の知能比較の議論で登場する。",
+  "examPoint": "「AIとは何か」という定義の曖昧さと関連づけて出題されやすい。",
+  "relatedServices": [
+   "弱いAI(ANI)/強いAI(AGI)"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-12",
+  "term": "教師なし学習",
+  "shortDescription": "正解ラベルのないデータから規則性を見つけ出す学習方式",
+  "beginnerExplanation": "答え合わせをせずに、データの中に潜む共通のパターンやグループを自力で見つけ出す学習方法です。",
+  "useCase": "クラスタリングや異常検知、次元削減などに応用される。",
+  "examPoint": "教師あり学習・強化学習との違いを整理して覚えておくこと。",
+  "relatedServices": [
+   "クラスタリング",
+   "教師あり学習"
+  ],
+  "domain": "aiBasics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-13",
+  "term": "CNN（畳み込みニューラルネットワーク）",
+  "shortDescription": "画像認識に強い、局所的な特徴を捉える深層学習モデル",
+  "beginnerExplanation": "画像の一部分ずつをフィルターでスキャンするように処理し、エッジや模様といった特徴を段階的に捉えていくモデルです。",
+  "useCase": "画像分類、物体検出、顔認証など画像処理全般に使われる。",
+  "examPoint": "画像分野で使われる代表的モデルとして、RNNとの用途の違いが問われる。",
+  "relatedServices": [
+   "RNN",
+   "ディープラーニング"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-14",
+  "term": "n-gram",
+  "shortDescription": "文章をn個の連続する単語・文字のまとまりで捉える手法",
+  "beginnerExplanation": "「私は学生です」を2つ区切りで見ると「私は」「は学生」「学生です」のように、連続するn個の単位に分割して言語のパターンを分析する手法です。",
+  "useCase": "古典的な言語モデルや文章の類似度計算、検索エンジンの索引作成に使われる。",
+  "examPoint": "Transformer以前の統計的自然言語処理の基礎技術として出題される。",
+  "relatedServices": [
+   "自己回帰モデル",
+   "プレトレーニング"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-15",
+  "term": "プレトレーニング（事前学習）",
+  "shortDescription": "大量の汎用データを使ってモデルの基礎能力を学習させる段階",
+  "beginnerExplanation": "特定の作業に特化させる前に、インターネット上の膨大なテキストなどを使ってAIに言語や知識の基礎を身につけさせる学習段階のことです。",
+  "useCase": "GPTなどの大規模言語モデルが最初に行う学習ステップとして使われる。",
+  "examPoint": "ファインチューニングの前段階であるという学習プロセスの順序が問われる。",
+  "relatedServices": [
+   "ファインチューニング",
+   "転移学習"
+  ],
+  "domain": "prompt",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-16",
+  "term": "BERT",
+  "shortDescription": "文章を双方向から読んで文脈を理解する事前学習モデル",
+  "beginnerExplanation": "文章の前後両方向から情報を読み取ることで、単語の意味を文脈に応じて正確に把握できるようにしたモデルです。",
+  "useCase": "検索エンジンの検索意図理解や文章分類、感情分析に使われる。",
+  "examPoint": "GPTが「一方向（自己回帰）」であるのに対し、BERTは「双方向」である違いが頻出。",
+  "relatedServices": [
+   "MLM",
+   "NSP",
+   "Transformer"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-17",
+  "term": "MLM（マスク言語モデル）",
+  "shortDescription": "文中の単語を隠して当てさせることで学習する事前学習手法",
+  "beginnerExplanation": "文章の一部を空欄（マスク）にして、その部分に入る単語をモデルに予測させることで、文脈理解力を鍛える方法です。",
+  "useCase": "BERTなど双方向モデルの事前学習タスクとして使われる。",
+  "examPoint": "BERTの学習手法の一つとして、NSPとセットで出題される。",
+  "relatedServices": [
+   "BERT",
+   "NSP"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-18",
+  "term": "NSP（次文予測）",
+  "shortDescription": "2つの文が連続する自然な文かどうかを判定させる事前学習手法",
+  "beginnerExplanation": "ある文の次に続く文として与えられたものが、本当に自然なつながりかどうかをモデルに判定させることで、文と文の関係理解を鍛えます。",
+  "useCase": "BERTの事前学習タスクの一つとして使われる。",
+  "examPoint": "MLMとあわせてBERTの2つの学習タスクとして問われる。",
+  "relatedServices": [
+   "BERT",
+   "MLM"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-19",
+  "term": "自己回帰モデル",
+  "shortDescription": "それまでの単語列から次の単語を順番に予測して文章を生成する方式",
+  "beginnerExplanation": "「これまでの文章」を手がかりに「次に来る一語」を予測し、それを繰り返して文章全体を作っていく仕組みです。",
+  "useCase": "GPTのような文章生成AIの基本的な仕組みとして使われる。",
+  "examPoint": "GPTが自己回帰型・一方向型であるという特徴として頻出。",
+  "relatedServices": [
+   "GPT",
+   "Attention"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-20",
+  "term": "Attention（注意機構）",
+  "shortDescription": "文中のどの単語に注目すべきかを重み付けする仕組み",
+  "beginnerExplanation": "文章を読むとき、どの単語が今の単語と関係が深いかに「注目度」をつけて処理する仕組みで、Transformerの中核技術です。",
+  "useCase": "翻訳や文章生成で、離れた位置の単語同士の関係を捉えるのに使われる。",
+  "examPoint": "Transformerの核となる技術として、自己注意（Self-Attention）の概念とともに問われる。",
+  "relatedServices": [
+   "Transformer",
+   "自己回帰モデル"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-21",
+  "term": "位置エンコーディング",
+  "shortDescription": "単語の並び順の情報をモデルに与えるための工夫",
+  "beginnerExplanation": "Transformerは単語を並列に処理するため、単語の順番情報を別途数値として埋め込んで教える必要があり、その仕組みを指します。",
+  "useCase": "Transformerベースのモデルの入力処理段階で使われる。",
+  "examPoint": "RNNと違い順序情報を自然には持たないTransformerが工夫している点として出題される。",
+  "relatedServices": [
+   "Transformer",
+   "Attention"
+  ],
+  "domain": "genAI",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-22",
+  "term": "ファインチューニング",
+  "shortDescription": "事前学習済みモデルを特定タスク向けに追加学習させること",
+  "beginnerExplanation": "汎用的な知識を持つモデルに、特定の業務や分野のデータを追加で学習させて、専門性を高める調整のことです。",
+  "useCase": "特定業界向けのチャットボットや専門文書対応AIの構築に使われる。",
+  "examPoint": "転移学習との関係、プロンプトエンジニアリングとの違いが問われる。",
+  "relatedServices": [
+   "転移学習",
+   "アライメント"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-23",
+  "term": "アライメント",
+  "shortDescription": "AIの出力を人間の意図や価値観に沿わせる調整のこと",
+  "beginnerExplanation": "AIが技術的に正しくても、人間にとって不適切・不快な回答をしないよう、人間の望む方向に調整する取り組みです。",
+  "useCase": "RLHFなどを通じて生成AIの安全性・有用性を高める場面で使われる。",
+  "examPoint": "RLHFと並んでAIの安全性確保の文脈で問われる用語。",
+  "relatedServices": [
+   "RLHF",
+   "ファインチューニング"
+  ],
+  "domain": "genAI",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-24",
+  "term": "パラメータ",
+  "shortDescription": "モデルの中で学習によって調整される数値（重み）のこと",
+  "beginnerExplanation": "モデルが学習を通じて自動的に調整していく無数の数値のことで、この数が多いほど一般に表現力が高いモデルとされます。",
+  "useCase": "「〇〇billionパラメータ」のようにモデルの規模を示す指標として使われる。",
+  "examPoint": "パラメータ数がモデルの性能や計算コストと関係する点を理解しておく。",
+  "relatedServices": [
+   "ニューラルネットワーク",
+   "ハイパーパラメータ"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-25",
+  "term": "Gemini",
+  "shortDescription": "Googleが開発するマルチモーダル対応の生成AIモデル",
+  "beginnerExplanation": "テキスト・画像・音声・動画など複数の種類の情報を同時に理解し処理できる、Google製の大規模言語モデルです。",
+  "useCase": "検索、Googleドキュメントなどの業務アプリへの組み込みに使われる。",
+  "examPoint": "各社の代表的な生成AIモデル名として、開発元とセットで覚えること。",
+  "relatedServices": [
+   "マルチモーダル",
+   "Claude",
+   "Copilot"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-26",
+  "term": "Claude",
+  "shortDescription": "Anthropic社が開発する、安全性を重視した対話型生成AI",
+  "beginnerExplanation": "「役に立ち、正直で、無害である」ことを設計方針に掲げるAnthropic社の大規模言語モデルで、文章作成やコーディング支援に使われます。",
+  "useCase": "文章生成、要約、プログラミング支援など幅広い業務利用がされる。",
+  "examPoint": "開発元（Anthropic）とあわせて代表的な生成AIサービスとして問われる。",
+  "relatedServices": [
+   "Gemini",
+   "GPT"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-27",
+  "term": "Copilot",
+  "shortDescription": "Microsoftが提供する、Officeやコーディングを支援する生成AI",
+  "beginnerExplanation": "WordやExcelなどのOffice製品や開発環境に組み込まれ、文書作成やコード作成を対話形式で支援するAIアシスタントです。",
+  "useCase": "業務文書の下書き作成やプログラムコードの自動補完に使われる。",
+  "examPoint": "業務アプリ統合型の生成AIの代表例として出題される。",
+  "relatedServices": [
+   "Gemini",
+   "Claude"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-28",
+  "term": "Sora",
+  "shortDescription": "OpenAIが開発したテキストから動画を生成するAIモデル",
+  "beginnerExplanation": "文章による指示（プロンプト）だけで、リアルな映像や創作的な動画を作り出すことができる動画生成AIです。",
+  "useCase": "映像制作、広告、企画のプロトタイプ映像作成などに活用される。",
+  "examPoint": "動画生成AIの代表例として、画像生成AIとの違いと合わせて問われる。",
+  "relatedServices": [
+   "動画生成AI",
+   "ディープフェイク"
+  ],
+  "domain": "genAI",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-29",
+  "term": "画像生成AI",
+  "shortDescription": "テキストなどの指示から新しい画像を作り出すAI技術",
+  "beginnerExplanation": "「夕焼けの海辺」といった言葉の指示だけで、実在しないオリジナルの画像を自動で描き出す技術です。",
+  "useCase": "広告素材、デザイン案の作成、イラスト制作の効率化に使われる。",
+  "examPoint": "拡散モデル（Diffusion Model）が代表的な仕組みである点が問われることがある。",
+  "relatedServices": [
+   "GAN",
+   "VAE",
+   "動画生成AI"
+  ],
+  "domain": "trends",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-30",
+  "term": "動画生成AI",
+  "shortDescription": "テキストや画像から動画を自動生成するAI技術",
+  "beginnerExplanation": "文章での指示や1枚の画像をもとに、動きのある映像を作り出す技術で、近年急速に精度が向上しています。",
+  "useCase": "広告映像やSNSコンテンツ、映画のプリビジュアライゼーションに使われる。",
+  "examPoint": "Soraなど具体的なサービス名と合わせて理解しておくこと。",
+  "relatedServices": [
+   "Sora",
+   "ディープフェイク"
+  ],
+  "domain": "trends",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-31",
+  "term": "音声生成AI",
+  "shortDescription": "テキストから自然な音声を作り出す、または声質を変換するAI技術",
+  "beginnerExplanation": "文章を読み上げるだけでなく、特定の人の声質・抑揚を再現したり、感情を込めた読み上げを行うことができる技術です。",
+  "useCase": "ナレーション制作、音声アシスタント、多言語吹き替えに使われる。",
+  "examPoint": "悪用時のなりすまし・詐欺リスクとして倫理分野と関連づけて出題される。",
+  "relatedServices": [
+   "ディープフェイク",
+   "ソーシャルエンジニアリング"
+  ],
+  "domain": "trends",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-32",
+  "term": "データ拡張（オーグメンテーション）",
+  "shortDescription": "既存データに変換を加えて学習データの量や多様性を増やす手法",
+  "beginnerExplanation": "手持ちの画像を回転させたり反転させたりして、少ないデータでも学習量を疑似的に増やすテクニックです。",
+  "useCase": "画像認識モデルの学習データが不足している際に活用される。",
+  "examPoint": "過学習対策や、データ不足を補う手法として出題される。",
+  "relatedServices": [
+   "過学習",
+   "特徴量"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-33",
+  "term": "ベクトルデータベース",
+  "shortDescription": "文章や画像を数値ベクトルとして保存し、類似検索できるDB",
+  "beginnerExplanation": "文章の意味を数値の並び（ベクトル）に変換して保存し、「意味が近いもの」を高速に検索できるようにしたデータベースです。",
+  "useCase": "RAGの仕組みで、質問に関連する文書を検索する際に使われる。",
+  "examPoint": "RAGを支える基盤技術として、チャンクと合わせて出題される。",
+  "relatedServices": [
+   "RAG",
+   "チャンク"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-34",
+  "term": "チャンク",
+  "shortDescription": "長い文書を検索・処理しやすい単位に分割したかたまり",
+  "beginnerExplanation": "長い文章をそのまま扱うと処理が重くなるため、意味のまとまりごとに小さく分割したものをチャンクと呼びます。",
+  "useCase": "RAGで文書をベクトルデータベースに登録する前処理として使われる。",
+  "examPoint": "RAGの処理フロー（分割→ベクトル化→検索→生成）の一部として問われる。",
+  "relatedServices": [
+   "RAG",
+   "ベクトルデータベース"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-35",
+  "term": "ディスインフォメーション",
+  "shortDescription": "意図的に人を欺くために作られる虚偽情報",
+  "beginnerExplanation": "誤って広まる「誤情報（ミスインフォメーション）」とは異なり、悪意を持って意図的に流される嘘の情報のことです。",
+  "useCase": "生成AIによるフェイクニュース拡散のリスクとして議論される。",
+  "examPoint": "「意図の有無」でミスインフォメーションと区別される点が頻出。",
+  "relatedServices": [
+   "ディープフェイク",
+   "フィッシング"
+  ],
+  "domain": "trends",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-36",
+  "term": "要配慮個人情報",
+  "shortDescription": "人種・病歴・信条など特に慎重な扱いが求められる個人情報",
+  "beginnerExplanation": "個人情報保護法で定められた、不当な差別や偏見が生じないよう、取得や利用に本人の同意が原則必要とされる特別な個人情報のことです。",
+  "useCase": "医療AIや採用AIなどで個人データを扱う際に注意すべき対象となる。",
+  "examPoint": "通常の個人情報より厳格な取得ルール（原則本人同意必須）が適用される点が頻出。",
+  "relatedServices": [
+   "個人情報保護法",
+   "匿名加工情報"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-37",
+  "term": "匿名加工情報",
+  "shortDescription": "特定の個人を識別できないよう加工し、復元もできなくした情報",
+  "beginnerExplanation": "個人情報から氏名などを削除・置換し、他の情報と照合しても元の個人が分からないように加工したデータのことです。",
+  "useCase": "AI学習用データセットとして、本人同意なしに利用できる場合がある。",
+  "examPoint": "個人情報保護法上、一定の要件を満たせば本人同意なく第三者提供が可能になる点が問われる。",
+  "relatedServices": [
+   "要配慮個人情報",
+   "個人識別符号"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-38",
+  "term": "個人識別符号",
+  "shortDescription": "指紋やマイナンバーなど、それ単体で個人を特定できる符号",
+  "beginnerExplanation": "顔認識データや指紋データ、マイナンバーのように、それ単独を見ただけで特定の個人を識別できてしまう情報のことです。",
+  "useCase": "生体認証AIを扱う際に、個人情報保護法上の取り扱いを検討する対象になる。",
+  "examPoint": "個人情報保護法上、それ単体で「個人情報」に該当する点を理解しておく。",
+  "relatedServices": [
+   "要配慮個人情報",
+   "個人情報保護法"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-39",
+  "term": "肖像権",
+  "shortDescription": "自分の顔や姿を無断で撮影・公表されない権利",
+  "beginnerExplanation": "本人の許可なく、顔や姿を写真・映像として使われたり公開されたりしないよう保護する権利です。",
+  "useCase": "AIによる画像生成で実在の人物に似た顔を生成する際に問題となる。",
+  "examPoint": "パブリシティ権（経済的価値の保護）との違いを区別して覚えること。",
+  "relatedServices": [
+   "パブリシティ権",
+   "ディープフェイク"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-40",
+  "term": "パブリシティ権",
+  "shortDescription": "有名人の氏名や肖像が持つ経済的な価値を保護する権利",
+  "beginnerExplanation": "芸能人などの知名度や人気が生み出す「商品としての価値」を、本人に無断で利用されないよう保護する権利です。",
+  "useCase": "AIで有名人に似せた画像や音声を広告に無断利用した場合に問題となる。",
+  "examPoint": "肖像権が人格的利益、パブリシティ権が経済的利益の保護である違いが頻出。",
+  "relatedServices": [
+   "肖像権",
+   "著作権"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ },
+ {
+  "id": "tx-41",
+  "term": "不正競争防止法",
+  "shortDescription": "営業秘密の不正取得など、公正な競争を害する行為を規制する法律",
+  "beginnerExplanation": "他社の企業秘密を不正に盗んだり利用したりする行為などを取り締まり、公正な事業競争を守るための法律です。",
+  "useCase": "AI開発時に他社の学習データや営業秘密を不正利用した場合に問題となる。",
+  "examPoint": "「営業秘密」の3要件（秘密管理性・有用性・非公知性）と関連づけて問われる。",
+  "relatedServices": [
+   "営業秘密",
+   "著作権"
+  ],
+  "domain": "ethics",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-42",
+  "term": "営業秘密",
+  "shortDescription": "秘密として管理されている、事業に有用な非公開の情報",
+  "beginnerExplanation": "顧客リストや製造ノウハウなど、企業が秘密として管理し、公にはなっていない、事業に役立つ情報のことです。",
+  "useCase": "AIモデルの学習データやプロンプト設計ノウハウの保護に関わる。",
+  "examPoint": "不正競争防止法で保護されるための3要件を押さえておくこと。",
+  "relatedServices": [
+   "不正競争防止法"
+  ],
+  "domain": "ethics",
+  "difficulty": 3
+ },
+ {
+  "id": "tx-43",
+  "term": "フィッシング",
+  "shortDescription": "偽サイトやメールで個人情報やパスワードを騙し取る詐欺手口",
+  "beginnerExplanation": "本物そっくりの偽メールやWebサイトを使って、ID・パスワード・クレジットカード情報などを入力させて盗み取る手口です。",
+  "useCase": "生成AIで自然な文章の偽メールが作られ、被害が巧妙化するリスクとして扱われる。",
+  "examPoint": "生成AIの悪用によって文面の自然さが向上し検知が難しくなる点が問われる。",
+  "relatedServices": [
+   "ソーシャルエンジニアリング",
+   "ランサムウェア"
+  ],
+  "domain": "ethics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-44",
+  "term": "ランサムウェア",
+  "shortDescription": "データを暗号化し、復号と引き換えに金銭を要求するマルウェア",
+  "beginnerExplanation": "感染するとファイルが勝手に暗号化されて使えなくなり、元に戻すための「身代金」を要求される悪意あるソフトウェアです。",
+  "useCase": "企業システムへのサイバー攻撃の代表例として説明される。",
+  "examPoint": "AIを使った攻撃の自動化・高度化のリスクとあわせて出題される。",
+  "relatedServices": [
+   "フィッシング",
+   "ソーシャルエンジニアリング"
+  ],
+  "domain": "ethics",
+  "difficulty": 1
+ },
+ {
+  "id": "tx-45",
+  "term": "ソーシャルエンジニアリング",
+  "shortDescription": "人の心理的な隙や信頼を悪用して情報を盗み出す攻撃手法",
+  "beginnerExplanation": "技術的な侵入ではなく、電話やなりすましなど「人」を騙すことで、パスワードや機密情報を聞き出す攻撃手法です。",
+  "useCase": "AI音声生成による「なりすまし電話」など新しい手口の土台として語られる。",
+  "examPoint": "音声合成AIの悪用による被害拡大という近年の論点とセットで出題される。",
+  "relatedServices": [
+   "フィッシング",
+   "音声生成AI"
+  ],
+  "domain": "ethics",
+  "difficulty": 2
+ }
+]

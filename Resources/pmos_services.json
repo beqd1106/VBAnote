@@ -1,0 +1,254 @@
+[
+ {
+  "id": "s-001",
+  "name": "PMO",
+  "category": "基礎用語",
+  "oneLiner": "組織のプロジェクト管理を支援・統制する部署",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-002",
+  "name": "PM",
+  "category": "基礎用語",
+  "oneLiner": "個別プロジェクトの責任者",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-003",
+  "name": "支援型PMO",
+  "category": "PMOの型・形態",
+  "oneLiner": "助言中心で統制が弱いPMO",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-004",
+  "name": "管理型PMO",
+  "category": "PMOの型・形態",
+  "oneLiner": "標準への準拠を求める中程度のPMO",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-005",
+  "name": "指揮型PMO",
+  "category": "PMOの型・形態",
+  "oneLiner": "直接プロジェクトを指揮する強いPMO",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-006",
+  "name": "EPMO",
+  "category": "PMOの型・形態",
+  "oneLiner": "全社を統括するエンタープライズPMO",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-007",
+  "name": "スポンサーシップ",
+  "category": "PMOの型・形態",
+  "oneLiner": "経営層の支援。導入と定着の鍵",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-008",
+  "name": "形骸化",
+  "category": "PMOの型・形態",
+  "oneLiner": "管理のための管理に陥った状態",
+  "domain": "pmo"
+ },
+ {
+  "id": "s-009",
+  "name": "QCD",
+  "category": "基礎用語",
+  "oneLiner": "品質・コスト・納期の三つの制約",
+  "domain": "pm"
+ },
+ {
+  "id": "s-010",
+  "name": "ISO 21500",
+  "category": "規格・枠組み",
+  "oneLiner": "プロジェクトマネジメントの国際規格",
+  "domain": "pm"
+ },
+ {
+  "id": "s-011",
+  "name": "5プロセス群",
+  "category": "規格・枠組み",
+  "oneLiner": "立ち上げ・計画・実行・管理・終結",
+  "domain": "pm"
+ },
+ {
+  "id": "s-012",
+  "name": "10対象群",
+  "category": "規格・枠組み",
+  "oneLiner": "統合からコミュニケーションまでの10分野",
+  "domain": "pm"
+ },
+ {
+  "id": "s-013",
+  "name": "ステアリングコミッティ",
+  "category": "会議体・組織",
+  "oneLiner": "重要な意思決定を行う運営委員会",
+  "domain": "pm"
+ },
+ {
+  "id": "s-014",
+  "name": "プロジェクト憲章",
+  "category": "計画・文書",
+  "oneLiner": "プロジェクトの開始を承認する文書",
+  "domain": "plan"
+ },
+ {
+  "id": "s-015",
+  "name": "WBS",
+  "category": "計画・文書",
+  "oneLiner": "作業を階層的に分解した構成図",
+  "domain": "plan"
+ },
+ {
+  "id": "s-016",
+  "name": "ベースライン",
+  "category": "計画・文書",
+  "oneLiner": "承認された基準計画。変更の比較元",
+  "domain": "plan"
+ },
+ {
+  "id": "s-017",
+  "name": "変更管理委員会",
+  "category": "会議体・組織",
+  "oneLiner": "変更要求を審議し承認する会議体",
+  "domain": "plan"
+ },
+ {
+  "id": "s-018",
+  "name": "クリティカルパス",
+  "category": "スケジュール・計算",
+  "oneLiner": "最短工期を決める最長の作業経路",
+  "domain": "plan"
+ },
+ {
+  "id": "s-019",
+  "name": "フロート",
+  "category": "スケジュール・計算",
+  "oneLiner": "全体を遅らせず許される余裕時間",
+  "domain": "plan"
+ },
+ {
+  "id": "s-020",
+  "name": "SV=EV-PV",
+  "category": "スケジュール・計算",
+  "oneLiner": "スケジュール差異。負なら遅れ",
+  "domain": "plan"
+ },
+ {
+  "id": "s-021",
+  "name": "CV=EV-AC",
+  "category": "スケジュール・計算",
+  "oneLiner": "コスト差異。負ならコスト超過",
+  "domain": "plan"
+ },
+ {
+  "id": "s-022",
+  "name": "SPI=EV/PV",
+  "category": "スケジュール・計算",
+  "oneLiner": "スケジュール効率。1未満なら遅れ",
+  "domain": "plan"
+ },
+ {
+  "id": "s-023",
+  "name": "CPI=EV/AC",
+  "category": "スケジュール・計算",
+  "oneLiner": "コスト効率。1未満なら超過",
+  "domain": "plan"
+ },
+ {
+  "id": "s-024",
+  "name": "RACIチャート",
+  "category": "計画・文書",
+  "oneLiner": "実行・説明責任・相談・報告を示す表",
+  "domain": "plan"
+ },
+ {
+  "id": "s-025",
+  "name": "リスク登録簿",
+  "category": "リスク・調達",
+  "oneLiner": "特定したリスクと対応を記録する表",
+  "domain": "risk"
+ },
+ {
+  "id": "s-026",
+  "name": "リスク対応(脅威)",
+  "category": "リスク・調達",
+  "oneLiner": "回避・転嫁・軽減・受容の4種類",
+  "domain": "risk"
+ },
+ {
+  "id": "s-027",
+  "name": "リスク対応(好機)",
+  "category": "リスク・調達",
+  "oneLiner": "活用・共有・強化・受容の4種類",
+  "domain": "risk"
+ },
+ {
+  "id": "s-028",
+  "name": "権力/関心度グリッド",
+  "category": "リスク・調達",
+  "oneLiner": "関係者を4象限に分類する図",
+  "domain": "risk"
+ },
+ {
+  "id": "s-029",
+  "name": "n(n-1)/2",
+  "category": "スケジュール・計算",
+  "oneLiner": "コミュニケーション経路数の計算式",
+  "domain": "risk"
+ },
+ {
+  "id": "s-030",
+  "name": "請負と準委任",
+  "category": "リスク・調達",
+  "oneLiner": "完成責任の有無で区別する契約形態",
+  "domain": "risk"
+ },
+ {
+  "id": "s-031",
+  "name": "RFIとRFP",
+  "category": "リスク・調達",
+  "oneLiner": "情報収集と提案依頼の文書",
+  "domain": "risk"
+ },
+ {
+  "id": "s-032",
+  "name": "テーラリング",
+  "category": "運用・実践",
+  "oneLiner": "標準を案件に合わせて調整すること",
+  "domain": "ops"
+ },
+ {
+  "id": "s-033",
+  "name": "ダッシュボード",
+  "category": "運用・実践",
+  "oneLiner": "進捗を信号表示で一覧する画面",
+  "domain": "ops"
+ },
+ {
+  "id": "s-034",
+  "name": "課題管理表",
+  "category": "運用・実践",
+  "oneLiner": "問題を記録して解決まで追う表",
+  "domain": "ops"
+ },
+ {
+  "id": "s-035",
+  "name": "ヘルスチェック",
+  "category": "運用・実践",
+  "oneLiner": "プロジェクトの健全性を診断すること",
+  "domain": "ops"
+ },
+ {
+  "id": "s-036",
+  "name": "レトロスペクティブ",
+  "category": "運用・実践",
+  "oneLiner": "終結時の振り返りと教訓の収集",
+  "domain": "ops"
+ }
+]

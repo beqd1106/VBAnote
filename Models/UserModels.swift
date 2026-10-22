@@ -16,15 +16,15 @@ enum ExperienceLevel: String, Codable, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .noneAtAll: return "まったくの初心者"
-        case .someIT:    return "IT経験あり"
-        case .someCloud: return "生成AI利用経験あり"
+        case .someIT:    return "少し知っている"
+        case .someCloud: return "実務で触れている"
         }
     }
     var detail: String {
         switch self {
-        case .noneAtAll: return "AI・ITともにほぼ未経験"
-        case .someIT:    return "ITの基礎知識はある"
-        case .someCloud: return "ChatGPTなど生成AIを使ったことがある"
+        case .noneAtAll: return "この分野の知識はほぼ未経験"
+        case .someIT:    return "用語を聞いたことがある・入門書を読んだ"
+        case .someCloud: return "仕事や趣味でふだんから使っている"
         }
     }
 }

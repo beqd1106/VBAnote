@@ -368,7 +368,7 @@ enum StudyRecordCSV {
             day = next
         }
         let text = "\u{FEFF}" + lines.joined(separator: "\r\n") + "\r\n"
-        let name = "\(AppInfo.displayName)_学習記録_\(CalendarFormat.fileDate(today)).csv"
+        let name = "\(AppInfo.displayName)_\(ExamInfo.brandPrefix)_学習記録_\(CalendarFormat.fileDate(today)).csv"
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
         try text.data(using: .utf8)!.write(to: url, options: .atomic)
         return url

@@ -1,0 +1,3373 @@
+[
+ {
+  "id": "l-cc-01",
+  "title": "そもそもクラウドとは？",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 6,
+  "summary": "クラウド＝必要なときに、必要なだけ、ネット経由で借りる仕組み。買わずに借りる発想が出発点。",
+  "sections": [
+   {
+    "heading": "身近な例えで理解する",
+    "body": "電気を使うのに自宅で発電する人はいません。電力会社から「使った分だけ」買いますよね。クラウドも同じで、サーバーやストレージを自分で買わず、AWSから必要な分だけ借りて、使った分だけ払います。"
+   },
+   {
+    "heading": "買う（オンプレミス）との違い",
+    "body": "従来は自社でサーバーを購入し、置き場所・電源・故障対応まで自前で行いました（オンプレミス）。クラウドはこれらをAWSに任せ、数分で増やしたり減らしたりできます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「初期投資が小さい」「使った分だけ課金」「すぐ増減できる」。この3つがクラウドの価値の核です。試験でも繰り返し問われます。"
+   }
+  ],
+  "quizIds": [
+   "q-cc-001",
+   "q2-cc-01",
+   "q2-cc-02",
+   "q6-cc-01",
+   "q6-cc-08",
+   "qd-cc01-e19",
+   "qd-cc01-11",
+   "qd-cc01-e13",
+   "qd-cc01-e9",
+   "qd-cc01-e14",
+   "qd-cc01-6",
+   "qd-cc01-e17",
+   "qd-cc01-7",
+   "qd-cc01-e11",
+   "qd-cc01-5"
+  ],
+  "challengeQuizIds": [
+   "qm-cc01-1",
+   "qm-cc01-2",
+   "qm-cc01-3"
+  ],
+  "drillQuizIds": [
+   "qd-cc01-1",
+   "qd-cc01-2",
+   "qd-cc01-3",
+   "qd-cc01-4",
+   "qd-cc01-8",
+   "qd-cc01-9",
+   "qd-cc01-10",
+   "qd-cc01-e1",
+   "qd-cc01-e2",
+   "qd-cc01-e3",
+   "qd-cc01-e4",
+   "qd-cc01-e5",
+   "qd-cc01-e6",
+   "qd-cc01-e7",
+   "qd-cc01-e8",
+   "qd-cc01-e10",
+   "qd-cc01-e12",
+   "qd-cc01-e15",
+   "qd-cc01-e16",
+   "qd-cc01-e18"
+  ],
+  "basicQuizIds": [
+   "b-cc-01-01",
+   "b-cc-01-02",
+   "b-cc-01-03",
+   "b-cc-01-04",
+   "b-cc-01-05",
+   "b-cc-01-06",
+   "b-cc-01-07",
+   "b-cc-01-08",
+   "b-cc-01-09",
+   "b-cc-01-10",
+   "b-cc-01-11",
+   "b-cc-01-12",
+   "b-cc-01-13",
+   "b-cc-01-14",
+   "b-cc-01-15"
+  ]
+ },
+ {
+  "id": "l-cc-02",
+  "title": "クラウドの6つのメリット",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 7,
+  "summary": "初期投資→変動費化、規模の経済、キャパシティ予測不要、俊敏性、運用負荷の削減、グローバル展開。この6つを言い回しごと覚える。",
+  "sections": [
+   {
+    "heading": "クラウド導入の主なメリット",
+    "body": "①初期の大きな投資が不要（固定費を変動費に）②規模の経済で安くなる③将来の必要量を当てる必要がない④数分で調達できる俊敏性⑤データセンター運用から解放⑥数分で世界展開。これがAWS公式が挙げる6つの利点です。"
+   },
+   {
+    "heading": "言葉の言い換えに注意",
+    "body": "俊敏性＝アジリティ、弾力性＝エラスティシティ、規模の経済＝ボリュームディスカウント。試験では日本語・英語・言い換えのどれでも問われます。意味とセットで結び付けましょう。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「固定費を変動費に変える（trade capital expense for variable expense）」は最頻出フレーズ。設備を買い込む代わりに、使った分だけ払う――この一文を軸に6つを整理します。"
+   }
+  ],
+  "quizIds": [
+   "q-cc-002",
+   "q-cc-006",
+   "q-cc-013",
+   "q7-cc-07",
+   "q10-cc-08",
+   "q6-cc-04",
+   "q9-cc-08",
+   "q8-cc-05",
+   "q4-cc-10",
+   "q11-cc-01",
+   "q4-cc-04",
+   "q6-cc-06",
+   "q5-cc-06",
+   "q-cc-007",
+   "q9-cc-03"
+  ],
+  "challengeQuizIds": [
+   "qm-cc-01",
+   "qm-cc-02"
+  ],
+  "drillQuizIds": [
+   "qd-cc02-1",
+   "qd-cc02-2",
+   "qd-cc02-3",
+   "qd-cc02-4",
+   "qd-cc02-5",
+   "qd-cc02-6",
+   "qd-cc02-7",
+   "qd-cc02-8",
+   "qd-cc02-9",
+   "qd-cc02-10",
+   "qd-cc02-11",
+   "qd-cc02-12",
+   "qd-cc02-13",
+   "qd-cc02-14",
+   "qd-cc02-15",
+   "qd-cc02-16",
+   "qd-cc02-17",
+   "qd-cc02-18",
+   "qd-cc02-19",
+   "qd-cc02-20",
+   "qd-cc02-21",
+   "qd-cc02-22",
+   "qd-cc02-23",
+   "qd-cc02-24",
+   "qd-cc02-25",
+   "qd-cc02-26",
+   "qd-cc02-27",
+   "qd-cc02-28",
+   "qd-cc02-29",
+   "qd-cc02-30",
+   "qd-cc02-31",
+   "qd-cc02-32",
+   "q-cc-004",
+   "q-cc-008",
+   "q-cc-012",
+   "q-cc-014",
+   "q-cc-018",
+   "q-cc-019",
+   "q-cc-020",
+   "q2-cc-10",
+   "q3-cc-04",
+   "q3-cc-05",
+   "q4-cc-05",
+   "q4-cc-07",
+   "q5-cc-04",
+   "q5-cc-07",
+   "q5-cc-09",
+   "q7-cc-01",
+   "q7-cc-02",
+   "q7-cc-03",
+   "q7-cc-09",
+   "q7-cc-12",
+   "q8-cc-07",
+   "q9-cc-02",
+   "q9-cc-07",
+   "q10-cc-01",
+   "q10-cc-03",
+   "q10-cc-06"
+  ],
+  "basicQuizIds": [
+   "b-cc-02-01",
+   "b-cc-02-02",
+   "b-cc-02-03",
+   "b-cc-02-04",
+   "b-cc-02-05",
+   "b-cc-02-06",
+   "b-cc-02-07",
+   "b-cc-02-08",
+   "b-cc-02-09",
+   "b-cc-02-10",
+   "b-cc-02-11",
+   "b-cc-02-12",
+   "b-cc-02-13",
+   "b-cc-02-14",
+   "b-cc-02-15"
+  ]
+ },
+ {
+  "id": "l-cc-03",
+  "title": "クラウドのデプロイモデル",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 6,
+  "summary": "すべてクラウド（クラウド）／自社設備のみ（オンプレミス）／両方つなぐ（ハイブリッド）。使い分けの理由を押さえる。",
+  "sections": [
+   {
+    "heading": "3つの選び方",
+    "body": "クラウド（すべてAWS上）、オンプレミス（自社データセンターのみ）、ハイブリッド（両方を接続して使う）の3モデルがあります。まるごと移せない事情があるとき、まずハイブリッドで始めるのが現実的です。"
+   },
+   {
+    "heading": "ハイブリッドが選ばれる理由",
+    "body": "法規制でデータを社内に置く必要がある、既存の基幹システムと連携したい、段階的に移行したい――こうした場合に、社内とAWSをDirect ConnectやVPNでつなぐハイブリッド構成が使われます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「既存資産を残しつつクラウドの利点も得たい＝ハイブリッド」が定番の問われ方。すべて新規ならクラウド、動かせない事情があればハイブリッド、と判断します。"
+   }
+  ],
+  "quizIds": [
+   "q5-cc-08",
+   "q7-cc-06",
+   "q7-cc-08",
+   "q-cc-010",
+   "q2-cc-03",
+   "q10-cc-05",
+   "q3-cc-07",
+   "q4-cc-08",
+   "q2-cc-04",
+   "qd-cc03-e18",
+   "qd-cc03-e10",
+   "qd-cc03-e11",
+   "qd-cc03-e13",
+   "qd-cc03-e2",
+   "qd-cc03-8"
+  ],
+  "challengeQuizIds": [
+   "qm-cc03b-1",
+   "qm-cc03b-2",
+   "qm-cc03b-3"
+  ],
+  "drillQuizIds": [
+   "qd-cc03-1",
+   "qd-cc03-2",
+   "qd-cc03-3",
+   "qd-cc03-4",
+   "qd-cc03-5",
+   "qd-cc03-6",
+   "qd-cc03-7",
+   "qd-cc03-9",
+   "qd-cc03-10",
+   "qd-cc03-11",
+   "qd-cc03-12",
+   "qd-cc03-e1",
+   "qd-cc03-e3",
+   "qd-cc03-e4",
+   "qd-cc03-e5",
+   "qd-cc03-e6",
+   "qd-cc03-e7",
+   "qd-cc03-e8",
+   "qd-cc03-e9",
+   "qd-cc03-e12",
+   "qd-cc03-e14",
+   "qd-cc03-e15",
+   "qd-cc03-e16",
+   "qd-cc03-e17"
+  ],
+  "basicQuizIds": [
+   "b-cc-03-01",
+   "b-cc-03-02",
+   "b-cc-03-03",
+   "b-cc-03-04",
+   "b-cc-03-05",
+   "b-cc-03-06",
+   "b-cc-03-07",
+   "b-cc-03-08",
+   "b-cc-03-09",
+   "b-cc-03-10",
+   "b-cc-03-11",
+   "b-cc-03-12",
+   "b-cc-03-13",
+   "b-cc-03-14",
+   "b-cc-03-15"
+  ]
+ },
+ {
+  "id": "l-cc-04",
+  "title": "AWSグローバルインフラ（リージョン・AZ・エッジ）",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 7,
+  "summary": "世界＝リージョン、リージョンの中に複数のAZ（データセンター群）、利用者の近くにエッジロケーション。この3層構造で覚える。",
+  "sections": [
+   {
+    "heading": "リージョンとアベイラビリティーゾーン",
+    "body": "リージョンは東京・大阪など地理的な大きなまとまり。各リージョンには物理的に離れた複数のアベイラビリティーゾーン（AZ）があります。AZをまたいで配置すると、片方のデータセンターが落ちてもサービスを続けられます。"
+   },
+   {
+    "heading": "エッジロケーション",
+    "body": "エッジロケーションは利用者のより近くにある拠点で、CloudFront（CDN）などが使います。コンテンツを近くから配信することで表示を速くします。"
+   },
+   {
+    "heading": "リージョンの選び方",
+    "body": "①利用者に近い（低遅延）②法令・データ所在地（コンプライアンス）③使いたいサービスがある④料金。この4観点でリージョンを選びます。"
+   }
+  ],
+  "quizIds": [
+   "q-cc-016",
+   "q7-cc-04",
+   "q9-cc-01",
+   "q9-cc-06",
+   "q2-cc-09",
+   "q2-cc-12",
+   "q8-cc-06",
+   "qd-cc04-8",
+   "qd-cc04-13",
+   "qd-cc04-e4",
+   "qd-cc04-4",
+   "qd-cc04-11",
+   "qd-cc04-9",
+   "qd-cc04-e1",
+   "qd-cc04-e15"
+  ],
+  "challengeQuizIds": [
+   "qm-cc04b-1",
+   "qm-cc04b-2",
+   "qm-cc04b-3"
+  ],
+  "drillQuizIds": [
+   "qd-cc04-1",
+   "qd-cc04-2",
+   "qd-cc04-3",
+   "qd-cc04-5",
+   "qd-cc04-6",
+   "qd-cc04-7",
+   "qd-cc04-10",
+   "qd-cc04-12",
+   "qd-cc04-e2",
+   "qd-cc04-e3",
+   "qd-cc04-e5",
+   "qd-cc04-e6",
+   "qd-cc04-e7",
+   "qd-cc04-e8",
+   "qd-cc04-e9",
+   "qd-cc04-e10",
+   "qd-cc04-e11",
+   "qd-cc04-e12",
+   "qd-cc04-e13",
+   "qd-cc04-e14",
+   "qd-cc04-e16",
+   "qd-cc04-e17"
+  ],
+  "basicQuizIds": [
+   "b-cc-04-01",
+   "b-cc-04-02",
+   "b-cc-04-03",
+   "b-cc-04-04",
+   "b-cc-04-05",
+   "b-cc-04-06",
+   "b-cc-04-07",
+   "b-cc-04-08",
+   "b-cc-04-09",
+   "b-cc-04-10",
+   "b-cc-04-11",
+   "b-cc-04-12",
+   "b-cc-04-13",
+   "b-cc-04-14",
+   "b-cc-04-15"
+  ]
+ },
+ {
+  "id": "l-cc-05",
+  "title": "可用性・弾力性・スケーラビリティ",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 7,
+  "summary": "止まらない＝可用性、需要に合わせ自動で増減＝弾力性、大きくできる＝スケーラビリティ。似た言葉を区別する。",
+  "sections": [
+   {
+    "heading": "高可用性（高くする方法）",
+    "body": "1台が壊れても止まらないよう、複数のAZに分散し、ロードバランサーで振り分けます。「単一障害点をなくす」のが高可用性の基本の考え方です。"
+   },
+   {
+    "heading": "弾力性（エラスティシティ）",
+    "body": "アクセスが増えたら自動でサーバーを増やし、減ったら減らす――これが弾力性。Auto Scalingが代表例で、必要な分だけに調整してコストも抑えます。"
+   },
+   {
+    "heading": "スケールアップとスケールアウト",
+    "body": "スケールアップ＝1台を高性能にする（垂直）。スケールアウト＝台数を増やす（水平）。クラウドでは、台数を増やすスケールアウトが柔軟で相性が良いとされます。"
+   }
+  ],
+  "quizIds": [
+   "q7-cc-05",
+   "q7-cc-11",
+   "q10-cc-02",
+   "q11-cc-02",
+   "q-cc-009",
+   "q10-cc-04",
+   "q8-cc-01",
+   "q9-cc-04",
+   "q5-cc-03",
+   "q2-cc-11",
+   "q4-cc-06",
+   "q5-cc-01",
+   "q5-cc-02",
+   "q3-cc-08",
+   "q8-cc-02"
+  ],
+  "challengeQuizIds": [
+   "qm-cc-03",
+   "qm-cc-04"
+  ],
+  "drillQuizIds": [
+   "qd-cc05-1",
+   "qd-cc05-2",
+   "qd-cc05-3",
+   "qd-cc05-4",
+   "qd-cc05-5",
+   "qd-cc05-6",
+   "qd-cc05-7",
+   "qd-cc05-8",
+   "qd-cc05-9",
+   "qd-cc05-10",
+   "qd-cc05-11",
+   "qd-cc05-12",
+   "qd-cc05-13",
+   "qd-cc05-14",
+   "qd-cc05-15",
+   "qd-cc05-16",
+   "qd-cc05-17",
+   "qd-cc05-18",
+   "qd-cc05-19",
+   "qd-cc05-20",
+   "qd-cc05-21",
+   "qd-cc05-22",
+   "qd-cc05-23",
+   "qd-cc05-24",
+   "qd-cc05-25",
+   "qd-cc05-26",
+   "qd-cc05-27",
+   "qd-cc05-e1",
+   "qd-cc05-e2",
+   "qd-cc05-e3",
+   "q6-cc-05"
+  ],
+  "basicQuizIds": [
+   "b-cc-05-01",
+   "b-cc-05-02",
+   "b-cc-05-03",
+   "b-cc-05-04",
+   "b-cc-05-05",
+   "b-cc-05-06",
+   "b-cc-05-07",
+   "b-cc-05-08",
+   "b-cc-05-09",
+   "b-cc-05-10",
+   "b-cc-05-11",
+   "b-cc-05-12",
+   "b-cc-05-13",
+   "b-cc-05-14",
+   "b-cc-05-15"
+  ]
+ },
+ {
+  "id": "l-cc-06",
+  "title": "AWS Well-Architected フレームワーク",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 8,
+  "summary": "良い設計を点検する6つの柱：運用上の優秀性・セキュリティ・信頼性・パフォーマンス効率・コスト最適化・持続可能性。",
+  "sections": [
+   {
+    "heading": "6つの柱とは",
+    "body": "Well-Architectedは「良いクラウド設計のチェックリスト」です。運用上の優秀性／セキュリティ／信頼性／パフォーマンス効率／コスト最適化／持続可能性――この6観点で設計を見直します。"
+   },
+   {
+    "heading": "それぞれのねらい",
+    "body": "信頼性＝障害から回復できるか、パフォーマンス効率＝資源を無駄なく使えるか、コスト最適化＝払いすぎていないか、持続可能性＝環境負荷を減らせるか。柱の名前と目的をペアで覚えます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「この状況はどの柱に当たるか」を問う出題が典型です。例：バックアップや復旧の話→信頼性、無駄な支出の話→コスト最適化。柱の追加（持続可能性）も要チェック。"
+   }
+  ],
+  "quizIds": [
+   "q7-cc-10",
+   "q-cc-003",
+   "q-cc-015",
+   "q2-cc-05",
+   "q2-cc-06",
+   "q8-cc-03",
+   "q9-cc-05",
+   "q5-cc-10",
+   "q3-cc-02",
+   "q4-cc-09",
+   "q3-cc-03",
+   "q-cc-011",
+   "q-cc-022",
+   "q3-cc-01",
+   "q10-cc-07"
+  ],
+  "challengeQuizIds": [
+   "qm-cc-05",
+   "qm-cc-06"
+  ],
+  "drillQuizIds": [
+   "qd-cc06-1",
+   "qd-cc06-2",
+   "qd-cc06-3",
+   "qd-cc06-4",
+   "qd-cc06-5",
+   "qd-cc06-6",
+   "qd-cc06-7",
+   "qd-cc06-8",
+   "qd-cc06-9",
+   "qd-cc06-10",
+   "qd-cc06-11",
+   "qd-cc06-12",
+   "qd-cc06-13",
+   "qd-cc06-14",
+   "qd-cc06-15",
+   "qd-cc06-16",
+   "qd-cc06-17",
+   "qd-cc06-18",
+   "qd-cc06-19",
+   "qd-cc06-20",
+   "qd-cc06-21",
+   "qd-cc06-22",
+   "qd-cc06-e1",
+   "qd-cc06-e2",
+   "qd-cc06-e3",
+   "qd-cc06-e4",
+   "qd-cc06-e5",
+   "qd-cc06-e6",
+   "qd-cc06-e7",
+   "qd-cc06-e8"
+  ],
+  "basicQuizIds": [
+   "b-cc-06-01",
+   "b-cc-06-02",
+   "b-cc-06-03",
+   "b-cc-06-04",
+   "b-cc-06-05",
+   "b-cc-06-06",
+   "b-cc-06-07",
+   "b-cc-06-08",
+   "b-cc-06-09",
+   "b-cc-06-10",
+   "b-cc-06-11",
+   "b-cc-06-12",
+   "b-cc-06-13",
+   "b-cc-06-14",
+   "b-cc-06-15"
+  ]
+ },
+ {
+  "id": "l-cc-07",
+  "title": "クラウド導入フレームワーク（AWS CAF）",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 7,
+  "summary": "組織がクラウドへ移行するときの道しるべ。6つの視点（ビジネス／人／ガバナンス／プラットフォーム／セキュリティ／オペレーション）。",
+  "sections": [
+   {
+    "heading": "AWS CAFとは",
+    "body": "AWS Cloud Adoption Framework（CAF）は、会社全体でクラウド移行を進めるための指針です。技術だけでなく、人や組織の準備も含めて整理します。"
+   },
+   {
+    "heading": "6つのパースペクティブ",
+    "body": "ビジネス・人材（People）・ガバナンスは「経営や組織」の視点、プラットフォーム・セキュリティ・オペレーションは「技術」の視点。前半3つと後半3つで役割が分かれます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「従業員の再教育やスキル移行はどの視点か→People（人材）」のように、視点の担当範囲を問う出題が多いです。CAFは移行の進め方の枠組みだと押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q2-cc-07",
+   "q-cc-005",
+   "q-cc-017",
+   "q4-cc-03",
+   "q5-cc-05",
+   "q8-cc-08",
+   "q6-cc-03",
+   "q6-cc-02",
+   "qd-cc07-7",
+   "qd-cc07-5",
+   "qd-cc07-3",
+   "qd-cc07-6",
+   "qd-cc07-2",
+   "qd-cc07-9",
+   "qd-cc07-10"
+  ],
+  "challengeQuizIds": [
+   "qm-cc07b-1",
+   "qm-cc07b-2",
+   "qm-cc07b-3"
+  ],
+  "drillQuizIds": [
+   "qd-cc07-1",
+   "qd-cc07-4",
+   "qd-cc07-8",
+   "qd-cc07-11",
+   "qd-cc07-e1",
+   "qd-cc07-e2",
+   "qd-cc07-e3",
+   "qd-cc07-e4",
+   "qd-cc07-e5",
+   "qd-cc07-e6",
+   "qd-cc07-e7",
+   "qd-cc07-e8",
+   "qd-cc07-e9",
+   "qd-cc07-e10",
+   "qd-cc07-e11",
+   "qd-cc07-e12",
+   "qd-cc07-e14",
+   "qd-cc07-e15",
+   "qd-cc07-e16",
+   "qd-cc07-e17",
+   "qd-cc07-e18",
+   "qd-cc07-e19"
+  ],
+  "basicQuizIds": [
+   "b-cc-07-01",
+   "b-cc-07-02",
+   "b-cc-07-03",
+   "b-cc-07-04",
+   "b-cc-07-05",
+   "b-cc-07-06",
+   "b-cc-07-07",
+   "b-cc-07-08",
+   "b-cc-07-09",
+   "b-cc-07-10",
+   "b-cc-07-11",
+   "b-cc-07-12",
+   "b-cc-07-13",
+   "b-cc-07-14",
+   "b-cc-07-15"
+  ]
+ },
+ {
+  "id": "l-cc-08",
+  "title": "クラウド移行の戦略（6つのR）",
+  "domain": "cloudConcepts",
+  "estimatedMinutes": 7,
+  "summary": "既存システムをどうクラウドへ運ぶか。リホスト／リプラットフォーム／リファクタ／リパーチェス／リタイア／リテイン。",
+  "sections": [
+   {
+    "heading": "代表的な移行方式",
+    "body": "リホスト（そのまま移す＝リフト＆シフト）、リプラットフォーム（少し手直しして移す）、リファクタリング（作り替える）。手をかけないほど速く、かけるほどクラウドの利点を活かせます。"
+   },
+   {
+    "heading": "残りの3R",
+    "body": "リパーチェス（SaaSなどに買い替え）、リタイア（不要なので廃止）、リテイン（今は残す）。すべてを移す必要はなく「やめる・残す」も立派な戦略です。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「まず速く移したい→リホスト」「クラウド最適化を優先→リファクタ」のように、目的と方式の対応を問われます。移行支援はMigration Hubなどが助けます。"
+   }
+  ],
+  "quizIds": [
+   "q3-cc-06",
+   "q6-cc-07",
+   "q-cc-021",
+   "q2-cc-08",
+   "q4-cc-01",
+   "q8-cc-04",
+   "q4-cc-02",
+   "qd-cc08-e8",
+   "qd-cc08-e12",
+   "qd-cc08-e11",
+   "qd-cc08-e17",
+   "qd-cc08-e5",
+   "qd-cc08-e15",
+   "qd-cc08-8",
+   "qd-cc08-e9"
+  ],
+  "challengeQuizIds": [
+   "qm-cc08b-1",
+   "qm-cc08b-2",
+   "qm-cc08b-3"
+  ],
+  "drillQuizIds": [
+   "qd-cc08-1",
+   "qd-cc08-2",
+   "qd-cc08-3",
+   "qd-cc08-4",
+   "qd-cc08-5",
+   "qd-cc08-6",
+   "qd-cc08-7",
+   "qd-cc08-9",
+   "qd-cc08-10",
+   "qd-cc08-11",
+   "qd-cc08-12",
+   "qd-cc08-13",
+   "qd-cc08-e1",
+   "qd-cc08-e2",
+   "qd-cc08-e3",
+   "qd-cc08-e4",
+   "qd-cc08-e6",
+   "qd-cc08-e7",
+   "qd-cc08-e10",
+   "qd-cc08-e13",
+   "qd-cc08-e14",
+   "qd-cc08-e16"
+  ],
+  "basicQuizIds": [
+   "b-cc-08-01",
+   "b-cc-08-02",
+   "b-cc-08-03",
+   "b-cc-08-04",
+   "b-cc-08-05",
+   "b-cc-08-06",
+   "b-cc-08-07",
+   "b-cc-08-08",
+   "b-cc-08-09",
+   "b-cc-08-10",
+   "b-cc-08-11",
+   "b-cc-08-12",
+   "b-cc-08-13",
+   "b-cc-08-14",
+   "b-cc-08-15"
+  ]
+ },
+ {
+  "id": "l-sec-01",
+  "title": "責任共有モデル",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "AWSは「クラウドそのもの」の安全、利用者は「クラウドの中身」の安全。境界線を正しく引けるかが要。",
+  "sections": [
+   {
+    "heading": "誰が何を守るのか",
+    "body": "AWSはデータセンター・ハードウェア・基盤ソフトなど「クラウドそのもの（of the cloud）」を守ります。利用者はデータ・アクセス権限・OSやアプリの設定など「クラウドの中身（in the cloud）」を守ります。"
+   },
+   {
+    "heading": "サービスで境界が動く",
+    "body": "EC2ではOSのパッチ当ては利用者の責任。一方、S3やLambdaのようなマネージドサービスでは、AWSが担う範囲が広がります。どこまでAWSが面倒を見るかはサービスで変わります。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「データの暗号化・IAM設定・ゲストOSの管理は利用者」「物理セキュリティ・ハイパーバイザーはAWS」が定番。迷ったら中身か・基盤かで切り分けます。"
+   }
+  ],
+  "quizIds": [
+   "q7-sec-03",
+   "q10-sec-07",
+   "q-sec-001",
+   "q-sec-016",
+   "q3-sec-10",
+   "q12-sec-24",
+   "q9-sec-05",
+   "q6-sec-04",
+   "q5-sec-07",
+   "q-sec-017",
+   "q4-sec-02",
+   "q8-sec-08",
+   "q2-sec-04",
+   "qd-sec01-12",
+   "qd-sec01-14"
+  ],
+  "challengeQuizIds": [
+   "qm-sec-01",
+   "qm-sec-02"
+  ],
+  "drillQuizIds": [
+   "qd-sec01-1",
+   "qd-sec01-2",
+   "qd-sec01-3",
+   "qd-sec01-4",
+   "qd-sec01-5",
+   "qd-sec01-6",
+   "qd-sec01-7",
+   "qd-sec01-8",
+   "qd-sec01-9",
+   "qd-sec01-10",
+   "qd-sec01-11",
+   "qd-sec01-13",
+   "qd-sec01-15",
+   "qd-sec01-16",
+   "qd-sec01-17",
+   "qd-sec01-18",
+   "qd-sec01-19",
+   "qd-sec01-20",
+   "qd-sec01-e1",
+   "qd-sec01-e2",
+   "qd-sec01-e3",
+   "qd-sec01-e4",
+   "qd-sec01-e5",
+   "qd-sec01-e6",
+   "qd-sec01-e7",
+   "qd-sec01-e8",
+   "qd-sec01-e9",
+   "qd-sec01-e10"
+  ],
+  "basicQuizIds": [
+   "b-sec-01-01",
+   "b-sec-01-02",
+   "b-sec-01-03",
+   "b-sec-01-04",
+   "b-sec-01-05",
+   "b-sec-01-06",
+   "b-sec-01-07",
+   "b-sec-01-08",
+   "b-sec-01-09",
+   "b-sec-01-10",
+   "b-sec-01-11",
+   "b-sec-01-12",
+   "b-sec-01-13",
+   "b-sec-01-14",
+   "b-sec-01-15"
+  ]
+ },
+ {
+  "id": "l-sec-02",
+  "title": "IAMの基本（ユーザー・グループ・ロール）",
+  "domain": "security",
+  "estimatedMinutes": 8,
+  "summary": "「誰が・何を・どこまで」できるかを管理する仕組み。ユーザー／グループ／ロール／ポリシーの4つを区別する。",
+  "sections": [
+   {
+    "heading": "4つの登場人物",
+    "body": "ユーザー＝人やアプリのID、グループ＝ユーザーの束（権限をまとめて付与）、ロール＝一時的に権限を借りる仕組み、ポリシー＝許可の内容を書いた文書。この4つでアクセスを設計します。"
+   },
+   {
+    "heading": "ロールが便利な理由",
+    "body": "ロールはパスワードや長期キーを配らずに権限を渡せます。EC2にロールを付ければ、そのサーバーは鍵を持たずにS3へアクセスできます。サービス間の連携はロールが基本です。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「EC2からS3にアクセスさせたい→IAMロール」「複数ユーザーに同じ権限→グループ」が頻出。アクセスキーの直書きは避ける、が鉄則です。"
+   }
+  ],
+  "quizIds": [
+   "q-sec-002",
+   "q-sec-007",
+   "q2-sec-01",
+   "q3-sec-13",
+   "q4-sec-10",
+   "q7-sec-07",
+   "q8-sec-10",
+   "q3-sec-05",
+   "q6-sec-06",
+   "q12-sec-03",
+   "q10-sec-05",
+   "q12-sec-15",
+   "q7-sec-10",
+   "q9-sec-04",
+   "q11-sec-01"
+  ],
+  "challengeQuizIds": [
+   "qm-sec02b-1",
+   "qm-sec02b-2",
+   "qm-sec02b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec02-1",
+   "qd-sec02-2",
+   "qd-sec02-3",
+   "qd-sec02-4",
+   "qd-sec02-5",
+   "qd-sec02-6",
+   "qd-sec02-7",
+   "qd-sec02-8",
+   "qd-sec02-9",
+   "qd-sec02-10",
+   "qd-sec02-11",
+   "qd-sec02-e1",
+   "qd-sec02-e2",
+   "qd-sec02-e3",
+   "qd-sec02-e4",
+   "qd-sec02-e5",
+   "qd-sec02-e6",
+   "qd-sec02-e7",
+   "qd-sec02-e8",
+   "qd-sec02-e9",
+   "qd-sec02-e10",
+   "qd-sec02-e11",
+   "qd-sec02-e12",
+   "qd-sec02-e13",
+   "qd-sec02-e14",
+   "qd-sec02-e15",
+   "qd-sec02-e16",
+   "qd-sec02-e17",
+   "qd-sec02-e18",
+   "qd-sec02-e19",
+   "q-sec-008",
+   "q2-sec-02",
+   "q2-sec-14",
+   "q3-sec-09",
+   "q4-sec-03",
+   "q4-sec-07",
+   "q5-sec-01",
+   "q5-sec-10",
+   "q6-sec-10",
+   "q9-sec-08",
+   "q12-sec-02",
+   "q12-sec-14",
+   "q12-sec-19",
+   "q12-sec-25"
+  ],
+  "basicQuizIds": [
+   "b-sec-02-01",
+   "b-sec-02-02",
+   "b-sec-02-03",
+   "b-sec-02-04",
+   "b-sec-02-05",
+   "b-sec-02-06",
+   "b-sec-02-07",
+   "b-sec-02-08",
+   "b-sec-02-09",
+   "b-sec-02-10",
+   "b-sec-02-11",
+   "b-sec-02-12",
+   "b-sec-02-13",
+   "b-sec-02-14",
+   "b-sec-02-15"
+  ]
+ },
+ {
+  "id": "l-sec-03",
+  "title": "IAMポリシーと最小権限の原則",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "許可はJSONのポリシーで表す。必要な権限だけを与える「最小権限」が全体を貫く原則。",
+  "sections": [
+   {
+    "heading": "ポリシーの読み方",
+    "body": "ポリシーは「誰に（Principal）／何を（Action）／どのリソースに（Resource）／許可か拒否か（Effect）」を書いたルールです。明示的な拒否（Deny）は許可より常に優先されます。"
+   },
+   {
+    "heading": "最小権限の原則",
+    "body": "最初から広い権限を与えず、業務に必要な最小限だけを許可し、足りなければ足す――これが最小権限。事故や不正アクセスの被害を小さく抑えます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「とりあえず管理者権限（AdministratorAccess）を全員に」はアンチパターン。役割ごとにポリシーを分け、グループで配るのが正解です。"
+   }
+  ],
+  "quizIds": [
+   "q6-sec-01",
+   "q7-sec-01",
+   "q7-sec-02",
+   "q7-sec-05",
+   "q9-sec-01",
+   "q6-sec-02",
+   "q12-sec-06",
+   "q5-sec-03",
+   "qd-sec03-e2",
+   "qd-sec03-18",
+   "qd-sec03-13",
+   "qd-sec03-e5",
+   "qd-sec03-e4",
+   "qd-sec03-15",
+   "qd-sec03-e3"
+  ],
+  "challengeQuizIds": [
+   "qm-sec-03",
+   "qm-sec-04",
+   "qm-sec-05"
+  ],
+  "drillQuizIds": [
+   "qd-sec03-1",
+   "qd-sec03-2",
+   "qd-sec03-3",
+   "qd-sec03-4",
+   "qd-sec03-5",
+   "qd-sec03-6",
+   "qd-sec03-7",
+   "qd-sec03-8",
+   "qd-sec03-9",
+   "qd-sec03-10",
+   "qd-sec03-e8",
+   "qd-sec03-12",
+   "qd-sec03-14",
+   "qd-sec03-16",
+   "qd-sec03-17",
+   "qd-sec03-19",
+   "qd-sec03-20",
+   "qd-sec03-21",
+   "qd-sec03-22",
+   "qd-sec03-e1",
+   "qd-sec03-e6",
+   "qd-sec03-e7"
+  ],
+  "basicQuizIds": [
+   "b-sec-03-01",
+   "b-sec-03-02",
+   "b-sec-03-03",
+   "b-sec-03-04",
+   "b-sec-03-05",
+   "b-sec-03-06",
+   "b-sec-03-07",
+   "b-sec-03-08",
+   "b-sec-03-09",
+   "b-sec-03-10",
+   "b-sec-03-11",
+   "b-sec-03-12",
+   "b-sec-03-13",
+   "b-sec-03-14",
+   "b-sec-03-15"
+  ]
+ },
+ {
+  "id": "l-sec-04",
+  "title": "ルートユーザーの保護とMFA",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "アカウント最強のルートユーザーは金庫にしまう。MFAで二重ロック、普段は権限を絞ったIAMユーザーで作業。",
+  "sections": [
+   {
+    "heading": "ルートユーザーとは",
+    "body": "アカウント作成時のメールアドレスでログインする最上位アカウント。すべての操作ができるため、日常業務には使わず、大事にしまっておくのが原則です。"
+   },
+   {
+    "heading": "MFA（多要素認証）",
+    "body": "MFAはパスワードに加えて、スマホアプリの数字コードなど2つ目の鍵を要求する仕組み。パスワードが漏れても、もう一つが無ければ入れません。ルートユーザーには必ず有効化します。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「ルートでしかできない作業」（アカウント解約・サポートプラン変更など）以外は、IAMユーザー／ロールで行う。ルートのアクセスキーは作らない・削除する、が定番です。"
+   }
+  ],
+  "quizIds": [
+   "q10-sec-01",
+   "q-sec-003",
+   "q-sec-006",
+   "q-sec-020",
+   "q-sec-023",
+   "q5-sec-04",
+   "q12-sec-01",
+   "q12-sec-13",
+   "qd-sec04-7",
+   "qd-sec04-11",
+   "qd-sec04-e9",
+   "qd-sec04-6",
+   "qd-sec04-e13",
+   "qd-sec04-e2",
+   "qd-sec04-e19"
+  ],
+  "challengeQuizIds": [
+   "qm-sec04b-1",
+   "qm-sec04b-2",
+   "qm-sec04b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec04-1",
+   "qd-sec04-2",
+   "qd-sec04-3",
+   "qd-sec04-4",
+   "qd-sec04-5",
+   "qd-sec04-8",
+   "qd-sec04-e11",
+   "qd-sec04-10",
+   "qd-sec04-e1",
+   "qd-sec04-e3",
+   "qd-sec04-e4",
+   "qd-sec04-e5",
+   "qd-sec04-e6",
+   "qd-sec04-e7",
+   "qd-sec04-e8",
+   "qd-sec04-e10",
+   "qd-sec04-e12",
+   "qd-sec04-e14",
+   "qd-sec04-e15",
+   "qd-sec04-e16",
+   "qd-sec04-e17",
+   "qd-sec04-e18"
+  ],
+  "basicQuizIds": [
+   "b-sec-04-01",
+   "b-sec-04-02",
+   "b-sec-04-03",
+   "b-sec-04-04",
+   "b-sec-04-05",
+   "b-sec-04-06",
+   "b-sec-04-07",
+   "b-sec-04-08",
+   "b-sec-04-09",
+   "b-sec-04-10",
+   "b-sec-04-11",
+   "b-sec-04-12",
+   "b-sec-04-13",
+   "b-sec-04-14",
+   "b-sec-04-15"
+  ]
+ },
+ {
+  "id": "l-sec-05",
+  "title": "認証とアクセスの集中管理",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "複数アカウント・大勢のユーザーをまとめて管理。IAM Identity Center／Cognito／Directory Service／STSの役割分担。",
+  "sections": [
+   {
+    "heading": "社員のログインを一元化",
+    "body": "IAM Identity Center（旧AWS SSO）は、一度のログインで複数のAWSアカウントやアプリに入れるようにします。既存の社内IDと連携させ、管理を一つにまとめられます。"
+   },
+   {
+    "heading": "アプリ利用者の認証",
+    "body": "Amazon Cognitoは、自社アプリのサインアップ／ログイン機能を提供します。エンドユーザー（アプリの利用者）の認証はCognito、と覚えます。"
+   },
+   {
+    "heading": "一時的な権限とAD連携",
+    "body": "STSは短時間だけ有効な一時認証情報を発行します。Directory Serviceは社内のMicrosoft Active DirectoryをAWSと連携させるサービスです。"
+   }
+  ],
+  "quizIds": [
+   "q2-sec-03",
+   "q12-sec-20",
+   "q12-sec-21",
+   "q-sec-028",
+   "q3-sec-06",
+   "q5-sec-05",
+   "q5-sec-02",
+   "q12-sec-22",
+   "q8-sec-05",
+   "qd-sec05-e9",
+   "qd-sec05-5",
+   "qd-sec05-12",
+   "qd-sec05-e14",
+   "qd-sec05-7",
+   "qd-sec05-6"
+  ],
+  "challengeQuizIds": [
+   "qm-sec05b-1",
+   "qm-sec05b-2",
+   "qm-sec05b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec05-1",
+   "qd-sec05-2",
+   "qd-sec05-3",
+   "qd-sec05-4",
+   "qd-sec05-8",
+   "qd-sec05-e10",
+   "qd-sec05-e11",
+   "qd-sec05-11",
+   "qd-sec05-e1",
+   "qd-sec05-e2",
+   "qd-sec05-e3",
+   "qd-sec05-e4",
+   "qd-sec05-e5",
+   "qd-sec05-e6",
+   "qd-sec05-e7",
+   "qd-sec05-e8",
+   "qd-sec05-e12",
+   "qd-sec05-e13",
+   "qd-sec05-e15",
+   "qd-sec05-e16",
+   "qd-sec05-e17",
+   "qd-sec05-e18"
+  ],
+  "basicQuizIds": [
+   "b-sec-05-01",
+   "b-sec-05-02",
+   "b-sec-05-03",
+   "b-sec-05-04",
+   "b-sec-05-05",
+   "b-sec-05-06",
+   "b-sec-05-07",
+   "b-sec-05-08",
+   "b-sec-05-09",
+   "b-sec-05-10",
+   "b-sec-05-11",
+   "b-sec-05-12",
+   "b-sec-05-13",
+   "b-sec-05-14",
+   "b-sec-05-15"
+  ]
+ },
+ {
+  "id": "l-sec-06",
+  "title": "データの暗号化とKMS",
+  "domain": "security",
+  "estimatedMinutes": 8,
+  "summary": "保存中・通信中のデータを鍵で守る。鍵の管理はKMS、証明書はACM、パスワードなどはSecrets Manager。",
+  "sections": [
+   {
+    "heading": "2種類の暗号化",
+    "body": "保存データの暗号化（at rest：S3やEBSに置いたまま暗号化）と、通信データの暗号化（in transit：HTTPS/TLSでやり取りを暗号化）。この2つを分けて考えます。"
+   },
+   {
+    "heading": "鍵を管理するKMS",
+    "body": "AWS KMS（Key Management Service）は暗号鍵の作成・管理・利用を一元化します。多くのサービスがKMSと連携し、チェック1つで暗号化できます。"
+   },
+   {
+    "heading": "証明書と機密情報",
+    "body": "ACM（Certificate Manager）はHTTPS用のTLS証明書を無料で発行・自動更新。Secrets Managerはデータベースのパスワードなどを安全に保管し、自動ローテーションもできます。"
+   }
+  ],
+  "quizIds": [
+   "q7-sec-04",
+   "q-sec-018",
+   "q2-sec-05",
+   "q2-sec-11",
+   "q3-sec-04",
+   "q8-sec-07",
+   "q12-sec-23",
+   "q12-sec-04",
+   "q10-sec-02",
+   "q5-sec-09",
+   "q9-sec-02",
+   "q4-sec-12",
+   "q8-sec-01",
+   "q-sec-011",
+   "q4-sec-01"
+  ],
+  "challengeQuizIds": [
+   "qm-sec-06",
+   "qm-sec-07"
+  ],
+  "drillQuizIds": [
+   "qd-sec06-1",
+   "qd-sec06-2",
+   "qd-sec06-3",
+   "qd-sec06-4",
+   "qd-sec06-5",
+   "qd-sec06-6",
+   "qd-sec06-7",
+   "qd-sec06-8",
+   "qd-sec06-9",
+   "qd-sec06-10",
+   "qd-sec06-11",
+   "qd-sec06-12",
+   "qd-sec06-13",
+   "qd-sec06-14",
+   "qd-sec06-15",
+   "qd-sec06-16",
+   "qd-sec06-17",
+   "qd-sec06-e1",
+   "qd-sec06-e2",
+   "qd-sec06-e3",
+   "qd-sec06-e4",
+   "qd-sec06-e5",
+   "qd-sec06-e6",
+   "qd-sec06-e7",
+   "qd-sec06-e8",
+   "qd-sec06-e11",
+   "qd-sec06-e12",
+   "qd-sec06-e13",
+   "q-sec-019",
+   "q3-sec-03",
+   "q6-sec-03",
+   "q12-sec-05",
+   "q12-sec-18"
+  ],
+  "basicQuizIds": [
+   "b-sec-06-01",
+   "b-sec-06-02",
+   "b-sec-06-03",
+   "b-sec-06-04",
+   "b-sec-06-05",
+   "b-sec-06-06",
+   "b-sec-06-07",
+   "b-sec-06-08",
+   "b-sec-06-09",
+   "b-sec-06-10",
+   "b-sec-06-11",
+   "b-sec-06-12",
+   "b-sec-06-13",
+   "b-sec-06-14",
+   "b-sec-06-15"
+  ]
+ },
+ {
+  "id": "l-sec-07",
+  "title": "脅威の検知（GuardDuty・Inspector・Macie）",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "怪しい動きを見張るGuardDuty、弱点を診断するInspector、個人情報を見つけるMacie。役割で区別する。",
+  "sections": [
+   {
+    "heading": "GuardDuty＝不審な挙動の監視",
+    "body": "GuardDutyはログを自動で分析し、不正アクセスや異常な通信などの怪しい動きを検知します。見張り役の脅威検知サービス、と覚えます。"
+   },
+   {
+    "heading": "Inspector＝脆弱性の診断",
+    "body": "Amazon InspectorはEC2やコンテナイメージを自動スキャンし、既知の脆弱性や危険な設定を洗い出します。弱点の健康診断がInspectorです。"
+   },
+   {
+    "heading": "Macie＝機微データの発見",
+    "body": "Amazon MacieはS3の中から個人情報（氏名・クレカ番号など）を機械学習で見つけ出します。どこに大事なデータがあるかを教えてくれます。"
+   }
+  ],
+  "quizIds": [
+   "q7-sec-06",
+   "q-sec-004",
+   "q-sec-010",
+   "q-sec-026",
+   "q2-sec-06",
+   "q12-sec-08",
+   "q3-sec-12",
+   "q5-sec-08",
+   "q6-sec-07",
+   "q9-sec-03",
+   "q10-sec-03",
+   "qm-sec-10",
+   "q3-sec-14",
+   "q-sec-013",
+   "q12-sec-09"
+  ],
+  "challengeQuizIds": [
+   "qm-sec07b-1",
+   "qm-sec07b-2",
+   "qm-sec07b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec07-1",
+   "qd-sec07-2",
+   "qd-sec07-3",
+   "qd-sec07-4",
+   "qd-sec07-5",
+   "qd-sec07-6",
+   "qd-sec07-7",
+   "qd-sec07-8",
+   "qd-sec07-e10",
+   "qd-sec07-e9",
+   "qd-sec07-11",
+   "qd-sec07-12",
+   "qd-sec07-e1",
+   "qd-sec07-e2",
+   "qd-sec07-e3",
+   "qd-sec07-e4",
+   "qd-sec07-e5",
+   "qd-sec07-e6",
+   "qd-sec07-e7",
+   "qd-sec07-e8",
+   "qd-sec07-e11",
+   "qd-sec07-e12",
+   "qd-sec07-e13",
+   "qd-sec07-e14",
+   "qd-sec07-e15",
+   "qd-sec07-e16",
+   "qd-sec07-e17",
+   "qd-sec07-e18",
+   "q3-sec-02",
+   "q4-sec-06",
+   "q4-sec-11",
+   "q6-sec-05",
+   "q8-sec-02",
+   "q8-sec-03",
+   "q10-sec-06",
+   "q11-sec-02",
+   "q12-sec-26"
+  ],
+  "basicQuizIds": [
+   "b-sec-07-01",
+   "b-sec-07-02",
+   "b-sec-07-03",
+   "b-sec-07-04",
+   "b-sec-07-05",
+   "b-sec-07-06",
+   "b-sec-07-07",
+   "b-sec-07-08",
+   "b-sec-07-09",
+   "b-sec-07-10",
+   "b-sec-07-11",
+   "b-sec-07-12",
+   "b-sec-07-13",
+   "b-sec-07-14",
+   "b-sec-07-15"
+  ]
+ },
+ {
+  "id": "l-sec-08",
+  "title": "ネットワークとアプリの防御",
+  "domain": "security",
+  "estimatedMinutes": 7,
+  "summary": "サーバーの門番＝セキュリティグループ、Webの盾＝WAF、DDoS対策＝Shield。境界の守りを整理する。",
+  "sections": [
+   {
+    "heading": "セキュリティグループとNACL",
+    "body": "セキュリティグループはインスタンス単位の仮想ファイアウォールで、許可した通信だけを通します（ステートフル）。ネットワークACLはサブネット単位で通信を制御します（ステートレス）。"
+   },
+   {
+    "heading": "WAFで攻撃を弾く",
+    "body": "AWS WAFはWebアプリを狙うSQLインジェクションやクロスサイトスクリプティングなどの攻撃をルールで遮断します。CloudFrontやALBの前に置いて使います。"
+   },
+   {
+    "heading": "ShieldでDDoS対策",
+    "body": "AWS ShieldはDDoS攻撃（大量アクセスでサービスを止める攻撃）から守ります。Standardは無料で自動適用、Advancedは高度な保護と支援が付きます。"
+   }
+  ],
+  "quizIds": [
+   "q-sec-009",
+   "q-sec-024",
+   "q2-sec-12",
+   "q7-sec-08",
+   "q9-sec-06",
+   "q12-sec-17",
+   "q2-sec-08",
+   "q12-sec-16",
+   "q3-sec-01",
+   "q12-sec-07",
+   "q4-sec-09",
+   "q8-sec-04",
+   "q4-sec-04",
+   "q6-sec-08",
+   "q-sec-014"
+  ],
+  "challengeQuizIds": [
+   "qm-sec-08",
+   "qm-sec-09"
+  ],
+  "drillQuizIds": [
+   "qd-sec08-2",
+   "qd-sec08-3",
+   "qd-sec08-4",
+   "qd-sec08-5",
+   "qd-sec08-6",
+   "qd-sec08-7",
+   "qd-sec08-8",
+   "qd-sec08-9",
+   "qd-sec08-10",
+   "qd-sec08-11",
+   "qd-sec08-e11",
+   "qd-sec08-13",
+   "qd-sec08-14",
+   "qd-sec08-15",
+   "qd-sec08-e1",
+   "qd-sec08-e2",
+   "qd-sec08-e3",
+   "qd-sec08-e4",
+   "qd-sec08-e5",
+   "qd-sec08-e6",
+   "qd-sec08-e7",
+   "qd-sec08-e8",
+   "qd-sec08-e9",
+   "qd-sec08-e12",
+   "qd-sec08-e13",
+   "qd-sec08-e14",
+   "qd-sec08-e15",
+   "q2-sec-10"
+  ],
+  "basicQuizIds": [
+   "b-sec-08-01",
+   "b-sec-08-02",
+   "b-sec-08-03",
+   "b-sec-08-04",
+   "b-sec-08-05",
+   "b-sec-08-06",
+   "b-sec-08-07",
+   "b-sec-08-08",
+   "b-sec-08-09",
+   "b-sec-08-10",
+   "b-sec-08-11",
+   "b-sec-08-12",
+   "b-sec-08-13",
+   "b-sec-08-14",
+   "b-sec-08-15"
+  ]
+ },
+ {
+  "id": "l-sec-09",
+  "title": "監査とガバナンス",
+  "domain": "security",
+  "estimatedMinutes": 8,
+  "summary": "操作の記録＝CloudTrail、設定の監視＝Config、複数アカウント統制＝Organizations／Control Tower。",
+  "sections": [
+   {
+    "heading": "誰が何をしたか（CloudTrail）",
+    "body": "AWS CloudTrailは「いつ・誰が・どのAPIを呼んだか」を記録します。不正操作の調査や監査証跡に使う操作の履歴です。"
+   },
+   {
+    "heading": "設定は正しいか（Config）",
+    "body": "AWS Configはリソースの設定変更を追跡し、ルール（例：S3は暗号化必須）に違反していないか継続的に評価します。あるべき状態からのズレを検知します。"
+   },
+   {
+    "heading": "複数アカウントの統制",
+    "body": "AWS Organizationsで複数アカウントを束ね、SCP（サービスコントロールポリシー）で全体の上限を決めます。Control Towerは安全な複数アカウント環境をひな形から自動構築します。"
+   }
+  ],
+  "quizIds": [
+   "q-sec-012",
+   "q3-sec-08",
+   "q8-sec-09",
+   "q12-sec-11",
+   "q-sec-022",
+   "q2-sec-07",
+   "q3-sec-11",
+   "q4-sec-08",
+   "q12-sec-12",
+   "q12-sec-10",
+   "q8-sec-06",
+   "q-sec-025",
+   "q-sec-015",
+   "q2-sec-09",
+   "qd-sec09-15"
+  ],
+  "challengeQuizIds": [
+   "qm-sec09b-1",
+   "qm-sec09b-2",
+   "qm-sec09b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec09-1",
+   "qd-sec09-2",
+   "qd-sec09-3",
+   "qd-sec09-4",
+   "qd-sec09-5",
+   "qd-sec09-6",
+   "qd-sec09-7",
+   "qd-sec09-8",
+   "qd-sec09-9",
+   "qd-sec09-10",
+   "qd-sec09-e9",
+   "qd-sec09-12",
+   "qd-sec09-e13",
+   "qd-sec09-14",
+   "qd-sec09-e1",
+   "qd-sec09-e2",
+   "qd-sec09-e3",
+   "qd-sec09-e4",
+   "qd-sec09-e5",
+   "qd-sec09-e6",
+   "qd-sec09-e7",
+   "qd-sec09-e8",
+   "qd-sec09-e11",
+   "qd-sec09-e12",
+   "qd-sec09-e14",
+   "qd-sec09-e15"
+  ],
+  "basicQuizIds": [
+   "b-sec-09-01",
+   "b-sec-09-02",
+   "b-sec-09-03",
+   "b-sec-09-04",
+   "b-sec-09-05",
+   "b-sec-09-06",
+   "b-sec-09-07",
+   "b-sec-09-08",
+   "b-sec-09-09",
+   "b-sec-09-10",
+   "b-sec-09-11",
+   "b-sec-09-12",
+   "b-sec-09-13",
+   "b-sec-09-14",
+   "b-sec-09-15"
+  ]
+ },
+ {
+  "id": "l-sec-10",
+  "title": "コンプライアンスと監査資料（Artifact）",
+  "domain": "security",
+  "estimatedMinutes": 6,
+  "summary": "第三者認証の証拠はArtifactで入手。コンプライアンスもまた責任共有で成り立つ。",
+  "sections": [
+   {
+    "heading": "AWS Artifactとは",
+    "body": "AWS Artifactは、SOCレポートやISO認証などAWSが取得した第三者監査の報告書をダウンロードできる場所です。監査対応でAWS側の証拠が必要なとき使います。"
+   },
+   {
+    "heading": "コンプライアンスの分担",
+    "body": "法令順守もまた責任共有です。AWSは基盤の認証を取得しますが、利用者は自分の使い方（データの扱い・設定）が規制に合っているかを担保します。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「監査人にAWSの準拠証明を提出したい→Artifact」が定番。準拠の対象範囲（自社設定は自社責任）も併せて問われます。"
+   }
+  ],
+  "quizIds": [
+   "q-sec-021",
+   "q3-sec-07",
+   "q4-sec-05",
+   "q6-sec-09",
+   "q7-sec-09",
+   "q10-sec-04",
+   "q-sec-005",
+   "q2-sec-13",
+   "q9-sec-07",
+   "q-sec-027",
+   "q5-sec-06",
+   "qd-sec10-9",
+   "qd-sec10-5",
+   "qd-sec10-e15",
+   "qd-sec10-4"
+  ],
+  "challengeQuizIds": [
+   "qm-sec10b-1",
+   "qm-sec10b-2",
+   "qm-sec10b-3"
+  ],
+  "drillQuizIds": [
+   "qd-sec10-1",
+   "qd-sec10-2",
+   "qd-sec10-3",
+   "qd-sec10-6",
+   "qd-sec10-e6",
+   "qd-sec10-e13",
+   "qd-sec10-10",
+   "qd-sec10-e1",
+   "qd-sec10-e2",
+   "qd-sec10-e3",
+   "qd-sec10-e4",
+   "qd-sec10-e5",
+   "qd-sec10-e7",
+   "qd-sec10-e8",
+   "qd-sec10-e9",
+   "qd-sec10-e10",
+   "qd-sec10-e11",
+   "qd-sec10-e12",
+   "qd-sec10-e14",
+   "qd-sec10-e16",
+   "qd-sec10-e17",
+   "qd-sec10-e18",
+   "qd-sec10-e19",
+   "qd-sec10-e20"
+  ],
+  "basicQuizIds": [
+   "b-sec-10-01",
+   "b-sec-10-02",
+   "b-sec-10-03",
+   "b-sec-10-04",
+   "b-sec-10-05",
+   "b-sec-10-06",
+   "b-sec-10-07",
+   "b-sec-10-08",
+   "b-sec-10-09",
+   "b-sec-10-10",
+   "b-sec-10-11",
+   "b-sec-10-12",
+   "b-sec-10-13",
+   "b-sec-10-14",
+   "b-sec-10-15"
+  ]
+ },
+ {
+  "id": "l-tec-01",
+  "title": "まず押さえる主要サービス（EC2・S3・RDS・Lambda）",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "EC2＝仮想サーバー、S3＝保管箱、RDS＝管理を任せるSQL DB、Lambda＝サーバーレス実行。役割の違いで覚える。",
+  "sections": [
+   {
+    "heading": "計算する：EC2とLambda",
+    "body": "EC2は自由度の高い仮想サーバーで、OSから自分で管理します。Lambdaはサーバーを意識せずコードを動かすサーバーレスで、使った分だけ課金。常時起動しない処理に向きます。"
+   },
+   {
+    "heading": "保存する：S3とRDS",
+    "body": "S3は画像やバックアップなどファイルを入れるオブジェクトストレージ。RDSはMySQLなど表形式のデータベースをAWSに管理してもらうサービスです。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「役割で覚える」のが攻略法。サーバー＝EC2/Lambda、ファイル＝S3、SQL DB＝RDS、NoSQL＝DynamoDB。混同しやすいので対比で整理します。"
+   }
+  ],
+  "quizIds": [
+   "q-tec-001",
+   "q7-tech-01",
+   "q2-tech-01",
+   "q3-tech-01",
+   "q4-tech-12",
+   "q11-tech-08",
+   "q10-tech-15",
+   "q6-tech-03",
+   "q9-tech-02",
+   "q10-tech-09",
+   "q9-tech-04",
+   "q10-tech-16",
+   "q9-tech-03",
+   "q8-tech-01",
+   "qd-tec01-e10"
+  ],
+  "challengeQuizIds": [
+   "qm-tec01b-1",
+   "qm-tec01b-2",
+   "qm-tec01b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec01-1",
+   "qd-tec01-2",
+   "qd-tec01-3",
+   "qd-tec01-4",
+   "qd-tec01-5",
+   "qd-tec01-6",
+   "qd-tec01-7",
+   "qd-tec01-8",
+   "qd-tec01-9",
+   "qd-tec01-10",
+   "qd-tec01-11",
+   "qd-tec01-12",
+   "qd-tec01-13",
+   "qd-tec01-14",
+   "qd-tec01-15",
+   "qd-tec03-e8",
+   "qd-tec04-e12",
+   "qd-tec01-18",
+   "qd-tec01-19",
+   "qd-tec01-e1",
+   "qd-tec01-e2",
+   "qd-tec01-e3",
+   "qd-tec01-e4",
+   "qd-tec01-e5",
+   "qd-tec01-e6",
+   "qd-tec01-e7",
+   "qd-tec01-e8",
+   "qd-tec01-e9",
+   "qd-tec01-e11"
+  ],
+  "basicQuizIds": [
+   "b-tec-01-01",
+   "b-tec-01-02",
+   "b-tec-01-03",
+   "b-tec-01-04",
+   "b-tec-01-05",
+   "b-tec-01-06",
+   "b-tec-01-07",
+   "b-tec-01-08",
+   "b-tec-01-09",
+   "b-tec-01-10",
+   "b-tec-01-11",
+   "b-tec-01-12",
+   "b-tec-01-13",
+   "b-tec-01-14",
+   "b-tec-01-15"
+  ]
+ },
+ {
+  "id": "l-tec-02",
+  "title": "コンピューティング：EC2を理解する",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "EC2は自由度の高い仮想サーバー。インスタンスタイプ／AMI／EBSの関係と、責任範囲を押さえる。",
+  "sections": [
+   {
+    "heading": "EC2の基本構成",
+    "body": "EC2はAMI（OSの雛形）からインスタンス（仮想サーバー）を起動し、EBS（仮想ディスク）を接続して使います。用途に応じて汎用・計算特化・メモリ特化などインスタンスタイプを選びます。"
+   },
+   {
+    "heading": "利用者の責任",
+    "body": "EC2はIaaS寄りで自由度が高い反面、OSのパッチ・ミドルウェア・アプリ・セキュリティグループ設定は利用者の責任です。責任共有モデルの中身を担当します。"
+   },
+   {
+    "heading": "軽く始めたいなら",
+    "body": "サーバー管理を最小限にしたいなら、簡単な構成の Lightsail や、コンテナ／サーバーレスも選択肢。まずEC2を基準に他と比較する視点を持ちます。"
+   }
+  ],
+  "quizIds": [
+   "q5-tech-13",
+   "q6-tech-19",
+   "q7-tech-10",
+   "q8-tech-17",
+   "q9-tech-12",
+   "q9-tech-08",
+   "q5-tech-04",
+   "q10-tech-13",
+   "q6-tech-04",
+   "q3-tech-07",
+   "q4-tech-04",
+   "q6-tech-20",
+   "qd-tec02-e12",
+   "qd-tec02-9",
+   "qd-tec02-e3"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-01",
+   "qm-tec-02"
+  ],
+  "drillQuizIds": [
+   "qd-tec02-1",
+   "qd-tec02-3",
+   "qd-tec02-4",
+   "qd-tec02-5",
+   "qd-tec02-6",
+   "qd-tec02-7",
+   "qd-tec02-8",
+   "qd-tec02-10",
+   "qd-tec02-e9",
+   "qd-tec02-12",
+   "qd-tec02-13",
+   "qd-tec02-14",
+   "qd-tec02-e1",
+   "qd-tec02-e2",
+   "qd-tec02-e4",
+   "qd-tec02-e5",
+   "qd-tec02-e6",
+   "qd-tec02-e7",
+   "qd-tec02-e8",
+   "qd-tec02-e10",
+   "qd-tec02-e11",
+   "qd-tec02-e13",
+   "qd-tec02-e14",
+   "qd-tec02-e15",
+   "qd-tec02-e16"
+  ],
+  "basicQuizIds": [
+   "b-tec-02-01",
+   "b-tec-02-02",
+   "b-tec-02-03",
+   "b-tec-02-04",
+   "b-tec-02-05",
+   "b-tec-02-06",
+   "b-tec-02-07",
+   "b-tec-02-08",
+   "b-tec-02-09",
+   "b-tec-02-10",
+   "b-tec-02-11",
+   "b-tec-02-12",
+   "b-tec-02-13",
+   "b-tec-02-14",
+   "b-tec-02-15"
+  ]
+ },
+ {
+  "id": "l-tec-03",
+  "title": "サーバーレスとコンテナ",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "サーバー管理ゼロ＝Lambda／Fargate。コンテナの入れ物＝ECS／EKS、置き場＝ECR。運用負荷で対比する。",
+  "sections": [
+   {
+    "heading": "サーバーレスとは",
+    "body": "Lambdaはサーバーの用意・管理なしにコードを実行し、呼ばれたときだけ動いて使った分だけ課金。常時起動のコスト・運用が不要で、イベント駆動の処理に最適です。"
+   },
+   {
+    "heading": "コンテナサービス",
+    "body": "コンテナはアプリを箱に固めて動かす技術。ECSとEKS（Kubernetes）はコンテナの実行を管理し、ECRはコンテナイメージの保管庫です。"
+   },
+   {
+    "heading": "サーバー管理をなくす選択",
+    "body": "Fargateを使うと、ECS/EKSの土台となるサーバー管理も不要になります。「サーバーの面倒を見たくない＝Fargate/Lambda」と押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q7-tech-04",
+   "q-tec-003",
+   "q2-tech-04",
+   "q4-tech-05",
+   "q7-tech-12",
+   "q-tec-029",
+   "q11-tech-03",
+   "q12-tech-04",
+   "q4-tech-06",
+   "q6-tech-05",
+   "q5-tech-05",
+   "q2-tech-03",
+   "q10-tech-03",
+   "q9-tech-10",
+   "q-tec-015"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-03",
+   "qm-tec-04"
+  ],
+  "drillQuizIds": [
+   "qd-tec03-1",
+   "qd-tec03-2",
+   "qd-tec03-3",
+   "qd-tec03-4",
+   "qd-tec03-6",
+   "qd-tec03-7",
+   "qd-tec03-8",
+   "qd-tec03-9",
+   "qd-tec03-10",
+   "qd-tec03-e9",
+   "qd-tec03-e10",
+   "qd-tec03-e14",
+   "qd-tec03-15",
+   "qd-tec03-e1",
+   "qd-tec03-e2",
+   "qd-tec03-e3",
+   "qd-tec03-e4",
+   "qd-tec03-e5",
+   "qd-tec03-e6",
+   "qd-tec03-e7",
+   "qd-tec03-e11",
+   "qd-tec03-e12",
+   "qd-tec03-e13",
+   "qd-tec03-e15",
+   "q8-tech-02"
+  ],
+  "basicQuizIds": [
+   "b-tec-03-01",
+   "b-tec-03-02",
+   "b-tec-03-03",
+   "b-tec-03-04",
+   "b-tec-03-05",
+   "b-tec-03-06",
+   "b-tec-03-07",
+   "b-tec-03-08",
+   "b-tec-03-09",
+   "b-tec-03-10",
+   "b-tec-03-11",
+   "b-tec-03-12",
+   "b-tec-03-13",
+   "b-tec-03-14",
+   "b-tec-03-15"
+  ]
+ },
+ {
+  "id": "l-tec-04",
+  "title": "ストレージの種類（S3・EBS・EFS・FSx）",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "オブジェクト＝S3、1台に付ける仮想ディスク＝EBS、複数から共有＝EFS/FSx。形と用途で区別する。",
+  "sections": [
+   {
+    "heading": "3つのストレージ形式",
+    "body": "オブジェクトストレージ（S3：ファイルをまるごと保管）、ブロックストレージ（EBS：EC2に付ける仮想ディスク）、ファイルストレージ（EFS/FSx：複数サーバーから共有）。形が違えば用途も違います。"
+   },
+   {
+    "heading": "EBSとEFSの違い",
+    "body": "EBSは基本1つのEC2に接続する専用ディスク。EFSは多数のEC2から同時にマウントして共有できるファイル置き場です。共有したい＝EFSが判断の軸。"
+   },
+   {
+    "heading": "オンプレ連携と移行",
+    "body": "Storage Gatewayは社内システムとS3などをつなぐ橋渡し、DataSyncは大量データを高速にAWSへ転送します。物理輸送が要るほど巨大ならSnowファミリーを使います。"
+   }
+  ],
+  "quizIds": [
+   "q-tec-002",
+   "q-tec-031",
+   "q7-tech-02",
+   "q-tec-010",
+   "q-tec-012",
+   "q9-tech-11",
+   "q6-tech-06",
+   "q2-tech-06",
+   "q11-tech-04",
+   "q10-tech-06",
+   "q8-tech-04",
+   "q8-tech-03",
+   "q2-tech-05",
+   "q-tec-011",
+   "qd-tec04-4"
+  ],
+  "challengeQuizIds": [
+   "qm-tec04b-1",
+   "qm-tec04b-2",
+   "qm-tec04b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec04-1",
+   "qd-tec04-2",
+   "qd-tec04-e3",
+   "qd-tec04-5",
+   "qd-tec04-6",
+   "qd-tec04-7",
+   "qd-tec04-8",
+   "qd-tec04-9",
+   "qd-tec04-10",
+   "qd-tec04-11",
+   "qd-tec04-e10",
+   "qd-tec04-e11",
+   "qd-tec04-14",
+   "qd-tec04-15",
+   "qd-tec04-e1",
+   "qd-tec04-e2",
+   "qd-tec04-e4",
+   "qd-tec04-e5",
+   "qd-tec04-e6",
+   "qd-tec04-e7",
+   "qd-tec04-e8",
+   "qd-tec04-e9",
+   "qd-tec04-e13",
+   "qd-tec04-e14",
+   "qd-tec04-e15"
+  ],
+  "basicQuizIds": [
+   "b-tec-04-01",
+   "b-tec-04-02",
+   "b-tec-04-03",
+   "b-tec-04-04",
+   "b-tec-04-05",
+   "b-tec-04-06",
+   "b-tec-04-07",
+   "b-tec-04-08",
+   "b-tec-04-09",
+   "b-tec-04-10",
+   "b-tec-04-11",
+   "b-tec-04-12",
+   "b-tec-04-13",
+   "b-tec-04-14",
+   "b-tec-04-15"
+  ]
+ },
+ {
+  "id": "l-tec-05",
+  "title": "S3を深掘り（ストレージクラスとGlacier）",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "S3は用途別のクラスで賢く節約。よく使う→標準、めったに見ない→Glacier。耐久性は非常に高い。",
+  "sections": [
+   {
+    "heading": "ストレージクラスで最適化",
+    "body": "頻繁に使うデータは標準、たまにしか使わないなら低頻度アクセス、長期保管はGlacier系（取り出しに時間がかかる代わり激安）。アクセス頻度に合わせてコストを下げます。"
+   },
+   {
+    "heading": "自動で階層を移す",
+    "body": "アクセス頻度が読めないなら S3 Intelligent-Tiering が自動で最適なクラスへ移動。ライフサイクルルールで「90日後にGlacierへ」のような移行も設定できます。"
+   },
+   {
+    "heading": "S3の強み",
+    "body": "S3は非常に高い耐久性（イレブンナイン）を持ち、静的サイトのホスティングやバックアップ、データレイクの基盤にも使われます。まず入れ物として万能と押さえます。"
+   }
+  ],
+  "quizIds": [
+   "q2-tech-07",
+   "q3-tech-20",
+   "q4-tech-08",
+   "q5-tech-16",
+   "q7-tech-09",
+   "q3-tech-08",
+   "q9-tech-09",
+   "q4-tech-07",
+   "q-tec-032",
+   "q6-tech-07",
+   "q10-tech-04",
+   "q6-tech-18",
+   "q12-tech-01",
+   "q4-tech-09",
+   "qd-tec05-e5"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-05",
+   "qm-tec-06"
+  ],
+  "drillQuizIds": [
+   "qd-tec05-1",
+   "qd-tec05-2",
+   "qd-tec05-3",
+   "qd-tec05-4",
+   "qd-tec05-5",
+   "qd-tec05-6",
+   "qd-tec05-7",
+   "qd-tec05-e8",
+   "qd-tec05-9",
+   "qd-tec05-10",
+   "qd-tec05-11",
+   "qd-tec05-e11",
+   "qd-tec05-e12",
+   "qd-tec05-14",
+   "qd-tec05-15",
+   "qd-tec05-e1",
+   "qd-tec05-e2",
+   "qd-tec05-e3",
+   "qd-tec05-e4",
+   "qd-tec05-e6",
+   "qd-tec05-e7",
+   "qd-tec05-e9",
+   "qd-tec05-e10",
+   "qd-tec05-e13",
+   "qd-tec05-e14",
+   "qd-tec05-e15"
+  ],
+  "basicQuizIds": [
+   "b-tec-05-01",
+   "b-tec-05-02",
+   "b-tec-05-03",
+   "b-tec-05-04",
+   "b-tec-05-05",
+   "b-tec-05-06",
+   "b-tec-05-07",
+   "b-tec-05-08",
+   "b-tec-05-09",
+   "b-tec-05-10",
+   "b-tec-05-11",
+   "b-tec-05-12",
+   "b-tec-05-13",
+   "b-tec-05-14",
+   "b-tec-05-15"
+  ]
+ },
+ {
+  "id": "l-tec-06",
+  "title": "データベースサービス",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "表形式のSQL＝RDS/Aurora、高速なNoSQL＝DynamoDB、超高速な一時置き＝ElastiCache、分析＝Redshift。",
+  "sections": [
+   {
+    "heading": "リレーショナル（SQL）",
+    "body": "RDSはMySQL/PostgreSQLなどの管理をAWSに任せられるSQLデータベース。AuroraはAWSが最適化した高性能・高可用な互換DBです。表と行のデータ＝RDS/Aurora。"
+   },
+   {
+    "heading": "NoSQLとキャッシュ",
+    "body": "DynamoDBはキー・バリュー型のNoSQLで、超高速・自動スケール・サーバーレス。ElastiCache（Redis/Memcached）は超高速な一時記憶で、よく使うデータを手前に置いて高速化します。"
+   },
+   {
+    "heading": "用途特化のDB",
+    "body": "分析用の大規模データはRedshift（データウェアハウス）、グラフ構造はNeptune、ドキュメント型はDocumentDB。やりたいことに合わせて専用DBを選びます。"
+   }
+  ],
+  "quizIds": [
+   "q7-tech-03",
+   "q-tec-004",
+   "q-tec-009",
+   "q2-tech-08",
+   "q2-tech-10",
+   "q7-tech-13",
+   "q6-tech-09",
+   "q4-tech-13",
+   "q5-tech-06",
+   "q3-tech-10",
+   "q9-tech-05",
+   "q10-tech-18",
+   "q12-tech-06",
+   "q8-tech-05",
+   "q8-tech-06"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-07",
+   "qm-tec-08"
+  ],
+  "drillQuizIds": [
+   "qd-tec06-1",
+   "qd-tec06-2",
+   "qd-tec06-3",
+   "qd-tec06-4",
+   "qd-tec06-5",
+   "qd-tec06-6",
+   "qd-tec06-7",
+   "qd-tec06-8",
+   "qd-tec06-9",
+   "qd-tec06-10",
+   "qd-tec06-11",
+   "qd-tec06-12",
+   "qd-tec06-e8",
+   "qd-tec06-e9",
+   "qd-tec06-e10",
+   "qd-tec06-16",
+   "qd-tec06-17",
+   "qd-tec06-e1",
+   "qd-tec06-e2",
+   "qd-tec06-e3",
+   "qd-tec06-e4",
+   "qd-tec06-e5",
+   "qd-tec06-e6",
+   "qd-tec06-e7",
+   "qd-tec06-e11",
+   "qd-tec06-e12",
+   "qd-tec06-e13",
+   "q-tec-016",
+   "q9-tech-06",
+   "q9-tech-07",
+   "q12-tech-05"
+  ],
+  "basicQuizIds": [
+   "b-tec-06-01",
+   "b-tec-06-02",
+   "b-tec-06-03",
+   "b-tec-06-04",
+   "b-tec-06-05",
+   "b-tec-06-06",
+   "b-tec-06-07",
+   "b-tec-06-08",
+   "b-tec-06-09",
+   "b-tec-06-10",
+   "b-tec-06-11",
+   "b-tec-06-12",
+   "b-tec-06-13",
+   "b-tec-06-14",
+   "b-tec-06-15"
+  ]
+ },
+ {
+  "id": "l-tec-07",
+  "title": "ネットワークの基礎（VPC・Route 53）",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "自分専用の仮想ネットワーク＝VPC、その中の区画＝サブネット、名前解決＝Route 53。土台の地図を描く。",
+  "sections": [
+   {
+    "heading": "VPCとサブネット",
+    "body": "VPCはAWS上に作る自分専用の仮想ネットワーク。中をパブリックサブネット（外に公開）とプライベートサブネット（内部専用）に分け、公開したいものだけ外に出します。"
+   },
+   {
+    "heading": "出入り口の部品",
+    "body": "インターネットゲートウェイで外とつなぎ、NATゲートウェイで内部サーバーから外へ安全に出ます。ルートテーブルで通信の経路を決めます。"
+   },
+   {
+    "heading": "DNSはRoute 53",
+    "body": "Route 53はドメイン名（example.com）をIPアドレスに変換するDNSサービス。ドメイン登録・ヘルスチェック・ルーティング制御もできます。"
+   }
+  ],
+  "quizIds": [
+   "q7-tech-05",
+   "q7-tech-07",
+   "q-tec-005",
+   "q-tec-006",
+   "q2-tech-02",
+   "q7-tech-14",
+   "q5-tech-07",
+   "q2-tech-11",
+   "q-tec-023",
+   "q6-tech-10",
+   "q3-tech-13",
+   "q11-tech-02",
+   "q11-tech-01",
+   "q3-tech-16",
+   "q8-tech-16"
+  ],
+  "challengeQuizIds": [
+   "qm-tec07b-1",
+   "qm-tec07b-2",
+   "qm-tec07b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec07-e1",
+   "qd-tec07-2",
+   "qd-tec07-e3",
+   "qd-tec07-4",
+   "qd-tec07-5",
+   "qd-tec07-6",
+   "qd-tec07-7",
+   "qd-tec07-8",
+   "qd-tec07-9",
+   "qd-tec07-e10",
+   "qd-tec07-e11",
+   "qd-tec07-12",
+   "qd-tec07-13",
+   "qd-tec07-e4",
+   "qd-tec07-e5",
+   "qd-tec07-e6",
+   "qd-tec07-e7",
+   "qd-tec07-e8",
+   "qd-tec07-e9",
+   "qd-tec07-e12",
+   "qd-tec07-e13",
+   "qd-tec07-e14",
+   "qd-tec07-e15",
+   "qd-tec07-e16",
+   "qd-tec07-e17",
+   "q9-tech-13"
+  ],
+  "basicQuizIds": [
+   "b-tec-07-01",
+   "b-tec-07-02",
+   "b-tec-07-03",
+   "b-tec-07-04",
+   "b-tec-07-05",
+   "b-tec-07-06",
+   "b-tec-07-07",
+   "b-tec-07-08",
+   "b-tec-07-09",
+   "b-tec-07-10",
+   "b-tec-07-11",
+   "b-tec-07-12",
+   "b-tec-07-13",
+   "b-tec-07-14",
+   "b-tec-07-15"
+  ]
+ },
+ {
+  "id": "l-tec-08",
+  "title": "コンテンツ配信とハイブリッド接続",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "近くから速く届ける＝CloudFront、専用線で安定接続＝Direct Connect、暗号化トンネル＝VPN。",
+  "sections": [
+   {
+    "heading": "CloudFront（CDN）",
+    "body": "CloudFrontは世界中のエッジロケーションからコンテンツを配信するCDN。利用者に近い拠点から届けるので表示が速く、オリジンの負荷も軽くなります。"
+   },
+   {
+    "heading": "オンプレとの接続",
+    "body": "Direct Connectはインターネットを介さない専用線で、安定・低遅延・大容量。VPNはインターネット上に暗号化トンネルを作る手軽な接続。安定重視＝Direct Connect、手軽さ＝VPN。"
+   },
+   {
+    "heading": "広域の高速化",
+    "body": "Global Acceleratorはユーザーからの通信をAWSの高速ネットワークに素早く載せ、遠距離アクセスを安定・高速化します。Transit Gatewayは多数のVPCや拠点を1点で束ねて接続します。"
+   }
+  ],
+  "quizIds": [
+   "q7-tech-06",
+   "q10-tech-17",
+   "q-tec-028",
+   "q2-tech-12",
+   "q3-tech-17",
+   "q10-tech-14",
+   "q5-tech-08",
+   "q6-tech-17",
+   "q6-tech-11",
+   "q3-tech-14",
+   "q10-tech-01",
+   "q4-tech-15",
+   "qd-tec08-e5",
+   "qd-tec08-4",
+   "qd-tec08-9"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-09",
+   "qm-tec-10"
+  ],
+  "drillQuizIds": [
+   "qd-tec08-1",
+   "qd-tec08-2",
+   "qd-tec08-3",
+   "qd-tec08-5",
+   "qd-tec08-6",
+   "qd-tec08-7",
+   "qd-tec08-8",
+   "qd-tec08-e10",
+   "qd-tec08-11",
+   "qd-tec08-12",
+   "qd-tec08-e16",
+   "qd-tec08-e1",
+   "qd-tec08-e2",
+   "qd-tec08-e3",
+   "qd-tec08-e4",
+   "qd-tec08-e6",
+   "qd-tec08-e7",
+   "qd-tec08-e8",
+   "qd-tec08-e9",
+   "qd-tec08-e11",
+   "qd-tec08-e12",
+   "qd-tec08-e13",
+   "qd-tec08-e14",
+   "qd-tec08-e15",
+   "qd-tec08-e17"
+  ],
+  "basicQuizIds": [
+   "b-tec-08-01",
+   "b-tec-08-02",
+   "b-tec-08-03",
+   "b-tec-08-04",
+   "b-tec-08-05",
+   "b-tec-08-06",
+   "b-tec-08-07",
+   "b-tec-08-08",
+   "b-tec-08-09",
+   "b-tec-08-10",
+   "b-tec-08-11",
+   "b-tec-08-12",
+   "b-tec-08-13",
+   "b-tec-08-14",
+   "b-tec-08-15"
+  ]
+ },
+ {
+  "id": "l-tec-09",
+  "title": "高可用性とスケーリング（ELB・Auto Scaling）",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "アクセスを振り分ける＝ロードバランサー、台数を自動増減＝Auto Scaling。この2つで止まらない・溢れない。",
+  "sections": [
+   {
+    "heading": "ロードバランサー（ELB）",
+    "body": "Elastic Load Balancingは複数のサーバーへアクセスを均等に振り分けます。1台が落ちても健全なサーバーへ回すので、可用性が上がります（ALB＝HTTP向け、NLB＝高速なTCP向け）。"
+   },
+   {
+    "heading": "Auto Scaling",
+    "body": "Auto Scalingは負荷に応じてEC2を自動で増減。混雑時は増やし、空いたら減らして、性能とコストを両立します。需要に合わせる＝弾力性の代表例です。"
+   },
+   {
+    "heading": "組み合わせで高可用性",
+    "body": "複数AZにサーバーを分散し、ELBで振り分け、Auto Scalingで増減――この3点セットが高可用性の王道パターンです。"
+   }
+  ],
+  "quizIds": [
+   "q-tec-013",
+   "q-tec-014",
+   "q7-tech-11",
+   "q3-tech-19",
+   "q4-tech-14",
+   "q2-tech-16",
+   "q4-tech-16",
+   "q3-tech-18",
+   "q5-tech-09",
+   "q9-tech-14",
+   "q5-tech-15",
+   "q8-tech-07",
+   "q8-tech-18",
+   "qd-tec09-e12",
+   "qd-tec09-e5"
+  ],
+  "challengeQuizIds": [
+   "qm-tec-11",
+   "qm-tec-12"
+  ],
+  "drillQuizIds": [
+   "qd-tec09-1",
+   "qd-tec09-2",
+   "qd-tec09-3",
+   "qd-tec09-4",
+   "qd-tec09-5",
+   "qd-tec09-6",
+   "qd-tec09-7",
+   "qd-tec09-8",
+   "qd-tec09-9",
+   "qd-tec09-e10",
+   "qd-tec09-e11",
+   "qd-tec09-e16",
+   "qd-tec09-13",
+   "qd-tec09-14",
+   "qd-tec09-e1",
+   "qd-tec09-e2",
+   "qd-tec09-e3",
+   "qd-tec09-e4",
+   "qd-tec09-e6",
+   "qd-tec09-e7",
+   "qd-tec09-e8",
+   "qd-tec09-e9",
+   "qd-tec09-e13",
+   "qd-tec09-e14",
+   "qd-tec09-e15"
+  ],
+  "basicQuizIds": [
+   "b-tec-09-01",
+   "b-tec-09-02",
+   "b-tec-09-03",
+   "b-tec-09-04",
+   "b-tec-09-05",
+   "b-tec-09-06",
+   "b-tec-09-07",
+   "b-tec-09-08",
+   "b-tec-09-09",
+   "b-tec-09-10",
+   "b-tec-09-11",
+   "b-tec-09-12",
+   "b-tec-09-13",
+   "b-tec-09-14",
+   "b-tec-09-15"
+  ]
+ },
+ {
+  "id": "l-tec-10",
+  "title": "監視・自動化・IaC",
+  "domain": "technology",
+  "estimatedMinutes": 8,
+  "summary": "計測と通知＝CloudWatch、構成をコード化＝CloudFormation、運用の自動化＝Systems Manager。",
+  "sections": [
+   {
+    "heading": "CloudWatchで監視",
+    "body": "CloudWatchはメトリクス（CPU使用率など）やログを収集し、しきい値を超えたらアラームで通知します。サービスの健康状態を測る計器です。"
+   },
+   {
+    "heading": "IaC（コードでインフラ）",
+    "body": "CloudFormationはインフラ構成をテンプレート（コード）で定義し、同じ環境を何度でも自動で作れます。手作業のミスを防ぎ、再現性を高めます（IaC＝Infrastructure as Code）。"
+   },
+   {
+    "heading": "運用を自動化",
+    "body": "Systems Managerは多数のサーバーへのパッチ適用や設定をまとめて実行。X-Rayはアプリ内部の処理を追跡し、遅い箇所を可視化します。"
+   }
+  ],
+  "quizIds": [
+   "q7-tech-08",
+   "q2-tech-15",
+   "q3-tech-09",
+   "q4-tech-10",
+   "q5-tech-18",
+   "q6-tech-16",
+   "q6-tech-12",
+   "q11-tech-07",
+   "q-tec-026",
+   "q10-tech-02",
+   "q5-tech-11",
+   "q2-tech-13",
+   "qd-tec10-e17",
+   "qd-tec10-4",
+   "qd-tec10-9"
+  ],
+  "challengeQuizIds": [
+   "qm-tec10b-1",
+   "qm-tec10b-2",
+   "qm-tec10b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec10-1",
+   "qd-tec10-2",
+   "qd-tec10-e3",
+   "qd-tec10-5",
+   "qd-tec10-6",
+   "qd-tec10-7",
+   "qd-tec10-8",
+   "qd-tec10-e10",
+   "qd-tec10-e11",
+   "qd-tec10-12",
+   "qd-tec10-13",
+   "qd-tec10-e1",
+   "qd-tec10-e2",
+   "qd-tec10-e4",
+   "qd-tec10-e5",
+   "qd-tec10-e6",
+   "qd-tec10-e7",
+   "qd-tec10-e8",
+   "qd-tec10-e9",
+   "qd-tec10-e12",
+   "qd-tec10-e13",
+   "qd-tec10-e14",
+   "qd-tec10-e15",
+   "qd-tec10-e16"
+  ],
+  "basicQuizIds": [
+   "b-tec-10-01",
+   "b-tec-10-02",
+   "b-tec-10-03",
+   "b-tec-10-04",
+   "b-tec-10-05",
+   "b-tec-10-06",
+   "b-tec-10-07",
+   "b-tec-10-08",
+   "b-tec-10-09",
+   "b-tec-10-10",
+   "b-tec-10-11",
+   "b-tec-10-12",
+   "b-tec-10-13",
+   "b-tec-10-14",
+   "b-tec-10-15"
+  ]
+ },
+ {
+  "id": "l-tec-11",
+  "title": "アプリ連携（SQS・SNS・API Gateway）",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "処理を切り離す間の仕組み。キュー＝SQS、通知の配信＝SNS、APIの窓口＝API Gateway。疎結合を実現する。",
+  "sections": [
+   {
+    "heading": "疎結合という考え方",
+    "body": "システム同士を直接つながず、間に仕組みを挟むことで、一方が遅れても全体が止まりにくくなります。これが疎結合。SQSやSNSがその要になります。"
+   },
+   {
+    "heading": "SQSとSNS",
+    "body": "SQS（キュー）は処理待ちのメッセージをためて、受け手が自分のペースで取り出せます。SNS（パブサブ）は1つの通知を複数の受け手へ一斉配信します。ためる＝SQS、配る＝SNS。"
+   },
+   {
+    "heading": "窓口とつなぎ役",
+    "body": "API GatewayはAPIの受付窓口となり、Lambdaなどのバックエンドとつなぎます。EventBridgeはイベントを条件で振り分け、Step Functionsは複数処理の流れを管理します。"
+   }
+  ],
+  "quizIds": [
+   "q3-tech-03",
+   "q3-tech-04",
+   "q-tec-019",
+   "q-tec-020",
+   "q-tec-024",
+   "q12-tech-03",
+   "q4-tech-01",
+   "q3-tech-02",
+   "q6-tech-13",
+   "q8-tech-08",
+   "q5-tech-14",
+   "q5-tech-01",
+   "q10-tech-07",
+   "qd-tec11-e4",
+   "qd-tec11-e12"
+  ],
+  "challengeQuizIds": [
+   "qm-tec11b-1",
+   "qm-tec11b-2",
+   "qm-tec11b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec11-e1",
+   "qd-tec11-2",
+   "qd-tec11-3",
+   "qd-tec11-5",
+   "qd-tec11-6",
+   "qd-tec11-7",
+   "qd-tec11-9",
+   "qd-tec11-e10",
+   "qd-tec11-e11",
+   "qd-tec11-12",
+   "qd-tec11-13",
+   "qd-tec11-e2",
+   "qd-tec11-e3",
+   "qd-tec11-e5",
+   "qd-tec11-e6",
+   "qd-tec11-e7",
+   "qd-tec11-e8",
+   "qd-tec11-e9",
+   "qd-tec11-e13",
+   "qd-tec11-e14",
+   "qd-tec11-e15",
+   "qd-tec11-e16",
+   "qd-tec11-e17"
+  ],
+  "basicQuizIds": [
+   "b-tec-11-01",
+   "b-tec-11-02",
+   "b-tec-11-03",
+   "b-tec-11-04",
+   "b-tec-11-05",
+   "b-tec-11-06",
+   "b-tec-11-07",
+   "b-tec-11-08",
+   "b-tec-11-09",
+   "b-tec-11-10",
+   "b-tec-11-11",
+   "b-tec-11-12",
+   "b-tec-11-13",
+   "b-tec-11-14",
+   "b-tec-11-15"
+  ]
+ },
+ {
+  "id": "l-tec-12",
+  "title": "分析サービス",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "S3を直接SQL＝Athena、大規模DWH＝Redshift、リアルタイム＝Kinesis、前処理＝Glue、可視化＝QuickSight。",
+  "sections": [
+   {
+    "heading": "たまる→調べる",
+    "body": "S3にたまったデータをそのままSQLで調べるならAthena（サーバー不要）。継続的に大規模分析するならデータウェアハウスのRedshift。手軽＝Athena、本格＝Redshift。"
+   },
+   {
+    "heading": "流れるデータを扱う",
+    "body": "Kinesisはセンサーやログなど絶え間なく流れるデータをリアルタイムに取り込み・処理します。EMRはHadoop/Sparkで大規模なバッチ分析を行います。"
+   },
+   {
+    "heading": "整える・見せる",
+    "body": "Glueはデータの抽出・変換・統合（ETL）を行い分析の下ごしらえをします。QuickSightはグラフやダッシュボードでデータを見える化します。"
+   }
+  ],
+  "quizIds": [
+   "q3-tech-15",
+   "q-tec-017",
+   "q-tec-018",
+   "q-tec-021",
+   "q-tec-030",
+   "q8-tech-10",
+   "q10-tech-10",
+   "q10-tech-05",
+   "q6-tech-14",
+   "q8-tech-15",
+   "q6-tech-01",
+   "q11-tech-05",
+   "q8-tech-14",
+   "q2-tech-09",
+   "qd-tec12-5"
+  ],
+  "challengeQuizIds": [
+   "qm-tec12b-1",
+   "qm-tec12b-2",
+   "qm-tec12b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec12-1",
+   "qd-tec12-2",
+   "qd-tec12-3",
+   "qd-tec12-4",
+   "qd-tec12-6",
+   "qd-tec12-7",
+   "qd-tec12-8",
+   "qd-tec12-9",
+   "qd-tec12-10",
+   "qd-tec12-e11",
+   "qd-tec12-e12",
+   "qd-tec12-13",
+   "qd-tec12-14",
+   "qd-tec12-e1",
+   "qd-tec12-e2",
+   "qd-tec12-e3",
+   "qd-tec12-e4",
+   "qd-tec12-e5",
+   "qd-tec12-e6",
+   "qd-tec12-e7",
+   "qd-tec12-e8",
+   "qd-tec12-e9",
+   "qd-tec12-e10",
+   "qd-tec12-e13",
+   "qd-tec12-e14",
+   "qd-tec12-e15",
+   "qd-tec12-e16"
+  ],
+  "basicQuizIds": [
+   "b-tec-12-01",
+   "b-tec-12-02",
+   "b-tec-12-03",
+   "b-tec-12-04",
+   "b-tec-12-05",
+   "b-tec-12-06",
+   "b-tec-12-07",
+   "b-tec-12-08",
+   "b-tec-12-09",
+   "b-tec-12-10",
+   "b-tec-12-11",
+   "b-tec-12-12",
+   "b-tec-12-13",
+   "b-tec-12-14",
+   "b-tec-12-15"
+  ]
+ },
+ {
+  "id": "l-tec-13",
+  "title": "AI/MLと生成AI",
+  "domain": "technology",
+  "estimatedMinutes": 7,
+  "summary": "モデルを作る土台＝SageMaker、すぐ使えるAI＝Rekognition等、生成AI＝Bedrock。用途で選ぶ。",
+  "sections": [
+   {
+    "heading": "自分で作る：SageMaker",
+    "body": "SageMakerは機械学習モデルの構築・学習・デプロイを一気通貫で行う土台。自前でモデルを作りたい＝SageMakerと押さえます。"
+   },
+   {
+    "heading": "すぐ使えるAIサービス",
+    "body": "画像認識＝Rekognition、音声→文字＝Transcribe、文字→音声＝Polly、翻訳＝Translate、文章解析＝Comprehend、文書からデータ抽出＝Textract。用途名とサービス名をペアで覚えます。"
+   },
+   {
+    "heading": "生成AI：Bedrock",
+    "body": "Amazon Bedrockは、さまざまな基盤モデル（生成AI）をAPIで手軽に利用できるサービス。チャットや文章生成などをアプリに組み込めます。生成AIの入り口＝Bedrock。"
+   }
+  ],
+  "quizIds": [
+   "q2-tech-17",
+   "q3-tech-11",
+   "q3-tech-12",
+   "q6-tech-08",
+   "q8-tech-11",
+   "q-tec-007",
+   "q6-tech-15",
+   "q10-tech-11",
+   "q8-tech-12",
+   "q3-tech-05",
+   "q5-tech-02",
+   "q4-tech-02",
+   "q6-tech-02",
+   "q-tec-008",
+   "q10-tech-12"
+  ],
+  "challengeQuizIds": [
+   "qm-tec13b-1",
+   "qm-tec13b-2",
+   "qm-tec13b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec13-1",
+   "qd-tec13-e2",
+   "qd-tec13-3",
+   "qd-tec13-e4",
+   "qd-tec13-e5",
+   "qd-tec13-6",
+   "qd-tec13-7",
+   "qd-tec13-8",
+   "qd-tec13-10",
+   "qd-tec13-e12",
+   "qd-tec13-e13",
+   "qd-tec13-e15",
+   "qd-tec13-14",
+   "qd-tec13-e1",
+   "qd-tec13-e3",
+   "qd-tec13-e6",
+   "qd-tec13-e7",
+   "qd-tec13-e8",
+   "qd-tec13-e9",
+   "qd-tec13-e10",
+   "qd-tec13-e11",
+   "qd-tec13-e14",
+   "qd-tec13-e16",
+   "q8-tech-13",
+   "q11-tech-06"
+  ],
+  "basicQuizIds": [
+   "b-tec-13-01",
+   "b-tec-13-02",
+   "b-tec-13-03",
+   "b-tec-13-04",
+   "b-tec-13-05",
+   "b-tec-13-06",
+   "b-tec-13-07",
+   "b-tec-13-08",
+   "b-tec-13-09",
+   "b-tec-13-10",
+   "b-tec-13-11",
+   "b-tec-13-12",
+   "b-tec-13-13",
+   "b-tec-13-14",
+   "b-tec-13-15"
+  ]
+ },
+ {
+  "id": "l-tec-14",
+  "title": "AWSの操作方法とデプロイ支援",
+  "domain": "technology",
+  "estimatedMinutes": 6,
+  "summary": "操作は3通り：画面（マネジメントコンソール）・コマンド（CLI）・プログラム（SDK）。手早く公開はElastic Beanstalk。",
+  "sections": [
+   {
+    "heading": "3つの操作手段",
+    "body": "マネジメントコンソール（ブラウザのGUI）、AWS CLI（コマンドで操作・自動化向き）、SDK（プログラムから操作）。手作業＝コンソール、自動化＝CLI/SDKと使い分けます。"
+   },
+   {
+    "heading": "手早くアプリを公開",
+    "body": "Elastic Beanstalkはコードをアップするだけで、裏側のEC2やロードバランサーを自動で用意してくれるPaaS。インフラ構築を任せて素早く公開できます。"
+   },
+   {
+    "heading": "開発を支える",
+    "body": "CodePipeline/CodeBuild/CodeDeployは、テスト～デプロイの流れ（CI/CD）を自動化します。Amplifyはフロントエンド／モバイルアプリの開発・公開を手軽にします。"
+   }
+  ],
+  "quizIds": [
+   "q2-tech-14",
+   "q-tec-025",
+   "q4-tech-11",
+   "q5-tech-10",
+   "q5-tech-12",
+   "q10-tech-08",
+   "q5-tech-17",
+   "q12-tech-02",
+   "q-tec-027",
+   "q9-tech-01",
+   "q3-tech-06",
+   "q8-tech-09",
+   "q-tec-022",
+   "q5-tech-03",
+   "q4-tech-03"
+  ],
+  "challengeQuizIds": [
+   "qm-tec14b-1",
+   "qm-tec14b-2",
+   "qm-tec14b-3"
+  ],
+  "drillQuizIds": [
+   "qd-tec14-e1",
+   "qd-tec14-e2",
+   "qd-tec14-e3",
+   "qd-tec14-e4",
+   "qd-tec14-5",
+   "qd-tec14-6",
+   "qd-tec14-7",
+   "qd-tec14-8",
+   "qd-tec14-9",
+   "qd-tec14-e10",
+   "qd-tec14-e11",
+   "qd-tec14-12",
+   "qd-tec14-13",
+   "qd-tec14-e5",
+   "qd-tec14-e6",
+   "qd-tec14-e7",
+   "qd-tec14-e8",
+   "qd-tec14-e9",
+   "qd-tec14-e12",
+   "qd-tec14-e13",
+   "qd-tec14-e14",
+   "qd-tec14-e15",
+   "qd-tec14-e16",
+   "qd-tec14-e17"
+  ],
+  "basicQuizIds": [
+   "b-tec-14-01",
+   "b-tec-14-02",
+   "b-tec-14-03",
+   "b-tec-14-04",
+   "b-tec-14-05",
+   "b-tec-14-06",
+   "b-tec-14-07",
+   "b-tec-14-08",
+   "b-tec-14-09",
+   "b-tec-14-10",
+   "b-tec-14-11",
+   "b-tec-14-12",
+   "b-tec-14-13",
+   "b-tec-14-14",
+   "b-tec-14-15"
+  ]
+ },
+ {
+  "id": "l-bil-01",
+  "title": "料金の考え方と無料利用枠",
+  "domain": "billing",
+  "estimatedMinutes": 6,
+  "summary": "基本は従量課金。使った分だけ・長く使うほど割引・データ転送は出る方に注意。無料利用枠で試せる。",
+  "sections": [
+   {
+    "heading": "3つの料金原則",
+    "body": "AWS料金の基本は①使った分だけ払う（従量課金）②長期・大量ほど安くなる③必要に応じて増減。前払いや固定契約に縛られないのが特徴です。"
+   },
+   {
+    "heading": "データ転送のクセ",
+    "body": "AWSへ入れる通信（インバウンド）は基本無料、AWSから出る通信（アウトバウンド）は課金対象になりがち。出ていくデータにお金がかかると覚えます。"
+   },
+   {
+    "heading": "無料利用枠",
+    "body": "無料利用枠には、12か月無料・常に無料・トライアルの3種類があります。学習や検証は無料枠を活用しつつ、超過に注意します。※2025年7月以降の新規アカウントは、最大200ドルのクレジット＋Free/Paidプラン方式に変わりました（Freeプランは最長6か月）。ただし『常に無料』の枠は継続し、CLF-C02試験では従来の3種類の考え方も問われます。"
+   }
+  ],
+  "quizIds": [
+   "q-bil-006",
+   "q2-bill-09",
+   "q4-bill-06",
+   "q6-bill-01",
+   "q7-bill-01",
+   "q2-bill-10",
+   "q7-bill-07",
+   "q-bil-007",
+   "q8-bill-08",
+   "q5-bill-02",
+   "q8-bill-07",
+   "q3-bill-07",
+   "q-bil-008",
+   "q9-bill-06",
+   "q11-bill-02"
+  ],
+  "challengeQuizIds": [
+   "qm-bil-01",
+   "qm-bil-02"
+  ],
+  "drillQuizIds": [
+   "qd-bil01-1",
+   "qd-bil01-2",
+   "qd-bil01-3",
+   "qd-bil01-5",
+   "qd-bil01-6",
+   "qd-bil01-7",
+   "qd-bil01-8",
+   "qd-bil01-e11",
+   "qd-bil01-10",
+   "qd-bil01-e13",
+   "qd-bil01-12",
+   "qd-bil01-13",
+   "qd-bil01-e1",
+   "qd-bil01-e2",
+   "qd-bil01-e3",
+   "qd-bil01-e4",
+   "qd-bil01-e5",
+   "qd-bil01-e6",
+   "qd-bil01-e7",
+   "qd-bil01-e8",
+   "qd-bil01-e9",
+   "qd-bil01-e10",
+   "qd-bil01-e12",
+   "qd-bil01-e14",
+   "qd-bil01-e15",
+   "qd-bil01-e16",
+   "qd-bil01-e17",
+   "q7-bill-02"
+  ],
+  "basicQuizIds": [
+   "b-bil-01-01",
+   "b-bil-01-02",
+   "b-bil-01-03",
+   "b-bil-01-04",
+   "b-bil-01-05",
+   "b-bil-01-06",
+   "b-bil-01-07",
+   "b-bil-01-08",
+   "b-bil-01-09",
+   "b-bil-01-10",
+   "b-bil-01-11",
+   "b-bil-01-12",
+   "b-bil-01-13",
+   "b-bil-01-14",
+   "b-bil-01-15"
+  ]
+ },
+ {
+  "id": "l-bil-02",
+  "title": "EC2の購入オプションとSavings Plans",
+  "domain": "billing",
+  "estimatedMinutes": 7,
+  "summary": "オンデマンド／リザーブド／スポットの3本柱＋Savings Plans。コミットするほど安くなる。",
+  "sections": [
+   {
+    "heading": "EC2の3つの買い方",
+    "body": "オンデマンド＝いつでも使えるが割引なし。リザーブドインスタンス＝1〜3年コミットで大幅割引。スポット＝余剰を最大9割引で使えるが中断あり。用途に合わせて選びます。"
+   },
+   {
+    "heading": "Savings Plans",
+    "body": "Savings Plansは「1時間あたり◯ドル使う」と一定利用をコミットすることで、対象の料金を柔軟に割引。リザーブドより使い方の縛りがゆるいのが利点です。"
+   },
+   {
+    "heading": "使い分けの判断",
+    "body": "常時稼働で予測できる→リザーブド/Savings Plans、突発・短時間→オンデマンド、中断してもよいバッチ処理→スポット。継続度と中断可否で選びます。"
+   }
+  ],
+  "quizIds": [
+   "q9-bill-01",
+   "q10-bill-01",
+   "q-bil-001",
+   "q-bil-002",
+   "q2-bill-02",
+   "q-bil-015",
+   "q4-bill-05",
+   "q3-bill-06",
+   "q2-bill-01",
+   "q-bil-010",
+   "q3-bill-04",
+   "q8-bill-04",
+   "q10-bill-03",
+   "qd-bil02-e1",
+   "qd-bil02-e3"
+  ],
+  "challengeQuizIds": [
+   "qm-bil-03",
+   "qm-bil-04",
+   "qm-bil-05"
+  ],
+  "drillQuizIds": [
+   "qd-bil02-1",
+   "qd-bil02-2",
+   "qd-bil02-3",
+   "qd-bil02-e4",
+   "qd-bil02-5",
+   "qd-bil02-6",
+   "qd-bil02-7",
+   "qd-bil02-8",
+   "qd-bil02-9",
+   "qd-bil02-10",
+   "qd-bil02-11",
+   "qd-bil02-e11",
+   "qd-bil02-e12",
+   "qd-bil02-14",
+   "qd-bil02-15",
+   "qd-bil02-16",
+   "qd-bil02-e2",
+   "qd-bil02-e5",
+   "qd-bil02-e6",
+   "qd-bil02-e7",
+   "qd-bil02-e8",
+   "qd-bil02-e9",
+   "qd-bil02-e10",
+   "qd-bil02-e13",
+   "qd-bil02-e14"
+  ],
+  "basicQuizIds": [
+   "b-bil-02-01",
+   "b-bil-02-02",
+   "b-bil-02-03",
+   "b-bil-02-04",
+   "b-bil-02-05",
+   "b-bil-02-06",
+   "b-bil-02-07",
+   "b-bil-02-08",
+   "b-bil-02-09",
+   "b-bil-02-10",
+   "b-bil-02-11",
+   "b-bil-02-12",
+   "b-bil-02-13",
+   "b-bil-02-14",
+   "b-bil-02-15"
+  ]
+ },
+ {
+  "id": "l-bil-03",
+  "title": "コストを見積もる・管理する",
+  "domain": "billing",
+  "estimatedMinutes": 7,
+  "summary": "事前見積り＝Pricing Calculator、予算アラート＝Budgets、分析＝Cost Explorer、明細＝CUR。ツールの役割を分ける。",
+  "sections": [
+   {
+    "heading": "使う前に見積もる",
+    "body": "AWS Pricing Calculatorは、構成を入力して事前に月額を見積もるツール。導入前の予算組みに使います。これから作る費用の試算＝Calculator。"
+   },
+   {
+    "heading": "決める→振り返る",
+    "body": "AWS Budgetsは予算を決めて超過をアラート通知（＝先回りの管理）。Cost Explorerは過去のコストをグラフで分析（＝振り返り）。決める＝Budgets／振り返る＝Cost Explorer。"
+   },
+   {
+    "heading": "詳細な明細",
+    "body": "Cost and Usage Report（CUR）は最も詳しい利用明細を出力し、詳細分析に使います。コスト配分タグを付けると、部署やプロジェクト単位で費用を分けて見られます。"
+   }
+  ],
+  "quizIds": [
+   "q7-bill-03",
+   "q7-bill-04",
+   "q7-bill-05",
+   "q10-bill-02",
+   "q-bil-004",
+   "q2-bill-03",
+   "q4-bill-04",
+   "q8-bill-02",
+   "q2-bill-04",
+   "q8-bill-03",
+   "q-bil-011",
+   "q-bil-016",
+   "q3-bill-02",
+   "q2-bill-07",
+   "q4-bill-02"
+  ],
+  "challengeQuizIds": [
+   "qm-bil03b-1",
+   "qm-bil03b-2",
+   "qm-bil03b-3"
+  ],
+  "drillQuizIds": [
+   "qd-bil03-e1",
+   "qd-bil03-2",
+   "qd-bil03-3",
+   "qd-bil03-4",
+   "qd-bil03-5",
+   "qd-bil03-6",
+   "qd-bil03-7",
+   "qd-bil03-e10",
+   "qd-bil03-e11",
+   "qd-bil03-12",
+   "qd-bil03-13",
+   "qd-bil03-e2",
+   "qd-bil03-e3",
+   "qd-bil03-e4",
+   "qd-bil03-e5",
+   "qd-bil03-e6",
+   "qd-bil03-e7",
+   "qd-bil03-e8",
+   "qd-bil03-e9",
+   "qd-bil03-e12",
+   "qd-bil03-e13",
+   "qd-bil03-e14",
+   "qd-bil03-e15",
+   "qd-bil03-e16",
+   "qd-bil03-e17",
+   "q5-bill-01",
+   "q9-bill-05"
+  ],
+  "basicQuizIds": [
+   "b-bil-03-01",
+   "b-bil-03-02",
+   "b-bil-03-03",
+   "b-bil-03-04",
+   "b-bil-03-05",
+   "b-bil-03-06",
+   "b-bil-03-07",
+   "b-bil-03-08",
+   "b-bil-03-09",
+   "b-bil-03-10",
+   "b-bil-03-11",
+   "b-bil-03-12",
+   "b-bil-03-13",
+   "b-bil-03-14",
+   "b-bil-03-15"
+  ]
+ },
+ {
+  "id": "l-bil-04",
+  "title": "コスト最適化とTrusted Advisor",
+  "domain": "billing",
+  "estimatedMinutes": 6,
+  "summary": "無駄を見つけて減らす。総合点検＝Trusted Advisor、最適なサイズ提案＝Compute Optimizer。",
+  "sections": [
+   {
+    "heading": "Trusted Advisor",
+    "body": "Trusted Advisorはアカウントを自動点検し、コスト・セキュリティ・信頼性・性能・上限の観点で改善点を助言します。使っていない資源はないかなどを教えてくれます。"
+   },
+   {
+    "heading": "サイズの最適化",
+    "body": "Compute Optimizerは実際の使用状況から「このインスタンスは過大／過小」を分析し、最適なサイズを提案。無駄な性能への支払いを減らせます。"
+   },
+   {
+    "heading": "最適化の基本動作",
+    "body": "使っていない資源を止める、適正サイズに変える、割引プラン（リザーブド/Savings Plans）を使う、マネージド／サーバーレスで運用を減らす。この積み重ねがコスト最適化です。"
+   }
+  ],
+  "quizIds": [
+   "q-bil-012",
+   "q2-bill-08",
+   "q3-bill-08",
+   "q6-bill-03",
+   "q8-bill-06",
+   "q10-bill-06",
+   "q6-bill-04",
+   "q5-bill-05",
+   "q4-bill-03",
+   "q6-bill-05",
+   "q-bil-009",
+   "q9-bill-02",
+   "q-bil-003",
+   "qd-bil04-11",
+   "qd-bil04-5"
+  ],
+  "challengeQuizIds": [
+   "qm-bil04b-1",
+   "qm-bil04b-2",
+   "qm-bil04b-3"
+  ],
+  "drillQuizIds": [
+   "qd-bil04-1",
+   "qd-bil04-2",
+   "qd-bil04-3",
+   "qd-bil04-4",
+   "qd-bil04-6",
+   "qd-bil04-7",
+   "qd-bil04-e10",
+   "qd-bil04-e11",
+   "qd-bil04-10",
+   "qd-bil04-e1",
+   "qd-bil04-e2",
+   "qd-bil04-e3",
+   "qd-bil04-e4",
+   "qd-bil04-e5",
+   "qd-bil04-e6",
+   "qd-bil04-e7",
+   "qd-bil04-e8",
+   "qd-bil04-e9",
+   "qd-bil04-e12",
+   "qd-bil04-e13",
+   "qd-bil04-e14",
+   "qd-bil04-e15",
+   "qd-bil04-e16",
+   "qd-bil04-e17",
+   "qd-bil04-e18",
+   "qd-bil04-e19"
+  ],
+  "basicQuizIds": [
+   "b-bil-04-01",
+   "b-bil-04-02",
+   "b-bil-04-03",
+   "b-bil-04-04",
+   "b-bil-04-05",
+   "b-bil-04-06",
+   "b-bil-04-07",
+   "b-bil-04-08",
+   "b-bil-04-09",
+   "b-bil-04-10",
+   "b-bil-04-11",
+   "b-bil-04-12",
+   "b-bil-04-13",
+   "b-bil-04-14",
+   "b-bil-04-15"
+  ]
+ },
+ {
+  "id": "l-bil-05",
+  "title": "アカウント管理と一括請求（Organizations）",
+  "domain": "billing",
+  "estimatedMinutes": 6,
+  "summary": "複数アカウントをまとめ、請求を1本化。ボリューム割引の合算とガバナンスを同時に得る。",
+  "sections": [
+   {
+    "heading": "一括請求（Consolidated Billing）",
+    "body": "AWS Organizationsで複数アカウントを束ねると、請求をまとめて1つにできます。使用量が合算されるため、ボリューム割引が効きやすくなるメリットがあります。"
+   },
+   {
+    "heading": "統制も同時に",
+    "body": "OrganizationsはSCP（サービスコントロールポリシー）で全アカウント共通の上限を設定でき、コスト管理とガバナンスを両立します。組織全体のたがをはめる役です。"
+   },
+   {
+    "heading": "調達の窓口",
+    "body": "AWS Marketplaceはサードパーティ製ソフトを購入・従量課金でき、AWSの請求にまとめられます。調達と支払いを一本化できます。"
+   }
+  ],
+  "quizIds": [
+   "q3-bill-05",
+   "q5-bill-03",
+   "q5-bill-06",
+   "q6-bill-06",
+   "q8-bill-05",
+   "q11-bill-01",
+   "q9-bill-03",
+   "q10-bill-04",
+   "q3-bill-01",
+   "qd-bil05-e13",
+   "qd-bil05-11",
+   "qd-bil05-e3",
+   "qd-bil05-2",
+   "qd-bil05-e16",
+   "qd-bil05-7"
+  ],
+  "challengeQuizIds": [
+   "qm-bil05b-1",
+   "qm-bil05b-2",
+   "qm-bil05b-3"
+  ],
+  "drillQuizIds": [
+   "qd-bil05-1",
+   "qd-bil05-3",
+   "qd-bil05-4",
+   "qd-bil05-5",
+   "qd-bil05-6",
+   "qd-bil05-e9",
+   "qd-bil05-e10",
+   "qd-bil05-10",
+   "qd-bil05-e1",
+   "qd-bil05-e2",
+   "qd-bil05-e4",
+   "qd-bil05-e5",
+   "qd-bil05-e6",
+   "qd-bil05-e7",
+   "qd-bil05-e8",
+   "qd-bil05-e11",
+   "qd-bil05-e12",
+   "qd-bil05-e14",
+   "qd-bil05-e15",
+   "qd-bil05-e17",
+   "qd-bil05-e18",
+   "qd-bil05-e19"
+  ],
+  "basicQuizIds": [
+   "b-bil-05-01",
+   "b-bil-05-02",
+   "b-bil-05-03",
+   "b-bil-05-04",
+   "b-bil-05-05",
+   "b-bil-05-06",
+   "b-bil-05-07",
+   "b-bil-05-08",
+   "b-bil-05-09",
+   "b-bil-05-10",
+   "b-bil-05-11",
+   "b-bil-05-12",
+   "b-bil-05-13",
+   "b-bil-05-14",
+   "b-bil-05-15"
+  ]
+ },
+ {
+  "id": "l-bil-06",
+  "title": "サポートプランを比較する",
+  "domain": "billing",
+  "estimatedMinutes": 7,
+  "summary": "Basic（無料）/Developer/Business/Enterpriseの4段階。上位ほど速く・手厚く、最上位は専任TAM付き。",
+  "sections": [
+   {
+    "heading": "4つのプラン",
+    "body": "Basicは無料で誰でも利用（ドキュメント・フォーラム等）。Developerは開発時の技術サポート。Businessは本番運用向けで24時間365日の対応。Enterpriseは最上位で最速対応です。"
+   },
+   {
+    "heading": "TAMとサポート範囲",
+    "body": "Business以上ではTrusted Advisorの全項目や、電話・チャットのケース対応が使えます。Enterpriseには専任のTAM（テクニカルアカウントマネージャー）が付き、伴走支援を受けられます。"
+   },
+   {
+    "heading": "ここがポイント",
+    "body": "「本番環境で24時間対応が必要→Business以上」「専任担当（TAM）が欲しい→Enterprise」が定番の判断。プラン名と対応レベルの対応関係を押さえます。※実サービスではDeveloper／Businessが2027年1月に終了予定で、24時間対応のBusiness Support+へ移行中です。ただし『24時間＝Business以上／専任TAM＝Enterprise』という考え方は変わりません。"
+   }
+  ],
+  "quizIds": [
+   "q7-bill-06",
+   "q-bil-013",
+   "q2-bill-06",
+   "q6-bill-02",
+   "q7-bill-08",
+   "q9-bill-04",
+   "q8-bill-01",
+   "q3-bill-03",
+   "q5-bill-04",
+   "q-bil-014",
+   "q2-bill-05",
+   "q4-bill-01",
+   "q10-bill-05",
+   "q-bil-005",
+   "qd-bil06-e10"
+  ],
+  "challengeQuizIds": [
+   "qm-bil-06",
+   "qm-bil-07"
+  ],
+  "drillQuizIds": [
+   "qd-bil06-1",
+   "qd-bil06-2",
+   "qd-bil06-3",
+   "qd-bil06-4",
+   "qd-bil06-5",
+   "qd-bil06-6",
+   "qd-bil06-e7",
+   "qd-bil06-8",
+   "qd-bil06-9",
+   "qd-bil06-10",
+   "qd-bil06-e11",
+   "qd-bil06-12",
+   "qd-bil06-13",
+   "qd-bil06-14",
+   "qd-bil06-15",
+   "qd-bil06-e1",
+   "qd-bil06-e2",
+   "qd-bil06-e3",
+   "qd-bil06-e4",
+   "qd-bil06-e5",
+   "qd-bil06-e6",
+   "qd-bil06-e8",
+   "qd-bil06-e9",
+   "qd-bil06-e13",
+   "qd-bil06-e14",
+   "qd-bil06-e15"
+  ],
+  "basicQuizIds": [
+   "b-bil-06-01",
+   "b-bil-06-02",
+   "b-bil-06-03",
+   "b-bil-06-04",
+   "b-bil-06-05",
+   "b-bil-06-06",
+   "b-bil-06-07",
+   "b-bil-06-08",
+   "b-bil-06-09",
+   "b-bil-06-10",
+   "b-bil-06-11",
+   "b-bil-06-12",
+   "b-bil-06-13",
+   "b-bil-06-14",
+   "b-bil-06-15"
+  ]
+ }
+]

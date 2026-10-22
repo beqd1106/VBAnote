@@ -1,0 +1,751 @@
+[
+ {
+  "id": "t-pdca",
+  "term": "PDCA",
+  "shortDescription": "計画→実行→評価→改善の管理サイクル。",
+  "beginnerExplanation": "仕事を「計画して、やって、ふり返って、直す」の順に繰り返し、少しずつ良くしていく考え方です。",
+  "useCase": "業務改善、品質管理など。",
+  "examPoint": "Plan・Do・Check・Actの順番が問われます。",
+  "relatedServices": [],
+  "domain": "strategyCorp",
+  "difficulty": 1
+ },
+ {
+  "id": "t-bep",
+  "term": "損益分岐点",
+  "shortDescription": "売上と費用が等しく利益ゼロになる売上高。",
+  "beginnerExplanation": "これ以上売れば黒字、下回れば赤字になる境目の売上高です。固定費÷(1−変動費率)で計算します。",
+  "useCase": "採算計画・価格設定。",
+  "examPoint": "固定費・変動費・限界利益との関係が頻出。",
+  "relatedServices": [
+   "固定費",
+   "変動費"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-copyright",
+  "term": "著作権",
+  "shortDescription": "創作時点で自動発生する著作物の権利。",
+  "beginnerExplanation": "文章・絵・音楽・プログラムなどを作った時点で自動的に得られる、無断使用を防ぐ権利です。",
+  "useCase": "ソフト・コンテンツの利用判断。",
+  "examPoint": "登録不要で自動発生。産業財産権との違いが頻出。",
+  "relatedServices": [
+   "知的財産権"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 1
+ },
+ {
+  "id": "t-personalinfo",
+  "term": "個人情報保護法",
+  "shortDescription": "個人情報の適正な取り扱いを定める法律。",
+  "beginnerExplanation": "名前・連絡先など個人を特定できる情報を、企業が正しく扱うためのルールを定めた法律です。",
+  "useCase": "顧客データの取り扱い全般。",
+  "examPoint": "要配慮個人情報・匿名加工情報の区別が頻出。",
+  "relatedServices": [],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-swot",
+  "term": "SWOT分析",
+  "shortDescription": "強み・弱み・機会・脅威の4視点分析。",
+  "beginnerExplanation": "自社の良い点・弱点（内部）と、追い風・逆風（外部）を4つのマスで整理する方法です。",
+  "useCase": "経営戦略の立案。",
+  "examPoint": "内部要因(S/W)と外部要因(O/T)の区別がポイント。",
+  "relatedServices": [],
+  "domain": "strategyBiz",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ppm",
+  "term": "PPM",
+  "shortDescription": "市場成長率と占有率で製品を分類する手法。",
+  "beginnerExplanation": "商品を「伸びる市場か」「自社が強いか」の2軸で分け、どれに力を入れるか考える方法です。",
+  "useCase": "事業ポートフォリオの検討。",
+  "examPoint": "花形・金のなる木・問題児・負け犬の4分類。",
+  "relatedServices": [
+   "SWOT分析"
+  ],
+  "domain": "strategyBiz",
+  "difficulty": 2
+ },
+ {
+  "id": "t-iot",
+  "term": "IoT",
+  "shortDescription": "あらゆるモノをネットにつなぐ仕組み。",
+  "beginnerExplanation": "家電やセンサーなど身の回りのモノをインターネットにつなぎ、データを集めて活用する仕組みです。",
+  "useCase": "スマート家電、工場の見える化。",
+  "examPoint": "Internet of Things。ビッグデータ・AIと連携。",
+  "relatedServices": [
+   "ビッグデータ"
+  ],
+  "domain": "strategyBiz",
+  "difficulty": 1
+ },
+ {
+  "id": "t-saas",
+  "term": "SaaS／PaaS／IaaS",
+  "shortDescription": "クラウドの3つの提供形態。",
+  "beginnerExplanation": "完成ソフトを使うのがSaaS、開発環境を借りるのがPaaS、サーバなど土台を借りるのがIaaSです。",
+  "useCase": "クラウドサービスの選定。",
+  "examPoint": "SaaS=ソフト、PaaS=開発環境、IaaS=インフラ。",
+  "relatedServices": [
+   "クラウド"
+  ],
+  "domain": "strategySys",
+  "difficulty": 2
+ },
+ {
+  "id": "t-erp",
+  "term": "ERP",
+  "shortDescription": "基幹業務を統合管理する仕組み。",
+  "beginnerExplanation": "会計・人事・在庫などバラバラな業務データを一つにまとめて管理する仕組み・ソフトです。",
+  "useCase": "全社の情報一元化。",
+  "examPoint": "Enterprise Resource Planning。経営資源の統合。",
+  "relatedServices": [],
+  "domain": "strategySys",
+  "difficulty": 2
+ },
+ {
+  "id": "t-rfp",
+  "term": "RFP",
+  "shortDescription": "要件を示して提案を求める依頼書。",
+  "beginnerExplanation": "システムを発注するとき、業者に「こういう物が欲しい」と条件を伝えて提案してもらう文書です。",
+  "useCase": "システム調達。",
+  "examPoint": "Request for Proposal。RFI(情報提供依頼)との違いが頻出。",
+  "relatedServices": [
+   "RFI"
+  ],
+  "domain": "strategySys",
+  "difficulty": 3
+ },
+ {
+  "id": "t-agile",
+  "term": "アジャイル開発",
+  "shortDescription": "短い反復で柔軟に進める開発手法。",
+  "beginnerExplanation": "少しずつ作って確認する短いサイクルを繰り返し、途中の変更にも対応しやすい開発の進め方です。",
+  "useCase": "要求が変わりやすい開発。",
+  "examPoint": "代表例はスクラム。ウォーターフォールと対比で頻出。",
+  "relatedServices": [
+   "スクラム",
+   "ウォーターフォール"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 1
+ },
+ {
+  "id": "t-waterfall",
+  "term": "ウォーターフォールモデル",
+  "shortDescription": "後戻りしない順次型の開発モデル。",
+  "beginnerExplanation": "要件定義→設計→開発→テストと、滝が流れるように後戻りせず順番に進める作り方です。",
+  "useCase": "仕様が固まった開発。",
+  "examPoint": "工程順と、後戻りが難しい点が特徴。",
+  "relatedServices": [
+   "アジャイル開発"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 1
+ },
+ {
+  "id": "t-blackbox",
+  "term": "ブラックボックステスト",
+  "shortDescription": "内部を見ず入出力で検証するテスト。",
+  "beginnerExplanation": "中身の作りは気にせず、「この入力ならこの結果が出るはず」を確かめるテストです。",
+  "useCase": "仕様通り動くかの確認。",
+  "examPoint": "内部を見るホワイトボックスとの対比が頻出。",
+  "relatedServices": [
+   "ホワイトボックステスト"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 2
+ },
+ {
+  "id": "t-qcd",
+  "term": "QCD",
+  "shortDescription": "品質・コスト・納期の管理指標。",
+  "beginnerExplanation": "プロジェクトで両立させたい「良さ(Q)・費用(C)・期日(D)」の3つの管理ポイントです。",
+  "useCase": "プロジェクト管理全般。",
+  "examPoint": "Quality・Cost・Deliveryの頭文字。",
+  "relatedServices": [],
+  "domain": "mgmtPm",
+  "difficulty": 1
+ },
+ {
+  "id": "t-wbs",
+  "term": "WBS",
+  "shortDescription": "作業を階層的に分解した構成図。",
+  "beginnerExplanation": "大きな作業を、管理できる小さな作業へ枝分かれさせて洗い出す表です。",
+  "useCase": "作業計画・見積り。",
+  "examPoint": "Work Breakdown Structure。抜け漏れ防止に使う。",
+  "relatedServices": [],
+  "domain": "mgmtPm",
+  "difficulty": 2
+ },
+ {
+  "id": "t-criticalpath",
+  "term": "クリティカルパス",
+  "shortDescription": "全体日程を左右する最長の作業経路。",
+  "beginnerExplanation": "作業の流れの中で最も時間がかかり、遅れると全体が遅れてしまう一本道のことです。",
+  "useCase": "スケジュール管理。",
+  "examPoint": "アローダイアグラムで余裕ゼロの経路を求める。",
+  "relatedServices": [
+   "WBS"
+  ],
+  "domain": "mgmtPm",
+  "difficulty": 3
+ },
+ {
+  "id": "t-sla",
+  "term": "SLA",
+  "shortDescription": "サービス品質の合意水準。",
+  "beginnerExplanation": "「稼働率99%以上」などサービスの品質目標を、提供者と利用者で約束した文書です。",
+  "useCase": "クラウド・運用委託。",
+  "examPoint": "Service Level Agreement。SLM(維持活動)と区別。",
+  "relatedServices": [],
+  "domain": "mgmtService",
+  "difficulty": 2
+ },
+ {
+  "id": "t-itil",
+  "term": "ITIL",
+  "shortDescription": "ITサービス運用の成功事例集。",
+  "beginnerExplanation": "ITサービスをうまく運用するための、世界的に使われるお手本（ベストプラクティス）集です。",
+  "useCase": "IT運用の標準化。",
+  "examPoint": "ITサービスマネジメントのフレームワーク。",
+  "relatedServices": [
+   "SLA"
+  ],
+  "domain": "mgmtService",
+  "difficulty": 2
+ },
+ {
+  "id": "t-audit",
+  "term": "システム監査",
+  "shortDescription": "独立の立場で情報システムを点検・評価。",
+  "beginnerExplanation": "システムがきちんと安全・正確に使われているかを、利害のない立場の人がチェックする活動です。",
+  "useCase": "内部統制・ガバナンス。",
+  "examPoint": "監査人の独立性・客観性が重要。監査証跡も頻出。",
+  "relatedServices": [],
+  "domain": "mgmtService",
+  "difficulty": 2
+ },
+ {
+  "id": "t-binary",
+  "term": "2進数",
+  "shortDescription": "0と1だけで数を表す方法。",
+  "beginnerExplanation": "コンピュータが使う、0と1の2種類だけで数を表す仕組みです。桁の重みは1,2,4,8…と増えます。",
+  "useCase": "データ表現の基礎。",
+  "examPoint": "2進⇄10進⇄16進の変換が頻出。",
+  "relatedServices": [],
+  "domain": "techBase",
+  "difficulty": 1
+ },
+ {
+  "id": "t-stack-queue",
+  "term": "スタックとキュー",
+  "shortDescription": "LIFOとFIFOのデータ構造。",
+  "beginnerExplanation": "最後に入れた物から出すのがスタック、先に入れた物から出すのがキューです。",
+  "useCase": "処理順の制御。",
+  "examPoint": "スタック=LIFO(積み上げ)、キュー=FIFO(行列)。",
+  "relatedServices": [],
+  "domain": "techBase",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ml",
+  "term": "機械学習",
+  "shortDescription": "データから規則性を学ぶAIの技術。",
+  "beginnerExplanation": "人がルールを全部書く代わりに、大量のデータからコンピュータが自分でパターンを見つける仕組みです。",
+  "useCase": "予測・分類・画像認識。",
+  "examPoint": "層を深くした深層学習(ディープラーニング)が発展形。",
+  "relatedServices": [
+   "ディープラーニング"
+  ],
+  "domain": "techBase",
+  "difficulty": 1
+ },
+ {
+  "id": "t-cpu",
+  "term": "CPU",
+  "shortDescription": "演算と制御を担う中枢装置。",
+  "beginnerExplanation": "コンピュータの頭脳にあたり、計算や各装置の制御を行う部品です。クロックが高いほど速い傾向です。",
+  "useCase": "PC・スマホの性能。",
+  "examPoint": "クロック周波数・コア数が性能に関係。",
+  "relatedServices": [],
+  "domain": "techSystem",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ram-rom",
+  "term": "RAMとROM",
+  "shortDescription": "揮発性メモリと不揮発性メモリ。",
+  "beginnerExplanation": "電源を切ると消えるのがRAM(作業用)、消えないのがROM(読み出し用)です。",
+  "useCase": "主記憶の理解。",
+  "examPoint": "RAM=揮発性、ROM=不揮発性の対比が頻出。",
+  "relatedServices": [],
+  "domain": "techSystem",
+  "difficulty": 1
+ },
+ {
+  "id": "t-availability",
+  "term": "稼働率",
+  "shortDescription": "システムが正常に使える時間の割合。",
+  "beginnerExplanation": "全体の時間のうち、故障せず使えていた時間の割合です。故障が少なく修理が速いほど高くなります。",
+  "useCase": "システムの信頼性評価。",
+  "examPoint": "稼働率=MTBF÷(MTBF+MTTR)。",
+  "relatedServices": [
+   "MTBF",
+   "MTTR"
+  ],
+  "domain": "techSystem",
+  "difficulty": 2
+ },
+ {
+  "id": "t-security-cia",
+  "term": "情報セキュリティの3要素(CIA)",
+  "shortDescription": "機密性・完全性・可用性。",
+  "beginnerExplanation": "情報を守る3つの柱で、「見られない(機密性)・書き換えられない(完全性)・使える(可用性)」を保つ考え方です。",
+  "useCase": "セキュリティ対策全般。",
+  "examPoint": "Confidentiality/Integrity/Availability。超頻出。",
+  "relatedServices": [],
+  "domain": "techElement",
+  "difficulty": 1
+ },
+ {
+  "id": "t-pubkey",
+  "term": "公開鍵暗号方式",
+  "shortDescription": "公開鍵と秘密鍵のペアを使う暗号。",
+  "beginnerExplanation": "誰でも使える公開鍵で暗号化し、本人だけが持つ秘密鍵で元に戻す方式です。鍵配布が安全です。",
+  "useCase": "SSL/TLS、電子署名。",
+  "examPoint": "相手の公開鍵で暗号化→相手の秘密鍵で復号。",
+  "relatedServices": [
+   "共通鍵暗号方式"
+  ],
+  "domain": "techElement",
+  "difficulty": 3
+ },
+ {
+  "id": "t-malware",
+  "term": "マルウェア",
+  "shortDescription": "悪意のあるソフトの総称。",
+  "beginnerExplanation": "ウイルス・ワーム・ランサムウェアなど、コンピュータに害を与える不正プログラムをまとめた呼び方です。",
+  "useCase": "セキュリティ脅威の理解。",
+  "examPoint": "ランサム=身代金、ワーム=自己増殖などの区別が頻出。",
+  "relatedServices": [
+   "ランサムウェア"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-normalization",
+  "term": "正規化",
+  "shortDescription": "データの重複をなくす設計手法。",
+  "beginnerExplanation": "データベースで同じ情報が重複しないよう、表を適切に分割して整理することです。",
+  "useCase": "データベース設計。",
+  "examPoint": "更新時の矛盾（不整合）を防ぐのが目的。",
+  "relatedServices": [
+   "主キー"
+  ],
+  "domain": "techElement",
+  "difficulty": 3
+ },
+ {
+  "id": "t-tcpip",
+  "term": "TCP/IP",
+  "shortDescription": "インターネットの標準プロトコル群。",
+  "beginnerExplanation": "インターネット通信の共通ルールの集まりで、Webやメールなどはこの上で動いています。",
+  "useCase": "ネットワーク全般。",
+  "examPoint": "IPアドレス・DNS・HTTP等が関連。",
+  "relatedServices": [
+   "DNS"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-mfa",
+  "term": "多要素認証",
+  "shortDescription": "複数の要素を組み合わせる認証。",
+  "beginnerExplanation": "パスワード（知識）に加えてスマホ（所持）や指紋（生体）も使い、なりすましを防ぐ認証です。",
+  "useCase": "ログインの安全強化。",
+  "examPoint": "知識・所持・生体の3要素から2つ以上を使う。",
+  "relatedServices": [],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-bs",
+  "term": "貸借対照表（B/S）",
+  "shortDescription": "ある時点の資産・負債・純資産を表す財務諸表。",
+  "beginnerExplanation": "会社がその時点で「何をどれだけ持っていて、どれだけ借金があるか」を一覧にした表です。",
+  "useCase": "会社の財政状態の把握。",
+  "examPoint": "損益計算書(P/L)との違い（B/Sは“ある時点”、P/Lは“一定期間”）が頻出。",
+  "relatedServices": [
+   "損益計算書"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-pl",
+  "term": "損益計算書（P/L）",
+  "shortDescription": "一定期間の収益と費用から利益を示す財務諸表。",
+  "beginnerExplanation": "1年間などの区切りで「いくら売り上げて、いくら費用がかかり、いくら儲かったか」を示す表です。",
+  "useCase": "会社の経営成績の把握。",
+  "examPoint": "売上総利益・営業利益・経常利益など利益の段階が頻出。",
+  "relatedServices": [
+   "貸借対照表（B/S）"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-industrialproperty",
+  "term": "産業財産権",
+  "shortDescription": "特許権・実用新案権・意匠権・商標権の総称。",
+  "beginnerExplanation": "発明やデザイン、商品名などのアイデアを、登録することで守ってもらえる4つの権利のまとめ呼び名です。",
+  "useCase": "発明・デザイン・ブランド名の保護。",
+  "examPoint": "登録が必要な点で、自動発生する著作権と区別される。",
+  "relatedServices": [
+   "著作権"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-sensitiveinfo",
+  "term": "要配慮個人情報",
+  "shortDescription": "本人への不当な差別等につながる個人情報。",
+  "beginnerExplanation": "病歴・人種・信条・犯罪歴など、扱いを間違えると本人が不利益を受けやすい特に大事な個人情報です。",
+  "useCase": "医療・採用など機微な情報の取り扱い。",
+  "examPoint": "取得には原則、本人の同意が必要な点が頻出。",
+  "relatedServices": [
+   "個人情報保護法"
+  ],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-pllaw",
+  "term": "PL法（製造物責任法）",
+  "shortDescription": "製品の欠陥による被害の賠償責任を定める法律。",
+  "beginnerExplanation": "製品に欠陥があって人がケガをしたときなど、過失を証明しなくても製造者に賠償を求められるようにする法律です。",
+  "useCase": "製造業の品質・安全対応。",
+  "examPoint": "過失の有無に関係なく責任を問える「無過失責任」がポイント。",
+  "relatedServices": [],
+  "domain": "strategyCorp",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-4p",
+  "term": "マーケティングの4P",
+  "shortDescription": "Product・Price・Place・Promotionの4視点。",
+  "beginnerExplanation": "「何を・いくらで・どこで・どう伝えて」売るかを整理する、マーケティング戦略の基本の4つの切り口です。",
+  "useCase": "商品戦略の立案。",
+  "examPoint": "4つの英単語（製品・価格・流通・販促）の対応が頻出。",
+  "relatedServices": [
+   "SWOT分析"
+  ],
+  "domain": "strategyBiz",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-corecompetence",
+  "term": "コアコンピタンス",
+  "shortDescription": "他社にまねできない自社独自の強み。",
+  "beginnerExplanation": "「これなら絶対にうちが一番」と言える、長年培った技術やノウハウなど競合が真似しにくい強みのことです。",
+  "useCase": "経営戦略・差別化の検討。",
+  "examPoint": "「模倣困難性」がキーワードとして問われやすい。",
+  "relatedServices": [
+   "SWOT分析"
+  ],
+  "domain": "strategyBiz",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-rfm",
+  "term": "RFM分析",
+  "shortDescription": "直近購入・頻度・金額で顧客を分類する手法。",
+  "beginnerExplanation": "「最近買ったか(Recency)」「よく買うか(Frequency)」「たくさん買うか(Monetary)」の3指標で優良顧客を見つける方法です。",
+  "useCase": "顧客ランク付け・販促の絞り込み。",
+  "examPoint": "3つの頭文字と、優良顧客の抽出に使う点が頻出。",
+  "relatedServices": [],
+  "domain": "strategyBiz",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-bpr",
+  "term": "BPR",
+  "shortDescription": "業務プロセスを根本から見直し再設計すること。",
+  "beginnerExplanation": "今までのやり方にとらわれず、業務の流れをゼロから見直して大きく効率化する取り組みです。",
+  "useCase": "業務改革・組織横断の効率化。",
+  "examPoint": "Business Process Re-engineering。部分改善のカイゼンとの違いが頻出。",
+  "relatedServices": [
+   "RPA"
+  ],
+  "domain": "strategySys",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-rpa",
+  "term": "RPA",
+  "shortDescription": "パソコン上の定型作業をソフトが自動で行う技術。",
+  "beginnerExplanation": "データ入力や転記など決まった手順の作業を、ロボット（ソフト）が人の代わりに自動でこなす仕組みです。",
+  "useCase": "事務作業の自動化・省力化。",
+  "examPoint": "Robotic Process Automation。定型業務の自動化がキーワード。",
+  "relatedServices": [
+   "BPR"
+  ],
+  "domain": "strategySys",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-scrum",
+  "term": "スクラム",
+  "shortDescription": "短い期間（スプリント）を繰り返す代表的なアジャイル手法。",
+  "beginnerExplanation": "数週間ごとの短い作業サイクルを繰り返しながら、チームで相談しつつ製品を少しずつ作り上げる開発の進め方です。",
+  "useCase": "アジャイル開発の実践。",
+  "examPoint": "スプリント・プロダクトオーナー・デイリースクラムが頻出用語。",
+  "relatedServices": [
+   "アジャイル開発"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-devops",
+  "term": "DevOps",
+  "shortDescription": "開発と運用が連携し迅速にリリースする考え方。",
+  "beginnerExplanation": "開発チームと運用チームが協力し合い、システムの変更や改善を素早く安全に届け続ける文化・仕組みです。",
+  "useCase": "継続的な機能改善・リリース。",
+  "examPoint": "Development＋Operations。CI/CDと組み合わせて出題されやすい。",
+  "relatedServices": [
+   "アジャイル開発"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-fp",
+  "term": "ファンクションポイント法",
+  "shortDescription": "画面や機能の数から開発規模を見積もる手法。",
+  "beginnerExplanation": "システムの入力画面や出力帳票などの機能の数・複雑さをもとに、開発のボリュームを見積もる方法です。",
+  "useCase": "開発工数・費用の見積り。",
+  "examPoint": "プログラムの行数(LOC法)に頼らない見積り手法である点が頻出。",
+  "relatedServices": [
+   "WBS"
+  ],
+  "domain": "mgmtDev",
+  "difficulty": 3
+ },
+ {
+  "id": "t-ext-arrowdiagram",
+  "term": "アローダイアグラム",
+  "shortDescription": "作業の順序と日数を矢印で表す図。",
+  "beginnerExplanation": "どの作業がどの作業の後に続くかを矢印でつなぎ、全体の日程を見える化する図です。",
+  "useCase": "スケジュールの計画・管理。",
+  "examPoint": "クリティカルパス（最長経路）を求める計算問題が頻出。",
+  "relatedServices": [
+   "クリティカルパス"
+  ],
+  "domain": "mgmtPm",
+  "difficulty": 3
+ },
+ {
+  "id": "t-ext-evm",
+  "term": "EVM",
+  "shortDescription": "コストと進捗を数値で管理する分析手法。",
+  "beginnerExplanation": "「予定通りの費用で、予定通り進んでいるか」を数値とグラフで見える化する、プロジェクトの進み具合の管理方法です。",
+  "useCase": "コスト・進捗の可視化。",
+  "examPoint": "Earned Value Management。計画値・出来高・実コストの比較が頻出。",
+  "relatedServices": [
+   "WBS"
+  ],
+  "domain": "mgmtPm",
+  "difficulty": 3
+ },
+ {
+  "id": "t-ext-incidentmgmt",
+  "term": "インシデント管理",
+  "shortDescription": "サービス障害を素早く復旧させるプロセス。",
+  "beginnerExplanation": "システムのトラブルが起きたとき、原因究明よりもまず「早く使える状態に戻す」ことを優先する対応の仕組みです。",
+  "useCase": "システム障害時の一次対応。",
+  "examPoint": "根本原因を追究する問題管理との違いが頻出。",
+  "relatedServices": [
+   "ITIL"
+  ],
+  "domain": "mgmtService",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-slm",
+  "term": "SLM",
+  "shortDescription": "SLAの品質水準を維持・改善する活動。",
+  "beginnerExplanation": "約束したサービス品質(SLA)がきちんと守られているかを継続的に確認し、必要に応じて改善していく活動です。",
+  "useCase": "サービス品質の継続的な維持管理。",
+  "examPoint": "Service Level Management。合意文書のSLAと活動のSLMの違いが頻出。",
+  "relatedServices": [
+   "SLA"
+  ],
+  "domain": "mgmtService",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-logic",
+  "term": "論理演算(AND/OR)",
+  "shortDescription": "真偽値を組み合わせる基本演算。",
+  "beginnerExplanation": "「両方とも真なら真」がAND（論理積）、「どちらか一方でも真なら真」がOR（論理和）という、条件を組み合わせる計算です。",
+  "useCase": "プログラムの条件分岐、回路設計。",
+  "examPoint": "AND・OR・NOTの真理値表を使った計算問題が頻出。",
+  "relatedServices": [
+   "2進数"
+  ],
+  "domain": "techBase",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-algorithm",
+  "term": "アルゴリズム",
+  "shortDescription": "問題を解くための手順・処理の流れ。",
+  "beginnerExplanation": "料理のレシピのように、目的の結果を得るための処理の順序をきちんと決めたものです。",
+  "useCase": "プログラム設計、業務処理の効率化。",
+  "examPoint": "フローチャートで手順を表す問題が頻出。",
+  "relatedServices": [
+   "スタックとキュー"
+  ],
+  "domain": "techBase",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-raid",
+  "term": "RAID",
+  "shortDescription": "複数の記憶装置を組み合わせ性能・信頼性を高める技術。",
+  "beginnerExplanation": "複数のハードディスクを組み合わせて使い、速度を上げたり、1台壊れてもデータを守れるようにする仕組みです。",
+  "useCase": "サーバのデータ保護・高速化。",
+  "examPoint": "RAID0(高速化)とRAID1(ミラーリング＝冗長化)の違いが頻出。",
+  "relatedServices": [
+   "稼働率"
+  ],
+  "domain": "techSystem",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-mtbf-mttr",
+  "term": "MTBF・MTTR",
+  "shortDescription": "平均故障間隔と平均修復時間。",
+  "beginnerExplanation": "故障から次の故障までの平均時間がMTBF、故障してから直るまでの平均時間がMTTRです。",
+  "useCase": "システムの信頼性・保守性の評価。",
+  "examPoint": "稼働率=MTBF÷(MTBF+MTTR)の計算式が頻出。",
+  "relatedServices": [
+   "稼働率"
+  ],
+  "domain": "techSystem",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-oss",
+  "term": "OSS",
+  "shortDescription": "ソースコードが公開され自由に利用・改変できるソフト。",
+  "beginnerExplanation": "プログラムの中身（設計図）が公開されていて、誰でも無料で使ったり、手直ししたりできるソフトウェアです。",
+  "useCase": "コスト削減、システム開発の基盤利用。",
+  "examPoint": "無料＝改変や再配布も自由という誤解に注意（ライセンス条件がある）。",
+  "relatedServices": [],
+  "domain": "techSystem",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-primarykey",
+  "term": "主キー",
+  "shortDescription": "表の中の行を一意に識別する項目。",
+  "beginnerExplanation": "名簿の「学籍番号」のように、表の中の1件1件を他と区別するための、重複のない項目です。",
+  "useCase": "データベース設計・検索の基準。",
+  "examPoint": "NULL（空）や重複を許さない点が頻出。",
+  "relatedServices": [
+   "正規化"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-sql",
+  "term": "SQL",
+  "shortDescription": "データベースを操作するための言語。",
+  "beginnerExplanation": "データベースに対して「探して」「追加して」「消して」などの指示を出すための専用の命令文の言語です。",
+  "useCase": "データの検索・登録・更新・削除。",
+  "examPoint": "SELECT・INSERT・UPDATE・DELETEの基本4命令が頻出。",
+  "relatedServices": [
+   "主キー"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-dns",
+  "term": "DNS",
+  "shortDescription": "ドメイン名とIPアドレスを結びつける仕組み。",
+  "beginnerExplanation": "「example.com」のような覚えやすい名前を、コンピュータが使う数字の住所（IPアドレス）に変換してくれる仕組みです。",
+  "useCase": "Webサイト閲覧・メール送受信の基盤。",
+  "examPoint": "Domain Name System。名前解決という言葉とセットで頻出。",
+  "relatedServices": [
+   "TCP/IP"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ },
+ {
+  "id": "t-ext-firewall",
+  "term": "ファイアウォール",
+  "shortDescription": "内部ネットワークと外部の通信を監視・制御する仕組み。",
+  "beginnerExplanation": "社内ネットワークと外のインターネットの間に置く「防火壁」で、怪しい通信の出入りをブロックします。",
+  "useCase": "不正アクセス対策・境界防御。",
+  "examPoint": "外部からの不正侵入だけでなく内部からの不正通信も制御できる点に注意。",
+  "relatedServices": [
+   "マルウェア"
+  ],
+  "domain": "techElement",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-digitalsignature",
+  "term": "ディジタル署名",
+  "shortDescription": "公開鍵暗号を利用しなりすまし・改ざんを検知する技術。",
+  "beginnerExplanation": "送った人が本人であること、途中で内容が書き換えられていないことを証明する、電子データの「ハンコ」のような技術です。",
+  "useCase": "電子契約・電子文書の真正性確認。",
+  "examPoint": "送信者の秘密鍵で署名し、受信者が送信者の公開鍵で検証する流れが頻出。",
+  "relatedServices": [
+   "公開鍵暗号方式"
+  ],
+  "domain": "techElement",
+  "difficulty": 3
+ },
+ {
+  "id": "t-ext-phishing",
+  "term": "フィッシング",
+  "shortDescription": "偽サイトなどでID・パスワードを盗む詐欺手法。",
+  "beginnerExplanation": "実在する銀行やサービスになりすましたメールやサイトで、パスワードやカード番号をだまし取る手口です。",
+  "useCase": "サイバー攻撃の脅威理解、利用者への注意喚起。",
+  "examPoint": "URLの確認や不審なリンクを開かないなどの対策とセットで出題。",
+  "relatedServices": [
+   "マルウェア"
+  ],
+  "domain": "techElement",
+  "difficulty": 1
+ },
+ {
+  "id": "t-ext-isms",
+  "term": "ISMS",
+  "shortDescription": "組織全体で情報セキュリティを管理する仕組み。",
+  "beginnerExplanation": "会社全体でルールを決め、教育・対策・見直しを繰り返しながら情報を守り続けるためのマネジメントの仕組みです。",
+  "useCase": "組織のセキュリティ体制構築・認証取得。",
+  "examPoint": "Information Security Management System。PDCAを回して継続的に改善する点が頻出。",
+  "relatedServices": [
+   "情報セキュリティの3要素(CIA)"
+  ],
+  "domain": "techElement",
+  "difficulty": 2
+ }
+]

@@ -318,6 +318,17 @@ struct QuizPlayerView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
 
+                // 出典（マニュアルの該当ページ）。どこを読み直せばよいかが分かる。
+                if let source = current.source, !source.isEmpty {
+                    HStack(alignment: .top, spacing: 5) {
+                        Image(systemName: "doc.text").font(.system(size: 11))
+                        Text(source).font(.system(size: 11))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .foregroundStyle(Theme.inkSoft)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                }
+
                 // この問題に関連する解説レッスンへ
                 if showLessonLink, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
                     NavigationLink { LessonDetailView(lesson: lesson) } label: {
@@ -370,22 +381,57 @@ struct QuizPlayerView: View {
                     .frame(width: 180, height: 180)
                     .padding(.top, Theme.Space.xxl)
 
-                Text(rate >= 0.7 ? "よくできました！この調子です。" : "間違えた問題は復習キューに入りました。")
+                Text(summaryMessage)
                     .font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.navy)
                     .multilineTextAlignment(.center)
 
                 if store.dueReviewCount > 0 {
-                    Text("復習待ち：\(store.dueReviewCount)問").captionStyle()
+                    Text("復習リスト：\(store.dueReviewCount)問").captionStyle()
                 }
 
-                PrimaryButton(title: "終わる", icon: "checkmark") { dismiss() }
-                    .padding(.horizontal, Theme.Space.xl)
+                VStack(spacing: Theme.Space.m) {
+                    if !missedQuestions.isEmpty {
+                        PrimaryButton(title: "間違えた\(missedQuestions.count)問をもう一度",
+                                      icon: "arrow.clockwise") { retryMissed() }
+                        SecondaryButton(title: "終わる", icon: "checkmark") { dismiss() }
+                    } else {
+                        PrimaryButton(title: "終わる", icon: "checkmark") { dismiss() }
+                    }
+                }
+                .padding(.horizontal, Theme.Space.xl)
             }
             .padding(Theme.Space.l)
         }
     }
 
+    /// このセッションで間違えた問題（出題順）
+    private var missedQuestions: [QuizQuestion] {
+        resultByIndex.filter { !$0.value }.keys.sorted()
+            .compactMap { questions.indices.contains($0) ? questions[$0] : nil }
+    }
+
+    private var summaryMessage: String {
+        if missedQuestions.isEmpty { return "全問正解！この調子です。" }
+        return "間違えた\(missedQuestions.count)問を復習リストに入れました。すぐに復習できます。"
+    }
+
     // MARK: - 操作
+
+    /// 間違えた問題だけでセッションをやり直す
+    private func retryMissed() {
+        let missed = missedQuestions
+        guard !missed.isEmpty else { return }
+        questions = missed
+        index = 0
+        selectedByIndex = [:]
+        submittedIndices = []
+        resultByIndex = [:]
+        hintLevelByIndex = [:]
+        hintTextByIndex = [:]
+        eliminatedByIndex = [:]
+        hintUsedIndices = []
+        finished = false
+    }
 
     private func toggle(_ i: Int) {
         var set = selectedByIndex[index] ?? []

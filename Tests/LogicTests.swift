@@ -144,6 +144,42 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(sum, 1.0, accuracy: 0.001, "公式配点の合計は100%になるべき")
     }
 
+    // MARK: - 収録している全資格
+
+    /// どの資格に切り替えても、コンテンツが読めて分野・ロードマップ・重要用語が噛み合っている
+    func testEveryExamLoadsConsistentContent() {
+        let original = ExamContext.current
+        defer { ExamContext.activate(original) }
+        XCTAssertGreaterThanOrEqual(ExamContext.all.count, 9)
+        for exam in ExamContext.all {
+            ExamContext.activate(exam)
+            let repo = ContentRepository.shared
+            XCTAssertFalse(repo.questions.isEmpty, "\(exam.key): 問題が空")
+            XCTAssertFalse(repo.lessons.isEmpty, "\(exam.key): レッスンが空")
+            let sum = ExamDomain.allCases.reduce(0.0) { $0 + $1.weight }
+            XCTAssertEqual(sum, 1.0, accuracy: 0.001, "\(exam.key): 配点の合計が100%でない")
+            let domains = Set(ExamDomain.allCases.map(\.rawValue))
+            XCTAssertTrue(repo.questions.allSatisfy { domains.contains($0.domain.rawValue) },
+                          "\(exam.key): 分野にない domain の問題がある")
+            XCTAssertEqual(ExamInfo.roadmap.count, 8, "\(exam.key): ロードマップは8週")
+            XCTAssertTrue(ExamInfo.roadmap.allSatisfy { !$0.domains.isEmpty }, "\(exam.key): 分野のない週がある")
+            for id in ExamInfo.keyTermIds {
+                XCTAssertTrue(repo.terms.contains { $0.id == id }, "\(exam.key): 重要用語 \(id) が無い")
+            }
+            XCTAssertFalse(repo.buildMockExam(count: ExamInfo.mockCount).isEmpty, "\(exam.key): 模試が組めない")
+        }
+    }
+
+    /// 他の資格の分野名は、いまの資格の分野として扱わない（進捗が混ざらない）
+    func testDomainFromAnotherExamIsRejected() {
+        let original = ExamContext.current
+        defer { ExamContext.activate(original) }
+        let itp = ExamContext.all.first { $0.key == "itp" }!
+        ExamContext.activate(itp)
+        XCTAssertNotNil(ExamDomain(rawValue: "strategyCorp"))
+        XCTAssertNil(ExamDomain(rawValue: "cloudConcepts"), "AWSの分野はITパスポートでは無効")
+    }
+
     // MARK: - 学習プラン
 
     func testRoadmapMatchesPlanDuration() {

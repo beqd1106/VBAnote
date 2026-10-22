@@ -1,0 +1,450 @@
+[
+ {
+  "id": "s-rpa",
+  "name": "RPA",
+  "category": "概要",
+  "oneLiner": "定型的なPC操作をソフトのロボットに代行させる自動化の仕組み。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-winactor",
+  "name": "WinActor",
+  "category": "概要",
+  "oneLiner": "NTTデータ製の純国産RPAツール。日本語で操作を記録・編集できる。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-windirector",
+  "name": "WinDirector",
+  "category": "概要",
+  "oneLiner": "複数のWinActorロボットを一元管理・実行制御する上位製品。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-full",
+  "name": "フル機能版",
+  "category": "エディション",
+  "oneLiner": "作成・編集・実行のすべてが行える開発用エディション。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-runtime",
+  "name": "実行版",
+  "category": "エディション",
+  "oneLiner": "作成済みシナリオの実行に特化。記録・編集・部分実行は不可。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-nodelock",
+  "name": "ノードロックライセンス",
+  "category": "ライセンス",
+  "oneLiner": "インストールした特定端末でのみ利用できる方式。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-floating",
+  "name": "フローティングライセンス",
+  "category": "ライセンス",
+  "oneLiner": "同時利用数の範囲で複数端末が使い回せる方式。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-node",
+  "name": "ノード",
+  "category": "部品",
+  "oneLiner": "分岐・繰り返し・待機などシナリオの骨組みとなる基本部品。",
+  "domain": "overview"
+ },
+ {
+  "id": "s-library",
+  "name": "ライブラリ",
+  "category": "部品",
+  "oneLiner": "Excel操作や文字列処理など細かな操作をまとめた部品。",
+  "domain": "features"
+ },
+ {
+  "id": "s-autorecord",
+  "name": "自動記録",
+  "category": "記録方式",
+  "oneLiner": "部品を内部情報で識別して操作を記録。安定して動く基本方式。",
+  "domain": "features"
+ },
+ {
+  "id": "s-imagematch",
+  "name": "画像マッチング",
+  "category": "記録方式",
+  "oneLiner": "記録した画像と画面を照合して操作。画面変化に弱い。",
+  "domain": "features"
+ },
+ {
+  "id": "s-emulation",
+  "name": "エミュレーション",
+  "category": "記録方式",
+  "oneLiner": "キー・マウス操作そのものを記録。座標依存でずれやすい。",
+  "domain": "features"
+ },
+ {
+  "id": "s-branch",
+  "name": "分岐",
+  "category": "ノード",
+  "oneLiner": "条件の成否で処理の流れを2方向に分けるノード。",
+  "domain": "features"
+ },
+ {
+  "id": "s-loop",
+  "name": "繰り返し",
+  "category": "ノード",
+  "oneLiner": "回数や条件が満たされる間、同じ処理を反復するノード。",
+  "domain": "features"
+ },
+ {
+  "id": "s-wait",
+  "name": "待機",
+  "category": "ノード",
+  "oneLiner": "画面表示や処理完了を待って処理を止める。安定動作の要。",
+  "domain": "features"
+ },
+ {
+  "id": "s-setvar",
+  "name": "変数値設定",
+  "category": "ノード",
+  "oneLiner": "変数に値を代入・更新するノード。",
+  "domain": "features"
+ },
+ {
+  "id": "s-variable",
+  "name": "変数",
+  "category": "データ",
+  "oneLiner": "値を一時的にしまう箱。ノード間で値を受け渡す。",
+  "domain": "features"
+ },
+ {
+  "id": "s-datalist",
+  "name": "データ一覧",
+  "category": "データ",
+  "oneLiner": "CSV等の表を取り込み1行ずつ処理するための表。",
+  "domain": "features"
+ },
+ {
+  "id": "s-scenario",
+  "name": "シナリオ",
+  "category": "シナリオ",
+  "oneLiner": "自動化の手順をフローチャートでまとめたもの。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-stepexec",
+  "name": "ステップ実行",
+  "category": "実行",
+  "oneLiner": "1ノードずつ動かして動作や変数を確認する実行方法。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-exception",
+  "name": "例外処理",
+  "category": "ノード",
+  "oneLiner": "エラー時も止めず、異常系へ処理を移す（try・catch相当）。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-subscenario",
+  "name": "サブルーチン",
+  "category": "シナリオ",
+  "oneLiner": "一連の手順を部品化し、呼び出して再利用する仕組み。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-mode-event",
+  "name": "イベントモード",
+  "category": "記録モード",
+  "oneLiner": "Windows純正アプリを対象に、部品の通し番号で記録。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-ie",
+  "name": "IEモード",
+  "category": "記録モード",
+  "oneLiner": "EdgeのIEモードが対象。部品の通し番号で記録。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-chrome",
+  "name": "Chromeモード",
+  "category": "記録モード",
+  "oneLiner": "Google Chrome専用。要素をXPathで管理する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-firefox",
+  "name": "Firefoxモード",
+  "category": "記録モード",
+  "oneLiner": "Mozilla Firefox専用。要素をXPathで管理する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-edge",
+  "name": "Edgeモード",
+  "category": "記録モード",
+  "oneLiner": "Edge(Chromium)専用。要素をXPathで管理する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-uia",
+  "name": "UIオートメーションモード",
+  "category": "記録モード",
+  "oneLiner": "アプリのGUI要素として操作を記録する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-mode-auto",
+  "name": "自動切り替えモード",
+  "category": "記録モード",
+  "oneLiner": "記録中に対象を変えると適切なモードへ自動で切替。",
+  "domain": "features"
+ },
+ {
+  "id": "s-tabunki",
+  "name": "多分岐",
+  "category": "ノード",
+  "oneLiner": "3つ以上の枝から1つを選ぶ（if・else if・else相当）。",
+  "domain": "features"
+ },
+ {
+  "id": "s-atohantei",
+  "name": "後判定繰返",
+  "category": "ノード",
+  "oneLiner": "処理後に判定するため最低1回は実行される繰り返し。",
+  "domain": "features"
+ },
+ {
+  "id": "s-loopend",
+  "name": "繰り返し終了",
+  "category": "ノード",
+  "oneLiner": "繰り返しから抜ける（break相当）。",
+  "domain": "features"
+ },
+ {
+  "id": "s-continue",
+  "name": "次の条件判定",
+  "category": "ノード",
+  "oneLiner": "以降を飛ばし条件判定へ進む（continue相当）。",
+  "domain": "features"
+ },
+ {
+  "id": "s-subcall",
+  "name": "サブルーチン呼び出し",
+  "category": "ノード",
+  "oneLiner": "サブルーチングループの処理を呼び出して実行する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-subgroup",
+  "name": "サブルーチングループ",
+  "category": "ノード",
+  "oneLiner": "再利用する処理のまとまり。ローカル変数を持てる。",
+  "domain": "features"
+ },
+ {
+  "id": "s-callscenario",
+  "name": "シナリオファイル呼び出し",
+  "category": "ノード",
+  "oneLiner": "他のシナリオファイルを読み込んで実行する。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-eventwatch",
+  "name": "イベント監視",
+  "category": "ノード",
+  "oneLiner": "登録したトリガーを監視し呼び出し処理を実行する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-rinkaku",
+  "name": "輪郭マッチング",
+  "category": "ノード",
+  "oneLiner": "輪郭を抽出しマルチスケールで照合して操作する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-ocr",
+  "name": "OCRマッチング",
+  "category": "ノード",
+  "oneLiner": "画面上の文字列を検索して操作する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-winwait",
+  "name": "ウィンドウ状態待機",
+  "category": "ノード",
+  "oneLiner": "画面の状態変化（6種類）を待つ・取得する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-timewait",
+  "name": "指定時間待機",
+  "category": "ノード",
+  "oneLiner": "時間（ミリ秒）や時刻まで待つ／時間帯を判定する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-sendstr",
+  "name": "文字列送信",
+  "category": "ノード",
+  "oneLiner": "文字列を1文字ずつ送信する。文字列設定が推奨。",
+  "domain": "features"
+ },
+ {
+  "id": "s-command",
+  "name": "コマンド実行",
+  "category": "ノード",
+  "oneLiner": "コマンドを実行し、標準出力の1行目を取得できる。",
+  "domain": "features"
+ },
+ {
+  "id": "s-script",
+  "name": "スクリプト実行",
+  "category": "ノード",
+  "oneLiner": "VBScriptのコードをシナリオ内で実行する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-python",
+  "name": "Python実行",
+  "category": "ノード",
+  "oneLiner": "Pythonのスクリプトを実行する（Ver.7.5.0で追加）。",
+  "domain": "features"
+ },
+ {
+  "id": "s-excel",
+  "name": "Excel操作",
+  "category": "ノード",
+  "oneLiner": "値の取得・値の設定・マクロ実行の3機能を持つ。",
+  "domain": "features"
+ },
+ {
+  "id": "s-clipboard",
+  "name": "クリップボード",
+  "category": "ノード",
+  "oneLiner": "値の設定と取得。取得はテキスト形式のみ。",
+  "domain": "features"
+ },
+ {
+  "id": "s-waitbox",
+  "name": "待機ボックス",
+  "category": "ノード",
+  "oneLiner": "メッセージ表示で中断。確認待ち／問い合わせの2種。",
+  "domain": "features"
+ },
+ {
+  "id": "s-inputbox",
+  "name": "インプットボックス",
+  "category": "ノード",
+  "oneLiner": "入力を受け取り変数へ格納する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-selectbox",
+  "name": "選択ボックス",
+  "category": "ノード",
+  "oneLiner": "選択候補から選ばせ、結果を変数へ格納する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-copyvar",
+  "name": "変数値コピー",
+  "category": "ノード",
+  "oneLiner": "変数の値を別の変数へコピーする。",
+  "domain": "features"
+ },
+ {
+  "id": "s-datetime",
+  "name": "日時取得",
+  "category": "ノード",
+  "oneLiner": "現在日時を変数へ格納する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-calc",
+  "name": "四則演算",
+  "category": "ノード",
+  "oneLiner": "2値の＋－×÷の結果を変数へ格納する。",
+  "domain": "features"
+ },
+ {
+  "id": "s-countup",
+  "name": "カウントアップ",
+  "category": "ノード",
+  "oneLiner": "変数に加算値（1～999,999）を加える。",
+  "domain": "features"
+ },
+ {
+  "id": "s-zenhan",
+  "name": "全角化/半角化",
+  "category": "ノード",
+  "oneLiner": "文字種を統一する。結果は対象変数へ上書き。",
+  "domain": "features"
+ },
+ {
+  "id": "s-windowrule",
+  "name": "ウィンドウ識別ルール",
+  "category": "仕組み",
+  "oneLiner": "操作対象の画面をタイトルやプロセス名で特定する。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-kanshi",
+  "name": "監視ルール",
+  "category": "仕組み",
+  "oneLiner": "特定画面が出たときの動作を決めておく規則。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-breakpoint",
+  "name": "ブレイクポイント",
+  "category": "デバッグ",
+  "oneLiner": "設定したノードの実行前で一時停止する。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-yokushi",
+  "name": "実行抑止",
+  "category": "デバッグ",
+  "oneLiner": "指定ノードを実行せずスキップする。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-loopexec",
+  "name": "ループ実行",
+  "category": "実行",
+  "oneLiner": "データ一覧の行数だけシナリオを繰り返す実行方式。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-partial",
+  "name": "部分実行",
+  "category": "実行",
+  "oneLiner": "選択したノードだけを実行する（実行版は不可）。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-fromhere",
+  "name": "ここから実行",
+  "category": "実行",
+  "oneLiner": "選択したノード以降を実行する（実行版は不可）。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-scenariopw",
+  "name": "シナリオパスワード",
+  "category": "セキュリティ",
+  "oneLiner": "編集・閲覧・実行を制限する3種のパスワード。",
+  "domain": "scenario"
+ },
+ {
+  "id": "s-bootopt",
+  "name": "起動オプション",
+  "category": "運用",
+  "oneLiner": "-fや-r、-ecなどコマンドラインからの起動指定。",
+  "domain": "overview"
+ }
+]

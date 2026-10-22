@@ -13,6 +13,8 @@ struct QuizQuestion: Codable, Identifiable, Hashable {
     /// 正解の選択肢インデックス（複数選択にも対応）
     let correctAnswers: [Int]
     let explanation: String
+    /// 出典（公式マニュアルの該当ページ・節など）。収録していない資格もあるので任意。
+    let source: String?
     /// 不正解選択肢の理由。キーは選択肢インデックスの文字列。
     let wrongChoiceExplanations: [String: String]
     let domain: ExamDomain
@@ -92,5 +94,7 @@ struct GenAIToolItem: Codable, Identifiable, Hashable {
 struct GlossaryEntry: Codable, Identifiable, Hashable {
     let term: String
     let explanation: String
+    /// 出典（公式マニュアルの該当ページ・節など）。収録していない資格もあるので任意。
+    let source: String?
     var id: String { term }
 }

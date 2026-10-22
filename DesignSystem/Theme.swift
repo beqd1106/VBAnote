@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// アプリ全体のデザイントークン。
-/// 方向性：AWSらしいクラウド感（白・ネイビー・ブルー）＋ 学習アプリの親しみ（オレンジ）。
+/// 方向性：落ち着いたノート風（クリーム・ネイビー）＋ 学習アプリの親しみ（オレンジ）。
 /// 初心者が迷わないよう、シンプル・余白広め・階層明快にする。
 enum Theme {
 
@@ -17,12 +17,32 @@ enum Theme {
     static let purple    = Color(hex: 0x7C5CD6)   // 補助アクセント
     static let indigo    = Color(hex: 0x3F51B5)   // 補助アクセント（分野色）
     static let rose      = Color(hex: 0xD05070)   // 補助アクセント（分野色）
+    static let amber     = Color(hex: 0xC98A1B)   // 補助アクセント（分野色）
+    static let slate     = Color(hex: 0x5B6B7B)   // 補助アクセント（分野色）
     static let green     = Color(hex: 0x2BA664)   // 正解・成功
     static let red       = Color(hex: 0xE0533D)   // 不正解・警告
 
     static let ink       = Color(hex: 0x29303A)   // 主要テキスト（やや温かい墨）
     static let inkSoft   = Color(hex: 0x8A8170)   // 補助テキスト（クリームに合う温かいグレー）
     static let line      = Color(hex: 0xEBE3D4)   // 区切り線・枠（クリーム系）
+
+    /// exams.json の色名（分野色）から Color を引く
+    static func named(_ name: String) -> Color {
+        switch name {
+        case "navy": return navy
+        case "blue": return blue
+        case "orange": return orange
+        case "teal": return teal
+        case "purple": return purple
+        case "indigo": return indigo
+        case "rose": return rose
+        case "amber": return amber
+        case "slate": return slate
+        case "green": return green
+        case "red": return red
+        default: return navy
+        }
+    }
 
     // MARK: - Spacing（4/8/12/16/24/32/48系）
     enum Space {

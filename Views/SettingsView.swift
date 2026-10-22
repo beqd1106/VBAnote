@@ -3,6 +3,7 @@ import SwiftData
 
 struct SettingsView: View {
     @EnvironmentObject var store: StudyStore
+    @EnvironmentObject var catalog: ExamCatalog
     @AppStorage("aiAssistEnabled") private var aiAssistEnabled = false
     @AppStorage("notificationsEnabled") private var notificationsEnabled = true
     @State private var showResetAlert = false
@@ -18,6 +19,7 @@ struct SettingsView: View {
                 AppBackground()
                 ScrollView {
                     VStack(spacing: Theme.Space.l) {
+                        examCard
                         profileCard
                         planCard
                         aiCard
@@ -31,6 +33,22 @@ struct SettingsView: View {
             }
             .navigationTitle("設定")
             .onAppear { staleCount = store.staleRecordCount() }
+        }
+    }
+
+    // MARK: - 学習中の資格
+
+    private var examCard: some View {
+        Card {
+            VStack(alignment: .leading, spacing: Theme.Space.m) {
+                Text("学習中の資格").font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
+                Text(ExamInfo.examFullName).bodyStyle()
+                    .fixedSize(horizontal: false, vertical: true)
+                SecondaryButton(title: "資格を切り替える", icon: "arrow.left.arrow.right") {
+                    catalog.showPicker()
+                }
+                Text("進捗は資格ごとに保存されるので、切り替えても消えません。").captionStyle()
+            }
         }
     }
 
@@ -116,22 +134,34 @@ struct SettingsView: View {
         Card {
             VStack(alignment: .leading, spacing: Theme.Space.s) {
                 Text("次のステップ").font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
-                ForEach(ExamInfo.nextCerts, id: \.title) { c in certRow(c.title, c.subtitle, true) }
-                Text("合格後はこれらの資格アプリ（◯◯noteシリーズ）へ拡張予定です。")
+                ForEach(ExamInfo.nextCerts, id: \.title) { c in
+                    if let exam = c.exam {
+                        Button { catalog.select(exam) } label: { certRow(c.title, c.subtitle, inApp: true) }
+                            .buttonStyle(.plain)
+                    } else {
+                        certRow(c.title, c.subtitle, inApp: false)
+                    }
+                }
+                Text("資格noteに収録している資格は「資格を切り替える」から学べます。")
                     .font(.system(size: 11)).foregroundStyle(Theme.inkSoft)
             }
         }
     }
 
-    private func certRow(_ title: String, _ subtitle: String, _ comingSoon: Bool) -> some View {
+    private func certRow(_ title: String, _ subtitle: String, inApp: Bool) -> some View {
         HStack {
-            Image(systemName: "lock.fill").foregroundStyle(Theme.inkSoft).font(.system(size: 12))
+            Image(systemName: inApp ? "book.fill" : "lock.fill")
+                .foregroundStyle(inApp ? Theme.orange : Theme.inkSoft).font(.system(size: 12))
             VStack(alignment: .leading, spacing: 1) {
                 Text(title).font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.ink)
                 Text(subtitle).captionStyle()
             }
             Spacer()
-            if comingSoon { TagChip(text: "準備中", color: Theme.inkSoft) }
+            if inApp {
+                TagChip(text: "学ぶ", color: Theme.blue)
+            } else {
+                TagChip(text: "準備中", color: Theme.inkSoft)
+            }
         }
     }
 

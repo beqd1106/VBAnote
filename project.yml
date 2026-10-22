@@ -41,7 +41,7 @@ targets:
     info:
       path: App/Info.plist
       properties:
-        CFBundleDisplayName: VBAnote
+        CFBundleDisplayName: 資格note
         CFBundleName: VBAnote
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
