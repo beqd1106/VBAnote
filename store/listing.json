@@ -1,0 +1,15 @@
+{
+  "app": "VBAnote",
+  "name": "資格note",
+  "subtitle": "ITパス・基本情報・MOSなど9資格",
+  "promo": "ITパスポート・基本情報・AWS・生成AIパスポート・G検定・MOS・VBA・RPA・PMOの9資格を、1つのアプリで。オリジナル問題9,000問超と要点レッスン、模擬試験、忘却曲線にもとづく復習。すべてオフラインで完結。",
+  "keywords": "資格,試験対策,問題集,ITパスポート,基本情報,AWS,生成AI,G検定,MOS,VBA,RPA,WinActor,PMO,一問一答",
+  "description": "仕事に役立つ9つの資格を、1つのアプリで。\n\n資格noteは、IT・AI・オフィス・業務自動化・プロジェクト管理の資格をまとめて学べる学習アプリです。学びたい資格を選ぶだけで、その試験の出題範囲に合わせた問題演習・要点レッスン・模擬試験・復習がそろいます。資格はいつでも切り替えられ、進捗は資格ごとに別々に保存されます。\n\n■ 収録している9資格\n【IT・クラウド】\n・ITパスポート\n・基本情報技術者試験\n・AWS クラウドプラクティショナー\n【AI】\n・生成AIパスポート\n・G検定\n【オフィス・業務自動化】\n・MOS（Excel・Word）\n・VBAエキスパート ベーシック\n・RPA技術者検定 アソシエイト（WinActor）\n【プロジェクト管理】\n・PMOスペシャリスト\n\n■ たっぷりの問題演習\n・すべてオリジナルの四択問題を9資格あわせて9,000問以上収録\n・すべての選択肢に、なぜ間違いなのかの「誤答解説」つき\n・回答前に使える2段階ヒント\n・間違えた問題はその場で復習リストへ。セッション後に「間違えた問題をもう一度」\n・試験ごとの問題数・時間に合わせた模擬試験と、分野別のミニ模試\n\n■ 解説から演習へ、要点レッスン\n各資格の出題範囲を小さなテーマに分けたレッスンで、要点を読んでから基礎問題→確認問題の順に挑戦。理解と演習を往復しながら着実に力をつけられます。\n\n■ 続けやすい学習サポート\n・試験日から逆算した学習プランと「今日の学習」\n・忘却曲線にもとづく復習\n・分野別の正答率と苦手分析、合格可能性の目安表示\n・学習カレンダーで日々の学習量をふり返り、画像やCSVで書き出せます\n・専門用語をタップして意味を確認できる用語ツールチップと、用語カード\n\n■ 安心して使える設計\n・すべてオフラインで完結。学習データは端末内にのみ保存されます\n・アカウント登録・ログインは不要\n・通信を行わないため、広告もトラッキングもありません\n\n※本アプリは非公式の学習支援アプリで、各試験の主催団体・実施機関とは関係ありません。問題・解説・用語はすべてオリジナルに作成しており、公式問題の転載は含みません。合格を保証するものではありません。各試験の範囲・配点は変更されることがあるため、最新情報は各試験の公式サイトでご確認ください。AWS、Amazon Web Services は Amazon.com, Inc. またはその関連会社の商標です。Microsoft・Excel・Word は米国 Microsoft Corporation の商標です。WinActor は株式会社NTTデータの登録商標です。",
+  "supportUrl": "https://beqd1106.com/vbanote/",
+  "privacyUrl": "https://beqd1106.com/vbanote/privacy/",
+  "reviewNote": "Thank you for the previous review. Following the Guideline 4.3(a) feedback, we have consolidated our separate single-exam study apps into this one app, \"資格note\". Instead of shipping one app per certification, users now pick from 9 certifications inside the app (IT Passport, Fundamental IT Engineer, AWS Cloud Practitioner, Generative AI Passport, JDLA Deep Learning for General, MOS Excel/Word, VBA Expert Basic, RPA Engineer Associate, PMO Specialist) on the first screen, and can switch at any time from Home or Settings. Study progress is stored separately per certification. No account or login is required; the app works fully offline, makes no network requests, and collects no data. All questions, explanations and glossary entries are original content; no official exam questions are reproduced. This is an unofficial study app and is not affiliated with any exam organizer.",
+  "counts": {
+    "exams": 9,
+    "total": 9064
+  }
+}
