@@ -45,7 +45,7 @@ final class LogicTests: XCTestCase {
                               service: String = "ストレージ") -> QuizQuestion {
         QuizQuestion(id: id, question: "機械学習について正しいものはどれか。",
                      choices: choices, correctAnswers: correct,
-                     explanation: "解説", wrongChoiceExplanations: [:],
+                     explanation: "解説", source: nil, wrongChoiceExplanations: [:],
                      domain: ExamDomain.allCases[0], service: service, difficulty: 2,
                      tags: ["ストレージ"], beginnerNote: beginnerNote)
     }
