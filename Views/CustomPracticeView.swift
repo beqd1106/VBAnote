@@ -125,11 +125,61 @@ struct CustomPracticeView: View {
     }
 }
 
-/// 折り返し表示のチップコンテナ（簡易）
+/// 折り返し表示のチップコンテナ。
+/// 資格によって分野が9個前後あるため、横幅に入りきらなければ次の行へ折り返す
+/// （以前は HStack で詰め込み、iPad 互換表示で文字が縦に潰れて 4.0 Design 却下になった）。
 struct FlexChips<Content: View>: View {
     @ViewBuilder let content: () -> Content
     var body: some View {
-        // 分野は4つなので横並びで十分
-        HStack(spacing: Theme.Space.s) { content() }
+        FlowLayout(spacing: Theme.Space.s) { content() }
+    }
+}
+
+/// 子ビューを本来の幅のまま左から並べ、はみ出したら折り返すレイアウト。
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 8
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let rows = arrange(maxWidth: proposal.width ?? .infinity, subviews: subviews)
+        let width = rows.map(\.width).max() ?? 0
+        let height = rows.map(\.height).reduce(0, +) + spacing * CGFloat(max(rows.count - 1, 0))
+        return CGSize(width: width, height: height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let rows = arrange(maxWidth: bounds.width, subviews: subviews)
+        var y = bounds.minY
+        for row in rows {
+            var x = bounds.minX
+            for index in row.indices {
+                let size = subviews[index].sizeThatFits(.unspecified)
+                // 1個だけで行幅を超える場合は行幅に収める（その場合のみ文字が折り返す）
+                let w = min(size.width, bounds.width)
+                subviews[index].place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(width: w, height: size.height))
+                x += w + spacing
+            }
+            y += row.height + spacing
+        }
+    }
+
+    private struct Row { var indices: [Int] = []; var width: CGFloat = 0; var height: CGFloat = 0 }
+
+    private func arrange(maxWidth: CGFloat, subviews: Subviews) -> [Row] {
+        var rows: [Row] = []
+        var current = Row()
+        for (i, view) in subviews.enumerated() {
+            let size = view.sizeThatFits(.unspecified)
+            let w = min(size.width, maxWidth)
+            let needed = current.indices.isEmpty ? w : current.width + spacing + w
+            if needed > maxWidth, !current.indices.isEmpty {
+                rows.append(current)
+                current = Row()
+            }
+            current.width = current.indices.isEmpty ? w : current.width + spacing + w
+            current.height = max(current.height, size.height)
+            current.indices.append(i)
+        }
+        if !current.indices.isEmpty { rows.append(current) }
+        return rows
     }
 }

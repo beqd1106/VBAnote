@@ -61,4 +61,22 @@ final class ScreenshotTests: XCTestCase {
 
         tab("分析");    shot("05_analysis")
     }
+
+    /// 4.0 Design 却下（iPad で「カスタム演習」の分野チップが潰れた）の確認用。
+    /// 分野の多い資格で、カスタム演習画面を撮影する。
+    func testCaptureCustomPractice() {
+        for exam in ["itp", "fe", "aws", "g", "pmos"] {
+            launch(exam: exam)
+            XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 20))
+            tab("演習")
+            let entry = app.staticTexts["カスタム演習"]
+            if entry.waitForExistence(timeout: 10) {
+                entry.tap()
+                shot("custom_\(exam)")
+            } else {
+                XCTFail("カスタム演習の入口が見つからない: \(exam)")
+            }
+            app.terminate()
+        }
+    }
 }

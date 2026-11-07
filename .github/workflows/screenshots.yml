@@ -5,6 +5,13 @@ name: screenshots
 
 on:
   workflow_dispatch:
+    inputs:
+      device_pattern:
+        description: "simctl の端末名に当てる正規表現（例: 'iPad Air 11-inch \\(M[0-9]\\)'）"
+        default: 'iPhone [0-9]+ Pro Max'
+      only_testing:
+        description: "実行する UI テスト"
+        default: 'VBAnoteUITests/ScreenshotTests'
 
 jobs:
   shots:
@@ -18,7 +25,7 @@ jobs:
       - name: Capture
         run: |
           set -o pipefail
-          DEVICE=$(xcrun simctl list devices available | grep -oE 'iPhone [0-9]+ Pro Max' | head -1)
+          DEVICE=$(xcrun simctl list devices available | grep -oE "${{ inputs.device_pattern }}" | head -1)
           echo "Using simulator: ${DEVICE}"
           mkdir -p "$RUNNER_TEMP/shots"
           xcrun simctl boot "$DEVICE" || true
@@ -28,7 +35,7 @@ jobs:
             -project "VBAnote.xcodeproj" \
             -scheme "VBAnote" \
             -destination "platform=iOS Simulator,name=${DEVICE}" \
-            -only-testing:VBAnoteUITests/ScreenshotTests \
+            -only-testing:${{ inputs.only_testing }} \
             -resultBundlePath "$RUNNER_TEMP/shots.xcresult" \
             CODE_SIGNING_ALLOWED=NO \
             test || true
