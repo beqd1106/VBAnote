@@ -92,4 +92,25 @@ final class ScreenshotTests: XCTestCase {
         shot("11_calendar_all")
         app.swipeUp(); shot("12_calendar_bottom")
     }
+
+    /// 聞き流し（一覧と再生画面）の見た目確認用
+    func testCaptureListening() {
+        launch(exam: "itp")
+        XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 20))
+        tab("ホーム")
+        let entry = app.staticTexts["聞き流し"].firstMatch
+        if !entry.waitForExistence(timeout: 5) { app.swipeUp() }
+        XCTAssertTrue(entry.waitForExistence(timeout: 10))
+        entry.tap()
+        XCTAssertTrue(app.navigationBars["聞き流し"].waitForExistence(timeout: 10))
+        shot("20_listening_hub")
+        let mix = app.buttons["通勤ミックス3分を再生"]
+        XCTAssertTrue(mix.waitForExistence(timeout: 10))
+        mix.tap()
+        sleep(4)
+        shot("21_listening_player")
+        app.swipeUp()
+        sleep(2)
+        shot("22_listening_next")
+    }
 }
