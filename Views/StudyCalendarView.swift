@@ -21,7 +21,7 @@ struct StudyCalendarView: View {
 
     var body: some View {
         // revision を読むことで、回答が保存されたら集計し直す
-        _ = store.revision
+        let _ = store.revision
         let activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
         let records = scope == .all ? activity.merged : store.dailyRecords()
         let streak = scope == .all ? activity.streak : store.studyStreak()
