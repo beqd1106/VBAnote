@@ -62,6 +62,8 @@ struct QuizPlayerView: View {
     @State private var eliminatedByIndex: [Int: Set<Int>] = [:]
     /// ヒントを使って答えた問題（正解でも復習リストに残す）
     @State private var hintUsedIndices: Set<Int> = []
+    /// 正解したが「自信なし」と押した問題（明日の復習に入れた）
+    @State private var unsureIndices: Set<Int> = []
 
     private var current: QuizQuestion { questions[index] }
     private var selected: Set<Int> { selectedByIndex[index] ?? [] }
@@ -331,6 +333,11 @@ struct QuizPlayerView: View {
                         .font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
                 }
 
+                // 正解でも当てずっぽうなら、明日の復習に回せる
+                if isCorrect && !usedHint {
+                    unsureButton
+                }
+
                 Divider()
 
                 labeledBlock("解説", current.explanation, color: Theme.navy)
@@ -394,6 +401,31 @@ struct QuizPlayerView: View {
                 }
             }
         }
+    }
+
+    private var unsureButton: some View {
+        let done = unsureIndices.contains(index)
+        return Button {
+            guard !done else { return }
+            store.markUnsure(questionId: current.id)
+            unsureIndices.insert(index)
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        } label: {
+            HStack(spacing: 6) {
+                Image(systemName: done ? "checkmark.circle.fill" : "questionmark.circle")
+                    .font(.system(size: 15, weight: .semibold))
+                Text(done ? "明日の復習に入れました" : "自信なし（明日もう一度出す）")
+                    .font(.system(size: 13, weight: .semibold))
+            }
+            .foregroundStyle(done ? Theme.green : Theme.navy)
+            .padding(.horizontal, 12).frame(minHeight: 36)
+            .background(done ? Theme.green.opacity(0.10) : Theme.navy.opacity(0.06))
+            .clipShape(Capsule())
+            .overlay(Capsule().strokeBorder(done ? Theme.green.opacity(0.4) : Theme.navy.opacity(0.18)))
+        }
+        .buttonStyle(.plain)
+        .disabled(done)
+        .accessibilityHint(done ? "" : "正解でも、明日の復習リストに入れます")
     }
 
     private func labeledBlock(_ label: String, _ text: String, color: Color) -> some View {

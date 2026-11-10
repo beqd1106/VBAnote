@@ -75,6 +75,20 @@ final class StudyStore: ObservableObject {
         }
     }
 
+    /// 正解したが「自信なし」だった問題を、明日の復習に入れる（段階は最初から）。
+    /// すでに復習リストにある場合は段階を最初に戻し、明日もう一度出す。
+    func markUnsure(questionId: String, now: Date = .now) {
+        let next = SpacedRepetition.next(currentLevel: 0, correct: true, usedHint: true, now: now).nextDate
+        if let item = fetchReviewItem(questionId) {
+            item.reviewLevel = 0
+            item.nextReviewDate = next
+        } else {
+            context.insert(ReviewItem(questionId: questionId, nextReviewDate: next,
+                                      reviewLevel: 0, lastResultCorrect: true))
+        }
+        bumpAndSave()
+    }
+
     private func fetchReviewItem(_ questionId: String) -> ReviewItem? {
         let d = FetchDescriptor<ReviewItem>(predicate: #Predicate { $0.questionId == questionId })
         return try? context.fetch(d).first
