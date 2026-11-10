@@ -40,7 +40,10 @@ struct HomeView: View {
 
     // MARK: - 次の一手（最上部・1つだけ）
 
-    private var nextAction: NextAction { NextAction.make(store: store) }
+    private var nextAction: NextAction {
+        _ = store.revision   // 答え合わせのたびに途中セッションの有無を読み直す
+        return NextAction.make(store: store, session: QuizSessionStore.load(examKey: ExamContext.current.key))
+    }
 
     private var nextActionCard: some View {
         let action = nextAction
@@ -377,6 +380,19 @@ struct HomeView: View {
                            questions: Array(repo.questions.shuffled().prefix(10)))
         case .review:
             QuizPlayerView(title: "復習", questions: store.dueReviewQuestions(limit: 10))
+        case .resumeSession:
+            if let session = QuizSessionStore.load(examKey: ExamContext.current.key) {
+                let qs = session.questionIds.compactMap { repo.question(id: $0) }
+                if qs.count == session.questionIds.count {
+                    QuizPlayerView(resuming: session, questions: qs)
+                } else {
+                    // 問題データが変わって揃わない場合は、残っている問題だけで解き直す
+                    QuizPlayerView(title: session.title, questions: qs)
+                }
+            } else {
+                EmptyStateView(icon: "checkmark.circle", title: "途中の問題はありません",
+                               message: "ホームから新しく始められます。")
+            }
         case .reviewQuick(let n):
             QuizPlayerView(title: "復習 \(n)問", questions: store.dueReviewQuestions(limit: n))
         case .bookmarks:
@@ -431,6 +447,8 @@ enum HomeRoute: Hashable {
     case calendar
     /// 復習を n 問だけ（ホームの「次の一手」用）
     case reviewQuick(Int)
+    /// 途中で閉じたセッションの続き
+    case resumeSession
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）

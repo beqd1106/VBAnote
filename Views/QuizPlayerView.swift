@@ -17,11 +17,32 @@ struct QuizPlayerView: View {
     /// 解説に「この分野の解説レッスンへ」導線を出すか（レッスンから起動した場合は循環を避けて false）。
     private let showLessonLink: Bool
 
+    /// 途中で閉じても続きから再開できるようにするか（レッスン完了処理のあるセッションは保存しない）
+    private let resumable: Bool
+
     init(title: String, questions: [QuizQuestion], showLessonLink: Bool = true, onComplete: (() -> Void)? = nil) {
         self.title = title
         _questions = State(initialValue: questions)
         self.onComplete = onComplete
         self.showLessonLink = showLessonLink
+        self.resumable = onComplete == nil
+    }
+
+    /// 保存しておいた途中セッションから再開する
+    init(resuming session: QuizSession, questions: [QuizQuestion]) {
+        self.title = session.title
+        _questions = State(initialValue: questions)
+        self.onComplete = nil
+        self.showLessonLink = true
+        self.resumable = true
+        _index = State(initialValue: min(session.index, max(0, questions.count - 1)))
+        _selectedByIndex = State(initialValue: session.selectedByIndex)
+        _submittedIndices = State(initialValue: session.submittedIndices)
+        _resultByIndex = State(initialValue: session.resultByIndex)
+        _hintLevelByIndex = State(initialValue: session.hintLevelByIndex)
+        _hintTextByIndex = State(initialValue: session.hintTextByIndex)
+        _eliminatedByIndex = State(initialValue: session.eliminatedByIndex)
+        _hintUsedIndices = State(initialValue: session.hintUsedIndices)
     }
 
     @State private var index = 0
@@ -64,6 +85,21 @@ struct QuizPlayerView: View {
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
+        // 答え合わせ・問題移動のたびに途中経過を保存（閉じても続きから戻れるように）
+        .onChange(of: submittedIndices) { saveSession() }
+        .onChange(of: index) { saveSession() }
+        .onChange(of: finished) { if finished && resumable { QuizSessionStore.clear(examKey: ExamContext.current.key) } }
+    }
+
+    private func saveSession() {
+        // 1問も答え合わせしていないセッションは保存しない（前の途中セッションを消さないため）
+        guard resumable, !finished, questions.count >= 2, !submittedIndices.isEmpty else { return }
+        let s = QuizSession(title: title, questionIds: questions.map(\.id), index: index,
+                            selectedByIndex: selectedByIndex, submittedIndices: submittedIndices,
+                            resultByIndex: resultByIndex, hintLevelByIndex: hintLevelByIndex,
+                            hintTextByIndex: hintTextByIndex, eliminatedByIndex: eliminatedByIndex,
+                            hintUsedIndices: hintUsedIndices, savedAt: .now)
+        QuizSessionStore.save(s, examKey: ExamContext.current.key)
     }
 
     // MARK: - 出題

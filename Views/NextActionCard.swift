@@ -3,7 +3,7 @@ import SwiftUI
 /// ホーム最上部の「次の一手」。開いて1秒で学習に入れるよう、いまやるべきことを1つだけ出す。
 /// 優先順：復習期限の問題 → 続きのレッスン → 今日の10問。
 struct NextAction: Equatable {
-    enum Kind { case review, lesson, mixed }
+    enum Kind { case resume, review, lesson, mixed }
     let kind: Kind
     let eyebrow: String
     let title: String
@@ -12,7 +12,13 @@ struct NextAction: Equatable {
     let route: HomeRoute
 
     @MainActor
-    static func make(store: StudyStore) -> NextAction {
+    static func make(store: StudyStore, session: QuizSession? = nil) -> NextAction {
+        if let session {
+            return NextAction(kind: .resume, eyebrow: "途中から再開",
+                              title: session.title,
+                              detail: "残り\(session.remaining)問・\(session.questionIds.count)問中",
+                              buttonTitle: "続きから解く", route: .resumeSession)
+        }
         let due = store.dueReviewCount
         if due > 0 {
             let n = min(due, 5)
@@ -38,6 +44,7 @@ struct NextAction: Equatable {
 
     var icon: String {
         switch kind {
+        case .resume: return "play.fill"
         case .review: return "arrow.clockwise"
         case .lesson: return "text.book.closed.fill"
         case .mixed: return "checklist"

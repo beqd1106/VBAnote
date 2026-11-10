@@ -273,4 +273,23 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(merged[day]?.estimatedMinutes, 10)
         XCTAssertEqual(merged[day]?.level, 2)        // 8問＋レッスン1(=5問分)＝13点
     }
+
+    // MARK: - 途中セッションの保存
+
+    func testQuizSessionRoundTripAndClearWhenFinished() {
+        let defaults = UserDefaults(suiteName: "QuizSessionTest-\(UUID().uuidString)")!
+        var s = QuizSession(title: "復習 5問", questionIds: ["a", "b", "c"], index: 1,
+                            selectedByIndex: [0: [2], 1: [0, 3]], submittedIndices: [0],
+                            resultByIndex: [0: true], hintLevelByIndex: [1: 2], hintTextByIndex: [1: "着眼点"],
+                            eliminatedByIndex: [1: [1]], hintUsedIndices: [1], savedAt: .now)
+        XCTAssertEqual(s.remaining, 2)
+        QuizSessionStore.save(s, examKey: "itp", defaults: defaults)
+        XCTAssertEqual(QuizSessionStore.load(examKey: "itp", defaults: defaults), s)
+        XCTAssertNil(QuizSessionStore.load(examKey: "fe", defaults: defaults))      // 資格ごとに別
+        // 全問答え合わせ済みのものは読み込まず、消す
+        s.submittedIndices = [0, 1, 2]
+        QuizSessionStore.save(s, examKey: "itp", defaults: defaults)
+        XCTAssertNil(QuizSessionStore.load(examKey: "itp", defaults: defaults))
+        XCTAssertNil(defaults.data(forKey: "quizSession.itp"))
+    }
 }
