@@ -70,6 +70,12 @@ struct QuizPlayerView: View {
     private var eliminated: Set<Int> { eliminatedByIndex[index] ?? [] }
     private var usedHint: Bool { hintUsedIndices.contains(index) }
     private var correctCount: Int { resultByIndex.values.filter { $0 }.count }
+    /// 残りの目安（1問約40秒）。終わりが見えると始めやすく、やめ時も分かる
+    private var remainingLabel: String {
+        let left = max(0, questions.count - index - (isSubmitted ? 1 : 0))
+        if left == 0 { return "これで最後" }
+        return "残り約\(max(1, Int((Double(left) * 40 / 60).rounded(.up))))分"
+    }
 
     var body: some View {
         ZStack {
@@ -111,6 +117,7 @@ struct QuizPlayerView: View {
                 HStack {
                     Text("\(index + 1) / \(questions.count)問")
                         .font(.system(size: 13, weight: .semibold)).foregroundStyle(Theme.inkSoft)
+                    Text(remainingLabel).font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
                     Spacer()
                     DomainChip(domain: current.domain)
                 }
@@ -417,6 +424,11 @@ struct QuizPlayerView: View {
                     .frame(width: 180, height: 180)
                     .padding(.top, Theme.Space.xxl)
 
+                Label("1区切り完了", systemImage: "checkmark.seal.fill")
+                    .font(.system(size: 15, weight: .bold)).foregroundStyle(Theme.green)
+                    .padding(.horizontal, 14).padding(.vertical, 6)
+                    .background(Capsule().fill(Theme.green.opacity(0.12)))
+
                 Text(summaryMessage)
                     .font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.navy)
                     .multilineTextAlignment(.center)
@@ -429,9 +441,13 @@ struct QuizPlayerView: View {
                     if !missedQuestions.isEmpty {
                         PrimaryButton(title: "間違えた\(missedQuestions.count)問をもう一度",
                                       icon: "arrow.clockwise") { retryMissed() }
-                        SecondaryButton(title: "終わる", icon: "checkmark") { dismiss() }
+                        SecondaryButton(title: "今日はここまで", icon: "checkmark") { dismiss() }
                     } else {
-                        PrimaryButton(title: "終わる", icon: "checkmark") { dismiss() }
+                        PrimaryButton(title: "今日はここまで", icon: "checkmark") { dismiss() }
+                        let extra = extraQuestions(2)
+                        if extra.count == 2 {
+                            SecondaryButton(title: "あと2問だけ（約1分）", icon: "plus") { startExtra(extra) }
+                        }
                     }
                 }
                 .padding(.horizontal, Theme.Space.xl)
@@ -452,6 +468,32 @@ struct QuizPlayerView: View {
     }
 
     // MARK: - 操作
+
+    /// おかわり用の問題：復習待ちを優先し、なければ同じ分野から未出題のもの
+    private func extraQuestions(_ n: Int) -> [QuizQuestion] {
+        let used = Set(questions.map(\.id))
+        var picks = store.dueReviewQuestions(limit: 20).filter { !used.contains($0.id) }
+        if picks.count < n, let domain = questions.first?.domain {
+            let more = ContentRepository.shared.questions(in: domain).filter { q in
+                !used.contains(q.id) && !picks.contains(where: { $0.id == q.id })
+            }
+            picks += more.shuffled()
+        }
+        return Array(picks.prefix(n))
+    }
+
+    private func startExtra(_ extra: [QuizQuestion]) {
+        questions = extra
+        index = 0
+        selectedByIndex = [:]
+        submittedIndices = []
+        resultByIndex = [:]
+        hintLevelByIndex = [:]
+        hintTextByIndex = [:]
+        eliminatedByIndex = [:]
+        hintUsedIndices = []
+        finished = false
+    }
 
     /// 間違えた問題だけでセッションをやり直す
     private func retryMissed() {

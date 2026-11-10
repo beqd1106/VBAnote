@@ -47,10 +47,27 @@ struct HomeView: View {
 
     private var nextActionCard: some View {
         let action = nextAction
-        return NavigationLink(value: action.route) {
-            NextActionCard(action: action)
+        return VStack(spacing: Theme.Space.s) {
+            NavigationLink(value: action.route) {
+                NextActionCard(action: action)
+            }
+            .buttonStyle(.pressable)
+            // 忙しい日の最低ライン：今日まだ何もしていなければ「1問だけ」を添える
+            if todayAnsweredHere == 0 && action.kind != .resume {
+                NavigationLink(value: HomeRoute.oneQuestion) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "bolt.fill").font(.system(size: 12))
+                        Text("忙しい日は 1問だけ（約30秒）").font(.system(size: 14, weight: .semibold))
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .bold))
+                    }
+                    .foregroundStyle(Theme.navy)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(RoundedRectangle(cornerRadius: Theme.Radius.button, style: .continuous)
+                        .stroke(Theme.navy.opacity(0.25), lineWidth: 1.5))
+                }
+                .buttonStyle(.pressable)
+            }
         }
-        .buttonStyle(.pressable)
     }
 
     // MARK: - 今日の学習（進捗リング＋統計）
@@ -393,6 +410,9 @@ struct HomeView: View {
                 EmptyStateView(icon: "checkmark.circle", title: "途中の問題はありません",
                                message: "ホームから新しく始められます。")
             }
+        case .oneQuestion:
+            QuizPlayerView(title: "今日の1問",
+                           questions: Array((store.dueReviewQuestions(limit: 1) + repo.questions.shuffled().prefix(1)).prefix(1)))
         case .reviewQuick(let n):
             QuizPlayerView(title: "復習 \(n)問", questions: store.dueReviewQuestions(limit: n))
         case .bookmarks:
@@ -449,6 +469,8 @@ enum HomeRoute: Hashable {
     case reviewQuick(Int)
     /// 途中で閉じたセッションの続き
     case resumeSession
+    /// 忙しい日の1問
+    case oneQuestion
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）
