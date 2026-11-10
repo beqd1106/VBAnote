@@ -33,19 +33,42 @@ struct AllExamsActivity {
         }
     }
 
-    /// 全資格の記録を読み込む。読めなかった資格は飛ばす（カレンダーが出ないよりはよいため）
+    /// 学習日の定義（単一資格・全資格で共通）：回答ログのある日＋記録上なにか学習した日
+    nonisolated static func studyDays(logs: [StudyDayLog], records: [Date: DailyStudyRecord]) -> Set<Date> {
+        Set(logs.map(\.day)).union(records.values.filter(\.hasActivity).map(\.day))
+    }
+
+    /// 1資格分の読み込み結果
+    private struct ExamSlice { let records: [Date: DailyStudyRecord]; let days: Set<Date> }
+    /// いま学習中でない資格の読み込み結果。その資格の記録は切り替えるまで変わらないので使い回す
+    private static var cache: [String: ExamSlice] = [:]
+
+    private static func readSlice(_ key: String) -> ExamSlice {
+        let context = ModelContext(StoreFactory.container(for: key))
+        let answers = (try? context.fetch(FetchDescriptor<AnswerRecord>())) ?? []
+        let lessons = (try? context.fetch(FetchDescriptor<LessonProgress>())) ?? []
+        let logs = (try? context.fetch(FetchDescriptor<StudyDayLog>())) ?? []
+        let records = DailyStudyRecord.build(answers: answers, lessons: lessons)
+        return ExamSlice(records: records, days: studyDays(logs: logs, records: records))
+    }
+
+    /// 全資格の記録を読み込む。現在の資格は毎回読み直し、他の資格はキャッシュを使う。
+    /// 読めなかった資格は空として扱う（カレンダーが出ないよりはよいため）
     static func load(currentExamKey: String) -> AllExamsActivity {
         var byExam: [String: [Date: DailyStudyRecord]] = [:]
         var days = Set<Date>()
         for exam in ExamContext.all where exam.key == currentExamKey || StoreFactory.hasProgress(for: exam.key) {
-            let context = ModelContext(StoreFactory.container(for: exam.key))
-            let answers = (try? context.fetch(FetchDescriptor<AnswerRecord>())) ?? []
-            let lessons = (try? context.fetch(FetchDescriptor<LessonProgress>())) ?? []
-            let logs = (try? context.fetch(FetchDescriptor<StudyDayLog>())) ?? []
-            let records = DailyStudyRecord.build(answers: answers, lessons: lessons)
-            byExam[exam.key] = records
-            days.formUnion(logs.map(\.day))
-            days.formUnion(records.values.filter(\.hasActivity).map(\.day))
+            let slice: ExamSlice
+            if exam.key == currentExamKey {
+                slice = readSlice(exam.key)
+                cache[exam.key] = nil   // 切り替えた後に古い値を使わないよう、学習中の資格はキャッシュしない
+            } else if let cached = cache[exam.key] {
+                slice = cached
+            } else {
+                slice = readSlice(exam.key); cache[exam.key] = slice
+            }
+            byExam[exam.key] = slice.records
+            days.formUnion(slice.days)
         }
         return AllExamsActivity(byExam: byExam, merged: merge(byExam.values), studyDays: days)
     }

@@ -44,7 +44,6 @@ struct StudyCalendarView: View {
                                 Spacer()
                             }
                             .foregroundStyle(Theme.inkSoft)
-                            .opacity(selectedDay == nil ? 1 : 0)
                             LevelLegend()
                         }
                     }
@@ -58,7 +57,10 @@ struct StudyCalendarView: View {
                 .padding(Theme.Space.l)
             }
         }
-        .onAppear { activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key) }
+        .onAppear {
+            activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
+            if selectedDay == nil { selectedDay = cal.startOfDay(for: .now) }
+        }
         .navigationTitle("学習カレンダー")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $shareItems) { items in
@@ -207,7 +209,7 @@ struct StudyCalendarView: View {
     @MainActor
     private func exportImage(month: Date, records: [Date: DailyStudyRecord], monthRecords: [DailyStudyRecord], streak: Int) {
         let card = CalendarShareImage(month: month, records: records, monthRecords: monthRecords,
-                                      streak: streak)
+                                      streak: streak, scopeTitle: scopeTitle)
         let renderer = ImageRenderer(content: card)
         renderer.scale = 3
         guard let image = renderer.uiImage else {
@@ -223,12 +225,16 @@ struct StudyCalendarView: View {
             return
         }
         do {
-            let url = try StudyRecordCSV.write(records: records)
+            let url = try StudyRecordCSV.write(records: records, scopeName: scopeFileName)
             shareItems = ShareItems(items: [url])
         } catch {
             exportError = "CSVファイルを保存できませんでした（\(error.localizedDescription)）。"
         }
     }
+
+    /// 書き出しに入れる対象名
+    private var scopeTitle: String { scope == .all ? "すべての資格" : ExamContext.current.examShortName }
+    private var scopeFileName: String { scope == .all ? "全資格" : ExamInfo.brandPrefix }
 
     private var displayedMonth: Date {
         cal.date(byAdding: .month, value: monthOffset, to: .now) ?? .now
@@ -376,12 +382,13 @@ private struct CalendarShareImage: View {
     let records: [Date: DailyStudyRecord]
     let monthRecords: [DailyStudyRecord]
     let streak: Int
+    let scopeTitle: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: Theme.Space.l) {
             HStack(alignment: .firstTextBaseline) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(AppInfo.displayName).font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.orange)
+                    Text("\(AppInfo.displayName)・\(scopeTitle)").font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.orange)
                     Text("\(CalendarFormat.monthTitle(month))の学習記録")
                         .font(.system(size: 20, weight: .bold)).foregroundStyle(Theme.navy)
                 }
@@ -406,7 +413,7 @@ private struct CalendarShareImage: View {
 enum StudyRecordCSV {
     /// 最初の学習日から今日までを1日1行で書き出す（学習しなかった日も0で入れる）。
     /// Excelで文字化けしないようUTF-8のBOMを付ける。
-    static func write(records: [Date: DailyStudyRecord]) throws -> URL {
+    static func write(records: [Date: DailyStudyRecord], scopeName: String = ExamInfo.brandPrefix) throws -> URL {
         let cal = Calendar.current
         let today = cal.startOfDay(for: .now)
         let first = records.keys.min() ?? today
@@ -422,7 +429,7 @@ enum StudyRecordCSV {
             day = next
         }
         let text = "\u{FEFF}" + lines.joined(separator: "\r\n") + "\r\n"
-        let name = "\(AppInfo.displayName)_\(ExamInfo.brandPrefix)_学習記録_\(CalendarFormat.fileDate(today)).csv"
+        let name = "\(AppInfo.displayName)_\(scopeName)_学習記録_\(CalendarFormat.fileDate(today)).csv"
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
         try text.data(using: .utf8)!.write(to: url, options: .atomic)
         return url

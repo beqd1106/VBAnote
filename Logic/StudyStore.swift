@@ -340,9 +340,10 @@ final class StudyStore: ObservableObject {
         return DailyStudyRecord.build(answers: allAnswers, lessons: lessons)
     }
 
+    /// 学習した日（回答した日・レッスンを履修した日のどちらか）。全資格の集計と同じ定義
     func studyDays() -> Set<Date> {
         let logs = (try? context.fetch(FetchDescriptor<StudyDayLog>())) ?? []
-        return Set(logs.map { $0.day })
+        return AllExamsActivity.studyDays(logs: logs, records: dailyRecords())
     }
 
     /// 今日を含む連続学習日数
