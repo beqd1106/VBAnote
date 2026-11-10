@@ -3,7 +3,11 @@ import UIKit
 
 /// 学習カレンダー。日ごとのがんばり度を色の濃さで見せ、画像とCSVで書き出せる。
 struct StudyCalendarView: View {
+    /// 表示範囲：すべての資格を合算するか、いま学習中の資格だけか
+    enum Scope: Hashable { case all, current }
+
     @EnvironmentObject var store: StudyStore
+    @State private var scope: Scope
     @State private var monthOffset = 0
     @State private var selectedDay: Date?
     @State private var shareItems: ShareItems?
@@ -11,15 +15,26 @@ struct StudyCalendarView: View {
 
     private let cal = Calendar.current
 
+    init(scope: Scope = .all) {
+        _scope = State(initialValue: scope)
+    }
+
     var body: some View {
-        let records = store.dailyRecords()
+        // revision を読むことで、回答が保存されたら集計し直す
+        _ = store.revision
+        let activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
+        let records = scope == .all ? activity.merged : store.dailyRecords()
+        let streak = scope == .all ? activity.streak : store.studyStreak()
+        let studyDayCount = scope == .all ? activity.studyDays.count : store.studyDays().count
         let month = displayedMonth
         let monthRecords = records.values.filter { cal.isDate($0.day, equalTo: month, toGranularity: .month) }
         ZStack {
             AppBackground()
             ScrollView {
                 VStack(spacing: Theme.Space.l) {
-                    streakCard
+                    scopePicker
+                    streakCard(streak: streak, days: studyDayCount,
+                               longest: scope == .all ? activity.longestStreak : StudyStreak.longest(days: store.studyDays()))
                     Card {
                         VStack(spacing: Theme.Space.m) {
                             monthHeader(month)
@@ -29,9 +44,10 @@ struct StudyCalendarView: View {
                     }
                     MonthSummaryCard(records: monthRecords)
                     if let day = selectedDay {
-                        dayDetailCard(records[day] ?? DailyStudyRecord(day: day))
+                        dayDetailCard(records[day] ?? DailyStudyRecord(day: day),
+                                      breakdown: scope == .all ? activity.breakdown(on: day) : [])
                     }
-                    exportCard(month: month, records: records, monthRecords: monthRecords)
+                    exportCard(month: month, records: records, monthRecords: monthRecords, streak: streak)
                 }
                 .padding(Theme.Space.l)
             }
@@ -50,12 +66,23 @@ struct StudyCalendarView: View {
 
     // MARK: - 連続学習
 
-    private var streakCard: some View {
+    private var scopePicker: some View {
+        Picker("表示する資格", selection: $scope) {
+            Text("すべての資格").tag(Scope.all)
+            Text(ExamContext.current.examShortName).tag(Scope.current)
+        }
+        .pickerStyle(.segmented)
+        .accessibilityHint("カレンダーに数える資格を切り替えます")
+    }
+
+    private func streakCard(streak: Int, days: Int, longest: Int) -> some View {
         Card {
-            HStack(spacing: Theme.Space.l) {
-                stat(icon: "flame.fill", color: Theme.orange, value: "\(store.studyStreak())日", caption: "連続学習")
+            HStack(spacing: Theme.Space.m) {
+                stat(icon: "flame.fill", color: Theme.orange, value: "\(streak)日", caption: "連続学習")
                 Divider().frame(height: 56)
-                stat(icon: "calendar", color: Theme.blue, value: "\(store.studyDays().count)日", caption: "累計学習日")
+                stat(icon: "trophy.fill", color: Theme.navy, value: "\(longest)日", caption: "最長記録")
+                Divider().frame(height: 56)
+                stat(icon: "calendar", color: Theme.blue, value: "\(days)日", caption: "累計学習日")
             }
         }
     }
@@ -95,7 +122,7 @@ struct StudyCalendarView: View {
 
     // MARK: - 選んだ日の内訳
 
-    private func dayDetailCard(_ r: DailyStudyRecord) -> some View {
+    private func dayDetailCard(_ r: DailyStudyRecord, breakdown: [(exam: ExamSpec, record: DailyStudyRecord)]) -> some View {
         Card {
             VStack(alignment: .leading, spacing: Theme.Space.m) {
                 HStack {
@@ -113,9 +140,29 @@ struct StudyCalendarView: View {
                     if r.mockQuestions > 0 { detailRow("うち模擬試験", "\(r.mockQuestions)問") }
                     if r.lessonsCompleted > 0 { detailRow("履修したレッスン", "\(r.lessonsCompleted)件") }
                     if r.questions > 0 { detailRow("学習時間の目安", "約\(r.estimatedMinutes)分") }
+                    if breakdown.count > 1 || (breakdown.count == 1 && breakdown[0].exam.key != ExamContext.current.key) {
+                        Divider()
+                        Text("資格ごとの内訳").font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.inkSoft)
+                        ForEach(breakdown, id: \.exam.key) { item in
+                            HStack(spacing: Theme.Space.s) {
+                                Image(systemName: item.exam.icon).font(.system(size: 13))
+                                    .foregroundStyle(Theme.blue).frame(width: 20)
+                                Text(item.exam.examShortName).font(.system(size: 14)).foregroundStyle(Theme.ink)
+                                Spacer()
+                                Text(breakdownText(item.record)).font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.ink)
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+
+    private func breakdownText(_ r: DailyStudyRecord) -> String {
+        var parts: [String] = []
+        if r.questions > 0 { parts.append("\(r.questions)問") }
+        if r.lessonsCompleted > 0 { parts.append("レッスン\(r.lessonsCompleted)") }
+        return parts.joined(separator: "・")
     }
 
     private func detailRow(_ label: String, _ value: String) -> some View {
@@ -128,7 +175,7 @@ struct StudyCalendarView: View {
 
     // MARK: - 書き出し
 
-    private func exportCard(month: Date, records: [Date: DailyStudyRecord], monthRecords: [DailyStudyRecord]) -> some View {
+    private func exportCard(month: Date, records: [Date: DailyStudyRecord], monthRecords: [DailyStudyRecord], streak: Int) -> some View {
         Card {
             VStack(alignment: .leading, spacing: Theme.Space.m) {
                 HStack(spacing: 6) {
@@ -140,7 +187,7 @@ struct StudyCalendarView: View {
                     .fixedSize(horizontal: false, vertical: true)
                 HStack(spacing: Theme.Space.s) {
                     PrimaryButton(title: "画像", icon: "photo") {
-                        exportImage(month: month, records: records, monthRecords: monthRecords)
+                        exportImage(month: month, records: records, monthRecords: monthRecords, streak: streak)
                     }
                     SecondaryButton(title: "CSV", icon: "tablecells") {
                         exportCSV(records: records)
@@ -151,9 +198,9 @@ struct StudyCalendarView: View {
     }
 
     @MainActor
-    private func exportImage(month: Date, records: [Date: DailyStudyRecord], monthRecords: [DailyStudyRecord]) {
+    private func exportImage(month: Date, records: [Date: DailyStudyRecord], monthRecords: [DailyStudyRecord], streak: Int) {
         let card = CalendarShareImage(month: month, records: records, monthRecords: monthRecords,
-                                      streak: store.studyStreak())
+                                      streak: streak)
         let renderer = ImageRenderer(content: card)
         renderer.scale = 3
         guard let image = renderer.uiImage else {
@@ -243,7 +290,7 @@ private struct CalendarGrid: View {
 }
 
 /// がんばり度の色。0は無色、1〜4でオレンジを濃くする
-private enum LevelColor {
+enum LevelColor {
     static func fill(_ level: Int) -> Color {
         switch level {
         case 0: return Theme.line.opacity(0.45)

@@ -13,6 +13,7 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: Theme.Space.m) {
                         AppWordmarkHeader()
                         todayHeroCard
+                        studyRecordCard
                         examPrepBanner
                         continueLessonCard
                         quickActions
@@ -51,7 +52,7 @@ struct HomeView: View {
                         .frame(width: 104, height: 104)
 
                     VStack(alignment: .leading, spacing: Theme.Space.s) {
-                        statRow("連続学習", "\(store.studyStreak()) 日")
+                        statRow("今日の演習", "\(todayAnsweredHere) 問")
                         statRow("累計演習", "\(store.totalAnswered) 問")
                         statRow("復習待ち", "\(store.dueReviewCount) 問")
                     }
@@ -66,6 +67,22 @@ struct HomeView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10))
             }
         }
+    }
+
+    /// この資格で今日解いた問題数
+    private var todayAnsweredHere: Int {
+        store.dailyRecords()[Calendar.current.startOfDay(for: .now)]?.questions ?? 0
+    }
+
+    // MARK: - 学習の記録（全資格の連続日数・直近7日・今日の目標）
+
+    private var studyRecordCard: some View {
+        _ = store.revision
+        return NavigationLink(value: HomeRoute.calendar) {
+            StudyRecordCard(activity: AllExamsActivity.load(currentExamKey: ExamContext.current.key),
+                            goalMinutes: store.profile?.dailyStudyMinutes ?? 30)
+        }
+        .buttonStyle(PressableCardStyle())
     }
 
     private func statRow(_ label: String, _ value: String) -> some View {
@@ -347,6 +364,8 @@ struct HomeView: View {
             RoadmapView()
         case .finalCheck:
             FinalCheckView()
+        case .calendar:
+            StudyCalendarView(scope: .all)
         }
     }
 
@@ -386,6 +405,7 @@ enum HomeRoute: Hashable {
     case roadmap
     case finalCheck
     case termSearch
+    case calendar
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）

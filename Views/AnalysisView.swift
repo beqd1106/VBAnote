@@ -32,7 +32,7 @@ struct AnalysisView: View {
             .navigationTitle("分析")
             .navigationDestination(for: AnalysisRoute.self) { route in
                 switch route {
-                case .calendar: StudyCalendarView()
+                case .calendar: StudyCalendarView(scope: .current)
                 }
             }
         }

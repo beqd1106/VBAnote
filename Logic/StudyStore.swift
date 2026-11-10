@@ -336,29 +336,8 @@ final class StudyStore: ObservableObject {
 
     /// 日ごとの学習記録（学習カレンダー・CSV書き出し用）。キーはその日の0時。
     func dailyRecords() -> [Date: DailyStudyRecord] {
-        let cal = Calendar.current
-        var result: [Date: DailyStudyRecord] = [:]
-        func record(_ day: Date) -> DailyStudyRecord { result[day] ?? DailyStudyRecord(day: day) }
-
-        // 回答（模試を含む）。学習時間は回答の間隔から推定する
-        let byDay = Dictionary(grouping: allAnswers) { cal.startOfDay(for: $0.answeredAt) }
-        for (day, answers) in byDay {
-            var r = record(day)
-            r.questions = answers.count
-            r.correct = answers.filter(\.isCorrect).count
-            r.mockQuestions = answers.filter(\.isMockExam).count
-            r.estimatedMinutes = DailyStudyRecord.estimateMinutes(answers.map(\.answeredAt))
-            result[day] = r
-        }
-        // 履修したレッスン（最後に履修済みにした日で数える）
         let lessons = (try? context.fetch(FetchDescriptor<LessonProgress>())) ?? []
-        for p in lessons {
-            let day = cal.startOfDay(for: p.completedAt)
-            var r = record(day)
-            r.lessonsCompleted += 1
-            result[day] = r
-        }
-        return result
+        return DailyStudyRecord.build(answers: allAnswers, lessons: lessons)
     }
 
     func studyDays() -> Set<Date> {
@@ -368,20 +347,7 @@ final class StudyStore: ObservableObject {
 
     /// 今日を含む連続学習日数
     func studyStreak() -> Int {
-        let days = studyDays()
-        guard !days.isEmpty else { return 0 }
-        let cal = Calendar.current
-        var streak = 0
-        var cursor = cal.startOfDay(for: .now)
-        // 今日まだ学習していなければ昨日から数える
-        if !days.contains(cursor) {
-            cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
-        }
-        while days.contains(cursor) {
-            streak += 1
-            cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
-        }
-        return streak
+        StudyStreak.count(days: studyDays())
     }
 
     // MARK: - 合格可能性スコア
@@ -487,5 +453,74 @@ struct DailyStudyRecord: Identifiable, Hashable {
     /// がんばり度の目安（凡例・アクセシビリティ用）
     static func levelLabel(_ level: Int) -> String {
         ["なし", "少し（1〜9問）", "ふつう（10〜29問）", "がんばった（30〜59問）", "すごくがんばった（60問以上）"][max(0, min(4, level))]
+    }
+
+    /// 学習した記録があるか
+    var hasActivity: Bool { questions > 0 || lessonsCompleted > 0 }
+
+    /// 回答履歴とレッスン履修から日ごとの記録を作る（資格1つ分）
+    static func build(answers: [AnswerRecord], lessons: [LessonProgress],
+                      calendar cal: Calendar = .current) -> [Date: DailyStudyRecord] {
+        var result: [Date: DailyStudyRecord] = [:]
+        // 回答（模試を含む）。学習時間は回答の間隔から推定する
+        let byDay = Dictionary(grouping: answers) { cal.startOfDay(for: $0.answeredAt) }
+        for (day, list) in byDay {
+            var r = DailyStudyRecord(day: day)
+            r.questions = list.count
+            r.correct = list.filter(\.isCorrect).count
+            r.mockQuestions = list.filter(\.isMockExam).count
+            r.estimatedMinutes = estimateMinutes(list.map(\.answeredAt))
+            result[day] = r
+        }
+        // 履修したレッスン（最後に履修済みにした日で数える）
+        for p in lessons {
+            let day = cal.startOfDay(for: p.completedAt)
+            var r = result[day] ?? DailyStudyRecord(day: day)
+            r.lessonsCompleted += 1
+            result[day] = r
+        }
+        return result
+    }
+
+    /// 同じ日の記録を足し合わせる（複数の資格をまとめるとき用）
+    func adding(_ other: DailyStudyRecord) -> DailyStudyRecord {
+        var r = self
+        r.questions += other.questions
+        r.correct += other.correct
+        r.mockQuestions += other.mockQuestions
+        r.lessonsCompleted += other.lessonsCompleted
+        r.estimatedMinutes += other.estimatedMinutes
+        return r
+    }
+}
+
+// MARK: - 連続学習日数
+
+enum StudyStreak {
+    /// 今日を含む連続学習日数。今日まだ学習していなければ昨日から数える
+    static func count(days: Set<Date>, today: Date = .now, calendar cal: Calendar = .current) -> Int {
+        guard !days.isEmpty else { return 0 }
+        var cursor = cal.startOfDay(for: today)
+        if !days.contains(cursor) {
+            cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
+        }
+        var streak = 0
+        while days.contains(cursor) {
+            streak += 1
+            cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
+        }
+        return streak
+    }
+
+    /// これまでで一番長く続いた日数
+    static func longest(days: Set<Date>, calendar cal: Calendar = .current) -> Int {
+        let sorted = days.map { cal.startOfDay(for: $0) }.sorted()
+        var best = 0, run = 0
+        var prev: Date?
+        for d in sorted {
+            if let p = prev, cal.date(byAdding: .day, value: 1, to: p) == d { run += 1 } else { run = 1 }
+            best = max(best, run); prev = d
+        }
+        return best
     }
 }

@@ -241,4 +241,36 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(lines.count, 4)               // 見出し＋3日分（学習しなかった日も入る）
         XCTAssertTrue(lines[1].contains(",4,3,75,"))  // 4問中3問正解＝75%
     }
+
+    // MARK: - 連続学習・全資格の合算
+
+    func testStreakCountsFromYesterdayWhenTodayIsEmpty() {
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: .now)
+        let d = { (n: Int) in cal.date(byAdding: .day, value: -n, to: today)! }
+        XCTAssertEqual(StudyStreak.count(days: [d(1), d(2), d(3)]), 3)       // 今日まだでも途切れない
+        XCTAssertEqual(StudyStreak.count(days: [today, d(1), d(3)]), 2)      // 1日空くとそこで止まる
+        XCTAssertEqual(StudyStreak.count(days: [d(2), d(3)]), 0)             // 昨日もしていなければ0
+        XCTAssertEqual(StudyStreak.count(days: []), 0)
+    }
+
+    func testLongestStreak() {
+        let cal = Calendar.current
+        let today = cal.startOfDay(for: .now)
+        let d = { (n: Int) in cal.date(byAdding: .day, value: -n, to: today)! }
+        XCTAssertEqual(StudyStreak.longest(days: [d(10), d(9), d(8), d(7), d(2), d(1)]), 4)
+        XCTAssertEqual(StudyStreak.longest(days: []), 0)
+    }
+
+    func testMergeAddsSameDayAcrossExams() {
+        let day = Calendar.current.startOfDay(for: .now)
+        var a = DailyStudyRecord(day: day); a.questions = 5; a.correct = 4; a.estimatedMinutes = 6
+        var b = DailyStudyRecord(day: day); b.questions = 3; b.correct = 1; b.lessonsCompleted = 1; b.estimatedMinutes = 4
+        let merged = AllExamsActivity.merge([[day: a], [day: b]])
+        XCTAssertEqual(merged[day]?.questions, 8)
+        XCTAssertEqual(merged[day]?.correct, 5)
+        XCTAssertEqual(merged[day]?.lessonsCompleted, 1)
+        XCTAssertEqual(merged[day]?.estimatedMinutes, 10)
+        XCTAssertEqual(merged[day]?.level, 2)        // 8問＋レッスン1(=5問分)＝13点
+    }
 }
