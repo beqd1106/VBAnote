@@ -251,24 +251,23 @@ private struct CalendarGrid: View {
 
     private let cal = Calendar.current
 
+    /// 7列。横幅いっぱいに均等に広げ、高さは押しやすい44ptで固定する
+    private let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 7)
+    private let cellHeight: CGFloat = 44
+
     var body: some View {
-        VStack(spacing: 6) {
-            HStack(spacing: 6) {
-                ForEach(Array(["日","月","火","水","木","金","土"].enumerated()), id: \.offset) { i, w in
-                    Text(w).font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(i == 0 ? Theme.orange : i == 6 ? Theme.blue : Theme.inkSoft)
-                        .frame(maxWidth: .infinity)
-                }
+        let cells = CalendarFormat.monthGrid(for: month).flatMap { $0 }
+        LazyVGrid(columns: columns, spacing: 6) {
+            ForEach(Array(["日","月","火","水","木","金","土"].enumerated()), id: \.offset) { i, w in
+                Text(w).font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(i == 0 ? Theme.orange : i == 6 ? Theme.blue : Theme.inkSoft)
+                    .frame(maxWidth: .infinity)
             }
-            ForEach(Array(CalendarFormat.monthGrid(for: month).enumerated()), id: \.offset) { _, week in
-                HStack(spacing: 6) {
-                    ForEach(Array(week.enumerated()), id: \.offset) { _, date in
-                        if let date {
-                            cell(date)
-                        } else {
-                            Color.clear.frame(maxWidth: .infinity).aspectRatio(1, contentMode: .fit)
-                        }
-                    }
+            ForEach(Array(cells.enumerated()), id: \.offset) { _, date in
+                if let date {
+                    cell(date)
+                } else {
+                    Color.clear.frame(height: cellHeight)
                 }
             }
         }
@@ -282,8 +281,7 @@ private struct CalendarGrid: View {
         let content = Text("\(cal.component(.day, from: date))")
             .font(.system(size: 13, weight: level >= 3 ? .bold : .medium))
             .foregroundStyle(level >= 3 ? .white : isFuture ? Theme.inkSoft.opacity(0.5) : Theme.ink)
-            .frame(maxWidth: .infinity)
-            .aspectRatio(1, contentMode: .fit)
+            .frame(maxWidth: .infinity, minHeight: cellHeight, maxHeight: cellHeight)
             .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(LevelColor.fill(level)))
             .overlay(
                 RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -293,8 +291,8 @@ private struct CalendarGrid: View {
         if let selectedDay, !isFuture {
             Button {
                 selectedDay.wrappedValue = isSelected ? nil : day
-            } label: { content }
-            .buttonStyle(.plain)
+            } label: { content.contentShape(Rectangle()) }
+            .buttonStyle(.pressable)
             .accessibilityLabel("\(CalendarFormat.dayTitle(day))、がんばり度\(DailyStudyRecord.levelLabel(level))")
         } else {
             content
