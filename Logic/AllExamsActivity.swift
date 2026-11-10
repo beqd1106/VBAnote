@@ -50,7 +50,7 @@ struct AllExamsActivity {
         return AllExamsActivity(byExam: byExam, merged: merge(byExam.values), studyDays: days)
     }
 
-    static func merge<S: Sequence>(_ maps: S) -> [Date: DailyStudyRecord] where S.Element == [Date: DailyStudyRecord] {
+    nonisolated static func merge<S: Sequence>(_ maps: S) -> [Date: DailyStudyRecord] where S.Element == [Date: DailyStudyRecord] {
         var result: [Date: DailyStudyRecord] = [:]
         for map in maps {
             for (day, r) in map {
