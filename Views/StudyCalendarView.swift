@@ -251,23 +251,28 @@ private struct CalendarGrid: View {
 
     private let cal = Calendar.current
 
-    /// 7列。横幅いっぱいに均等に広げ、高さは押しやすい44ptで固定する
-    private let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: 7)
+    /// 7列。横幅いっぱいに均等に広げ、高さは押しやすい44ptで固定する。
+    /// （LazyVGrid はカード内で高さを測り違えて上下が切れるため、全部を作る Grid を使う）
     private let cellHeight: CGFloat = 44
 
     var body: some View {
-        let cells = CalendarFormat.monthGrid(for: month).flatMap { $0 }
-        LazyVGrid(columns: columns, spacing: 6) {
-            ForEach(Array(["日","月","火","水","木","金","土"].enumerated()), id: \.offset) { i, w in
-                Text(w).font(.system(size: 12, weight: .semibold))
-                    .foregroundStyle(i == 0 ? Theme.orange : i == 6 ? Theme.blue : Theme.inkSoft)
-                    .frame(maxWidth: .infinity)
+        Grid(horizontalSpacing: 6, verticalSpacing: 6) {
+            GridRow {
+                ForEach(Array(["日","月","火","水","木","金","土"].enumerated()), id: \.offset) { i, w in
+                    Text(w).font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(i == 0 ? Theme.orange : i == 6 ? Theme.blue : Theme.inkSoft)
+                        .frame(maxWidth: .infinity)
+                }
             }
-            ForEach(Array(cells.enumerated()), id: \.offset) { _, date in
-                if let date {
-                    cell(date)
-                } else {
-                    Color.clear.frame(height: cellHeight)
+            ForEach(Array(CalendarFormat.monthGrid(for: month).enumerated()), id: \.offset) { _, week in
+                GridRow {
+                    ForEach(Array(week.enumerated()), id: \.offset) { _, date in
+                        if let date {
+                            cell(date)
+                        } else {
+                            Color.clear.frame(maxWidth: .infinity, minHeight: cellHeight, maxHeight: cellHeight)
+                        }
+                    }
                 }
             }
         }
