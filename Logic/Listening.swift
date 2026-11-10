@@ -122,7 +122,7 @@ enum ListeningSettings {
 
     /// AVSpeechUtterance の rate に変換（標準0.5を1.0倍とする）
     static func utteranceRate(_ r: Double) -> Float {
-        Float(min(AVSpeechUtteranceMaximumSpeechRate, max(AVSpeechUtteranceMinimumSpeechRate, 0.5 * r)))
+        min(AVSpeechUtteranceMaximumSpeechRate, max(AVSpeechUtteranceMinimumSpeechRate, Float(0.5 * r)))
     }
 }
 
