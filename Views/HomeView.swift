@@ -14,11 +14,12 @@ struct HomeView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: Theme.Space.m) {
                         AppWordmarkHeader()
-                        todayHeroCard
-                        studyRecordCard
+                        nextActionCard
                         examPrepBanner
-                        continueLessonCard
                         quickActions
+                        studyRecordCard
+                        todayHeroCard
+                        if nextAction.kind != .lesson { continueLessonCard }
                         todaySection
                         weakAreaCard
                         categorySection
@@ -37,6 +38,18 @@ struct HomeView: View {
         }
     }
 
+    // MARK: - 次の一手（最上部・1つだけ）
+
+    private var nextAction: NextAction { NextAction.make(store: store) }
+
+    private var nextActionCard: some View {
+        let action = nextAction
+        return NavigationLink(value: action.route) {
+            NextActionCard(action: action)
+        }
+        .buttonStyle(.pressable)
+    }
+
     // MARK: - 今日の学習（進捗リング＋統計）
 
     private var todayHeroCard: some View {
@@ -44,7 +57,7 @@ struct HomeView: View {
         return Card {
             VStack(alignment: .leading, spacing: Theme.Space.m) {
                 HStack {
-                    Label("今日の学習", systemImage: "checklist")
+                    Label("\(ExamContext.current.examShortName)の進み具合", systemImage: "chart.pie.fill")
                         .font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
                     Spacer()
                     Text(todayString).font(.system(size: 13)).foregroundStyle(Theme.inkSoft)
@@ -85,7 +98,7 @@ struct HomeView: View {
             NavigationLink(value: HomeRoute.calendar) {
                 StudyRecordCard(activity: activity, goalMinutes: store.profile?.dailyStudyMinutes ?? 30)
             }
-            .buttonStyle(PressableCardStyle())
+            .buttonStyle(.pressable)
         }
     }
 
@@ -121,7 +134,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         }
     }
 
@@ -155,7 +168,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         }
     }
 
@@ -197,7 +210,7 @@ struct HomeView: View {
             .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
             .shadow(color: Theme.cardShadow(), radius: 8, x: 0, y: 3)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 
     // MARK: - 今日の学習タスク
@@ -209,7 +222,7 @@ struct HomeView: View {
                 NavigationLink(value: route(for: task)) {
                     taskRow(task)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
             }
         }
     }
@@ -263,7 +276,7 @@ struct HomeView: View {
                     }
                 }
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.pressable)
         }
     }
 
@@ -279,7 +292,7 @@ struct HomeView: View {
                     NavigationLink(value: HomeRoute.quiz(domain)) {
                         categoryCard(domain)
                     }
-                    .buttonStyle(.plain)
+                    .buttonStyle(.pressable)
                 }
             }
         }
@@ -334,7 +347,7 @@ struct HomeView: View {
                 }
             }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(.pressable)
     }
 
     // MARK: - ルーティング
@@ -364,6 +377,8 @@ struct HomeView: View {
                            questions: Array(repo.questions.shuffled().prefix(10)))
         case .review:
             QuizPlayerView(title: "復習", questions: store.dueReviewQuestions(limit: 10))
+        case .reviewQuick(let n):
+            QuizPlayerView(title: "復習 \(n)問", questions: store.dueReviewQuestions(limit: n))
         case .bookmarks:
             QuizPlayerView(title: "お気に入り", questions: store.bookmarkedQuestions())
         case .termSearch:
@@ -414,6 +429,8 @@ enum HomeRoute: Hashable {
     case finalCheck
     case termSearch
     case calendar
+    /// 復習を n 問だけ（ホームの「次の一手」用）
+    case reviewQuick(Int)
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）

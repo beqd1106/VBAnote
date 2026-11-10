@@ -24,7 +24,7 @@ struct AnalysisView: View {
                                     Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft)
                                 }
                             }
-                        }.buttonStyle(.plain)
+                        }.buttonStyle(.pressable)
                     }
                     .padding(Theme.Space.l)
                 }

@@ -32,7 +32,7 @@ struct PracticeHubView: View {
                                     Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft)
                                 }
                             }
-                        }.buttonStyle(.plain)
+                        }.buttonStyle(.pressable)
 
                         // 復習＆お気に入り
                         HStack(spacing: Theme.Space.m) {
@@ -55,14 +55,14 @@ struct PracticeHubView: View {
                                     Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft)
                                 }
                             }
-                        }.buttonStyle(.plain)
+                        }.buttonStyle(.pressable)
 
                         // 分野別演習
                         SectionHeader(title: "分野別に演習")
                         ForEach(ExamDomain.allCases) { domain in
                             NavigationLink(value: PracticeRoute.domain(domain)) {
                                 domainRow(domain)
-                            }.buttonStyle(.plain)
+                            }.buttonStyle(.pressable)
                         }
                     }
                     .padding(Theme.Space.l)
@@ -96,7 +96,7 @@ struct PracticeHubView: View {
                     Text(title).captionStyle()
                 }
             }
-        }.buttonStyle(.plain)
+        }.buttonStyle(.pressable)
     }
 
     private func domainRow(_ domain: ExamDomain) -> some View {

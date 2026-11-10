@@ -116,13 +116,3 @@ struct StudyRecordCard: View {
         }
     }
 }
-
-/// 押せるカードの共通スタイル：押している間だけ少し沈む（取っ手の手触り）
-struct PressableCardStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
-            .shadow(color: Theme.cardShadow(), radius: configuration.isPressed ? 4 : 10, x: 0, y: configuration.isPressed ? 2 : 4)
-            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
-    }
-}

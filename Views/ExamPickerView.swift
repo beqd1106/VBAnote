@@ -23,7 +23,7 @@ struct ExamPickerView: View {
                             Text(group).font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.inkSoft)
                             ForEach(ExamCatalog.all.filter { $0.group == group }) { exam in
                                 Button { catalog.select(exam) } label: { examCard(exam) }
-                                    .buttonStyle(.plain)
+                                    .buttonStyle(.pressable)
                                     .accessibilityIdentifier("exam_\(exam.key)")
                             }
                         }

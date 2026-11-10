@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 /// 画面横断で再利用する共通UI部品。スタイルのばらつきを防ぐ。
 
@@ -211,4 +212,36 @@ struct AppBackground: View {
                 .ignoresSafeArea()
         }
     }
+}
+
+// MARK: - 押せるカードの取っ手
+
+/// 押せるカード・タイルの共通スタイル。押している間だけ少し沈み、タップが確定したら軽い触覚を返す。
+/// 「視差効果を減らす」設定のときは沈み込みをやめ、濃さの変化だけにする。
+struct PressableCardStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        PressableBody(configuration: configuration)
+    }
+
+    private struct PressableBody: View {
+        let configuration: ButtonStyleConfiguration
+        @Environment(\.accessibilityReduceMotion) private var reduceMotion
+        @Environment(\.isEnabled) private var isEnabled
+
+        var body: some View {
+            configuration.label
+                .scaleEffect(configuration.isPressed && !reduceMotion ? 0.97 : 1)
+                .opacity(isEnabled ? (configuration.isPressed ? 0.88 : 1) : 0.5)
+                .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+                // 触覚はタップが確定した時だけ（スクロールで押下が取り消された時は鳴らさない）
+                .simultaneousGesture(TapGesture().onEnded {
+                    if isEnabled { UIImpactFeedbackGenerator(style: .light).impactOccurred() }
+                })
+        }
+    }
+}
+
+extension ButtonStyle where Self == PressableCardStyle {
+    /// 押せるカード・タイル用（沈み込み＋軽い触覚）
+    static var pressable: PressableCardStyle { PressableCardStyle() }
 }

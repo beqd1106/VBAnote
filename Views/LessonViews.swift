@@ -22,7 +22,7 @@ struct LessonListView: View {
                                 ForEach(items) { lesson in
                                     NavigationLink { LessonDetailView(lesson: lesson) } label: {
                                         lessonRow(lesson)
-                                    }.buttonStyle(.plain)
+                                    }.buttonStyle(.pressable)
                                 }
                             }
                         }
@@ -289,7 +289,7 @@ struct LessonDetailView: View {
                         .fill(done ? tint : soft))
                     .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(.pressable)
                 .accessibilityLabel("\(kind == .basic ? "基礎問題" : "確認問題")パターン\(set.letter)、\(chunk.count)問\(done ? "、解答済み" : "")")
             }
         }
