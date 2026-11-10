@@ -42,6 +42,7 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: 資格note
+        UIBackgroundModes: [audio]
         CFBundleName: VBAnote
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)

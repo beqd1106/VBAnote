@@ -292,4 +292,27 @@ final class LogicTests: XCTestCase {
         XCTAssertNil(QuizSessionStore.load(examKey: "itp", defaults: defaults))
         XCTAssertNil(defaults.data(forKey: "quizSession.itp"))
     }
+
+    // MARK: - 聞き流し
+
+    func testListeningScriptReadsAnswerContentAndShortExplanation() {
+        let q = QuizQuestion(id: "t1", question: "PDCAのCは何ですか。", choices: ["計画", "評価", "実行", "改善"],
+                             correctAnswers: [1], explanation: "Cは評価です。Checkの略です。3文目は読みません。",
+                             source: nil, wrongChoiceExplanations: [:], domain: ExamDomain.allCases[0],
+                             service: "", difficulty: 1, tags: [], beginnerNote: nil)
+        let p = ListeningScript.parts(for: q, readChoices: true)
+        XCTAssertTrue(p.question.contains("2番、評価"))
+        XCTAssertEqual(p.answer, "正解は、2番、評価。")              // 番号だけでなく中身まで読む
+        XCTAssertEqual(p.explanation, "Cは評価です。Checkの略です。")  // 解説は2文まで
+        XCTAssertFalse(ListeningScript.parts(for: q, readChoices: false).question.contains("1番"))
+    }
+
+    func testListeningProgressRoundTrip() {
+        let defaults = UserDefaults(suiteName: "ListeningTest-\(UUID().uuidString)")!
+        var p = ListeningProgress()
+        p.completedChapterIds = ["a-1"]; p.heardIds = ["q1"]; p.lastChapterId = "a-2"; p.lastIndex = 3
+        p.save(examKey: "itp", defaults: defaults)
+        XCTAssertEqual(ListeningProgress.load(examKey: "itp", defaults: defaults), p)
+        XCTAssertEqual(ListeningProgress.load(examKey: "fe", defaults: defaults), ListeningProgress())
+    }
 }

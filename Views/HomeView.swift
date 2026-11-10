@@ -17,6 +17,7 @@ struct HomeView: View {
                         nextActionCard
                         examPrepBanner
                         quickActions
+                        listeningEntry
                         studyRecordCard
                         todayHeroCard
                         if nextAction.kind != .lesson { continueLessonCard }
@@ -68,6 +69,29 @@ struct HomeView: View {
                 .buttonStyle(.pressable)
             }
         }
+    }
+
+    // MARK: - 聞き流しの入口
+
+    private var listeningEntry: some View {
+        NavigationLink(value: HomeRoute.listening) {
+            HStack(spacing: Theme.Space.m) {
+                Image(systemName: "headphones").font(.system(size: 20, weight: .semibold)).foregroundStyle(Theme.orange)
+                    .frame(width: 44, height: 44).background(Theme.orangeSoft)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("聞き流し").font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
+                    Text("通勤ミックス 3分・10分・20分／画面を消しても続く").captionStyle()
+                }
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft)
+            }
+            .padding(Theme.Space.l)
+            .background(Theme.card)
+            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+            .shadow(color: Theme.cardShadow(), radius: 8, x: 0, y: 3)
+        }
+        .buttonStyle(.pressable)
     }
 
     // MARK: - 今日の学習（進捗リング＋統計）
@@ -410,6 +434,8 @@ struct HomeView: View {
                 EmptyStateView(icon: "checkmark.circle", title: "途中の問題はありません",
                                message: "ホームから新しく始められます。")
             }
+        case .listening:
+            ListeningHubView()
         case .oneQuestion:
             QuizPlayerView(title: "今日の1問",
                            questions: Array((store.dueReviewQuestions(limit: 1) + repo.questions.shuffled().prefix(1)).prefix(1)))
@@ -471,6 +497,8 @@ enum HomeRoute: Hashable {
     case resumeSession
     /// 忙しい日の1問
     case oneQuestion
+    /// 聞き流し
+    case listening
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）

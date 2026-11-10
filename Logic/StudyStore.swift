@@ -318,6 +318,12 @@ final class StudyStore: ObservableObject {
 
     // MARK: - 学習ログ・連続日数
 
+    /// 聞き流しで1問聞いた（学習した日として数える。正誤や習得の判定には使わない）
+    func logListening() {
+        logStudy(questions: 0, minutes: 0)
+        bumpAndSave()
+    }
+
     private func logStudy(questions: Int, minutes: Int) {
         let today = Calendar.current.startOfDay(for: .now)
         let d = FetchDescriptor<StudyDayLog>(predicate: #Predicate { $0.day == today })
