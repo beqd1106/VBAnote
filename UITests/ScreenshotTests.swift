@@ -79,4 +79,17 @@ final class ScreenshotTests: XCTestCase {
             app.terminate()
         }
     }
+
+    /// 学習の記録カード（ホーム）と学習カレンダーの見た目確認用
+    func testCaptureStudyCalendar() {
+        launch(exam: "itp")
+        XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 20))
+        tab("ホーム"); shot("10_home_record")
+        let card = app.buttons.matching(NSPredicate(format: "label BEGINSWITH '学習の記録'")).firstMatch
+        XCTAssertTrue(card.waitForExistence(timeout: 10))
+        card.tap()
+        XCTAssertTrue(app.navigationBars["学習カレンダー"].waitForExistence(timeout: 10))
+        shot("11_calendar_all")
+        app.swipeUp(); shot("12_calendar_bottom")
+    }
 }
