@@ -8,6 +8,7 @@ struct StudyCalendarView: View {
 
     @EnvironmentObject var store: StudyStore
     @State private var scope: Scope
+    @State private var activity: AllExamsActivity?
     @State private var monthOffset = 0
     @State private var selectedDay: Date?
     @State private var shareItems: ShareItems?
@@ -20,9 +21,7 @@ struct StudyCalendarView: View {
     }
 
     var body: some View {
-        // revision を読むことで、回答が保存されたら集計し直す
-        let _ = store.revision
-        let activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
+        let activity = self.activity ?? AllExamsActivity(byExam: [:], merged: [:], studyDays: [])
         let records = scope == .all ? activity.merged : store.dailyRecords()
         let streak = scope == .all ? activity.streak : store.studyStreak()
         let studyDayCount = scope == .all ? activity.studyDays.count : store.studyDays().count
@@ -52,6 +51,7 @@ struct StudyCalendarView: View {
                 .padding(Theme.Space.l)
             }
         }
+        .onAppear { activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key) }
         .navigationTitle("学習カレンダー")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $shareItems) { items in

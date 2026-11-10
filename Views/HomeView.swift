@@ -4,6 +4,8 @@ struct HomeView: View {
     @EnvironmentObject var store: StudyStore
 
     private let repo = ContentRepository.shared
+    /// 全資格の学習記録。画面表示時と記録の更新時だけ読み直す（全ストアを開くため毎描画では読まない）
+    @State private var activity: AllExamsActivity?
 
     var body: some View {
         NavigationStack {
@@ -27,6 +29,8 @@ struct HomeView: View {
                 }
             }
             .toolbar(.hidden, for: .navigationBar)
+            .onAppear { reloadActivity() }
+            .onChange(of: store.revision) { reloadActivity() }
             .navigationDestination(for: HomeRoute.self) { route in
                 destination(for: route)
             }
@@ -76,13 +80,17 @@ struct HomeView: View {
 
     // MARK: - 学習の記録（全資格の連続日数・直近7日・今日の目標）
 
-    private var studyRecordCard: some View {
-        _ = store.revision
-        return NavigationLink(value: HomeRoute.calendar) {
-            StudyRecordCard(activity: AllExamsActivity.load(currentExamKey: ExamContext.current.key),
-                            goalMinutes: store.profile?.dailyStudyMinutes ?? 30)
+    @ViewBuilder private var studyRecordCard: some View {
+        if let activity {
+            NavigationLink(value: HomeRoute.calendar) {
+                StudyRecordCard(activity: activity, goalMinutes: store.profile?.dailyStudyMinutes ?? 30)
+            }
+            .buttonStyle(PressableCardStyle())
         }
-        .buttonStyle(PressableCardStyle())
+    }
+
+    private func reloadActivity() {
+        activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
     }
 
     private func statRow(_ label: String, _ value: String) -> some View {
