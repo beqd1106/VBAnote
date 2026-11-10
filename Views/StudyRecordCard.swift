@@ -102,7 +102,7 @@ struct StudyRecordCard: View {
         let reached = done >= goal
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text("今日の目標").font(.system(size: 13)).foregroundStyle(Theme.inkSoft)
+                Text("今日の目標（全資格の合計）").font(.system(size: 13)).foregroundStyle(Theme.inkSoft)
                 Spacer()
                 if reached {
                     Label("達成", systemImage: "checkmark.seal.fill")
@@ -112,6 +112,7 @@ struct StudyRecordCard: View {
                 }
             }
             ProgressBar(value: Double(done) / Double(goal), color: reached ? Theme.green : Theme.orange, height: 8)
+            Text("学習時間は解いた間隔からの目安です").font(.system(size: 11)).foregroundStyle(Theme.inkSoft)
         }
     }
 }

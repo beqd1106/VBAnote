@@ -38,14 +38,21 @@ struct StudyCalendarView: View {
                         VStack(spacing: Theme.Space.m) {
                             monthHeader(month)
                             CalendarGrid(month: month, records: records, selectedDay: $selectedDay)
+                            HStack(spacing: 4) {
+                                Image(systemName: "hand.tap").font(.system(size: 11))
+                                Text("日付をタップすると内訳が見られます").font(.system(size: 11))
+                                Spacer()
+                            }
+                            .foregroundStyle(Theme.inkSoft)
+                            .opacity(selectedDay == nil ? 1 : 0)
                             LevelLegend()
                         }
                     }
-                    MonthSummaryCard(records: monthRecords)
                     if let day = selectedDay {
                         dayDetailCard(records[day] ?? DailyStudyRecord(day: day),
                                       breakdown: scope == .all ? activity.breakdown(on: day) : [])
                     }
+                    MonthSummaryCard(records: monthRecords)
                     exportCard(month: month, records: records, monthRecords: monthRecords, streak: streak)
                 }
                 .padding(Theme.Space.l)
