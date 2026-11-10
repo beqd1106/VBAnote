@@ -58,7 +58,7 @@ struct StudyCalendarView: View {
             }
         }
         .onAppear {
-            activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
+            self.activity = AllExamsActivity.load(currentExamKey: ExamContext.current.key)
             if selectedDay == nil { selectedDay = cal.startOfDay(for: .now) }
         }
         .navigationTitle("学習カレンダー")
