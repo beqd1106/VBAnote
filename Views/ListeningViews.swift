@@ -271,6 +271,10 @@ struct ListeningPlayerView: View {
             p.save(examKey: examKey)
         }
         player.onToggleFavorite = { q in store.toggleBookmark(q.id) }
+        let mastery = store.listeningMastery()
+        player.masteryProvider = { q in
+            mastery.weak.contains(q.id) ? .weak : mastery.solid.contains(q.id) ? .solid : .new
+        }
         player.nextChapterProvider = { current in
             guard let i = allChapters.firstIndex(where: { $0.id == current.id }), i + 1 < allChapters.count else { return nil }
             let next = allChapters[i + 1]
@@ -482,7 +486,7 @@ struct ListeningPlayerView: View {
                         Text("5秒").tag(5.0)
                         Text("8秒").tag(8.0)
                     }
-                    Text("間をあけると、答えを思い出す練習になります").font(.footnote).foregroundStyle(.secondary)
+                    Text("間をあけると、答えを思い出す練習になります。間違えたことのある問題は長め、正解した問題は短めに自動で調整します。").font(.footnote).foregroundStyle(.secondary)
                 }
                 Section("読み上げ") {
                     Picker("速さ", selection: $rate) {

@@ -378,4 +378,15 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(QuizPlayerView.emptyCopy(for: "お気に入り").title, "お気に入りはまだありません")
         XCTAssertEqual(QuizPlayerView.emptyCopy(for: "分野別").title, "問題がありません")
     }
+
+    // MARK: - 聞き流しの考える間
+
+    func testThinkPauseFollowsMastery() {
+        XCTAssertEqual(ListeningScript.thinkPause(base: 3, mastery: .new), 3)
+        XCTAssertEqual(ListeningScript.thinkPause(base: 3, mastery: .weak), 4.5)
+        XCTAssertEqual(ListeningScript.thinkPause(base: 3, mastery: .solid), 1.5)
+        XCTAssertEqual(ListeningScript.thinkPause(base: 10, mastery: .weak), 13)   // 長くなりすぎない
+        XCTAssertEqual(ListeningScript.thinkPause(base: 1, mastery: .solid), 1)    // 1秒より短くしない
+        XCTAssertEqual(ListeningScript.thinkPause(base: 0, mastery: .weak), 0)     // 聞くだけはそのまま
+    }
 }

@@ -146,6 +146,20 @@ enum ListeningScript {
                      answer: "正解は、" + answers + "、です。", explanation: shortExplanation(q.explanation))
     }
 
+    /// 問題の身につき具合
+    enum Mastery { case new, weak, solid }
+
+    /// 答えの前に考える間（秒）。苦手な問題は長め、身についた問題は短め。
+    /// base が 0（聞くだけ）のときは変えない。
+    static func thinkPause(base: Double, mastery: Mastery) -> Double {
+        guard base > 0 else { return 0 }
+        switch mastery {
+        case .new: return base
+        case .weak: return min(base * 1.5, base + 3)
+        case .solid: return max(1, base * 0.5)
+        }
+    }
+
     static func ordinal(_ i: Int) -> String { i < ordinals.count ? ordinals[i] : "\(i + 1)つ目" }
 
     /// 解説は最初の2文まで（長すぎると区切りが崩れるため）
@@ -192,6 +206,8 @@ final class ListeningPlayer: NSObject, ObservableObject {
     var nextChapterProvider: ((ListeningChapter) -> (ListeningChapter, [QuizQuestion])?)?
     /// ロック画面の「お気に入り」から呼ぶ
     var onToggleFavorite: ((QuizQuestion) -> Void)?
+    /// 問題ごとの身につき具合（考える間の長さに使う）。nil なら全問同じ間
+    var masteryProvider: ((QuizQuestion) -> ListeningScript.Mastery)?
 
     private let synth = AVSpeechSynthesizer()
     /// いま流している1問分の読み上げ（最後の1つが終わったら次の問題へ）
@@ -282,7 +298,8 @@ final class ListeningPlayer: NSObject, ObservableObject {
             return u
         }
         // 問題 →（短い間）→ 選択肢を1つずつ（短い間）→ 考える間 → 答え → 解説
-        let think = max(0.6, ListeningSettings.recallPause)
+        let think = max(0.6, ListeningScript.thinkPause(base: ListeningSettings.recallPause,
+                                                         mastery: masteryProvider?(q) ?? .new))
         var list = [make(parts.question, .question, after: parts.choices.isEmpty ? think : 0.45)]
         for (i, c) in parts.choices.enumerated() {
             list.append(make(c, .question, after: i == parts.choices.count - 1 ? think : 0.25))

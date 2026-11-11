@@ -94,6 +94,14 @@ final class StudyStore: ObservableObject {
         return try? context.fetch(d).first
     }
 
+    /// 聞き流しの「考える間」を問題ごとに変えるための目安。
+    /// weak＝復習リストにある問題、solid＝正解したことがあり復習リストにない問題。
+    func listeningMastery() -> (weak: Set<String>, solid: Set<String>) {
+        let weak = Set(((try? context.fetch(FetchDescriptor<ReviewItem>())) ?? []).map(\.questionId))
+        let correct = Set(((try? context.fetch(FetchDescriptor<AnswerRecord>(predicate: #Predicate { $0.isCorrect }))) ?? []).map(\.questionId))
+        return (weak, correct.subtracting(weak))
+    }
+
     // MARK: - 復習
 
     /// 今日が期限の復習問題
