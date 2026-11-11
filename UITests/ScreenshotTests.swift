@@ -113,4 +113,18 @@ final class ScreenshotTests: XCTestCase {
         sleep(2)
         shot("22_listening_next")
     }
+
+    /// ホームの資格切り替え（文字つきボタン→半分シート）と、設定の学習リマインドの確認用
+    func testCaptureSwitcherAndReminder() {
+        launch(exam: "aws")
+        XCTAssertTrue(app.tabBars.firstMatch.waitForExistence(timeout: 20))
+        tab("ホーム"); shot("30_home_top")
+        let sw = app.buttons["資格を切り替える"]
+        if sw.waitForExistence(timeout: 10) { sw.tap(); shot("31_switcher_sheet") }
+        let close = app.buttons["閉じる"]
+        if close.waitForExistence(timeout: 5) { close.tap() }
+        tab("設定")
+        app.swipeUp()
+        shot("32_settings_reminder")
+    }
 }
