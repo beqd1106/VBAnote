@@ -6,7 +6,7 @@ import MediaPlayer
 
 /// 聞き流しの1区切り（約3分・5問）。分野ごとの通し番号のほか、復習・お気に入り・通勤ミックスも同じ形で扱う。
 struct ListeningChapter: Identifiable, Hashable {
-    enum Kind: Hashable { case domain, review, favorites, mix }
+    enum Kind: Hashable { case domain, review, weak, favorites, mix }
     let id: String
     let kind: Kind
     let title: String
@@ -55,6 +55,15 @@ enum ListeningCatalog {
         let qs = store.dueReviewQuestions(limit: 30).filter(isListenable)
         guard !qs.isEmpty else { return nil }
         return ListeningChapter(id: "review", kind: .review, title: "復習待ち",
+                                subtitle: "\(qs.count)問", questionIds: qs.map(\.id))
+    }
+
+    /// 間違えた・自信なしの問題（復習の期限がまだ先のものも含めて、耳でおさらいする）
+    static func weak(store: StudyStore) -> ListeningChapter? {
+        let ids = store.listeningMastery().weak
+        let qs = ContentRepository.shared.questions.filter { ids.contains($0.id) && isListenable($0) }.prefix(30)
+        guard !qs.isEmpty else { return nil }
+        return ListeningChapter(id: "weak", kind: .weak, title: "間違えた問題",
                                 subtitle: "\(qs.count)問", questionIds: qs.map(\.id))
     }
 

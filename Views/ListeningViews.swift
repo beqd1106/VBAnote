@@ -116,12 +116,14 @@ struct ListeningHubView: View {
     }
 
     @ViewBuilder private var specialLists: some View {
-        let lists = [ListeningCatalog.review(store: store), ListeningCatalog.favorites(store: store)].compactMap { $0 }
+        let lists = [ListeningCatalog.review(store: store), ListeningCatalog.weak(store: store),
+                     ListeningCatalog.favorites(store: store)].compactMap { $0 }
         if !lists.isEmpty {
             VStack(alignment: .leading, spacing: Theme.Space.s) {
                 SectionHeader(title: "リスト")
                 ForEach(lists) { chapter in
-                    chapterRow(chapter, icon: chapter.kind == .review ? "arrow.clockwise" : "star.fill")
+                    chapterRow(chapter, icon: chapter.kind == .review ? "arrow.clockwise"
+                               : chapter.kind == .weak ? "exclamationmark.circle" : "star.fill")
                 }
             }
         }
