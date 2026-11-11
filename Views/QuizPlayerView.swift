@@ -64,6 +64,8 @@ struct QuizPlayerView: View {
     @State private var hintUsedIndices: Set<Int> = []
     /// 正解したが「自信なし」と押した問題（明日の復習に入れた）
     @State private var unsureIndices: Set<Int> = []
+    /// 「要確認」の印を付けた問題
+    @State private var flaggedIds: Set<String> = Set(QuestionFlags.ids(examKey: ExamContext.current.key))
 
     private var current: QuizQuestion { questions[index] }
     private var selected: Set<Int> { selectedByIndex[index] ?? [] }
@@ -399,8 +401,28 @@ struct QuizPlayerView: View {
                     }
                     .buttonStyle(.plain)
                 }
+
+                flagButton
             }
         }
+    }
+
+    /// 内容がおかしいと感じた問題に「要確認」の印を付ける（設定からまとめて送れる）
+    private var flagButton: some View {
+        let on = flaggedIds.contains(current.id)
+        return Button {
+            QuestionFlags.toggle(current.id, examKey: ExamContext.current.key)
+            flaggedIds = Set(QuestionFlags.ids(examKey: ExamContext.current.key))
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        } label: {
+            Label(on ? "要確認に入れました（設定から送れます）" : "内容がおかしい？ 要確認に入れる",
+                  systemImage: on ? "flag.fill" : "flag")
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(on ? Theme.red : Theme.inkSoft)
+                .frame(minHeight: 32)
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
     private var unsureButton: some View {

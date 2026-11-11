@@ -353,4 +353,21 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(dates.first, at(cal, 12, 20))
         XCTAssertEqual(StudyReminder.identifier(for: at(cal, 12, 20), calendar: cal), "study.reminder.2026-11-12")
     }
+
+    // MARK: - 要確認の印
+
+    func testQuestionFlagsToggleAndReport() {
+        let defaults = UserDefaults(suiteName: "FlagTest-\(UUID().uuidString)")!
+        XCTAssertTrue(QuestionFlags.toggle("q1", examKey: "itp", defaults: defaults))
+        XCTAssertTrue(QuestionFlags.contains("q1", examKey: "itp", defaults: defaults))
+        XCTAssertFalse(QuestionFlags.contains("q1", examKey: "fe", defaults: defaults))   // 資格ごとに分かれる
+        XCTAssertFalse(QuestionFlags.toggle("q1", examKey: "itp", defaults: defaults))
+        XCTAssertTrue(QuestionFlags.ids(examKey: "itp", defaults: defaults).isEmpty)
+        let q = QuizQuestion(id: "q9", question: "テスト問題です", choices: ["a", "b"], correctAnswers: [0],
+                             explanation: "", source: nil, wrongChoiceExplanations: [:], domain: ExamDomain.allCases[0],
+                             service: "", difficulty: 1, tags: [], beginnerNote: nil)
+        let text = QuestionFlags.reportText(examName: "ITパスポート", questions: [q])
+        XCTAssertTrue(text.contains("q9：テスト問題です"))
+        XCTAssertTrue(text.contains("ITパスポート・1問"))
+    }
 }

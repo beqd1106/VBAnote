@@ -9,6 +9,7 @@ struct SettingsView: View {
     @AppStorage(StudyReminder.hourKey) private var reminderHour = 20
     @AppStorage(StudyReminder.minuteKey) private var reminderMinute = 0
     @State private var reminderDenied = false
+    @State private var flaggedIds: [String] = []
     @State private var showResetAlert = false
     @State private var showStaleAlert = false
     @State private var showProgressAlert = false
@@ -28,6 +29,7 @@ struct SettingsView: View {
                         aiCard
                         notificationCard
                         nextCertCard
+                        flagsCard
                         legalCard
                         resetCard
                     }
@@ -35,7 +37,10 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("設定")
-            .onAppear { staleCount = store.staleRecordCount() }
+            .onAppear {
+                staleCount = store.staleRecordCount()
+                flaggedIds = QuestionFlags.ids(examKey: ExamContext.current.key)
+            }
         }
     }
 
@@ -162,6 +167,41 @@ struct SettingsView: View {
                             Link("設定を開く", destination: url).font(.system(size: 13, weight: .semibold))
                         }
                     }
+                }
+            }
+        }
+    }
+
+    // MARK: - 要確認の問題
+
+    @ViewBuilder
+    private var flagsCard: some View {
+        if !flaggedIds.isEmpty {
+            let qs = flaggedIds.compactMap { ContentRepository.shared.question(id: $0) }
+            Card {
+                VStack(alignment: .leading, spacing: Theme.Space.s) {
+                    HStack {
+                        Label("要確認にした問題", systemImage: "flag.fill")
+                            .font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
+                        Spacer()
+                        Text("\(qs.count)問").font(.system(size: 14, weight: .semibold)).foregroundStyle(Theme.red)
+                    }
+                    Text("内容がおかしいと感じた問題です。下のボタンからメールやメッセージで送ってもらえると、直します。")
+                        .captionStyle().fixedSize(horizontal: false, vertical: true)
+                    ShareLink(item: QuestionFlags.reportText(examName: ExamInfo.examShortName, questions: qs)) {
+                        Label("まとめて送る", systemImage: "square.and.arrow.up")
+                            .font(.system(size: 15, weight: .semibold))
+                            .frame(maxWidth: .infinity, minHeight: 44)
+                            .background(Theme.blueSoft)
+                            .foregroundStyle(Theme.blue)
+                            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.button))
+                    }
+                    Button("印をすべて外す") {
+                        QuestionFlags.clear(examKey: ExamContext.current.key)
+                        flaggedIds = []
+                    }
+                    .font(.system(size: 13)).foregroundStyle(Theme.inkSoft)
+                    .frame(maxWidth: .infinity, minHeight: 36)
                 }
             }
         }
