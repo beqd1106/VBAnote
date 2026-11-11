@@ -64,6 +64,8 @@ struct QuizPlayerView: View {
     @State private var hintUsedIndices: Set<Int> = []
     /// 正解したが「自信なし」と押した問題（明日の復習に入れた）
     @State private var unsureIndices: Set<Int> = []
+    @State private var doneAppeared = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// 「要確認」の印を付けた問題
     @State private var flaggedIds: Set<String> = Set(QuestionFlags.ids(examKey: ExamContext.current.key))
 
@@ -472,16 +474,30 @@ struct QuizPlayerView: View {
         let rate = questions.isEmpty ? 0 : Double(correctCount) / Double(questions.count)
         return ScrollView {
             VStack(spacing: Theme.Space.xl) {
-                ScoreRing(value: rate, color: rate >= 0.7 ? Theme.green : Theme.orange,
-                          label: "\(Int(rate*100))%",
-                          caption: "\(correctCount)/\(questions.count)問正解")
-                    .frame(width: 180, height: 180)
-                    .padding(.top, Theme.Space.xxl)
+                // 完了の手応え：ノートにチェックが付いた3Dイラスト（ふわっと出す）
+                Image("SessionDone")
+                    .resizable().scaledToFit()
+                    .frame(width: 168, height: 168)
+                    .scaleEffect(doneAppeared || reduceMotion ? 1 : 0.7)
+                    .opacity(doneAppeared || reduceMotion ? 1 : 0)
+                    .padding(.top, Theme.Space.xl)
+                    .accessibilityHidden(true)
+                    .onAppear {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) { doneAppeared = true }
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    }
 
-                Label("1区切り完了", systemImage: "checkmark.seal.fill")
-                    .font(.system(size: 15, weight: .bold)).foregroundStyle(Theme.green)
-                    .padding(.horizontal, 14).padding(.vertical, 6)
-                    .background(Capsule().fill(Theme.green.opacity(0.12)))
+                VStack(spacing: Theme.Space.s) {
+                    Text("1区切り完了").font(.system(size: 14, weight: .bold)).foregroundStyle(Theme.green)
+                        .padding(.horizontal, 14).padding(.vertical, 5)
+                        .background(Capsule().fill(Theme.green.opacity(0.12)))
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("\(correctCount)").font(.system(size: 44, weight: .heavy, design: .rounded))
+                            .foregroundStyle(rate >= 0.7 ? Theme.green : Theme.navy)
+                        Text("/ \(questions.count)問正解").font(.system(size: 18, weight: .bold)).foregroundStyle(Theme.inkSoft)
+                    }
+                    .accessibilityElement(children: .combine)
+                }
 
                 Text(summaryMessage)
                     .font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.navy)
