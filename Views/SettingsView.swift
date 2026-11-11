@@ -5,7 +5,10 @@ struct SettingsView: View {
     @EnvironmentObject var store: StudyStore
     @EnvironmentObject var catalog: ExamCatalog
     @AppStorage("aiAssistEnabled") private var aiAssistEnabled = false
-    @AppStorage("notificationsEnabled") private var notificationsEnabled = true
+    @AppStorage(StudyReminder.enabledKey) private var reminderOn = false
+    @AppStorage(StudyReminder.hourKey) private var reminderHour = 20
+    @AppStorage(StudyReminder.minuteKey) private var reminderMinute = 0
+    @State private var reminderDenied = false
     @State private var showResetAlert = false
     @State private var showStaleAlert = false
     @State private var showProgressAlert = false
@@ -117,14 +120,50 @@ struct SettingsView: View {
         }
     }
 
+    private var reminderTime: Binding<Date> {
+        Binding(
+            get: { Calendar.current.date(bySettingHour: reminderHour, minute: reminderMinute, second: 0, of: .now) ?? .now },
+            set: { d in
+                let c = Calendar.current.dateComponents([.hour, .minute], from: d)
+                reminderHour = c.hour ?? 20; reminderMinute = c.minute ?? 0
+                Task { await StudyReminder.reschedule() }
+            })
+    }
+
     private var notificationCard: some View {
         Card {
-            Toggle(isOn: $notificationsEnabled) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("学習リマインド").font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.ink)
-                    Text("毎日の学習を通知でお知らせ").captionStyle()
+            VStack(alignment: .leading, spacing: Theme.Space.m) {
+                Toggle(isOn: Binding(get: { reminderOn }, set: { on in
+                    if on {
+                        Task {
+                            let ok = await StudyReminder.requestPermission()
+                            reminderOn = ok; reminderDenied = !ok
+                            await StudyReminder.reschedule()
+                        }
+                    } else {
+                        reminderOn = false
+                        Task { await StudyReminder.reschedule() }
+                    }
+                })) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("学習リマインド").font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.ink)
+                        Text("その日まだ学習していないときだけ、1日1回お知らせ").captionStyle()
+                    }
+                }.tint(Theme.blue)
+                if reminderOn {
+                    DatePicker("通知する時刻", selection: reminderTime, displayedComponents: .hourAndMinute)
+                        .font(.system(size: 15))
                 }
-            }.tint(Theme.blue)
+                if reminderDenied {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("通知が許可されていません。iPhoneの「設定」から資格noteの通知をオンにしてください。")
+                            .font(.system(size: 12)).foregroundStyle(Theme.red)
+                        if let url = URL(string: UIApplication.openSettingsURLString) {
+                            Link("設定を開く", destination: url).font(.system(size: 13, weight: .semibold))
+                        }
+                    }
+                }
+            }
         }
     }
 

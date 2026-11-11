@@ -164,6 +164,7 @@ final class StudyStore: ObservableObject {
     func markLessonCompleted(_ lessonId: String) {
         guard !isLessonCompleted(lessonId) else { return }
         context.insert(LessonProgress(lessonId: lessonId))
+        StudyReminder.markStudiedToday()
         bumpAndSave()
     }
 
@@ -339,6 +340,7 @@ final class StudyStore: ObservableObject {
     }
 
     private func logStudy(questions: Int, minutes: Int) {
+        StudyReminder.markStudiedToday()   // 学習した日は、その日のリマインドを鳴らさない
         let today = Calendar.current.startOfDay(for: .now)
         let d = FetchDescriptor<StudyDayLog>(predicate: #Predicate { $0.day == today })
         if let log = try? context.fetch(d).first {

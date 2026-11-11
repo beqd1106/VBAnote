@@ -317,4 +317,32 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(ListeningProgress.load(examKey: "itp", defaults: defaults), p)
         XCTAssertEqual(ListeningProgress.load(examKey: "fe", defaults: defaults), ListeningProgress())
     }
+
+    // MARK: - 学習リマインド
+
+    private func jstCal() -> Calendar { var c = Calendar(identifier: .gregorian); c.timeZone = TimeZone(identifier: "Asia/Tokyo")!; return c }
+    private func at(_ cal: Calendar, _ d: Int, _ h: Int, _ m: Int = 0) -> Date {
+        cal.date(from: DateComponents(year: 2026, month: 11, day: d, hour: h, minute: m))!
+    }
+
+    func testReminderIncludesTodayWhenNotStudiedAndBeforeTime() {
+        let cal = jstCal()
+        let dates = StudyReminder.fireDates(now: at(cal, 11, 9), hour: 20, minute: 0, studiedToday: false, days: 7, calendar: cal)
+        XCTAssertEqual(dates.count, 7)
+        XCTAssertEqual(dates.first, at(cal, 11, 20))
+    }
+
+    func testReminderSkipsTodayWhenAlreadyStudied() {
+        let cal = jstCal()
+        let dates = StudyReminder.fireDates(now: at(cal, 11, 9), hour: 20, minute: 0, studiedToday: true, days: 7, calendar: cal)
+        XCTAssertEqual(dates.count, 6)
+        XCTAssertEqual(dates.first, at(cal, 12, 20))   // 学習済みの日は鳴らさない
+    }
+
+    func testReminderSkipsTodayWhenTimeHasPassed() {
+        let cal = jstCal()
+        let dates = StudyReminder.fireDates(now: at(cal, 11, 21), hour: 20, minute: 0, studiedToday: false, days: 7, calendar: cal)
+        XCTAssertEqual(dates.first, at(cal, 12, 20))
+        XCTAssertEqual(StudyReminder.identifier(for: at(cal, 12, 20), calendar: cal), "study.reminder.2026-11-12")
+    }
 }

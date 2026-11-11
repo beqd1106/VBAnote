@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct VBAnoteApp: App {
     @StateObject private var catalog = ExamCatalog.shared
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
         WindowGroup {
@@ -19,6 +20,10 @@ struct VBAnoteApp: App {
             }
             .environmentObject(catalog)
             .tint(Theme.orange)
+            // アプリを開くたびに、この先7日分の学習リマインドを予約し直す
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { await StudyReminder.reschedule() } }
+            }
         }
     }
 }
