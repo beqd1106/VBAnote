@@ -300,11 +300,13 @@ final class LogicTests: XCTestCase {
                              correctAnswers: [1], explanation: "Cは評価です。Checkの略です。3文目は読みません。",
                              source: nil, wrongChoiceExplanations: [:], domain: ExamDomain.allCases[0],
                              service: "", difficulty: 1, tags: [], beginnerNote: nil)
-        let p = ListeningScript.parts(for: q, readChoices: true)
-        XCTAssertTrue(p.question.contains("2番、評価"))
-        XCTAssertEqual(p.answer, "正解は、2番、評価。")              // 番号だけでなく中身まで読む
+        let p = ListeningScript.parts(for: q, readChoices: true, number: 1)
+        XCTAssertEqual(p.question, "では、第1問。PDCAのCは何ですか。")
+        XCTAssertEqual(p.choices, ["1つ目、計画。", "2つ目、評価。", "3つ目、実行。", "4つ目、改善。"])
+        XCTAssertEqual(p.answer, "正解は、2番の、評価、です。")      // 番号だけでなく中身まで読む
         XCTAssertEqual(p.explanation, "Cは評価です。Checkの略です。")  // 解説は2文まで
-        XCTAssertFalse(ListeningScript.parts(for: q, readChoices: false).question.contains("1番"))
+        XCTAssertTrue(ListeningScript.parts(for: q, readChoices: false).choices.isEmpty)
+        XCTAssertEqual(ListeningScript.parts(for: q, readChoices: false, number: 2).question, "第2問。PDCAのCは何ですか。")
     }
 
     func testListeningProgressRoundTrip() {

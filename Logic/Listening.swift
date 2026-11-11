@@ -130,18 +130,23 @@ enum ListeningSettings {
 
 /// 1問分の読み上げ文を作る（耳で分かるように番号と答えの中身まで読む）
 enum ListeningScript {
-    struct Parts { let question: String; let answer: String; let explanation: String }
+    /// 読み上げの部品。問題文と選択肢を分けて、選択肢のあいだに短い間を入れる（話し言葉に近づけるため）
+    struct Parts { let question: String; let choices: [String]; let answer: String; let explanation: String }
 
-    static func parts(for q: QuizQuestion, readChoices: Bool) -> Parts {
-        var question = clean(q.question)
-        if readChoices {
-            let list = q.choices.enumerated().map { "\($0.offset + 1)番、\(clean($0.element))" }.joined(separator: "。")
-            question += "。" + list + "。"
-        }
-        let answers = q.correctAnswers.sorted().map { "\($0 + 1)番、\(clean(q.choices[$0]))" }.joined(separator: "、と、")
-        let answer = "正解は、" + answers + "。"
-        return Parts(question: question, answer: answer, explanation: shortExplanation(q.explanation))
+    static let ordinals = ["1つ目", "2つ目", "3つ目", "4つ目", "5つ目", "6つ目"]
+
+    /// - Parameter number: チャプター内の何問目か（1始まり）。nil なら番号を読まない
+    static func parts(for q: QuizQuestion, readChoices: Bool, number: Int? = nil) -> Parts {
+        let lead = number.map { ($0 == 1 ? "では、" : "") + "第\($0)問。" } ?? ""
+        let choices = readChoices
+            ? q.choices.enumerated().map { "\(ordinal($0.offset))、\(clean($0.element))。" }
+            : []
+        let answers = q.correctAnswers.sorted().map { "\($0 + 1)番の、\(clean(q.choices[$0]))" }.joined(separator: "と、")
+        return Parts(question: lead + clean(q.question), choices: choices,
+                     answer: "正解は、" + answers + "、です。", explanation: shortExplanation(q.explanation))
     }
+
+    static func ordinal(_ i: Int) -> String { i < ordinals.count ? ordinals[i] : "\(i + 1)つ目" }
 
     /// 解説は最初の2文まで（長すぎると区切りが崩れるため）
     static func shortExplanation(_ text: String) -> String {
@@ -265,7 +270,7 @@ final class ListeningPlayer: NSObject, ObservableObject {
     private func speakCurrent() {
         guard let q = current else { return }
         stopSpeaking()
-        let parts = ListeningScript.parts(for: q, readChoices: ListeningSettings.readChoices)
+        let parts = ListeningScript.parts(for: q, readChoices: ListeningSettings.readChoices, number: index + 1)
         let rate = ListeningSettings.utteranceRate(ListeningSettings.rate)
         let voice = Self.bestJapaneseVoice
         func make(_ text: String, _ phase: Phase, after: TimeInterval) -> AVSpeechUtterance {
@@ -276,10 +281,15 @@ final class ListeningPlayer: NSObject, ObservableObject {
             phaseByUtterance[ObjectIdentifier(u)] = phase
             return u
         }
-        var list = [make(parts.question, .question, after: max(0.6, ListeningSettings.recallPause))]
-        list.append(make(parts.answer, .answer, after: 0.8))
+        // 問題 →（短い間）→ 選択肢を1つずつ（短い間）→ 考える間 → 答え → 解説
+        let think = max(0.6, ListeningSettings.recallPause)
+        var list = [make(parts.question, .question, after: parts.choices.isEmpty ? think : 0.45)]
+        for (i, c) in parts.choices.enumerated() {
+            list.append(make(c, .question, after: i == parts.choices.count - 1 ? think : 0.25))
+        }
+        list.append(make(parts.answer, .answer, after: 0.6))
         if ListeningSettings.readExplanation, !parts.explanation.isEmpty {
-            list.append(make(parts.explanation, .explanation, after: 1.0))
+            list.append(make(parts.explanation, .explanation, after: 1.1))
         }
         pending = list
         phase = .question
