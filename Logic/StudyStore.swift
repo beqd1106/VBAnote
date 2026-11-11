@@ -571,6 +571,7 @@ enum StudyStreak {
             } else { run = 1 }
             best = max(best, run); prev = d
         }
-        return best
+        // 休息日の選び方しだいで「今の連続」のほうが長く数えられることがあるので、そろえる
+        return max(best, count(days: days, calendar: cal))
     }
 }
