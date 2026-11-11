@@ -89,8 +89,9 @@ struct QuizPlayerView: View {
             if finished {
                 summaryView
             } else if questions.isEmpty {
-                EmptyStateView(icon: "tray", title: "問題がありません",
-                               message: "別の分野を選んでみてください。")
+                let e = Self.emptyCopy(for: title)
+                EmptyStateView(icon: "tray", title: e.title, message: e.message,
+                               image: "EmptyNote", actionTitle: "戻る") { dismiss() }
             } else {
                 quizView
             }
@@ -457,6 +458,19 @@ struct QuizPlayerView: View {
             Text(label).font(.system(size: 13, weight: .bold)).foregroundStyle(color)
             GlossaryText(text: text, size: 14, color: Theme.ink)
         }
+    }
+
+    /// 問題が0件のときの見出しと説明（どの入口から来たかで変える）
+    static func emptyCopy(for title: String) -> (title: String, message: String) {
+        if title.contains("復習") {
+            return ("いま復習する問題はありません",
+                    "間違えた問題や「自信なし」にした問題が、日をおいてここに出てきます。今日は新しい問題に進みましょう。")
+        }
+        if title.contains("お気に入り") {
+            return ("お気に入りはまだありません",
+                    "問題の画面で星のボタンを押すと、あとで見返したい問題がここに集まります。")
+        }
+        return ("問題がありません", "別の分野を選んでみてください。")
     }
 
     private var bookmarkButton: some View {

@@ -189,14 +189,34 @@ struct EmptyStateView: View {
     let icon: String
     let title: String
     let message: String
+    /// 指定すると SF Symbol の代わりに3Dイラスト（Assets）を出す
+    var image: String? = nil
+    /// 次の行動（例：「戻る」）。nil ならボタンなし
+    var actionTitle: String? = nil
+    var action: (() -> Void)? = nil
     var body: some View {
         VStack(spacing: Theme.Space.m) {
-            Image(systemName: icon).font(.system(size: 40)).foregroundStyle(Theme.inkSoft.opacity(0.5))
-            Text(title).font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.ink)
+            if let image {
+                Image(image).resizable().scaledToFit()
+                    .frame(width: 150)
+                    .accessibilityHidden(true)
+                    .padding(.bottom, Theme.Space.s)
+            } else {
+                Image(systemName: icon).font(.system(size: 40)).foregroundStyle(Theme.inkSoft.opacity(0.5))
+            }
+            Text(title).font(.system(size: 17, weight: .bold)).foregroundStyle(Theme.ink)
+                .multilineTextAlignment(.center)
             Text(message).font(.system(size: 14)).foregroundStyle(Theme.inkSoft)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            if let actionTitle, let action {
+                SecondaryButton(title: actionTitle, icon: "arrow.uturn.backward", action: action)
+                    .padding(.top, Theme.Space.s)
+            }
         }
+        .frame(maxWidth: 340)
         .frame(maxWidth: .infinity)
+        .padding(.horizontal, Theme.Space.l)
         .padding(.vertical, Theme.Space.xxl)
     }
 }

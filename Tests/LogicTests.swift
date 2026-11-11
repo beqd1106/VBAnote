@@ -370,4 +370,12 @@ final class LogicTests: XCTestCase {
         XCTAssertTrue(text.contains("q9：テスト問題です"))
         XCTAssertTrue(text.contains("ITパスポート・1問"))
     }
+
+    // MARK: - 空の画面の文言
+
+    func testEmptyCopyDependsOnEntry() {
+        XCTAssertEqual(QuizPlayerView.emptyCopy(for: "復習 3問").title, "いま復習する問題はありません")
+        XCTAssertEqual(QuizPlayerView.emptyCopy(for: "お気に入り").title, "お気に入りはまだありません")
+        XCTAssertEqual(QuizPlayerView.emptyCopy(for: "分野別").title, "問題がありません")
+    }
 }
