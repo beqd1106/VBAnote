@@ -108,6 +108,7 @@ enum ListeningSettings {
         static let readChoices = "listening.readChoices"
         static let readExplanation = "listening.readExplanation"
         static let autoNext = "listening.autoNext"
+        static let chime = "listening.chime"
     }
     /// 再生の速さ（表示用の倍率）
     static let rates: [Double] = [0.8, 1.0, 1.2, 1.5]
@@ -119,6 +120,8 @@ enum ListeningSettings {
     static var readExplanation: Bool { d.object(forKey: Keys.readExplanation) as? Bool ?? true }
     /// チャプターが終わったら次へ自動で進む
     static var autoNext: Bool { d.object(forKey: Keys.autoNext) as? Bool ?? false }
+    /// 考える時間に入るときに短い合図音を鳴らす
+    static var chime: Bool { d.object(forKey: Keys.chime) as? Bool ?? true }
 
     /// AVSpeechUtterance の rate に変換（標準0.5を1.0倍とする）
     static func utteranceRate(_ r: Double) -> Float {
@@ -214,6 +217,15 @@ final class ListeningPlayer: NSObject, ObservableObject {
     private var pending: [AVSpeechUtterance] = []
     private var phaseByUtterance: [ObjectIdentifier: Phase] = [:]
     private var generation = 0
+    /// 読み終わったら合図音を鳴らす読み上げ（問題の最後の部品）
+    private var chimeAfter: ObjectIdentifier?
+    private lazy var chimePlayer: AVAudioPlayer? = {
+        guard let url = Bundle.main.url(forResource: "answer_chime", withExtension: "wav") else { return nil }
+        let p = try? AVAudioPlayer(contentsOf: url)
+        p?.volume = 0.6
+        p?.prepareToPlay()
+        return p
+    }()
 
     var current: QuizQuestion? { questions.indices.contains(index) ? questions[index] : nil }
 
@@ -280,6 +292,7 @@ final class ListeningPlayer: NSObject, ObservableObject {
         generation += 1
         pending = []
         phaseByUtterance = [:]
+        chimeAfter = nil
         if synth.isSpeaking || synth.isPaused { synth.stopSpeaking(at: .immediate) }
     }
 
@@ -303,6 +316,9 @@ final class ListeningPlayer: NSObject, ObservableObject {
         var list = [make(parts.question, .question, after: parts.choices.isEmpty ? think : 0.45)]
         for (i, c) in parts.choices.enumerated() {
             list.append(make(c, .question, after: i == parts.choices.count - 1 ? think : 0.25))
+        }
+        if ListeningSettings.chime, think >= 1, let lastQuestion = list.last {
+            chimeAfter = ObjectIdentifier(lastQuestion)
         }
         list.append(make(parts.answer, .answer, after: 0.6))
         if ListeningSettings.readExplanation, !parts.explanation.isEmpty {
@@ -329,6 +345,10 @@ final class ListeningPlayer: NSObject, ObservableObject {
 
     private func utteranceFinished(_ u: AVSpeechUtterance) {
         if phaseByUtterance[ObjectIdentifier(u)] == .question { phase = .thinking }
+        if chimeAfter == ObjectIdentifier(u) {
+            chimePlayer?.currentTime = 0
+            chimePlayer?.play()
+        }
         guard let last = pending.last, last === u else { return }
         // 1問終わり：スリープタイマーを確認して次へ
         if let sleepAt, Date() >= sleepAt {

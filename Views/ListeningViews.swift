@@ -219,6 +219,7 @@ struct ListeningPlayerView: View {
 
     @AppStorage(ListeningSettings.Keys.rate) private var rate = 1.0
     @AppStorage(ListeningSettings.Keys.recallPause) private var recallPause = 3.0
+    @AppStorage(ListeningSettings.Keys.chime) private var chime = true
     @AppStorage(ListeningSettings.Keys.readExplanation) private var readExplanation = true
     @AppStorage(ListeningSettings.Keys.autoNext) private var autoNext = false
 
@@ -486,6 +487,8 @@ struct ListeningPlayerView: View {
                         Text("5秒").tag(5.0)
                         Text("8秒").tag(8.0)
                     }
+                    Toggle("考える時間の合図音", isOn: $chime)
+                        .disabled(recallPause == 0)
                     Text("間をあけると、答えを思い出す練習になります。間違えたことのある問題は長め、正解した問題は短めに自動で調整します。").font(.footnote).foregroundStyle(.secondary)
                 }
                 Section("読み上げ") {
