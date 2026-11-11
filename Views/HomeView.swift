@@ -520,11 +520,13 @@ private struct AppWordmarkHeader: View {
             // 押せると一目で分かるよう、文字つきのカプセルにする（取っ手）
             Button { showSwitcher = true } label: {
                 HStack(spacing: 4) {
+                    if let exam = catalog.selected { ExamNoteIcon(exam: exam, size: 28) }
                     Text("資格").font(.system(size: 14, weight: .bold))
                     Image(systemName: "chevron.up.chevron.down").font(.system(size: 11, weight: .bold))
                 }
                 .foregroundStyle(Theme.navy)
-                .padding(.horizontal, 14)
+                .padding(.leading, catalog.selected == nil ? 14 : 8)
+                .padding(.trailing, 14)
                 .frame(height: 42)
                 .background(Theme.card)
                 .clipShape(Capsule())
