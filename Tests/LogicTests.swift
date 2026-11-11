@@ -249,9 +249,16 @@ final class LogicTests: XCTestCase {
         let today = cal.startOfDay(for: .now)
         let d = { (n: Int) in cal.date(byAdding: .day, value: -n, to: today)! }
         XCTAssertEqual(StudyStreak.count(days: [d(1), d(2), d(3)]), 3)       // 今日まだでも途切れない
-        XCTAssertEqual(StudyStreak.count(days: [today, d(1), d(3)]), 2)      // 1日空くとそこで止まる
-        XCTAssertEqual(StudyStreak.count(days: [d(2), d(3)]), 0)             // 昨日もしていなければ0
+        XCTAssertEqual(StudyStreak.count(days: [today, d(1), d(3)]), 3)      // 1日だけの休みは休息日（日数には数えない）
+        XCTAssertEqual(StudyStreak.walk(days: [today, d(1), d(3)]).rests, [d(2)])
+        XCTAssertEqual(StudyStreak.count(days: [today, d(3)]), 1)            // 2日続けて休むと切れる
+        XCTAssertEqual(StudyStreak.count(days: [d(2), d(3)]), 2)             // 昨日が休息日なら今日まだでも続いている
+        XCTAssertEqual(StudyStreak.count(days: [d(3), d(4)]), 0)             // 昨日も一昨日もしていなければ0
         XCTAssertEqual(StudyStreak.count(days: []), 0)
+        // 休息日は7日に1日まで：d(2)とd(5)の2回休むと、2回目で切れる
+        XCTAssertEqual(StudyStreak.count(days: [today, d(1), d(3), d(4), d(6)]), 4)
+        // 8日空ければもう一度使える
+        XCTAssertEqual(StudyStreak.count(days: Set([0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 12].map(d))), 11)
     }
 
     func testLongestStreak() {
@@ -259,6 +266,7 @@ final class LogicTests: XCTestCase {
         let today = cal.startOfDay(for: .now)
         let d = { (n: Int) in cal.date(byAdding: .day, value: -n, to: today)! }
         XCTAssertEqual(StudyStreak.longest(days: [d(10), d(9), d(8), d(7), d(2), d(1)]), 4)
+        XCTAssertEqual(StudyStreak.longest(days: [d(10), d(9), d(7), d(6)]), 4)   // 1日の休息日をはさんでも続く
         XCTAssertEqual(StudyStreak.longest(days: []), 0)
     }
 

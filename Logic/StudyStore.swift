@@ -520,28 +520,55 @@ struct DailyStudyRecord: Identifiable, Hashable {
 // MARK: - 連続学習日数
 
 enum StudyStreak {
+    /// 休息日：7日に1日までは、学習しなかった日があっても連続が切れない（毎日のプレッシャーを和らげる）。
+    /// 休息日は「前後どちらも学習した日」にはさまれた1日だけ。2日続けて休むと切れる。休息日は日数に数えない。
+    static let restSpacing = 7
+
     /// 今日を含む連続学習日数。今日まだ学習していなければ昨日から数える
     static func count(days: Set<Date>, today: Date = .now, calendar cal: Calendar = .current) -> Int {
-        guard !days.isEmpty else { return 0 }
+        walk(days: days, today: today, calendar: cal).count
+    }
+
+    /// 連続日数と、その途中で使った休息日
+    static func walk(days: Set<Date>, today: Date = .now, calendar cal: Calendar = .current) -> (count: Int, rests: [Date]) {
+        let set = Set(days.map { cal.startOfDay(for: $0) })
+        guard !set.isEmpty else { return (0, []) }
         var cursor = cal.startOfDay(for: today)
-        if !days.contains(cursor) {
+        if !set.contains(cursor) { cursor = cal.date(byAdding: .day, value: -1, to: cursor)! }
+        var count = 0
+        var rests: [Date] = []
+        while true {
+            if set.contains(cursor) {
+                count += 1
+            } else {
+                let before = cal.date(byAdding: .day, value: -1, to: cursor)!
+                let spaced = rests.last.map { (cal.dateComponents([.day], from: cursor, to: $0).day ?? 0) >= restSpacing } ?? true
+                guard set.contains(before), spaced else { break }
+                rests.append(cursor)
+            }
             cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
         }
-        var streak = 0
-        while days.contains(cursor) {
-            streak += 1
-            cursor = cal.date(byAdding: .day, value: -1, to: cursor)!
-        }
-        return streak
+        return (count, rests)
     }
 
     /// これまでで一番長く続いた日数
     static func longest(days: Set<Date>, calendar cal: Calendar = .current) -> Int {
-        let sorted = days.map { cal.startOfDay(for: $0) }.sorted()
+        let sorted = Set(days.map { cal.startOfDay(for: $0) }).sorted()
         var best = 0, run = 0
         var prev: Date?
+        var lastRest: Date?
         for d in sorted {
-            if let p = prev, cal.date(byAdding: .day, value: 1, to: p) == d { run += 1 } else { run = 1 }
+            if let p = prev {
+                let gap = cal.dateComponents([.day], from: p, to: d).day ?? 0
+                if gap == 1 {
+                    run += 1
+                } else if gap == 2, lastRest.map({ (cal.dateComponents([.day], from: $0, to: d).day ?? 0) > restSpacing }) ?? true {
+                    run += 1                                   // 1日だけの休息日
+                    lastRest = cal.date(byAdding: .day, value: -1, to: d)
+                } else {
+                    run = 1; lastRest = nil
+                }
+            } else { run = 1 }
             best = max(best, run); prev = d
         }
         return best

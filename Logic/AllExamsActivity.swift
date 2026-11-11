@@ -13,6 +13,8 @@ struct AllExamsActivity {
     let studyDays: Set<Date>
 
     var streak: Int { StudyStreak.count(days: studyDays) }
+    /// 連続の途中で使った休息日（ホームの7日表示で「休」を出す）
+    var restDays: Set<Date> { Set(StudyStreak.walk(days: studyDays).rests) }
     var longestStreak: Int { StudyStreak.longest(days: studyDays) }
 
     /// その日に学習した資格と記録（問題数の多い順）

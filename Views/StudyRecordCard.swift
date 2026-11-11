@@ -17,7 +17,7 @@ struct StudyRecordCard: View {
             header
             HStack(alignment: .center, spacing: Theme.Space.l) {
                 streakBlock(streak: streak, studiedToday: today.hasActivity)
-                weekStrip(week)
+                weekStrip(week, rests: activity.restDays)
             }
             goalBar(today: today)
         }
@@ -69,7 +69,7 @@ struct StudyRecordCard: View {
         .frame(width: 76)
     }
 
-    private func weekStrip(_ week: [DailyStudyRecord]) -> some View {
+    private func weekStrip(_ week: [DailyStudyRecord], rests: Set<Date>) -> some View {
         HStack(spacing: 6) {
             ForEach(week) { r in
                 let isToday = cal.isDateInToday(r.day)
@@ -84,6 +84,11 @@ struct StudyRecordCard: View {
                             if r.hasActivity {
                                 Image(systemName: "checkmark").font(.system(size: 11, weight: .heavy))
                                     .foregroundStyle(r.level >= 3 ? .white : Theme.orange)
+                            } else if rests.contains(cal.startOfDay(for: r.day)) {
+                                // 休息日：連続は切れていないことを示す
+                                Image(systemName: "moon.zzz.fill").font(.system(size: 11, weight: .bold))
+                                    .foregroundStyle(Theme.blue)
+                                    .accessibilityLabel("休息日")
                             }
                         }
                         .overlay(
@@ -112,7 +117,9 @@ struct StudyRecordCard: View {
                 }
             }
             ProgressBar(value: Double(done) / Double(goal), color: reached ? Theme.green : Theme.orange, height: 8)
-            Text("学習時間は解いた間隔からの目安です").font(.system(size: 11)).foregroundStyle(Theme.inkSoft)
+            Text("週に1日までは、休んでも連続が切れません（休息日）。学習時間は解いた間隔からの目安です")
+                .font(.system(size: 11)).foregroundStyle(Theme.inkSoft)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
