@@ -504,6 +504,7 @@ enum HomeRoute: Hashable {
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）
 private struct AppWordmarkHeader: View {
     @EnvironmentObject var catalog: ExamCatalog
+    @State private var showSwitcher = false
     var body: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 3) {
@@ -516,16 +517,23 @@ private struct AppWordmarkHeader: View {
                     .frame(width: CGFloat(24 + ExamInfo.brandPrefix.count * 18), height: 3)
             }
             Spacer()
-            Button { catalog.showPicker() } label: {
-                Image(systemName: "arrow.left.arrow.right")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundStyle(Theme.navy)
-                    .frame(width: 42, height: 42)
-                    .background(Theme.card)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Theme.line, lineWidth: 1))
+            // 押せると一目で分かるよう、文字つきのカプセルにする（取っ手）
+            Button { showSwitcher = true } label: {
+                HStack(spacing: 4) {
+                    Text("資格").font(.system(size: 14, weight: .bold))
+                    Image(systemName: "chevron.up.chevron.down").font(.system(size: 11, weight: .bold))
+                }
+                .foregroundStyle(Theme.navy)
+                .padding(.horizontal, 14)
+                .frame(height: 42)
+                .background(Theme.card)
+                .clipShape(Capsule())
+                .overlay(Capsule().stroke(Theme.line, lineWidth: 1))
+                .shadow(color: Theme.cardShadow(), radius: 4, y: 2)
             }
+            .buttonStyle(.pressable)
             .accessibilityLabel("資格を切り替える")
+            .sheet(isPresented: $showSwitcher) { ExamSwitcherSheet().environmentObject(catalog) }
             NavigationLink(value: HomeRoute.termSearch) {
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 18, weight: .semibold))
