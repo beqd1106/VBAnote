@@ -45,12 +45,7 @@ struct ExamSwitcherSheet: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { catalog.select(exam) }
         } label: {
             HStack(spacing: Theme.Space.m) {
-                Image(systemName: exam.icon)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(Theme.navy)
-                    .frame(width: 38, height: 38)
-                    .background(Theme.orangeSoft)
-                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.chip))
+                ExamNoteIcon(exam: exam, size: 44)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(exam.examShortName).font(.system(size: 16, weight: .semibold)).foregroundStyle(Theme.ink)
                     Text("問題\(exam.questionCount)問・レッスン\(exam.lessonCount)").captionStyle()
@@ -68,5 +63,30 @@ struct ExamSwitcherSheet: View {
         }
         .buttonStyle(.plain)
         .listRowBackground(Theme.card)
+    }
+}
+
+/// 資格ごとの色違いノート（3D）。画像が無いときは SF Symbol のタイルにする。
+struct ExamNoteIcon: View {
+    let exam: ExamSpec
+    var size: CGFloat = 44
+
+    static func assetName(_ key: String) -> String { "ExamNote_\(key)" }
+
+    var body: some View {
+        if UIImage(named: Self.assetName(exam.key)) != nil {
+            Image(Self.assetName(exam.key))
+                .resizable().scaledToFit()
+                .frame(width: size, height: size)
+                .accessibilityHidden(true)
+        } else {
+            Image(systemName: exam.icon)
+                .font(.system(size: size * 0.42, weight: .semibold))
+                .foregroundStyle(Theme.navy)
+                .frame(width: size, height: size)
+                .background(Theme.orangeSoft)
+                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.chip))
+                .accessibilityHidden(true)
+        }
     }
 }

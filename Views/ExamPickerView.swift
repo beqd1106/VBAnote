@@ -62,12 +62,7 @@ struct ExamPickerView: View {
         let isCurrent = catalog.selected?.key == exam.key
         return Card {
             HStack(alignment: .top, spacing: Theme.Space.m) {
-                Image(systemName: exam.icon)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundStyle(Theme.navy)
-                    .frame(width: 44, height: 44)
-                    .background(Theme.orangeSoft)
-                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.chip))
+                ExamNoteIcon(exam: exam, size: 52)
                 VStack(alignment: .leading, spacing: Theme.Space.xs) {
                     HStack(spacing: Theme.Space.s) {
                         Text(exam.examShortName)
