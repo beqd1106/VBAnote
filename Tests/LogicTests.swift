@@ -317,6 +317,19 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(ListeningScript.parts(for: q, readChoices: false, number: 2).question, "第2問。PDCAのCは何ですか。")
     }
 
+    func testListenableExcludesVisualAndMultilineCode() {
+        func make(_ text: String) -> QuizQuestion {
+            QuizQuestion(id: "l", question: text, choices: ["a", "b"], correctAnswers: [0], explanation: "x",
+                         source: nil, wrongChoiceExplanations: [:], domain: ExamDomain.allCases[0],
+                         service: "", difficulty: 1, tags: [], beginnerNote: nil)
+        }
+        XCTAssertTrue(ListeningCatalog.isListenable(make("PDCAのCは何ですか。")))
+        XCTAssertTrue(ListeningCatalog.isListenable(make("次のコードの結果はどれか。\nMsgBox 1 + 2")))   // 2行までは聞ける
+        XCTAssertFalse(ListeningCatalog.isListenable(make("次のコードの結果はどれか。\nFor i = 1 To 3\nNext i")))
+        XCTAssertFalse(ListeningCatalog.isListenable(make("次の図の構成で正しいものはどれか。")))
+        XCTAssertFalse(ListeningCatalog.isListenable(make(String(repeating: "あ", count: 221))))
+    }
+
     func testListeningProgressRoundTrip() {
         let defaults = UserDefaults(suiteName: "ListeningTest-\(UUID().uuidString)")!
         var p = ListeningProgress()

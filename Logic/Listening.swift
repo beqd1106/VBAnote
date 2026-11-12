@@ -74,11 +74,14 @@ enum ListeningCatalog {
                                 subtitle: "\(qs.count)問", questionIds: qs.map(\.id))
     }
 
-    /// 耳だけで意味が通る問題か（図・表が前提の問題や、極端に長い問題は外す）
+    /// 耳だけで意味が通る問題か（図・表が前提の問題、3行以上のコードや疑似言語、極端に長い問題は外す）
+    /// 聞き流し音声の原稿（資格note音声試作/gemini_listen/build_scripts.py の listenable）と同じ規則。変えるときは両方そろえる。
     static func isListenable(_ q: QuizQuestion) -> Bool {
         let text = q.question
         let visual = ["図", "表", "下記", "次の画面", "グラフ"].contains { text.contains($0 + "の") || text.contains($0 + "に") || text.contains($0 + "を") }
-        return !visual && text.count <= 220
+        let lines = text.split(separator: "\n", omittingEmptySubsequences: true)
+            .filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        return !visual && lines.count < 3 && text.count <= 220
     }
 }
 
