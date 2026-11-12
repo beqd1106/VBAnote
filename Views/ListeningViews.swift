@@ -224,6 +224,7 @@ struct ListeningPlayerView: View {
     @AppStorage(ListeningSettings.Keys.chime) private var chime = true
     @AppStorage(ListeningSettings.Keys.readExplanation) private var readExplanation = true
     @AppStorage(ListeningSettings.Keys.autoNext) private var autoNext = false
+    @AppStorage(VoiceClips.settingKey) private var naturalVoice = true
 
     private let repo = ContentRepository.shared
     private var examKey: String { ExamContext.current.key }
@@ -493,12 +494,17 @@ struct ListeningPlayerView: View {
                         .disabled(recallPause == 0)
                     Text("間をあけると、答えを思い出す練習になります。間違えたことのある問題は長め、正解した問題は短めに自動で調整します。").font(.footnote).foregroundStyle(.secondary)
                 }
-                Section("読み上げ") {
+                Section {
+                    Toggle("自然な声で聞く", isOn: $naturalVoice)
                     Picker("速さ", selection: $rate) {
                         ForEach(ListeningSettings.rates, id: \.self) { Text(String(format: "%.1f倍", $0)).tag($0) }
                     }
-                    Toggle("解説も読む", isOn: $readExplanation)
+                    Toggle("解説も読む（端末の読み上げのとき）", isOn: $readExplanation)
                     Toggle("チャプターが終わったら次へ進む", isOn: $autoNext)
+                } header: {
+                    Text("読み上げ")
+                } footer: {
+                    Text("自然な声は、問題ごとに用意した音声を通信して流します（解説も含みます）。通信できないときや音声がない問題は、端末の読み上げで流れます。")
                 }
                 Section("スリープタイマー") {
                     Button("このチャプターの終わりで止める") { player.stopAtChapterEnd = true; showSettings = false }

@@ -241,10 +241,36 @@ final class ListeningPlayer: NSObject, ObservableObject {
 
     var current: QuizQuestion? { questions.indices.contains(index) ? questions[index] : nil }
 
+    // 自然な声（作っておいた mp3）で流すときのキュー。問題 → 無音（考える間）→ 答え → 無音（次への間）を並べる
+    private let voicePlayer = AVQueuePlayer()
+    private var voicePhase: [ObjectIdentifier: Phase] = [:]
+    private var voiceLastItem: AVPlayerItem?
+    private var voiceChimeItem: ObjectIdentifier?
+    private var itemObserver: NSKeyValueObservation?
+    private var statusObservers: [NSKeyValueObservation] = []
+    /// この問題は自然な声が流せなかったので、端末の読み上げで流す
+    private var forceSpeechFor: String?
+    private var usingVoice = false
+    private lazy var silenceURL = Bundle.main.url(forResource: "silence_12s", withExtension: "m4a")
+
     private override init() {
         super.init()
         synth.delegate = self
         setupRemoteCommands()
+        voicePlayer.actionAtItemEnd = .advance
+        itemObserver = voicePlayer.observe(\.currentItem, options: [.new]) { [weak self] p, _ in
+            let item = p.currentItem
+            Task { @MainActor in self?.voiceItemChanged(item) }
+        }
+        NotificationCenter.default.addObserver(forName: AVPlayerItem.didPlayToEndTimeNotification, object: nil, queue: .main) { [weak self] n in
+            let item = n.object as? AVPlayerItem
+            Task { @MainActor in self?.voiceItemEnded(item) }
+        }
+        NotificationCenter.default.addObserver(forName: AVPlayerItem.failedToPlayToEndTimeNotification, object: nil, queue: .main) { [weak self] n in
+            let item = n.object as? AVPlayerItem
+            Task { @MainActor in self?.voiceItemFailed(item) }
+        }
+        Task { await VoiceClips.refresh() }
     }
 
     // MARK: 操作
@@ -262,7 +288,9 @@ final class ListeningPlayer: NSObject, ObservableObject {
         guard current != nil else { return }
         activateSession()
         if phase == .chapterDone { index = 0; phase = .question }
-        if synth.isPaused {
+        if usingVoice, voicePlayer.currentItem != nil {
+            voicePlayer.playImmediately(atRate: voiceRate)
+        } else if synth.isPaused {
             synth.continueSpeaking()
         } else {
             speakCurrent()
@@ -272,6 +300,7 @@ final class ListeningPlayer: NSObject, ObservableObject {
     }
 
     func pause() {
+        if usingVoice { voicePlayer.pause() }
         if synth.isSpeaking { synth.pauseSpeaking(at: .word) }
         isPlaying = false
         updateNowPlaying()
@@ -306,11 +335,27 @@ final class ListeningPlayer: NSObject, ObservableObject {
         phaseByUtterance = [:]
         chimeAfter = nil
         if synth.isSpeaking || synth.isPaused { synth.stopSpeaking(at: .immediate) }
+        usingVoice = false
+        voicePhase = [:]
+        voiceLastItem = nil
+        voiceChimeItem = nil
+        statusObservers = []
+        voicePlayer.pause()
+        voicePlayer.removeAllItems()
     }
+
+    /// 再生の速さ（AVPlayer の rate。声の高さは変えない）
+    private var voiceRate: Float { Float(ListeningSettings.rate) }
 
     private func speakCurrent() {
         guard let q = current else { return }
         stopSpeaking()
+        let exam = ExamContext.current.key
+        if forceSpeechFor != q.id, VoiceClips.has(exam: exam, id: q.id), let silenceURL {
+            playVoice(q, exam: exam, silence: silenceURL)
+            return
+        }
+        forceSpeechFor = nil
         let parts = ListeningScript.parts(for: q, readChoices: ListeningSettings.readChoices, number: index + 1)
         let rate = ListeningSettings.utteranceRate(ListeningSettings.rate)
         let voice = Self.bestJapaneseVoice
@@ -341,6 +386,61 @@ final class ListeningPlayer: NSObject, ObservableObject {
         list.forEach { synth.speak($0) }
     }
 
+    // MARK: 自然な声
+
+    private func playVoice(_ q: QuizQuestion, exam: String, silence: URL) {
+        func silenceItem(_ seconds: Double) -> AVPlayerItem {
+            let item = AVPlayerItem(url: silence)
+            item.forwardPlaybackEndTime = CMTime(seconds: min(11.5, max(0.3, seconds)), preferredTimescale: 600)
+            return item
+        }
+        func clip(_ part: VoiceClips.Part) -> AVPlayerItem {
+            let item = AVPlayerItem(url: VoiceClips.url(exam: exam, id: q.id, part: part))
+            item.audioTimePitchAlgorithm = .timeDomain   // 速さを変えても声の高さは変えない
+            // 読み込めなかったら（404・通信なし）その問題は読み上げで流す
+            statusObservers.append(item.observe(\.status, options: [.new]) { [weak self] it, _ in
+                guard it.status == .failed else { return }
+                Task { @MainActor in self?.voiceItemFailed(it) }
+            })
+            return item
+        }
+        let think = max(0.6, ListeningScript.thinkPause(base: ListeningSettings.recallPause,
+                                                         mastery: masteryProvider?(q) ?? .new))
+        let qItem = clip(.question), thinkItem = silenceItem(think), aItem = clip(.answer), gapItem = silenceItem(1.1)
+        voicePhase = [ObjectIdentifier(qItem): .question, ObjectIdentifier(thinkItem): .thinking,
+                      ObjectIdentifier(aItem): .answer, ObjectIdentifier(gapItem): .explanation]
+        if ListeningSettings.chime, think >= 1 { voiceChimeItem = ObjectIdentifier(thinkItem) }
+        voiceLastItem = gapItem
+        usingVoice = true
+        phase = .question
+        [qItem, thinkItem, aItem, gapItem].forEach { voicePlayer.insert($0, after: nil) }
+        voicePlayer.playImmediately(atRate: voiceRate)
+    }
+
+    private func voiceItemChanged(_ item: AVPlayerItem?) {
+        guard usingVoice, let item, let p = voicePhase[ObjectIdentifier(item)] else { return }
+        if p == .thinking, voiceChimeItem == ObjectIdentifier(item) {
+            chimePlayer?.currentTime = 0
+            chimePlayer?.play()
+        }
+        // 答え以降は「解説」も含む1本なので、答えのあいだは answer のまま
+        phase = p == .explanation ? .answer : p
+        if p == .answer, let q = current { onQuestionHeard?(q) }
+        updateNowPlaying()
+    }
+
+    private func voiceItemEnded(_ item: AVPlayerItem?) {
+        guard usingVoice, let item, item === voiceLastItem else { return }
+        questionFinished()
+    }
+
+    /// 音声が取れない（通信が切れた・まだ無い）ときは、その問題を端末の読み上げで流し直す
+    private func voiceItemFailed(_ item: AVPlayerItem?) {
+        guard usingVoice, let item, voicePhase[ObjectIdentifier(item)] != nil, let q = current else { return }
+        forceSpeechFor = q.id
+        speakCurrent()
+    }
+
     /// 端末にある日本語の声のうち、品質の高いものを優先
     static var bestJapaneseVoice: AVSpeechSynthesisVoice? {
         let ja = AVSpeechSynthesisVoice.speechVoices().filter { $0.language == "ja-JP" }
@@ -362,7 +462,11 @@ final class ListeningPlayer: NSObject, ObservableObject {
             chimePlayer?.play()
         }
         guard let last = pending.last, last === u else { return }
-        // 1問終わり：スリープタイマーを確認して次へ
+        questionFinished()
+    }
+
+    /// 1問終わり：スリープタイマーを確認して次へ
+    private func questionFinished() {
         if let sleepAt, Date() >= sleepAt {
             self.sleepAt = nil
             pause(); return

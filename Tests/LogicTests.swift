@@ -331,6 +331,17 @@ final class LogicTests: XCTestCase {
         XCTAssertFalse(ListeningCatalog.isListenable(make(String(repeating: "あ", count: 221))))
     }
 
+    func testVoiceClipsURLAndIndexDecoding() {
+        XCTAssertEqual(VoiceClips.url(exam: "fe", id: "b-th1-01", part: .question).absoluteString,
+                       "https://shikakunote-audio.beqd1106.workers.dev/fe/b-th1-01_q.mp3")
+        XCTAssertEqual(VoiceClips.url(exam: "aws", id: "q-cc-001", part: .answer).lastPathComponent, "q-cc-001_a.mp3")
+        let idx = VoiceClips.decode(Data(#"{"fe":["a","b"],"aws":[]}"#.utf8))
+        XCTAssertEqual(idx?["fe"], ["a", "b"])
+        XCTAssertEqual(idx?["aws"], [])
+        XCTAssertNil(VoiceClips.decode(Data("not json".utf8)))      // 形が違えば使わない
+        XCTAssertNotNil(Bundle.main.url(forResource: "silence_12s", withExtension: "m4a"))  // 考える間に使う無音
+    }
+
     func testListeningProgressRoundTrip() {
         let defaults = UserDefaults(suiteName: "ListeningTest-\(UUID().uuidString)")!
         var p = ListeningProgress()
