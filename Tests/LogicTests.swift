@@ -317,6 +317,7 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(ListeningScript.parts(for: q, readChoices: false, number: 2).question, "第2問。PDCAのCは何ですか。")
     }
 
+    @MainActor
     func testListenableExcludesVisualAndMultilineCode() {
         func make(_ text: String) -> QuizQuestion {
             QuizQuestion(id: "l", question: text, choices: ["a", "b"], correctAnswers: [0], explanation: "x",
