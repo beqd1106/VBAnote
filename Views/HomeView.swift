@@ -16,6 +16,7 @@ struct HomeView: View {
                         AppWordmarkHeader()
                         nextActionCard
                         examPrepBanner
+                        TrainingEntryCard()
                         quickActions
                         listeningEntry
                         studyRecordCard
