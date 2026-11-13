@@ -53,8 +53,26 @@ struct HomeView: View {
                 NextActionCard(action: action)
             }
             .buttonStyle(.pressable)
-            // 忙しい日の最低ライン：今日まだ何もしていなければ「1問だけ」を添える
-            if todayAnsweredHere == 0 && action.kind != .resume {
+            if action.kind == .lesson {
+                lessonProgressBar
+            }
+            // レッスンが主役のときも、復習期限の問題があれば小さく添える
+            if action.kind == .lesson && store.dueReviewCount > 0 {
+                let n = min(store.dueReviewCount, 5)
+                NavigationLink(value: HomeRoute.reviewQuick(n)) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "arrow.clockwise").font(.system(size: 12, weight: .bold))
+                        Text("復習が\(store.dueReviewCount)問あります（先に\(n)問だけ解く）").font(.system(size: 14, weight: .semibold))
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .bold))
+                    }
+                    .foregroundStyle(Theme.navy)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(RoundedRectangle(cornerRadius: Theme.Radius.button, style: .continuous)
+                        .stroke(Theme.navy.opacity(0.25), lineWidth: 1.5))
+                }
+                .buttonStyle(.pressable)
+            } else if todayAnsweredHere == 0 && action.kind != .resume {
+                // 忙しい日の最低ライン：今日まだ何もしていなければ「1問だけ」を添える
                 NavigationLink(value: HomeRoute.oneQuestion) {
                     HStack(spacing: 6) {
                         Image(systemName: "bolt.fill").font(.system(size: 12))
@@ -69,6 +87,17 @@ struct HomeView: View {
                 .buttonStyle(.pressable)
             }
         }
+    }
+
+    /// レッスンの進み具合（何本中何本読んだか）
+    private var lessonProgressBar: some View {
+        let done = store.completedLessonCount, total = max(1, repo.lessons.count)
+        return HStack(spacing: Theme.Space.m) {
+            ProgressView(value: Double(done), total: Double(total)).tint(Theme.green)
+            Text("レッスン \(done)/\(repo.lessons.count)本").captionStyle().monospacedDigit()
+        }
+        .padding(.horizontal, Theme.Space.xs)
+        .accessibilityElement(children: .combine)
     }
 
     // MARK: - 聞き流しの入口
@@ -221,7 +250,7 @@ struct HomeView: View {
     private var quickActions: some View {
         HStack(spacing: Theme.Space.m) {
             quickTile("用語カード", "rectangle.on.rectangle.angled", .termSearch)
-            quickTile("問題演習", "checklist", .quizMixed)
+            quickTile("レッスン", "text.book.closed.fill", .lessonsAll)
             quickTile("復習", "arrow.clockwise", .review, badge: store.dueReviewCount)
             quickTile("お気に入り", "star.fill", .bookmarks)
         }
@@ -312,7 +341,7 @@ struct HomeView: View {
                                 Text("\(rec.domain.title)を集中的に固めよう")
                                     .font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.ink)
                                     .lineLimit(2).fixedSize(horizontal: false, vertical: true)
-                                Text("「\(rec.lesson.title)」のランダム問題で基礎から").captionStyle()
+                                Text("「\(rec.lesson.title)」のレッスンで基礎から").captionStyle()
                             }
                             Spacer(minLength: 0)
                             Image(systemName: "chevron.right").foregroundStyle(Theme.inkSoft).font(.system(size: 13))
@@ -333,13 +362,19 @@ struct HomeView: View {
                                 GridItem(.flexible(), spacing: Theme.Space.m)],
                       spacing: Theme.Space.m) {
                 ForEach(ExamDomain.allCases) { domain in
-                    NavigationLink(value: HomeRoute.quiz(domain)) {
+                    NavigationLink(value: domainRoute(domain)) {
                         categoryCard(domain)
                     }
                     .buttonStyle(.pressable)
                 }
             }
         }
+    }
+
+    /// 分野カードの行き先：その分野でまだ読んでいないレッスンがあればそれ、なければ分野の演習
+    private func domainRoute(_ domain: ExamDomain) -> HomeRoute {
+        if let l = store.nextUnfinishedLesson(in: domain) { return .lesson(l.id) }
+        return .quiz(domain)
     }
 
     private func categoryCard(_ domain: ExamDomain) -> some View {
@@ -363,7 +398,10 @@ struct HomeView: View {
                 }
                 Text(domain.title).font(.system(size: 14, weight: .bold)).foregroundStyle(Theme.navy)
                     .lineLimit(2).fixedSize(horizontal: false, vertical: true)
-                Text("\(count)問").font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
+                let lessonTotal = repo.lessons(in: domain).count
+                Text(lessonTotal > 0 ? "レッスン\(store.completedLessonCount(in: domain))/\(lessonTotal)・\(count)問" : "\(count)問")
+                    .font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
+                    .lineLimit(1).minimumScaleFactor(0.85)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -416,6 +454,8 @@ struct HomeView: View {
         case .quiz(let domain):
             QuizPlayerView(title: domain.shortTitle + "の問題",
                            questions: Array(repo.questions(in: domain).shuffled().prefix(10)))
+        case .lessonsAll:
+            LessonListView()
         case .quizMixed:
             QuizPlayerView(title: "今日の問題",
                            questions: Array(repo.questions.shuffled().prefix(10)))
@@ -485,6 +525,8 @@ enum HomeRoute: Hashable {
     case terms(ExamDomain)
     case quiz(ExamDomain)
     case quizMixed
+    /// レッスン一覧
+    case lessonsAll
     case review
     case bookmarks
     case roadmap

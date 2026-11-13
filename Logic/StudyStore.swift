@@ -202,6 +202,12 @@ final class StudyStore: ObservableObject {
         return repo.lessons.first { !ids.contains($0.id) }
     }
 
+    /// その分野でカリキュラム順に最初の未履修レッスン。全て履修済みなら nil。
+    func nextUnfinishedLesson(in domain: ExamDomain) -> Lesson? {
+        let ids = Set(((try? context.fetch(FetchDescriptor<LessonProgress>())) ?? []).map(\.lessonId))
+        return repo.lessons(in: domain).first { !ids.contains($0.id) }
+    }
+
     // MARK: - カスタム演習用の集合
 
     /// これまでに一度でも間違えた問題のID集合

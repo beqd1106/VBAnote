@@ -154,6 +154,12 @@ struct LessonDetailView: View {
     private let drillSessionSize = 10
 
     private var isDone: Bool { store.isLessonCompleted(lesson.id) }
+    /// カリキュラム順で次のレッスン
+    private var nextLesson: Lesson? {
+        let all = ContentRepository.shared.lessons
+        guard let i = all.firstIndex(where: { $0.id == lesson.id }), i + 1 < all.count else { return nil }
+        return all[i + 1]
+    }
     private var basicIds: [String] { lesson.basicQuizIds ?? [] }
     private var challengeIds: [String] { lesson.challengeQuizIds ?? [] }
     private var drillIds: [String] { lesson.drillQuizIds ?? [] }
@@ -204,6 +210,28 @@ struct LessonDetailView: View {
 
                     // 履修済みマークの手動トグル
                     completionButton
+
+                    // 次のレッスンへ（カリキュラム順）。どの画面から開いても動くよう宛先を直接渡す
+                    if let next = nextLesson {
+                        NavigationLink {
+                            LessonDetailView(lesson: next)
+                        } label: {
+                            HStack(spacing: Theme.Space.s) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text("次のレッスン").font(.system(size: 12, weight: .bold)).foregroundStyle(Theme.blue)
+                                    Text(next.title).font(.system(size: 15, weight: .semibold)).foregroundStyle(Theme.navy)
+                                        .lineLimit(2).fixedSize(horizontal: false, vertical: true)
+                                }
+                                Spacer(minLength: 0)
+                                Image(systemName: "arrow.right").font(.system(size: 14, weight: .bold)).foregroundStyle(Theme.blue)
+                            }
+                            .padding(Theme.Space.l)
+                            .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
+                            .background(RoundedRectangle(cornerRadius: Theme.Radius.button, style: .continuous)
+                                .stroke(Theme.blue.opacity(0.5), lineWidth: 1.5))
+                        }
+                        .buttonStyle(.pressable)
+                    }
                 }
                 .padding(Theme.Space.l)
             }

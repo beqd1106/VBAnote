@@ -1,7 +1,8 @@
 import SwiftUI
 
 /// ホーム最上部の「次の一手」。開いて1秒で学習に入れるよう、いまやるべきことを1つだけ出す。
-/// 優先順：復習期限の問題 → 続きのレッスン → 今日の10問。
+/// レッスン中心：途中の問題 → 次のレッスン → 復習期限の問題 → 今日の10問。
+/// 復習はレッスンの下に小さく添える（HomeView）。
 struct NextAction: Equatable {
     enum Kind { case resume, review, lesson, mixed }
     let kind: Kind
@@ -19,6 +20,13 @@ struct NextAction: Equatable {
                               detail: "残り\(session.remaining)問・\(session.questionIds.count)問中",
                               buttonTitle: "続きから解く", route: .resumeSession)
         }
+        if let lesson = store.nextUnfinishedLesson() {
+            let total = ContentRepository.shared.lessons.count
+            return NextAction(kind: .lesson, eyebrow: "次のレッスン（\(store.completedLessonCount + 1)/\(total)本目）",
+                              title: lesson.title,
+                              detail: "\(lesson.domain.shortTitle)・約\(lesson.estimatedMinutes)分 → 確認問題",
+                              buttonTitle: "レッスンを読む", route: .lesson(lesson.id))
+        }
         let due = store.dueReviewCount
         if due > 0 {
             let n = min(due, 5)
@@ -26,12 +34,6 @@ struct NextAction: Equatable {
                               title: "間違えた問題を \(n)問 解き直す",
                               detail: due > n ? "復習待ち \(due)問のうち\(n)問・約\(minutes(n))分" : "約\(minutes(n))分",
                               buttonTitle: "復習をはじめる", route: .reviewQuick(n))
-        }
-        if let lesson = store.nextUnfinishedLesson() {
-            return NextAction(kind: .lesson, eyebrow: "続きから",
-                              title: lesson.title,
-                              detail: "\(lesson.domain.shortTitle)・約\(lesson.estimatedMinutes)分",
-                              buttonTitle: "レッスンを開く", route: .lesson(lesson.id))
         }
         return NextAction(kind: .mixed, eyebrow: "今日の演習",
                           title: "全分野から10問",
