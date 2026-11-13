@@ -1,0 +1,212 @@
+[
+ {
+  "id": "s-workflow",
+  "name": "Workflow",
+  "category": "アプリタイプ",
+  "oneLiner": "入力を受けて最初から最後まで1回流れ、結果を返すアプリ。トリガーで自動実行もできる。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-chatflow",
+  "name": "Chatflow",
+  "category": "アプリタイプ",
+  "oneLiner": "チャットのメッセージごとにフローが動くアプリ。会話変数とメモリで会話を持ち越せる。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-dsl",
+  "name": "DSL / アプリパッケージ",
+  "category": "アプリタイプ",
+  "oneLiner": "アプリの構成をYAMLで表した設計図。1.18.0以降のエクスポートは付属ファイル込みの .ifpkg。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-env",
+  "name": "環境変数",
+  "category": "変数",
+  "oneLiner": "アプリ全体で共有する値。APIキーなどの秘密はSecret型にする。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-convvar",
+  "name": "会話変数",
+  "category": "変数",
+  "oneLiner": "Chatflowだけにある、同じ会話の中でターンをまたいで残る変数。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-userinput",
+  "name": "ユーザー入力",
+  "category": "開始",
+  "oneLiner": "利用者やAPIから入力を受け取る入口。1キャンバスに1つ。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-trigger",
+  "name": "トリガー",
+  "category": "開始",
+  "oneLiner": "スケジュール・Webhook・インテグレーションでWorkflowを自動実行する入口。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-output",
+  "name": "出力",
+  "category": "終了",
+  "oneLiner": "Workflowの結果を呼び出し元に返す。変数名がAPIの outputs のキーになる。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-answer",
+  "name": "回答",
+  "category": "終了",
+  "oneLiner": "Chatflowでユーザーに返事を出す。複数置いて途中経過も返せる。",
+  "domain": "basics"
+ },
+ {
+  "id": "s-llm",
+  "name": "LLM",
+  "category": "ノード",
+  "oneLiner": "言語モデルを呼び出す。コンテキスト・メモリ・構造化出力・ビジョンに対応。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-classifier",
+  "name": "質問分類器",
+  "category": "ノード",
+  "oneLiner": "LLMが意味で判断して、決めたクラスごとに道を分ける。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-ifelse",
+  "name": "If-Else",
+  "category": "ノード",
+  "oneLiner": "条件式（含む・等しい・空など）でIF/ELIF/ELSEに道を分ける。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-aggregator",
+  "name": "変数集約器",
+  "category": "ノード",
+  "oneLiner": "排他的に分かれた道の結果を1つの変数にまとめる。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-assigner",
+  "name": "変数アサイナー",
+  "category": "ノード",
+  "oneLiner": "会話変数に書き込む（上書き・追加・拡張・算術など）。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-iteration",
+  "name": "反復処理",
+  "category": "ノード",
+  "oneLiner": "配列の1件ずつに同じ処理をかける。並列は最大10件。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-loop",
+  "name": "ループ",
+  "category": "ノード",
+  "oneLiner": "前の結果を使って繰り返し改良する。終了条件か最大回数で終わる。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-code",
+  "name": "コード",
+  "category": "ノード",
+  "oneLiner": "PythonかJavaScriptをサンドボックスで実行し、出力変数の辞書を返す。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-template",
+  "name": "テンプレート",
+  "category": "ノード",
+  "oneLiner": "Jinja2で文章を組み立てる。Chatflowではフォームやボタンも作れる。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-docextract",
+  "name": "テキスト抽出",
+  "category": "ノード",
+  "oneLiner": "PDF・Word・Excelなどのファイルから文字を取り出す。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-paramext",
+  "name": "パラメータ抽出器",
+  "category": "ノード",
+  "oneLiner": "文章から決めた項目（日付・人数など）をLLMで取り出す。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-listop",
+  "name": "リスト演算子",
+  "category": "ノード",
+  "oneLiner": "配列を絞り込み・並べ替え・取り出しする。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-http",
+  "name": "HTTPリクエスト",
+  "category": "ノード",
+  "oneLiner": "外部APIを呼ぶ。GET/POST/PUT/PATCH/DELETE、認証、リトライに対応。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-errorhandling",
+  "name": "エラー処理",
+  "category": "ノード",
+  "oneLiner": "失敗時に「なし」「デフォルト値」「失敗分岐」から動きを選ぶ。",
+  "domain": "nodes"
+ },
+ {
+  "id": "s-knowledge",
+  "name": "ナレッジベース",
+  "category": "ナレッジ",
+  "oneLiner": "文書をチャンクに分けてインデックスし、検索できるようにする。",
+  "domain": "knowledge"
+ },
+ {
+  "id": "s-retrieval",
+  "name": "知識検索",
+  "category": "ナレッジ",
+  "oneLiner": "ナレッジベースから関連チャンクを探し、result として出す。",
+  "domain": "knowledge"
+ },
+ {
+  "id": "s-metadata",
+  "name": "メタデータ",
+  "category": "ナレッジ",
+  "oneLiner": "文書に付ける名札。検索範囲の絞り込みに使う。",
+  "domain": "knowledge"
+ },
+ {
+  "id": "s-publish",
+  "name": "公開",
+  "category": "公開",
+  "oneLiner": "下書きを最新バージョンにし、Webアプリ・API・埋め込み・MCPに反映する。",
+  "domain": "ops"
+ },
+ {
+  "id": "s-mcp",
+  "name": "MCPサーバー",
+  "category": "公開",
+  "oneLiner": "アプリをClaude DesktopやCursorからツールとして呼べるようにする。",
+  "domain": "ops"
+ },
+ {
+  "id": "s-annotation",
+  "name": "注釈返信",
+  "category": "運用",
+  "oneLiner": "よくある質問に用意した回答をLLMを使わずに返す。",
+  "domain": "ops"
+ },
+ {
+  "id": "s-logs",
+  "name": "ログ",
+  "category": "運用",
+  "oneLiner": "実際の利用の記録。Sandboxプランは30日保持。",
+  "domain": "ops"
+ }
+]

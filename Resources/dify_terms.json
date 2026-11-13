@@ -1,0 +1,136 @@
+[
+ {
+  "id": "t-workflow",
+  "term": "Workflow",
+  "shortDescription": "1回流れて結果を返すアプリタイプ",
+  "beginnerExplanation": "ボタンを押すと最初から最後まで一気に流れる処理。レポート作成や一括処理向き。",
+  "useCase": "毎朝のニュース要約、問い合わせメールの分類を一括で",
+  "examPoint": "入口はユーザー入力かトリガー、出口は出力ノード（任意）",
+  "relatedServices": [
+   "Chatflow",
+   "トリガー"
+  ],
+  "domain": "basics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-chatflow",
+  "term": "Chatflow",
+  "shortDescription": "話しかけるたびに動くアプリタイプ",
+  "beginnerExplanation": "チャットで1回話しかけるたびに、裏でフローが1回動く。会話の流れを覚えておける。",
+  "useCase": "社内FAQボット、手続きの案内役",
+  "examPoint": "入口は必ずユーザー入力、出口は回答ノード（必須）、トリガーは使えない",
+  "relatedServices": [
+   "Workflow",
+   "会話変数"
+  ],
+  "domain": "basics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-node",
+  "term": "ノード",
+  "shortDescription": "フローを作る部品",
+  "beginnerExplanation": "LLMを呼ぶ、条件で分ける、APIを呼ぶ、などの1つの仕事をする部品。線でつないで流れを作る。",
+  "useCase": "LLM・If-Else・HTTPリクエスト",
+  "examPoint": "1つの実行の道に置けるのは最大50ノード",
+  "relatedServices": [
+   "キャンバス"
+  ],
+  "domain": "basics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-variable",
+  "term": "変数",
+  "shortDescription": "値を入れる名前付きの入れ物",
+  "beginnerExplanation": "入力・各ノードの結果・環境変数・会話変数がある。「/」で差し込める。",
+  "useCase": "{{query}} で質問文を差し込む",
+  "examPoint": "入力と出力は実行中に書き換えられない",
+  "relatedServices": [
+   "環境変数",
+   "会話変数"
+  ],
+  "domain": "basics",
+  "difficulty": 1
+ },
+ {
+  "id": "t-rag",
+  "term": "RAG",
+  "shortDescription": "検索した資料をもとに答えさせる仕組み",
+  "beginnerExplanation": "AIに答えさせる前に、社内文書などから関係する部分を探して渡し、それを根拠に答えさせる。",
+  "useCase": "就業規則にもとづく社内FAQ",
+  "examPoint": "知識検索の result をLLMのコンテキストに入れる",
+  "relatedServices": [
+   "ナレッジベース",
+   "チャンク"
+  ],
+  "domain": "knowledge",
+  "difficulty": 2
+ },
+ {
+  "id": "t-chunk",
+  "term": "チャンク",
+  "shortDescription": "検索の単位になる文書の小さなかたまり",
+  "beginnerExplanation": "文書を段落などで小さく分けたもの。質問に関係するチャンクだけをAIに渡す。",
+  "useCase": "マニュアルを段落ごとに分けて登録",
+  "examPoint": "汎用モードと親子モード。モードは作成後に変えられない",
+  "relatedServices": [
+   "ナレッジベース"
+  ],
+  "domain": "knowledge",
+  "difficulty": 2
+ },
+ {
+  "id": "t-embedding",
+  "term": "埋め込み（ベクトル化）",
+  "shortDescription": "文章を意味の座標に変えること",
+  "beginnerExplanation": "文章を数字の並び（ベクトル）にして、意味が近い文章ほど近い位置に置く。言い回しが違っても探せる。",
+  "useCase": "「有休」と「年次休暇」を同じ話として探す",
+  "examPoint": "高品質インデックスで使う。エコノミーはキーワード検索",
+  "relatedServices": [
+   "高品質インデックス"
+  ],
+  "domain": "knowledge",
+  "difficulty": 3
+ },
+ {
+  "id": "t-rerank",
+  "term": "Rerank",
+  "shortDescription": "検索結果の並べ直し",
+  "beginnerExplanation": "一度見つかった候補を、質問との関係の強さで並べ直して精度を上げる。",
+  "useCase": "ハイブリッド検索の結果を並べ直す",
+  "examPoint": "有効にするとRerankモデルのトークンを使う",
+  "relatedServices": [
+   "トップK"
+  ],
+  "domain": "knowledge",
+  "difficulty": 3
+ },
+ {
+  "id": "t-publish",
+  "term": "公開",
+  "shortDescription": "下書きを利用者に届けること",
+  "beginnerExplanation": "編集中の下書きは利用者に見えない。公開すると最新バージョンになり、全部の出口に反映される。",
+  "useCase": "Webアプリのリンクを共有",
+  "examPoint": "古い版の復元は下書きに戻すだけで、公開は別操作",
+  "relatedServices": [
+   "バージョン管理"
+  ],
+  "domain": "ops",
+  "difficulty": 1
+ },
+ {
+  "id": "t-mcp",
+  "term": "MCP",
+  "shortDescription": "AIツール同士をつなぐ共通の約束ごと",
+  "beginnerExplanation": "Model Context Protocol。DifyのアプリをClaude DesktopやCursorなどから道具として呼べるようにする。",
+  "useCase": "Cursorから社内FAQアプリを呼ぶ",
+  "examPoint": "MCPサーバーのURLは秘密。漏れたら再生成",
+  "relatedServices": [
+   "公開"
+  ],
+  "domain": "ops",
+  "difficulty": 2
+ }
+]

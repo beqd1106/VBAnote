@@ -1,0 +1,3186 @@
+[
+ {
+  "id": "q-ba-001",
+  "domain": "basics",
+  "service": "アプリタイプ",
+  "difficulty": 1,
+  "question": "Difyで新しくアプリを作るとき、公式ドキュメントが推奨している主なアプリタイプの組み合わせはどれですか。",
+  "choices": [
+   "テキストジェネレーターとエージェント",
+   "エージェントとチャットボット",
+   "チャットボットとテキストジェネレーター",
+   "WorkflowとChatflow"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "主要な概念のページで、DifyはWorkflowとChatflowの2つを主要なアプリタイプとして提供し、この2つから選ぶことを推奨しています。チャットボット・エージェント・テキストジェネレーターは、よりシンプルな画面のついた基本アプリタイプです。",
+  "wrongChoiceExplanations": {
+   "2": "チャットボットとテキストジェネレーターは基本アプリタイプで、推奨の主タイプではない。",
+   "1": "エージェントとチャットボットも基本アプリタイプ。",
+   "0": "どちらも基本アプリタイプ。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "迷ったら「1回で終わる処理＝Workflow」「会話＝Chatflow」と覚える。",
+  "tags": [
+   "アプリタイプ"
+  ]
+ },
+ {
+  "id": "q-ba-002",
+  "domain": "basics",
+  "service": "Workflow",
+  "difficulty": 1,
+  "question": "Workflowアプリの動き方として正しいものはどれですか。",
+  "choices": [
+   "会話のターンごとにフローが動き、会話変数を持ち越す",
+   "ユーザー入力ノードからしか開始できない",
+   "必ず回答ノードで終わり、チャット画面に返信する",
+   "最初から最後まで1回実行され、入力を処理して結果を返す"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "Workflowは最初から最後まで1回実行され、入力を受け取ってフローで処理し、結果を返します。自動レポート生成やデータ処理、バッチ処理などに向きます。",
+  "wrongChoiceExplanations": {
+   "0": "会話ターンごとに動くのはChatflow。",
+   "2": "回答ノードはChatflow用。Workflowの終点は出力ノード（任意）。",
+   "1": "Workflowはユーザー入力のほか、トリガーからも開始できる。"
+  },
+  "source": "Dify公式ドキュメント「Workflow と Chatflow」",
+  "beginnerNote": "Workflow＝ボタンを押したら最後まで一気に流れる処理。",
+  "tags": [
+   "Workflow"
+  ]
+ },
+ {
+  "id": "q-ba-003",
+  "domain": "basics",
+  "service": "Chatflow",
+  "difficulty": 1,
+  "question": "Chatflowについての説明として正しいものはどれですか。",
+  "choices": [
+   "ユーザーのメッセージごとにフローが動き、常にユーザー入力から始まる",
+   "スケジュールトリガーで毎朝自動実行できる",
+   "会話変数は使えない",
+   "終了ノードとして出力ノードを使う"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "Chatflowは会話のターンごとにトリガーされるワークフローで、常にユーザー入力（ユーザーのメッセージ）から始まります。トリガーは使えません。",
+  "wrongChoiceExplanations": {
+   "1": "トリガーを使えるのはWorkflowだけ。",
+   "3": "Chatflowの終点は回答ノード（必須）。",
+   "2": "会話変数はChatflowにのみ存在する機能。"
+  },
+  "source": "Dify公式ドキュメント「Workflow と Chatflow」「開始ノード」",
+  "beginnerNote": "Chatflow＝チャットで話しかけるたびに裏でフローが1回動く。",
+  "tags": [
+   "Chatflow"
+  ]
+ },
+ {
+  "id": "q-ba-004",
+  "domain": "basics",
+  "service": "Workflow と Chatflow",
+  "difficulty": 2,
+  "question": "WorkflowとChatflowの終点ノードの組み合わせとして正しいものはどれですか。",
+  "choices": [
+   "どちらも出力ノードが必須",
+   "どちらも回答ノードが任意",
+   "Workflow：出力（任意）／Chatflow：回答（必須）",
+   "Workflow：回答（必須）／Chatflow：出力（任意）"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "比較表では、Workflowの終了ノードは出力（任意）、Chatflowの終了ノードは回答（必須）とされています。",
+  "wrongChoiceExplanations": {
+   "3": "組み合わせが逆。",
+   "0": "出力ノードはWorkflowのみで、しかも任意。",
+   "1": "Chatflowの回答ノードは必須。"
+  },
+  "source": "Dify公式ドキュメント「Workflow と Chatflow」",
+  "beginnerNote": "チャットは返事（回答）がないと会話にならない、と覚える。",
+  "tags": [
+   "出力",
+   "回答"
+  ]
+ },
+ {
+  "id": "q-ba-005",
+  "domain": "basics",
+  "service": "DSL",
+  "difficulty": 2,
+  "question": "Dify DSLについて正しい説明はどれですか。",
+  "choices": [
+   "ナレッジベースの中身を移行するための専用形式",
+   "アプリの構成をYAML形式で表し、ログやナレッジベースのデータは含まない",
+   "Pythonで書くワークフロー定義",
+   "アプリの会話ログもすべて含むJSON形式のファイル"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "Dify DSLはアプリを記述するYAML形式で、ノード・プロンプト・変数・設定などの構成を表しますが、ログやナレッジベースなどのデータは含みません。",
+  "wrongChoiceExplanations": {
+   "3": "DSLにログは含まれない。形式もYAML。",
+   "0": "ナレッジベースのデータは含まない。",
+   "2": "プログラミング言語ではなくYAMLの記述形式。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "DSL＝アプリの設計図ファイル。中身のデータまでは入らない。",
+  "tags": [
+   "DSL",
+   "エクスポート"
+  ]
+ },
+ {
+  "id": "q-ba-006",
+  "domain": "basics",
+  "service": "DSL",
+  "difficulty": 3,
+  "question": "Dify 1.18.0以降でアプリをエクスポートしたときに得られるファイルはどれですか。",
+  "choices": [
+   "DSLファイル（.yml）のみ",
+   "ナレッジベースのZIP",
+   "アプリパッケージ（.ifpkg）",
+   "会話ログのCSV"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "1.18.0以降はアプリパッケージ（.ifpkg）が得られ、DSLファイルのほか、アップロードしたアイコンやAgentのスキルとファイルなど、アプリに必要なファイルが含まれます。それ以前のバージョンではDSLファイル（.yml）のみです。",
+  "wrongChoiceExplanations": {
+   "0": "1.18.0より前のバージョンの動き。",
+   "3": "ログはエクスポートに含まれない。",
+   "1": "ナレッジベースのデータはエクスポート対象ではない。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "新しい版は「設計図＋付属ファイル」をひとまとめにした箱で出てくる。",
+  "tags": [
+   "DSL",
+   "アプリパッケージ"
+  ]
+ },
+ {
+  "id": "q-ba-007",
+  "domain": "basics",
+  "service": "変数",
+  "difficulty": 2,
+  "question": "ユーザー入力やノードの出力（変数）について正しいものはどれですか。",
+  "choices": [
+   "ユーザー入力とノード出力は、どちらも実行中に更新できない",
+   "ユーザー入力は実行中にいつでも上書きできる",
+   "ノードの出力は後続ノードで書き換えられる",
+   "ノード出力は同じノード内でしか参照できない"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "ユーザー入力は各実行の開始時に設定され更新できません。ノード出力も入力と同様に更新できません。値を変えながら持ち越したい場合はChatflowの会話変数（変数代入ノードで更新）を使います。",
+  "wrongChoiceExplanations": {
+   "1": "ユーザー入力は開始時に確定し、更新できない。",
+   "2": "ノード出力も更新できない。",
+   "3": "各ノードの出力は後続のノードから参照できる。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "入力と出力は「書いたら消せないメモ」。変えたい値は会話変数へ。",
+  "tags": [
+   "変数"
+  ]
+ },
+ {
+  "id": "q-ba-008",
+  "domain": "basics",
+  "service": "環境変数",
+  "difficulty": 2,
+  "question": "APIキーのような秘密の値をアプリ全体で使いたいとき、適切な方法はどれですか。",
+  "choices": [
+   "会話変数に保存する",
+   "プロンプトに直接書く",
+   "環境変数をSecret型で追加する",
+   "ユーザー入力の非表示フィールドに入れる"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "環境変数はアプリ全体で使う値を保持します。APIキーなどのシークレットにはSecret型を使い、その値はエクスポート時に含めると選んだ場合にのみ書き出されます。",
+  "wrongChoiceExplanations": {
+   "3": "非表示フィールドの値はURLのクエリ文字列に入り、秘匿情報ではない。",
+   "0": "会話変数は会話の進行に合わせて変わる情報用。",
+   "1": "プロンプトに直書きすると漏えいの原因になる。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」「ユーザー入力」",
+  "beginnerNote": "秘密の値は「Secret型の環境変数」が定位置。",
+  "tags": [
+   "環境変数",
+   "セキュリティ"
+  ]
+ },
+ {
+  "id": "q-ba-009",
+  "domain": "basics",
+  "service": "会話変数",
+  "difficulty": 2,
+  "question": "会話変数についての説明として正しいものはどれですか。",
+  "choices": [
+   "値はコードノードでしか更新できない",
+   "Chatflowにだけあり、1つの会話の中でターンをまたいで値を保つ",
+   "アプリ全体で全ユーザーが共有する値",
+   "Workflowでも使え、実行をまたいで値を保つ"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "会話変数はChatflowにのみ存在し、1つの会話の中でターンをまたいで値が保持されます。ToDoリストやトークンコストのように会話の進行で変わる情報の保存に使い、変数代入ノードで更新できます。",
+  "wrongChoiceExplanations": {
+   "3": "会話変数はChatflow専用。",
+   "0": "更新には変数代入（変数アサイナー）ノードを使う。",
+   "2": "全体で共有する値は環境変数。会話変数は会話ごと。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "会話変数＝この会話の中だけで使えるメモ帳。",
+  "tags": [
+   "会話変数"
+  ]
+ },
+ {
+  "id": "q-ba-010",
+  "domain": "basics",
+  "service": "システム変数",
+  "difficulty": 2,
+  "question": "Chatflowのシステム変数 sys.dialogue_count の説明として正しいものはどれですか。",
+  "choices": [
+   "そのアプリの総ユーザー数",
+   "会話のターン数で、チャットのやり取りごとに1増える",
+   "ワークフロー内のノード数",
+   "今日の実行回数"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "sys.dialogue_countはChatflowでの会話ターン数で、各チャットラウンド後に自動で1増えます。If-Elseノードと組み合わせて「X回目のターンで振り返りをする」といった分岐が作れます。",
+  "wrongChoiceExplanations": {
+   "0": "ユーザー数を表す変数ではない。",
+   "2": "ノード情報はsys.workflow_idなどで扱う。",
+   "3": "日単位の実行回数ではない。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "何往復目の会話かを数えるカウンター。",
+  "tags": [
+   "システム変数"
+  ]
+ },
+ {
+  "id": "q-ba-011",
+  "domain": "basics",
+  "service": "変数参照",
+  "difficulty": 1,
+  "question": "プロンプトなどの長い入力欄に変数の値を差し込むとき、公式ドキュメントで案内されている操作はどれですか。",
+  "choices": [
+   "「#」を入力して変数を選ぶ",
+   "「@」を入力して変数を選ぶ",
+   "変数は差し込めないのでコードノードを使う",
+   "「/」（スラッシュ）を入力して変数を選ぶ"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "入力フィールドではドロップダウンから変数を選べるほか、「/」スラッシュを入力して変数を選ぶことで、複雑なテキスト入力に変数値を挿入できます。",
+  "wrongChoiceExplanations": {
+   "0": "「#」ではない。",
+   "1": "「@」ではない。",
+   "2": "スラッシュで直接差し込める。"
+  },
+  "source": "Dify公式ドキュメント「主要な概念」",
+  "beginnerNote": "「/」を打つと変数の一覧が出る、と手で覚えておく。",
+  "tags": [
+   "変数参照",
+   "操作"
+  ]
+ },
+ {
+  "id": "q-ba-012",
+  "domain": "basics",
+  "service": "直列と並列",
+  "difficulty": 2,
+  "question": "ノードを並列に配置したときの変数参照について正しいものはどれですか。",
+  "choices": [
+   "並列ブランチ同士は互いの変数を参照できる",
+   "並列にすると直前のノードの変数も参照できなくなる",
+   "並列ブランチ同士は参照できないが、合流先のノードはすべてのブランチの変数を参照できる",
+   "並列ブランチの変数はどこからも参照できない"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "並列の場合、ノードは同時に実行され互いの変数は参照できませんが、並列ブランチの合流先のノードはすべてのブランチの変数を参照できます。",
+  "wrongChoiceExplanations": {
+   "0": "並列ブランチ同士は参照できない。",
+   "3": "合流先からは参照できる。",
+   "1": "上流のノードの変数は参照できる。"
+  },
+  "source": "Dify公式ドキュメント「オーケストレーションロジック」",
+  "beginnerNote": "同時に走っている者同士は、相手の結果をまだ知らない。",
+  "tags": [
+   "並列",
+   "変数"
+  ]
+ },
+ {
+  "id": "q-ba-013",
+  "domain": "basics",
+  "service": "直列と並列",
+  "difficulty": 3,
+  "question": "1つの実行パスに配置できるノード数の上限として、公式ドキュメントに記載されているのはどれですか。",
+  "choices": [
+   "50ノード",
+   "20ノード",
+   "30ノード",
+   "100ノード"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "オーケストレーションロジックのページに「1つの実行パスには最大50ノードまで配置できます」と記載されています。",
+  "wrongChoiceExplanations": {
+   "1": "20ではない。",
+   "2": "30ではない。",
+   "3": "100ではない。"
+  },
+  "source": "Dify公式ドキュメント「オーケストレーションロジック」",
+  "beginnerNote": "1本の道に置けるのは50個まで。",
+  "tags": [
+   "上限"
+  ]
+ },
+ {
+  "id": "q-ba-014",
+  "domain": "basics",
+  "service": "ノードの再利用",
+  "difficulty": 2,
+  "question": "コピー＆ペーストで再利用できないノードはどれですか。",
+  "choices": [
+   "If-Elseノード",
+   "コードノード",
+   "ユーザー入力ノード",
+   "LLMノード"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "ユーザー入力ノードを除き、すべてのノードは同じワークフロー内、ワークフロー間、Difyインスタンス間でコピー＆ペーストできます。",
+  "wrongChoiceExplanations": {
+   "3": "LLMノードはコピーできる。",
+   "1": "コードノードはコピーできる。",
+   "0": "If-Elseノードはコピーできる。"
+  },
+  "source": "Dify公式ドキュメント「オーケストレーションロジック」",
+  "beginnerNote": "入口（ユーザー入力）は1キャンバスに1つだけなので複製できない。",
+  "tags": [
+   "コピー"
+  ]
+ },
+ {
+  "id": "q-ba-015",
+  "domain": "basics",
+  "service": "開始ノード",
+  "difficulty": 2,
+  "question": "Web アプリ、MCP サーバー、バックエンドサービス API として公開できるワークフローの条件はどれですか。",
+  "choices": [
+   "どの開始ノードでも公開できる",
+   "ユーザー入力で開始するもの",
+   "Webhookトリガーで開始するもの",
+   "スケジュールトリガーで開始するもの"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ユーザー入力で開始するワークフローのみ、Webアプリ、MCPサーバー、バックエンドサービスAPIとして公開したり、他のDifyアプリのツールとして再利用したりできます。",
+  "wrongChoiceExplanations": {
+   "3": "トリガー開始のワークフローは自動実行用で、これらの公開形態には使えない。",
+   "2": "同上。",
+   "0": "条件がある。"
+  },
+  "source": "Dify公式ドキュメント「開始ノード」",
+  "beginnerNote": "人やAPIが呼び出す形のものだけが「公開」できる。",
+  "tags": [
+   "開始ノード",
+   "公開"
+  ]
+ },
+ {
+  "id": "q-ba-016",
+  "domain": "basics",
+  "service": "開始ノード",
+  "difficulty": 2,
+  "question": "ワークフローを外部システムからのHTTPリクエストを受けたときに自動実行したい。選ぶ開始ノードはどれですか。",
+  "choices": [
+   "インテグレーショントリガー",
+   "スケジュールトリガー",
+   "Webhookトリガー",
+   "ユーザー入力"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "Webhookトリガーは外部システムからのHTTPリクエストを受信したときに実行します。スケジュールトリガーは指定時刻・間隔、インテグレーショントリガーはトリガー統合のイベント購読で動きます。",
+  "wrongChoiceExplanations": {
+   "1": "時刻や間隔で動くもの。",
+   "0": "統合を通じたイベントサブスクリプションで動くもの。",
+   "3": "人やAPI呼び出しで手動開始するもの。"
+  },
+  "source": "Dify公式ドキュメント「開始ノード」",
+  "beginnerNote": "Webhook＝「外から呼び鈴を鳴らされたら動く」。",
+  "tags": [
+   "トリガー"
+  ]
+ },
+ {
+  "id": "q-ba-017",
+  "domain": "basics",
+  "service": "開始ノード",
+  "difficulty": 2,
+  "question": "ユーザー入力とトリガーの関係について正しいものはどれですか。",
+  "choices": [
+   "一度作ったら開始ノードは変更できない",
+   "1つのキャンバスに両方を置いて併用できる",
+   "トリガーはChatflowでも使える",
+   "同じキャンバス上では排他的で、切り替えるには開始ノードを右クリックして「ノード変更」などを行う"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "ユーザー入力とトリガーは同じキャンバス上で排他的です。切り替えるには、現在の開始ノードを右クリックして「ノード変更」を選ぶか、削除して新しいノードを追加します。",
+  "wrongChoiceExplanations": {
+   "1": "併用はできない。",
+   "2": "トリガーを使えるのはワークフローのみ。",
+   "0": "ノード変更や削除で切り替えられる。"
+  },
+  "source": "Dify公式ドキュメント「開始ノード」",
+  "beginnerNote": "入口はどちらか1つ。右クリック→ノード変更で付け替える。",
+  "tags": [
+   "開始ノード",
+   "操作"
+  ]
+ },
+ {
+  "id": "q-no-001",
+  "domain": "nodes",
+  "service": "出力ノード",
+  "difficulty": 2,
+  "question": "出力ノード（旧「終了」ノード）について正しいものはどれですか。",
+  "choices": [
+   "今もすべてのワークフローで必須",
+   "任意で、なくても実行はできるが呼び出し元にデータは返らない",
+   "1つのワークフローに1つしか置けない",
+   "Chatflowで返信を出すためのノード"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "出力ノードは以前「終了」ノードと呼ばれ必須でしたが、現在はオプションです。なくてもワークフローは実行されますが、呼び出し元にデータは返されません。Chatflowでは回答ノードを使います。",
+  "wrongChoiceExplanations": {
+   "0": "現在は任意。",
+   "3": "Chatflowは回答ノードを使う。",
+   "2": "複数置ける。"
+  },
+  "source": "Dify公式ドキュメント「出力」",
+  "beginnerNote": "結果を返したいなら出力ノードを置く。",
+  "tags": [
+   "出力ノード"
+  ]
+ },
+ {
+  "id": "q-no-002",
+  "domain": "nodes",
+  "service": "出力ノード",
+  "difficulty": 3,
+  "question": "2つの出力ノードで同じ出力変数名を使った場合、どうなりますか。",
+  "choices": [
+   "エラーで実行できない",
+   "両方の値が配列にまとめられる",
+   "先に実行されたノードの値が残る",
+   "後に実行されたノードの値で上書きされる"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "出力ノードの変数は1つの最終結果に統合されます。2つの出力ノードが同じ変数名を使うと、後に実行されたノードの値で上書きされるため、名前が重複しないようにします。",
+  "wrongChoiceExplanations": {
+   "0": "エラーにはならず上書きされる。",
+   "1": "配列にはまとめられない。",
+   "2": "残るのは後に実行された方。"
+  },
+  "source": "Dify公式ドキュメント「出力」",
+  "beginnerNote": "同じ名前の箱に後から入れたものが勝つ。",
+  "tags": [
+   "出力ノード"
+  ]
+ },
+ {
+  "id": "q-no-003",
+  "domain": "nodes",
+  "service": "出力ノード",
+  "difficulty": 3,
+  "question": "ワークフローをツールとして公開するとき、出力変数名に使わない方がよいものはどれですか。",
+  "choices": [
+   "text",
+   "result_text",
+   "summary",
+   "answer_count"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "ワークフローをツールとして公開する場合、text、files、json はツールの組み込み出力用に予約されているため使わないよう案内されています。",
+  "wrongChoiceExplanations": {
+   "2": "予約語ではない。",
+   "1": "予約語ではない。",
+   "3": "予約語ではない。"
+  },
+  "source": "Dify公式ドキュメント「出力」",
+  "beginnerNote": "text・files・json はツール側が使う名前。",
+  "tags": [
+   "出力ノード",
+   "ツール"
+  ]
+ },
+ {
+  "id": "q-no-004",
+  "domain": "nodes",
+  "service": "出力ノード",
+  "difficulty": 2,
+  "question": "出力ノードで設定した変数名は、API で呼び出したときにどう使われますか。",
+  "choices": [
+   "APIでは使われない",
+   "ログのファイル名になる",
+   "レスポンスの outputs オブジェクトのキーになる",
+   "HTTPヘッダー名になる"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "設定した変数名はAPIレスポンスのキーとして使われ、出力変数はレスポンスの outputs オブジェクトに含まれます。ストリーミングでは最後の workflow_finished イベントで届きます。",
+  "wrongChoiceExplanations": {
+   "3": "ヘッダー名にはならない。",
+   "1": "ファイル名にはならない。",
+   "0": "APIレスポンスのキーとして使われる。"
+  },
+  "source": "Dify公式ドキュメント「出力」",
+  "beginnerNote": "出力ノードの名前＝APIの返り値の項目名。",
+  "tags": [
+   "API",
+   "出力ノード"
+  ]
+ },
+ {
+  "id": "q-no-005",
+  "domain": "nodes",
+  "service": "回答ノード",
+  "difficulty": 1,
+  "question": "回答（Answer）ノードについて正しいものはどれですか。",
+  "choices": [
+   "Chatflowでユーザーに届ける内容を決め、複数配置して段階的に返答できる",
+   "テキストしか返せない",
+   "1つのChatflowに1つしか置けない",
+   "Workflowの結果をAPIに返す"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "回答ノードはChatflowでユーザーに届ける内容を定義します。複数配置して、処理の途中で確認の返答をしたり、分岐ごとに違う返答をしたりできます。テキスト・画像・ファイルを返せます。",
+  "wrongChoiceExplanations": {
+   "3": "Workflowは出力ノードを使う。",
+   "2": "複数置ける。",
+   "1": "画像やファイルも返せる。"
+  },
+  "source": "Dify公式ドキュメント「答え」",
+  "beginnerNote": "回答ノード＝チャットの吹き出しを出す部品。",
+  "tags": [
+   "回答ノード"
+  ]
+ },
+ {
+  "id": "q-no-006",
+  "domain": "nodes",
+  "service": "ユーザー入力",
+  "difficulty": 2,
+  "question": "ユーザー入力ノードの「短いテキスト」で受け付けられる最大文字数はどれですか。",
+  "choices": [
+   "256文字",
+   "制限なし",
+   "1,000文字",
+   "100文字"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "短いテキストは最大256文字を受け付けます。長さ制限なしで複数行の入力をさせたい場合は「段落」を使います。",
+  "wrongChoiceExplanations": {
+   "3": "100文字ではない。",
+   "2": "1,000文字ではない。",
+   "1": "制限なしは「段落」。"
+  },
+  "source": "Dify公式ドキュメント「ユーザー入力」",
+  "beginnerNote": "1行で収まる入力は短いテキスト、長文は段落。",
+  "tags": [
+   "ユーザー入力"
+  ]
+ },
+ {
+  "id": "q-no-007",
+  "domain": "nodes",
+  "service": "ユーザー入力",
+  "difficulty": 2,
+  "question": "アップロードされたPDFの中身をLLMに理解させたい。ユーザー入力ノードの後に置くのに適したノードはどれですか。",
+  "choices": [
+   "If-Elseノード",
+   "回答ノード",
+   "変数集約器ノード",
+   "テキスト抽出ノード"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "ユーザー入力ノードはファイルを集めるだけで中身を読みません。ドキュメントファイルは、LLMが内容を理解できるようにテキスト抽出ノードに回します。",
+  "wrongChoiceExplanations": {
+   "2": "分岐の結果をまとめるノード。",
+   "0": "条件分岐のノード。",
+   "1": "返答を出すノード。"
+  },
+  "source": "Dify公式ドキュメント「ユーザー入力」",
+  "beginnerNote": "ファイルは「受け取る」と「読む」が別の部品。",
+  "tags": [
+   "ファイル",
+   "テキスト抽出"
+  ]
+ },
+ {
+  "id": "q-no-008",
+  "domain": "nodes",
+  "service": "ユーザー入力",
+  "difficulty": 3,
+  "question": "入力フィールドの「非表示・事前入力」について正しいものはどれですか。",
+  "choices": [
+   "値はURLのクエリ文字列で送られるため秘匿情報ではない",
+   "「必須」と同時に設定できる",
+   "単一ファイルのフィールドでも使える",
+   "値は暗号化されるのでAPIキーを入れてよい"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "非表示フィールドは秘匿情報ではなく、値はURLクエリ文字列に含まれ、アドレスバーや履歴から見えます。認証情報には環境変数を使います。「必須」とは併用できず、ファイル系フィールドは非対応です。",
+  "wrongChoiceExplanations": {
+   "3": "暗号化されず、秘密の値には使わない。",
+   "1": "必須のチェックを外してから有効にする。",
+   "2": "単一ファイル・ファイルリストは非対応。"
+  },
+  "source": "Dify公式ドキュメント「ユーザー入力」",
+  "beginnerNote": "隠しているのは画面だけ。URLには見えている。",
+  "tags": [
+   "非表示フィールド",
+   "セキュリティ"
+  ]
+ },
+ {
+  "id": "q-no-009",
+  "domain": "nodes",
+  "service": "ユーザー入力",
+  "difficulty": 2,
+  "question": "1つのアプリのキャンバスに置けるユーザー入力ノードの数はどれですか。",
+  "choices": [
+   "制限なし",
+   "2つまで",
+   "5つまで",
+   "1つだけ"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "各アプリケーションキャンバスには、ユーザー入力ノードを1つだけ含めることができます。",
+  "wrongChoiceExplanations": {
+   "1": "2つは置けない。",
+   "2": "5つは置けない。",
+   "0": "制限がある。"
+  },
+  "source": "Dify公式ドキュメント「ユーザー入力」",
+  "beginnerNote": "入口は1つ。",
+  "tags": [
+   "ユーザー入力"
+  ]
+ },
+ {
+  "id": "q-no-010",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 1,
+  "question": "LLMノードを使う前に必要な準備はどれですか。",
+  "choices": [
+   "「連携」の「モデルプロバイダー」で少なくとも1つのモデルプロバイダーを設定する",
+   "コードノードを置く",
+   "アプリを公開する",
+   "ナレッジベースを1つ以上作る"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "LLMノードを使う前に、「連携」＞「モデルプロバイダー」で少なくとも1つのモデルプロバイダーを設定しておく必要があります。",
+  "wrongChoiceExplanations": {
+   "3": "ナレッジベースはRAGに使うときだけ必要。",
+   "1": "コードノードは不要。",
+   "2": "公開前でも使える。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "まずAIのモデルをつなぐ。そこから全部始まる。",
+  "tags": [
+   "LLM",
+   "モデルプロバイダー"
+  ]
+ },
+ {
+  "id": "q-no-011",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 2,
+  "question": "LLMノードの「温度（Temperature）」の説明として正しいものはどれですか。",
+  "choices": [
+   "0に近いほど長い応答になる",
+   "APIの待ち時間を決める",
+   "0に近いほど決定的、1に近いほど創造的な応答になる",
+   "応答の言語を決める"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "温度は0（決定的）から1（創造的）の範囲で応答生成を制御します。Top P・頻度ペナルティ・存在ペナルティもあり、「精密」「バランス」「創造的」のプリセットも使えます。",
+  "wrongChoiceExplanations": {
+   "0": "長さを決めるものではない。",
+   "3": "言語を決めるものではない。",
+   "1": "待ち時間の設定ではない。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "温度が低い＝毎回ほぼ同じ答え。高い＝アイデアが広がる。",
+  "tags": [
+   "LLM",
+   "パラメータ"
+  ]
+ },
+ {
+  "id": "q-no-012",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 2,
+  "question": "知識検索ノードの結果をLLMの回答の根拠に使うとき、LLMノードでどこに設定しますか。",
+  "choices": [
+   "メモリ",
+   "コンテキスト",
+   "構造化出力",
+   "ビジョン"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "LLMノードの「コンテキスト」フィールドで知識検索ノードの result 変数を選び、プロンプトで Context 変数とユーザー入力を参照します。この場合、Difyは自動で引用を追跡します。",
+  "wrongChoiceExplanations": {
+   "0": "メモリは会話の履歴を持ち越す機能。",
+   "3": "ビジョンは画像を扱う機能。",
+   "2": "構造化出力は応答をJSONなどにする機能。"
+  },
+  "source": "Dify公式ドキュメント「LLM」「従来型の知識検索」",
+  "beginnerNote": "検索結果は「コンテキスト」に入れると、出典付きで答えてくれる。",
+  "tags": [
+   "RAG",
+   "コンテキスト"
+  ]
+ },
+ {
+  "id": "q-no-013",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 3,
+  "question": "LLMノードの「構造化出力」の横に「モデルが対応していません」と表示されたときの説明として正しいものはどれですか。",
+  "choices": [
+   "DifyがプロンプトにJSONスキーマを含めて指示するが、応答がスキーマに合わずノードが失敗することがある",
+   "自動で別のモデルに切り替わる",
+   "構造化出力の設定自体ができない",
+   "出力がすべて空になる"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "その表示はモデルが構造化出力にネイティブ対応していないことを示します。この場合DifyはプロンプトにJSONスキーマを含めて指示しますが、応答がスキーマに合わず失敗することがあります。安定させたいなら表示が出ないモデルを選びます。",
+  "wrongChoiceExplanations": {
+   "2": "設定はできるが安定しない。",
+   "1": "自動切り替えはされない。",
+   "3": "空になるわけではない。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "対応していないモデルは「お願いベース」なので外れることがある。",
+  "tags": [
+   "構造化出力"
+  ]
+ },
+ {
+  "id": "q-no-014",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 2,
+  "question": "LLMノードの「メモリ」について正しいものはどれですか。",
+  "choices": [
+   "Workflowでだけ使える",
+   "ナレッジベースに会話を保存する",
+   "Chatflowの会話内で以前のやり取りを後続のプロンプトに含め、ノードごとに設定する",
+   "すべての会話をまたいで記憶し続ける"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "メモリを有効にすると、Chatflowの会話内で以前のやり取りがユーザー・アシスタント形式で後続のプロンプトに含まれます。メモリはノード固有で、別の会話には持ち越されません。",
+  "wrongChoiceExplanations": {
+   "3": "異なる会話間では持続しない。",
+   "1": "ナレッジベースには保存しない。",
+   "0": "Chatflowの会話で使う機能。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "メモリ＝この会話の流れを覚えておく機能。",
+  "tags": [
+   "メモリ"
+  ]
+ },
+ {
+  "id": "q-no-015",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 3,
+  "question": "複数のLLMノードで同じモデル設定を使い回し、まとめて切り替えたい。公式ドキュメントで案内されている方法はどれですか。",
+  "choices": [
+   "各ノードを1つずつ手で変更する",
+   "会話変数にモデル名を入れる",
+   "環境変数にLLMタイプの変数を追加し、各LLMノードのAIモデル欄を変数モードにして選ぶ",
+   "コードノードでモデルを選ぶ"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "環境変数パネルでLLMタイプの変数を追加し、各LLMノードの「AIモデル」フィールドを変数モードに切り替えて選びます。変数を編集すると紐づくすべてのノードが更新されます。プロンプトなどは各ノードに残ります。",
+  "wrongChoiceExplanations": {
+   "0": "できるが、まとめて切り替える方法ではない。",
+   "1": "会話変数はこの用途ではない。",
+   "3": "コードノードは不要。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "モデルの指定を1か所にまとめると、乗り換えが一瞬。",
+  "tags": [
+   "環境変数",
+   "LLM"
+  ]
+ },
+ {
+  "id": "q-no-016",
+  "domain": "nodes",
+  "service": "LLM",
+  "difficulty": 3,
+  "question": "推論モデルの思考（<think>タグの中身）を回答と分けたい。LLMノードでの設定はどれですか。",
+  "choices": [
+   "構造化出力をオンにする",
+   "メモリをオフにする",
+   "温度を0にする",
+   "「推論タグの分離を有効にする」をオンにし、思考を reasoning_content 出力に分ける"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "「推論タグの分離を有効にする」をオンにすると、text出力には回答だけが残り、思考は独立した reasoning_content 出力変数に入ります。APIでは reasoning_format が separated になります。",
+  "wrongChoiceExplanations": {
+   "2": "温度は分離と関係ない。",
+   "1": "メモリは会話履歴の機能。",
+   "0": "構造化出力はJSON形式の機能。"
+  },
+  "source": "Dify公式ドキュメント「LLM」",
+  "beginnerNote": "考えたことと答えを別の箱に入れるスイッチ。",
+  "tags": [
+   "推論モデル"
+  ]
+ },
+ {
+  "id": "q-no-017",
+  "domain": "nodes",
+  "service": "質問分類器",
+  "difficulty": 1,
+  "question": "問い合わせを「返品」「使い方」「その他」に振り分けて、それぞれ別の処理に流したい。言葉の意味で判断して振り分けるのに適したノードはどれですか。",
+  "choices": [
+   "If-Else",
+   "質問分類器",
+   "テンプレート",
+   "変数集約器"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "質問分類器は、定義したクラスに対してLLMが意味を理解して最適なものを選び、異なるパスへ振り分けます。If-Elseは値の比較（含む・等しい等）で分岐します。",
+  "wrongChoiceExplanations": {
+   "0": "If-Elseは条件式での分岐で、意味の理解はしない。",
+   "3": "分岐をまとめるノード。",
+   "2": "文章を整形するノード。"
+  },
+  "source": "Dify公式ドキュメント「質問分類器」",
+  "beginnerNote": "意味で振り分け＝質問分類器、ルールで振り分け＝If-Else。",
+  "tags": [
+   "質問分類器",
+   "分岐"
+  ]
+ },
+ {
+  "id": "q-no-018",
+  "domain": "nodes",
+  "service": "質問分類器",
+  "difficulty": 3,
+  "question": "質問分類器のクラスについて正しいものはどれですか。",
+  "choices": [
+   "クラスタイトルがモデルの判断に使われる",
+   "クラス説明は下流で参照できない",
+   "クラスは2つまでしか作れない",
+   "モデルが判断に使うのはクラス説明（本文）で、タイトルはキャンバスに表示されるラベル"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "各クラスには独立した2つのテキストがあり、クラス説明（エディタ本文）はモデルが分岐を選ぶ際に参照する内容で下流では class_name、クラスタイトルはキャンバスに表示されるラベルで下流では class_label として出力されます。",
+  "wrongChoiceExplanations": {
+   "0": "判断に使うのは説明の方。",
+   "2": "複数のクラスを作れる。",
+   "1": "class_nameとして出力される。"
+  },
+  "source": "Dify公式ドキュメント「質問分類器」",
+  "beginnerNote": "タイトルは見た目用、説明はAI向けの判断材料。",
+  "tags": [
+   "質問分類器"
+  ]
+ },
+ {
+  "id": "q-no-019",
+  "domain": "nodes",
+  "service": "If-Else",
+  "difficulty": 1,
+  "question": "If-Elseノードで、どの条件にも当てはまらなかったときに通る道はどれですか。",
+  "choices": [
+   "ELIF",
+   "IF",
+   "ELSE",
+   "END"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "ELSEパスは、どの条件も一致しない場合のフォールバックです。IFが主条件、ELIFはIFがfalseのときに順に調べる追加条件です。",
+  "wrongChoiceExplanations": {
+   "1": "主条件がtrueのときの道。",
+   "0": "追加条件の道。",
+   "3": "そのような道はない。"
+  },
+  "source": "Dify公式ドキュメント「If-Else」",
+  "beginnerNote": "ELSE＝それ以外ぜんぶ。",
+  "tags": [
+   "If-Else"
+  ]
+ },
+ {
+  "id": "q-no-020",
+  "domain": "nodes",
+  "service": "If-Else",
+  "difficulty": 2,
+  "question": "If-Elseで複数の条件を「すべて満たすとき」に進ませたい。使う論理はどれですか。",
+  "choices": [
+   "XOR",
+   "OR",
+   "AND",
+   "NOT"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "ANDはすべての条件がtrueである必要があり、ORは任意の条件がtrueであればよい論理です。",
+  "wrongChoiceExplanations": {
+   "1": "どれか1つでよいときに使う。",
+   "3": "If-Elseの組み合わせ論理として案内されていない。",
+   "0": "同上。"
+  },
+  "source": "Dify公式ドキュメント「If-Else」",
+  "beginnerNote": "AND＝全部、OR＝どれか。",
+  "tags": [
+   "If-Else"
+  ]
+ },
+ {
+  "id": "q-no-021",
+  "domain": "nodes",
+  "service": "反復処理",
+  "difficulty": 2,
+  "question": "反復処理（イテレーション）ノードの中で使える組み込み変数の組み合わせはどれですか。",
+  "choices": [
+   "item と count",
+   "items と index",
+   "value と key",
+   "row と number"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "各反復処理では、処理中の現在の要素 items と、0から始まるインデックス index にアクセスできます。",
+  "wrongChoiceExplanations": {
+   "0": "名称が違う。",
+   "3": "名称が違う。",
+   "2": "名称が違う。"
+  },
+  "source": "Dify公式ドキュメント「反復処理」",
+  "beginnerNote": "今の1件＝items、何番目か＝index（0始まり）。",
+  "tags": [
+   "反復処理"
+  ]
+ },
+ {
+  "id": "q-no-022",
+  "domain": "nodes",
+  "service": "反復処理",
+  "difficulty": 2,
+  "question": "反復処理ノードの並列モードで同時に処理される要素の最大数はどれですか。",
+  "choices": [
+   "50個",
+   "3個",
+   "5個",
+   "10個"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "並列モードでは最大10個のアイテムが同時に処理されます。順序が大事な場合やストリーミング出力を使う場合はシーケンシャル（順次）モードを使います。",
+  "wrongChoiceExplanations": {
+   "1": "3ではない。",
+   "2": "5ではない。",
+   "0": "50ではない。"
+  },
+  "source": "Dify公式ドキュメント「反復処理」",
+  "beginnerNote": "同時に走るのは10件まで。",
+  "tags": [
+   "反復処理",
+   "並列"
+  ]
+ },
+ {
+  "id": "q-no-023",
+  "domain": "nodes",
+  "service": "反復処理",
+  "difficulty": 3,
+  "question": "入力 [1, 2, 3] のうち2番目で失敗したとき、エラー処理を「失敗結果を除去」にした場合の出力はどれですか。",
+  "choices": [
+   "[result-1]",
+   "エラーで停止し出力なし",
+   "[result-1, null, result-3]",
+   "[result-1, result-3]"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "「失敗結果を除去」は失敗した要素をスキップし、成功した結果のみを返します。「エラー時継続」なら [result-1, null, result-3]、「終了」ならエラーで停止します。",
+  "wrongChoiceExplanations": {
+   "2": "「エラー時継続」の出力。",
+   "1": "「終了」の動き。",
+   "0": "3つ目は成功しているので含まれる。"
+  },
+  "source": "Dify公式ドキュメント「反復処理」",
+  "beginnerNote": "除去＝失敗は最初からなかったことにする。",
+  "tags": [
+   "反復処理",
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-024",
+  "domain": "nodes",
+  "service": "ループ",
+  "difficulty": 2,
+  "question": "ループノードと反復処理ノードの違いとして正しいものはどれですか。",
+  "choices": [
+   "ループは前のサイクルの結果を使って段階的に改良し、反復処理は要素を独立に処理する",
+   "どちらも同じ動き",
+   "反復処理は終了条件を必ず指定する",
+   "ループは配列の各要素を独立に処理する"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "ループは各サイクルが前の結果に依存し、ループ変数で状態を持ち越して段階的に改良します。反復処理は配列の各要素を独立に処理し、並列にもできます。",
+  "wrongChoiceExplanations": {
+   "3": "それは反復処理の説明。",
+   "2": "終了条件はループの設定。",
+   "1": "用途が違う。"
+  },
+  "source": "Dify公式ドキュメント「ループ」",
+  "beginnerNote": "ループ＝書き直しを重ねる、反復処理＝1件ずつ同じ作業。",
+  "tags": [
+   "ループ",
+   "反復処理"
+  ]
+ },
+ {
+  "id": "q-no-025",
+  "domain": "nodes",
+  "service": "ループ",
+  "difficulty": 2,
+  "question": "ループノードで終了条件を指定しなかった場合の動きはどれですか。",
+  "choices": [
+   "最大ループ回数まで続く",
+   "無限に続く",
+   "エラーで実行できない",
+   "1回で終わる"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "ループは終了条件が満たされる、最大回数に達する、またはループ終了ノードが実行されると終わります。条件が指定されていない場合は最大回数まで続きます。",
+  "wrongChoiceExplanations": {
+   "3": "1回では終わらない。",
+   "1": "最大ループ回数が安全装置になる。",
+   "2": "エラーにはならない。"
+  },
+  "source": "Dify公式ドキュメント「ループ」",
+  "beginnerNote": "止める条件がなければ、上限回数がストッパー。",
+  "tags": [
+   "ループ"
+  ]
+ },
+ {
+  "id": "q-no-026",
+  "domain": "nodes",
+  "service": "コード",
+  "difficulty": 1,
+  "question": "コードノードで選べる言語の組み合わせはどれですか。",
+  "choices": [
+   "PythonとRuby",
+   "JavaとJavaScript",
+   "PythonとJavaScript",
+   "GoとPython"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "コードノードではPythonとJavaScriptから選べます。どちらも安全なサンドボックス内で実行されます。",
+  "wrongChoiceExplanations": {
+   "0": "Rubyは選べない。",
+   "1": "Javaは選べない。",
+   "3": "Goは選べない。"
+  },
+  "source": "Dify公式ドキュメント「コード」",
+  "beginnerNote": "Python か JavaScript。",
+  "tags": [
+   "コード"
+  ]
+ },
+ {
+  "id": "q-no-027",
+  "domain": "nodes",
+  "service": "コード",
+  "difficulty": 2,
+  "question": "コードノードの関数が返す必要があるものはどれですか。",
+  "choices": [
+   "宣言した出力変数を含む辞書",
+   "HTTPレスポンス",
+   "文字列1つ",
+   "何も返さなくてよい"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "入力変数を定義してコード内で参照し、関数は宣言した出力変数を含む辞書を返す必要があります。",
+  "wrongChoiceExplanations": {
+   "2": "出力変数を含む辞書を返す。",
+   "1": "HTTPレスポンスではない。",
+   "3": "返り値が必要。"
+  },
+  "source": "Dify公式ドキュメント「コード」",
+  "beginnerNote": "return { 出力名: 値 } の形で返す。",
+  "tags": [
+   "コード"
+  ]
+ },
+ {
+  "id": "q-no-028",
+  "domain": "nodes",
+  "service": "コード",
+  "difficulty": 3,
+  "question": "コードノードの出力制限として正しいものはどれですか。",
+  "choices": [
+   "objectのネストは10階層まで",
+   "array[string]などの配列出力の要素数は最大500",
+   "文字列は最大1万文字",
+   "制限はない"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "出力制限は、文字列の長さ400,000文字、配列出力の要素数500、object内にネストするオブジェクト3階層、小数点以下20桁などです。超えるとノードは失敗します。",
+  "wrongChoiceExplanations": {
+   "2": "文字列は400,000文字。",
+   "0": "ネストは3階層。",
+   "3": "制限がある。"
+  },
+  "source": "Dify公式ドキュメント「コード」",
+  "beginnerNote": "配列は500件まで。多いときは分けて返す。",
+  "tags": [
+   "コード",
+   "上限"
+  ]
+ },
+ {
+  "id": "q-no-029",
+  "domain": "nodes",
+  "service": "コード",
+  "difficulty": 2,
+  "question": "コードノードの「失敗時再試行」で設定できる最大回数はどれですか。",
+  "choices": [
+   "無制限",
+   "5回",
+   "3回",
+   "10回"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "失敗時再試行では最大10回まで自動で再試行でき、間隔は最大5000msまで設定できます。",
+  "wrongChoiceExplanations": {
+   "2": "3回ではない。",
+   "1": "5回ではない。",
+   "0": "上限がある。"
+  },
+  "source": "Dify公式ドキュメント「コード」",
+  "beginnerNote": "再試行は10回・5秒間隔まで。",
+  "tags": [
+   "コード",
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-030",
+  "domain": "nodes",
+  "service": "テンプレート",
+  "difficulty": 1,
+  "question": "テンプレートノードが使うテンプレート構文はどれですか。",
+  "choices": [
+   "Handlebars",
+   "Jinja2",
+   "Mustache専用",
+   "Markdownのみ"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "テンプレートノードはJinja2を使い、変数の置換、if-elseの条件分岐、forループ、フィルターなどで文章を組み立てます。出力は400,000文字までです。",
+  "wrongChoiceExplanations": {
+   "0": "Handlebarsではない。",
+   "2": "Mustacheではない。",
+   "3": "Markdownだけではない。"
+  },
+  "source": "Dify公式ドキュメント「テンプレート」",
+  "beginnerNote": "{{ 変数 }} や {% for %} で文章を組み立てる。",
+  "tags": [
+   "テンプレート"
+  ]
+ },
+ {
+  "id": "q-no-031",
+  "domain": "nodes",
+  "service": "テンプレート",
+  "difficulty": 3,
+  "question": "Chatflowでテンプレートノードが作るフォームの値をJSONとして送りたい。どう書きますか。",
+  "choices": [
+   "<form> に type=\"json\" を付ける",
+   "<form> に data-format=\"json\" を付ける",
+   "何もしなくてもJSONで送られる",
+   "<input> に data-json を付ける"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "送信形式は<form>の data-format 属性で決まり、data-format=\"json\" ならJSONオブジェクト、未設定ならプレーンテキスト（1行に1つの name: value）で送られます。",
+  "wrongChoiceExplanations": {
+   "0": "type属性ではない。",
+   "3": "そのような属性ではない。",
+   "2": "未設定ならプレーンテキスト。"
+  },
+  "source": "Dify公式ドキュメント「テンプレート」",
+  "beginnerNote": "JSONで欲しければ data-format=\"json\"。",
+  "tags": [
+   "テンプレート",
+   "フォーム"
+  ]
+ },
+ {
+  "id": "q-no-032",
+  "domain": "nodes",
+  "service": "変数集約器",
+  "difficulty": 2,
+  "question": "If-Elseで分かれた2つの分岐が、どちらも同じ型の文章を作る。後の処理を1つにまとめたいときに使うノードはどれですか。",
+  "choices": [
+   "変数アサイナー",
+   "変数集約器",
+   "リスト演算子",
+   "パラメータ抽出器"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "変数集約器は、If-Elseや質問分類器が作る排他的なブランチの出力を1つにまとめ、下流の処理を一度だけ定義すれば済むようにします。",
+  "wrongChoiceExplanations": {
+   "0": "会話変数に書き込むノード。",
+   "2": "配列の絞り込み・並べ替えをするノード。",
+   "3": "文章から構造化データを取り出すノード。"
+  },
+  "source": "Dify公式ドキュメント「変数集約器」",
+  "beginnerNote": "分かれた道を、また1本に戻す合流点。",
+  "tags": [
+   "変数集約器"
+  ]
+ },
+ {
+  "id": "q-no-033",
+  "domain": "nodes",
+  "service": "変数集約器",
+  "difficulty": 3,
+  "question": "並列ブランチ（同時に動く複数の道）の結果を1つにまとめたい。公式ドキュメントが案内しているノードはどれですか。",
+  "choices": [
+   "コード実行またはテンプレート",
+   "変数集約器",
+   "質問分類器",
+   "回答"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "変数集約器は一度に1つのパスだけが実行される排他的なブランチ向けで、並列ブランチの出力は結合できません。並列ブランチの結果をマージするにはコード実行かテンプレートノードを使います。",
+  "wrongChoiceExplanations": {
+   "1": "排他的な分岐専用で、並列の結合はできない。",
+   "2": "振り分けるノード。",
+   "3": "返答を出すノード。"
+  },
+  "source": "Dify公式ドキュメント「変数集約器」",
+  "beginnerNote": "「どちらか1本」なら集約器、「同時に何本も」ならコードかテンプレート。",
+  "tags": [
+   "変数集約器",
+   "並列"
+  ]
+ },
+ {
+  "id": "q-no-034",
+  "domain": "nodes",
+  "service": "変数アサイナー",
+  "difficulty": 2,
+  "question": "Chatflowで、会話の中で集めたToDoを配列の会話変数に1件ずつ足していきたい。変数アサイナーの操作モードはどれですか。",
+  "choices": [
+   "クリア",
+   "上書き",
+   "追加",
+   "算術演算"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "Array型の会話変数では、上書き・クリア・追加（最後に1要素を足す）・拡張（別の配列の全要素を足す）・最初/最後を削除が使えます。1件ずつ足すなら「追加」です。",
+  "wrongChoiceExplanations": {
+   "1": "全体を置き換えてしまう。",
+   "0": "全部消してしまう。",
+   "3": "Number型で使う操作。"
+  },
+  "source": "Dify公式ドキュメント「変数アサイナー」",
+  "beginnerNote": "リストに1つ足す＝追加、リストごと足す＝拡張。",
+  "tags": [
+   "変数アサイナー",
+   "会話変数"
+  ]
+ },
+ {
+  "id": "q-no-035",
+  "domain": "nodes",
+  "service": "変数アサイナー",
+  "difficulty": 2,
+  "question": "会話変数とワークフロー変数の違いとして正しいものはどれですか。",
+  "choices": [
+   "ワークフロー変数は会話をまたいで残る",
+   "会話変数は同じチャットセッションの複数ターンにわたって残り、ワークフロー変数は1回の実行が終わるとリセットされる",
+   "どちらもアプリ全体で共有される",
+   "どちらも1回の実行で消える"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ワークフロー変数は単一の実行中のみ存在し、完了するとリセットされます。会話変数は同じチャットセッション内の複数ターンにわたって持続します。",
+  "wrongChoiceExplanations": {
+   "0": "逆。",
+   "3": "会話変数は残る。",
+   "2": "全体共有は環境変数。"
+  },
+  "source": "Dify公式ドキュメント「変数アサイナー」",
+  "beginnerNote": "会話変数だけが次のターンまで持ち越せる。",
+  "tags": [
+   "会話変数"
+  ]
+ },
+ {
+  "id": "q-no-036",
+  "domain": "nodes",
+  "service": "パラメータ抽出器",
+  "difficulty": 1,
+  "question": "「来週火曜に東京で3人の会議室を予約したい」という文章から日付・場所・人数を取り出したい。適したノードはどれですか。",
+  "choices": [
+   "リスト演算子",
+   "変数集約器",
+   "テキスト抽出",
+   "パラメータ抽出器"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "パラメータ抽出器はLLMを使って非構造化テキストを構造化データに変換します。パラメータ名・データ型・説明・必須を定義して取り出します。",
+  "wrongChoiceExplanations": {
+   "2": "ファイルから文字を取り出すノード。",
+   "0": "配列を絞り込むノード。",
+   "1": "分岐の出力をまとめるノード。"
+  },
+  "source": "Dify公式ドキュメント「パラメータ抽出器」",
+  "beginnerNote": "文章→項目ごとの値に分解する係。",
+  "tags": [
+   "パラメータ抽出器"
+  ]
+ },
+ {
+  "id": "q-no-037",
+  "domain": "nodes",
+  "service": "パラメータ抽出器",
+  "difficulty": 3,
+  "question": "パラメータ抽出器で、抽出に失敗したかどうかを後続で判定するために使う組み込み変数はどれですか。",
+  "choices": [
+   "items と index",
+   "status_code と body",
+   "error_type と error_message",
+   "__is_success と __reason"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "パラメータ抽出器には抽出の成否（成功1・失敗0）を表す __is_success と、失敗時の理由 __reason が組み込み変数として出ます。失敗時のフォールバックは __is_success を見て作ります。",
+  "wrongChoiceExplanations": {
+   "2": "ノードのエラー処理（デフォルト値・失敗分岐）で使う変数。",
+   "1": "HTTPリクエストの出力。",
+   "0": "反復処理の組み込み変数。"
+  },
+  "source": "Dify公式ドキュメント「パラメータ抽出器」",
+  "beginnerNote": "取れたかどうかは __is_success を見る。",
+  "tags": [
+   "パラメータ抽出器"
+  ]
+ },
+ {
+  "id": "q-no-038",
+  "domain": "nodes",
+  "service": "HTTPリクエスト",
+  "difficulty": 2,
+  "question": "HTTPリクエストノードで、既存のリソースの一部の項目だけを更新したいときに使うメソッドはどれですか。",
+  "choices": [
+   "PUT",
+   "GET",
+   "PATCH",
+   "HEAD"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "PATCHは既存のリソースに部分的な更新を行います。PUTはリソースを作成または完全に置き換えます。GETは取得、HEADはヘッダーだけ取得です。",
+  "wrongChoiceExplanations": {
+   "1": "取得するメソッド。",
+   "0": "全体を置き換えるメソッド。",
+   "3": "ヘッダーだけ取得するメソッド。"
+  },
+  "source": "Dify公式ドキュメント「HTTP リクエスト」",
+  "beginnerNote": "一部だけ直す＝PATCH、丸ごと差し替え＝PUT。",
+  "tags": [
+   "HTTP"
+  ]
+ },
+ {
+  "id": "q-no-039",
+  "domain": "nodes",
+  "service": "HTTPリクエスト",
+  "difficulty": 2,
+  "question": "HTTPリクエストノードの認証で「Bearer」を選んだときに付くヘッダーはどれですか。",
+  "choices": [
+   "Authorization: Bearer <token>",
+   "X-API-KEY: <token>",
+   "Cookie: <token>",
+   "Authorization: Basic <base64>"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "APIキー認証には Basic・Bearer・カスタムの3つがあり、Bearerは Authorization: Bearer <token> ヘッダーを追加します。Basicはbase64エンコードのBasic Authヘッダー、カスタムは指定した名前と値のヘッダーです。",
+  "wrongChoiceExplanations": {
+   "3": "Basicを選んだときのヘッダー。",
+   "1": "カスタムで自分で作る形。",
+   "2": "Cookieは付かない。"
+  },
+  "source": "Dify公式ドキュメント「HTTP リクエスト」",
+  "beginnerNote": "Bearer＝「この合言葉を持っている人です」と名乗るヘッダー。",
+  "tags": [
+   "HTTP",
+   "認証"
+  ]
+ },
+ {
+  "id": "q-no-040",
+  "domain": "nodes",
+  "service": "HTTPリクエスト",
+  "difficulty": 3,
+  "question": "HTTPリクエストノードでSecret型の環境変数を使ったとき、ログ上の扱いはどれですか。",
+  "choices": [
+   "そのまま表示される",
+   "ログ自体が保存されない",
+   "値が空として送信される",
+   "実行ログとこのノードのリクエストログでマスクされて表示される"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "Secret型の環境変数の値は、ワークフロー実行ログとこのノードのリクエストログでマスクされて表示されます。",
+  "wrongChoiceExplanations": {
+   "0": "マスクされる。",
+   "1": "ログは保存される。",
+   "2": "値は正しく送られる。"
+  },
+  "source": "Dify公式ドキュメント「HTTP リクエスト」",
+  "beginnerNote": "秘密の値はログでは伏せ字になる。",
+  "tags": [
+   "HTTP",
+   "セキュリティ"
+  ]
+ },
+ {
+  "id": "q-no-041",
+  "domain": "nodes",
+  "service": "HTTPリクエスト",
+  "difficulty": 2,
+  "question": "HTTPリクエストノードの自動リトライの上限として正しいものはどれですか。",
+  "choices": [
+   "最大3回・間隔最大1000ms",
+   "最大5回・間隔最大10秒",
+   "最大10回・間隔最大5000ms",
+   "無制限"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "リトライ設定では、最大5000msの間隔で失敗したリクエストを最大10回まで自動でリトライできます。",
+  "wrongChoiceExplanations": {
+   "0": "上限が違う。",
+   "1": "上限が違う。",
+   "3": "上限がある。"
+  },
+  "source": "Dify公式ドキュメント「HTTP リクエスト」",
+  "beginnerNote": "LLM・コード・HTTPの再試行は「10回・5秒」と覚える。",
+  "tags": [
+   "HTTP",
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-042",
+  "domain": "nodes",
+  "service": "テキスト抽出",
+  "difficulty": 2,
+  "question": "テキスト抽出ノードにファイルリスト（複数ファイル）を入れたときの出力 text の型はどれですか。",
+  "choices": [
+   "object",
+   "file",
+   "array[string]",
+   "string"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "単一ファイル入力ではstring、複数ファイル入力では各ファイルの内容を含むarray[string]が出力されます。出力変数名はtextです。",
+  "wrongChoiceExplanations": {
+   "3": "単一ファイルのとき。",
+   "0": "objectではない。",
+   "1": "ファイルではなく文字列。"
+  },
+  "source": "Dify公式ドキュメント「テキスト抽出」",
+  "beginnerNote": "1つなら文字列、複数なら文字列の配列。",
+  "tags": [
+   "テキスト抽出"
+  ]
+ },
+ {
+  "id": "q-no-043",
+  "domain": "nodes",
+  "service": "テキスト抽出",
+  "difficulty": 2,
+  "question": "テキスト抽出ノードがExcelやCSVを読み込んだときの変換先はどれですか。",
+  "choices": [
+   "変換できない",
+   "JSON配列",
+   "画像",
+   "Markdownテーブル"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "スプレッドシート（.xls/.xlsx）やCSVはMarkdownテーブルに変換され、LLMが理解しやすい形になります。",
+  "wrongChoiceExplanations": {
+   "1": "JSONにはならない。",
+   "2": "画像にはならない。",
+   "0": "対応している。"
+  },
+  "source": "Dify公式ドキュメント「テキスト抽出」",
+  "beginnerNote": "表は表のまま（Markdownの表）で渡る。",
+  "tags": [
+   "テキスト抽出"
+  ]
+ },
+ {
+  "id": "q-no-044",
+  "domain": "nodes",
+  "service": "リスト演算子",
+  "difficulty": 2,
+  "question": "画像とPDFが混ざったファイルリストから画像だけを取り出したい。適したノードはどれですか。",
+  "choices": [
+   "質問分類器",
+   "リスト演算子（type = image でフィルタ）",
+   "テキスト抽出",
+   "変数集約器"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "リスト演算子は配列のフィルタリング・ソート・選択を行います。ファイル配列はタイプ（画像・文書・音声・動画）やMIMEタイプ、拡張子などで絞り込めます。",
+  "wrongChoiceExplanations": {
+   "3": "分岐の出力をまとめるノード。",
+   "2": "ファイルから文字を取り出すノード。",
+   "0": "文章の意味で振り分けるノード。"
+  },
+  "source": "Dify公式ドキュメント「リスト演算子」",
+  "beginnerNote": "混ざったファイルを種類ごとに仕分ける係。",
+  "tags": [
+   "リスト演算子",
+   "ファイル"
+  ]
+ },
+ {
+  "id": "q-no-045",
+  "domain": "nodes",
+  "service": "リスト演算子",
+  "difficulty": 3,
+  "question": "リスト演算子の出力変数として存在しないものはどれですか。",
+  "choices": [
+   "result",
+   "middle_record",
+   "first_record",
+   "last_record"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "出力変数は、絞り込み・並べ替え済みの配列 result、先頭の1件 first_record、末尾の1件 last_record です。",
+  "wrongChoiceExplanations": {
+   "0": "存在する。",
+   "2": "存在する。",
+   "3": "存在する。"
+  },
+  "source": "Dify公式ドキュメント「リスト演算子」",
+  "beginnerNote": "全部・最初・最後の3つ。",
+  "tags": [
+   "リスト演算子"
+  ]
+ },
+ {
+  "id": "q-no-046",
+  "domain": "nodes",
+  "service": "エラー処理",
+  "difficulty": 2,
+  "question": "LLMノードが失敗しても、決めておいた文章で処理を続けたい。エラー処理の設定はどれですか。",
+  "choices": [
+   "デフォルト値",
+   "再試行0回",
+   "なし",
+   "失敗分岐"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "「デフォルト値」はノードが失敗したときにバックアップ値を使って実行を続けます。デフォルト値はノードの出力型と一致する必要があります。「なし」は失敗でワークフロー全体が止まります。",
+  "wrongChoiceExplanations": {
+   "2": "失敗するとワークフロー全体が止まる。",
+   "3": "別のフローに流す方法。決めた文章で続けるならデフォルト値。",
+   "1": "そういう設定ではない。"
+  },
+  "source": "Dify公式ドキュメント「エラーの処理」",
+  "beginnerNote": "失敗したら代わりの答えを入れて先へ進む＝デフォルト値。",
+  "tags": [
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-047",
+  "domain": "nodes",
+  "service": "エラー処理",
+  "difficulty": 2,
+  "question": "メインのAPIが失敗したらバックアップのAPIを呼び出したい。エラー処理の設定はどれですか。",
+  "choices": [
+   "なし",
+   "変数集約器",
+   "失敗分岐",
+   "デフォルト値"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "「失敗分岐」はノードが失敗したときに別のフローを動かします。キャンバス上ではオレンジ色で強調表示され、通知送信やバックアップサービスの利用などができます。",
+  "wrongChoiceExplanations": {
+   "0": "止まってしまう。",
+   "3": "決まった値を入れて続けるだけで、別のAPIは呼ばない。",
+   "1": "エラー処理の設定ではない。"
+  },
+  "source": "Dify公式ドキュメント「エラーの処理」",
+  "beginnerNote": "失敗したら別ルートへ＝失敗分岐（オレンジの線）。",
+  "tags": [
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-048",
+  "domain": "nodes",
+  "service": "エラー処理",
+  "difficulty": 3,
+  "question": "エラー処理を「デフォルト値」か「失敗分岐」にしたとき、使えるようになる変数の組み合わせはどれですか。",
+  "choices": [
+   "error_type と error_message",
+   "__is_success と __reason",
+   "class_name と class_label",
+   "status_code と headers"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "デフォルト値または失敗分岐を使うと、エラーの種類 error_type と詳細 error_message の2つの変数が得られ、ユーザーへのメッセージやアラート送信に使えます。",
+  "wrongChoiceExplanations": {
+   "1": "パラメータ抽出器の組み込み変数。",
+   "3": "HTTPリクエストの出力。",
+   "2": "質問分類器の出力。"
+  },
+  "source": "Dify公式ドキュメント「エラーの処理」",
+  "beginnerNote": "何が起きたか＝error_type、詳しい中身＝error_message。",
+  "tags": [
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-no-049",
+  "domain": "nodes",
+  "service": "エラー処理",
+  "difficulty": 3,
+  "question": "ループノードの中の子ノードが失敗したときの動きとして正しいものはどれですか。",
+  "choices": [
+   "自動で10回再試行する",
+   "失敗した回だけ飛ばして続く",
+   "常に即座に停止し、ループ全体が終了してエラーを返す",
+   "エラー処理モードで続行を選べる"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "ループノードは子ノードが失敗すると常に即座に停止し、ループ全体が終了してエラーを返します。続行などを選べるのは反復ノードのエラー処理モードです。",
+  "wrongChoiceExplanations": {
+   "1": "ループでは飛ばせない。",
+   "3": "それは反復ノードの機能。",
+   "0": "自動再試行の仕組みではない。"
+  },
+  "source": "Dify公式ドキュメント「エラーの処理」",
+  "beginnerNote": "ループは1回でも転んだら止まる。",
+  "tags": [
+   "ループ",
+   "エラー処理"
+  ]
+ },
+ {
+  "id": "q-de-001",
+  "domain": "nodes",
+  "service": "デバッグ",
+  "difficulty": 2,
+  "question": "単一ノードテスト（ノードを1つだけ実行）に対応していないノードはどれですか。",
+  "choices": [
+   "回答（Answer）ノードと終了（End）ノード",
+   "コードノード",
+   "LLMノード",
+   "HTTPリクエストノード"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "任意のノードを個別にテストできますが、AnswerノードとEndノードは単一ノードテストをサポートしていません。",
+  "wrongChoiceExplanations": {
+   "2": "テストできる。",
+   "1": "テストできる。",
+   "3": "テストできる。"
+  },
+  "source": "Dify公式ドキュメント「単一ノード」",
+  "beginnerNote": "出口のノードは単体では動かせない。",
+  "tags": [
+   "デバッグ"
+  ]
+ },
+ {
+  "id": "q-de-002",
+  "domain": "nodes",
+  "service": "変数インスペクター",
+  "difficulty": 2,
+  "question": "変数インスペクターで変数の値を編集したときの動きとして正しいものはどれですか。",
+  "choices": [
+   "元のノードの「最後の実行」記録も書き換わる",
+   "下流のノードを実行すると、編集した値が使われる",
+   "上流のノードが自動で再実行される",
+   "公開版にも反映される"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "変数インスペクターで値を編集して下流のノードを実行すると、元の値ではなく編集した値が使われます。元のノードの「最後の実行」記録は変わりません。",
+  "wrongChoiceExplanations": {
+   "2": "上流は再実行されない。",
+   "0": "最後の実行記録は変更されない。",
+   "3": "テスト用の値で、公開版には関係しない。"
+  },
+  "source": "Dify公式ドキュメント「変数インスペクター」",
+  "beginnerNote": "途中の値を書き換えて、その先だけ試せる。",
+  "tags": [
+   "デバッグ",
+   "変数インスペクター"
+  ]
+ },
+ {
+  "id": "q-de-003",
+  "domain": "nodes",
+  "service": "実行履歴",
+  "difficulty": 2,
+  "question": "実行履歴の「実行追跡」で確認できる内容はどれですか。",
+  "choices": [
+   "チームメンバーの一覧",
+   "どのノードがどの順序で実行され、それぞれ何秒かかったか",
+   "ナレッジベースのチャンク",
+   "アプリの公開URL"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "実行追跡では、どのノードがどの順序で実行されたか、それぞれにかかった時間、ノード間のデータの流れを確認でき、ボトルネック探しに役立ちます。",
+  "wrongChoiceExplanations": {
+   "3": "公開設定で確認する。",
+   "0": "ワークスペースで確認する。",
+   "2": "ナレッジ側で確認する。"
+  },
+  "source": "Dify公式ドキュメント「実行履歴」",
+  "beginnerNote": "どこで時間がかかったかを見る画面。",
+  "tags": [
+   "デバッグ",
+   "実行履歴"
+  ]
+ },
+ {
+  "id": "q-tr-001",
+  "domain": "nodes",
+  "service": "スケジュールトリガー",
+  "difficulty": 2,
+  "question": "スケジュールトリガーについて正しいものはどれですか。",
+  "choices": [
+   "Workflowでのみ使え、1つのワークフローに最大1つ",
+   "Chatflowでも使える",
+   "出力変数として日時を返す",
+   "1つのワークフローに何個でも置ける"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "トリガーはWorkflowでのみ使え、各ワークフローに設定できるスケジュールトリガーは最大1つです。出力変数は作りませんが、実行のたびにシステム変数 sys.timestamp を更新します。",
+  "wrongChoiceExplanations": {
+   "1": "Workflow専用。",
+   "3": "最大1つ。",
+   "2": "出力変数は作らない（sys.timestampが更新される）。"
+  },
+  "source": "Dify公式ドキュメント「スケジュールトリガー」",
+  "beginnerNote": "時計で動かせるのはWorkflowだけ、1つまで。",
+  "tags": [
+   "トリガー"
+  ]
+ },
+ {
+  "id": "q-tr-002",
+  "domain": "nodes",
+  "service": "スケジュールトリガー",
+  "difficulty": 3,
+  "question": "「平日の午前9時」に実行するCron式として正しいものはどれですか。",
+  "choices": [
+   "9 0 * * 1-5",
+   "0 9 * * 1-5",
+   "0 0 9 * MON-FRI",
+   "0 9 1-5 * *"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "Cron式は「分 時 日 月 曜日」の5つのフィールドです。平日の午前9時は 0 9 * * 1-5（または 0 9 * * MON-FRI）です。",
+  "wrongChoiceExplanations": {
+   "0": "9分0時になってしまう。",
+   "3": "毎月1〜5日の9時になる。",
+   "2": "フィールドの位置がずれている。"
+  },
+  "source": "Dify公式ドキュメント「スケジュールトリガー」",
+  "beginnerNote": "左から 分・時・日・月・曜日。",
+  "tags": [
+   "トリガー",
+   "Cron"
+  ]
+ },
+ {
+  "id": "q-tr-003",
+  "domain": "nodes",
+  "service": "スケジュールトリガー",
+  "difficulty": 3,
+  "question": "スケジュールトリガーで「このステップを実行」と「テスト実行」の違いとして正しいものはどれですか。",
+  "choices": [
+   "「テスト実行」は即座に実行し、「このステップを実行」は次の予定時刻まで待つ",
+   "どちらも即座に実行される",
+   "どちらも次の予定時刻まで待つ",
+   "「このステップを実行」は即座に実行し、「テスト実行」は次の予定時刻まで待つ"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "「このステップを実行」ではスケジュールを無視して即座に実行し、「テスト実行」では次回の予定実行時刻まで待機します。",
+  "wrongChoiceExplanations": {
+   "1": "テスト実行は待つ。",
+   "0": "逆。",
+   "2": "このステップを実行はすぐ動く。"
+  },
+  "source": "Dify公式ドキュメント「スケジュールトリガー」",
+  "beginnerNote": "すぐ試すなら「このステップを実行」。",
+  "tags": [
+   "トリガー",
+   "デバッグ"
+  ]
+ },
+ {
+  "id": "q-op-001",
+  "domain": "ops",
+  "service": "バージョン管理",
+  "difficulty": 2,
+  "question": "バージョン管理で、ユーザーに公開されていない作業中のものはどれですか。",
+  "choices": [
+   "名前付きバージョン",
+   "最新バージョン",
+   "現在のドラフト",
+   "以前のバージョン"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "現在のドラフトは作業中のバージョンでユーザーには公開されていません。最新バージョンはユーザーが見る公開版、以前のバージョンは古い公開版です。",
+  "wrongChoiceExplanations": {
+   "1": "ユーザーが見ている公開版。",
+   "3": "古い公開版。",
+   "0": "名前を付けた公開版。"
+  },
+  "source": "Dify公式ドキュメント「バージョン管理」",
+  "beginnerNote": "ドラフト＝下書き。公開するまで誰にも見えない。",
+  "tags": [
+   "バージョン管理"
+  ]
+ },
+ {
+  "id": "q-op-002",
+  "domain": "ops",
+  "service": "バージョン管理",
+  "difficulty": 3,
+  "question": "古いバージョンを「復元」したときの動きとして正しいものはどれですか。",
+  "choices": [
+   "現在のドラフトと古いバージョンが合体する",
+   "古いバージョンがドラフトに読み込まれ、現在のドラフトは完全に置き換えられる",
+   "新しいアプリとして複製される",
+   "すぐに公開版が古いバージョンに戻る"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "バージョンの復元は古いバージョンをドラフトに読み込み直します。現在のドラフトは完全に置き換えられるため、保存していない作業がないか確認してから行います。公開するには改めて公開します。",
+  "wrongChoiceExplanations": {
+   "3": "ドラフトに戻るだけで、公開は別操作。",
+   "0": "合体はしない。",
+   "2": "複製はされない。"
+  },
+  "source": "Dify公式ドキュメント「バージョン管理」",
+  "beginnerNote": "復元＝下書きを昔の状態に戻す。今の下書きは消える。",
+  "tags": [
+   "バージョン管理"
+  ]
+ },
+ {
+  "id": "q-op-003",
+  "domain": "ops",
+  "service": "バージョン管理",
+  "difficulty": 2,
+  "question": "削除できないバージョンの組み合わせはどれですか。",
+  "choices": [
+   "自動生成名のバージョンすべて",
+   "以前のバージョンと名前付きバージョン",
+   "現在のドラフトと最新バージョン",
+   "削除できないものはない"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "現在のドラフトと最新バージョンは削除できません。不要な古いバージョンは削除できます。",
+  "wrongChoiceExplanations": {
+   "1": "古いバージョンは削除できる。",
+   "0": "削除できる。",
+   "3": "削除できないものがある。"
+  },
+  "source": "Dify公式ドキュメント「バージョン管理」",
+  "beginnerNote": "いま使っている2つ（下書きと公開版）は消せない。",
+  "tags": [
+   "バージョン管理"
+  ]
+ },
+ {
+  "id": "q-op-004",
+  "domain": "ops",
+  "service": "ホットキー",
+  "difficulty": 2,
+  "question": "ワークフロー編集画面で、ノードを自動で整列させるショートカット（Windows）はどれですか。",
+  "choices": [
+   "Alt + R",
+   "Ctrl + 1",
+   "Ctrl + D",
+   "Ctrl + O"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "Ctrl + O（macOSはCmd + O）でノードを自動整列します。Ctrl + Dは複製、Ctrl + 1はビューに合わせる、Alt + Rはテスト実行です。",
+  "wrongChoiceExplanations": {
+   "2": "複製。",
+   "1": "ビューに合わせる。",
+   "0": "テスト実行。"
+  },
+  "source": "Dify公式ドキュメント「ホットキー」",
+  "beginnerNote": "散らかったら Ctrl + O。",
+  "tags": [
+   "操作",
+   "ショートカット"
+  ]
+ },
+ {
+  "id": "q-op-005",
+  "domain": "ops",
+  "service": "ホットキー",
+  "difficulty": 2,
+  "question": "ワークフローをテスト実行するショートカット（Windows）はどれですか。",
+  "choices": [
+   "Alt + R",
+   "Ctrl + Enter",
+   "F5",
+   "Shift + R"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "テスト実行は Alt + R（macOSは Option + R）です。",
+  "wrongChoiceExplanations": {
+   "1": "案内されていない。",
+   "3": "案内されていない。",
+   "2": "案内されていない。"
+  },
+  "source": "Dify公式ドキュメント「ホットキー」",
+  "beginnerNote": "Run の R、Alt + R。",
+  "tags": [
+   "操作",
+   "ショートカット"
+  ]
+ },
+ {
+  "id": "q-op-006",
+  "domain": "ops",
+  "service": "ホットキー",
+  "difficulty": 3,
+  "question": "選んだノードがどの変数とつながっているかをハイライトする操作はどれですか。",
+  "choices": [
+   "Spaceを長押し",
+   "Shiftを長押し",
+   "Ctrlを長押し",
+   "Altを長押し"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ノードを選択した状態でShiftを長押しすると、選択したノードの変数のつながりがハイライトされます。",
+  "wrongChoiceExplanations": {
+   "2": "案内されていない。",
+   "3": "案内されていない。",
+   "0": "案内されていない。"
+  },
+  "source": "Dify公式ドキュメント「ホットキー」",
+  "beginnerNote": "Shiftを押している間だけ、変数の糸が光る。",
+  "tags": [
+   "操作",
+   "ショートカット"
+  ]
+ },
+ {
+  "id": "q-op-007",
+  "domain": "ops",
+  "service": "Go to Anything",
+  "difficulty": 2,
+  "question": "Dify内のどこからでもアプリやノードを検索してジャンプできるショートカット（Windows）はどれですか。",
+  "choices": [
+   "Ctrl + F",
+   "Ctrl + P",
+   "Ctrl + K",
+   "Ctrl + G"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "Go to Anythingは Ctrl + K（macOSは Cmd + K）で開きます。@ でアプリ・インテグレーション・ナレッジベース・ノードを検索し、/ で /docs などのコマンドを実行できます。",
+  "wrongChoiceExplanations": {
+   "0": "案内されていない。",
+   "1": "案内されていない。",
+   "3": "案内されていない。"
+  },
+  "source": "Dify公式ドキュメント「ホットキー」",
+  "beginnerNote": "迷子になったら Ctrl + K。",
+  "tags": [
+   "操作",
+   "ショートカット"
+  ]
+ },
+ {
+  "id": "q-op-008",
+  "domain": "ops",
+  "service": "ホットキー",
+  "difficulty": 1,
+  "question": "キャンバスで「ハンドモード（画面をつかんで動かす）」に切り替えるキーはどれですか。",
+  "choices": [
+   "V",
+   "M",
+   "C",
+   "H"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "Vはポインターモード（選択）、Hはハンドモード（パン）、Cはコメントモードです。",
+  "wrongChoiceExplanations": {
+   "0": "ポインターモード。",
+   "2": "コメントモード。",
+   "1": "割り当てはない。"
+  },
+  "source": "Dify公式ドキュメント「ホットキー」",
+  "beginnerNote": "Hand の H。",
+  "tags": [
+   "操作",
+   "ショートカット"
+  ]
+ },
+ {
+  "id": "q-kn-001",
+  "domain": "knowledge",
+  "service": "チャンク",
+  "difficulty": 1,
+  "question": "ナレッジベースに取り込んだ文書を小さな単位に分けたもの（検索の単位）を何と呼びますか。",
+  "choices": [
+   "チャンク",
+   "トークン",
+   "ノード",
+   "セグメントID"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "ナレッジベースにインポートされた文書はチャンクと呼ばれる小さなセグメントに分割されます。質問が来るとシステムはチャンクから関連情報を探し、LLMにコンテキストとして渡します。",
+  "wrongChoiceExplanations": {
+   "1": "トークンはモデルが数える文字のかたまり。",
+   "2": "ノードはワークフローの部品。",
+   "3": "そういう呼び名ではない。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "本を章や段落に分けておくイメージ。",
+  "tags": [
+   "ナレッジ",
+   "チャンク"
+  ]
+ },
+ {
+  "id": "q-kn-002",
+  "domain": "knowledge",
+  "service": "チャンク",
+  "difficulty": 2,
+  "question": "区切り文字に「A」を指定したとき、「CBACD」はどう分割されますか。",
+  "choices": [
+   "CB と CD",
+   "CBACD のまま",
+   "CB と ACD",
+   "CBA と CD"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "区切り文字はチャンク化の際に削除されるため、「CBACD」は「CB」と「CD」に分割されます。情報が消えないよう、文書に自然に出てこない文字を区切り文字に使います。",
+  "wrongChoiceExplanations": {
+   "3": "区切り文字は前のチャンクに残らない。",
+   "2": "区切り文字は後ろのチャンクにも残らない。",
+   "1": "区切り文字があれば分割される。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "区切り文字は「はさみ」で、切った所の文字は消える。",
+  "tags": [
+   "チャンク"
+  ]
+ },
+ {
+  "id": "q-kn-003",
+  "domain": "knowledge",
+  "service": "チャンク",
+  "difficulty": 2,
+  "question": "汎用モードで「チャンクのオーバーラップ」を50文字にする目的として正しいものはどれですか。",
+  "choices": [
+   "検索結果を50件に制限する",
+   "隣り合うチャンクで50文字を重ね、境目で意味が切れないようにする",
+   "50文字未満のチャンクを削除する",
+   "チャンクの数を半分にする"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "オーバーラップは隣接するチャンク間で重複させる文字数で、意味のつながりを保ち、重要な情報がチャンクの境界で分断されるのを防ぎます。50文字なら、あるチャンクの最後の50文字が次のチャンクの最初の50文字にもなります。",
+  "wrongChoiceExplanations": {
+   "3": "数を減らす機能ではない。",
+   "2": "削除の機能ではない。",
+   "0": "件数の制限はトップK。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "のりしろを付けて、つなぎ目の話を失わない。",
+  "tags": [
+   "チャンク"
+  ]
+ },
+ {
+  "id": "q-kn-004",
+  "domain": "knowledge",
+  "service": "親子モード",
+  "difficulty": 2,
+  "question": "親子モードの検索の仕組みとして正しいものはどれですか。",
+  "choices": [
+   "親チャンクで照合し、子チャンクを返す",
+   "チャンクを使わず文書全体を返す",
+   "親と子を両方照合して両方返す",
+   "子チャンクで照合し、その親チャンク全体を返す"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "親子モードでは小さな子チャンクで質問と照合し、一致すると大きな親チャンク全体を検索結果として返します。小さいチャンクの正確さと、大きいチャンクの文脈の豊かさを両立します。",
+  "wrongChoiceExplanations": {
+   "0": "逆。",
+   "2": "返すのは親チャンク。",
+   "1": "チャンクを使う。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "小さい付箋で見つけて、そのページごと渡す。",
+  "tags": [
+   "親子モード"
+  ]
+ },
+ {
+  "id": "q-kn-005",
+  "domain": "knowledge",
+  "service": "親子モード",
+  "difficulty": 3,
+  "question": "汎用モードと親子モードについて正しいものはどれですか。",
+  "choices": [
+   "親子モードはFAQなど短い自己完結の内容向け",
+   "親子モードは「高品質」インデックスでのみ使える",
+   "チャンクモードは作成後いつでも変更できる",
+   "汎用モードは「高品質」でしか使えない"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "比較表では、汎用モードは高品質・経済的の両方、親子モードは高品質のみに対応します。チャンクモードはナレッジベース作成後に変更できません（区切り文字などの設定は調整可能）。",
+  "wrongChoiceExplanations": {
+   "2": "モードは作成後に変更できない。",
+   "0": "FAQなどは汎用モード向け。親子は技術マニュアルなど文脈が大事な文書向け。",
+   "3": "汎用モードは経済的でも使える。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "モードは最初に決めたら変えられない。",
+  "tags": [
+   "親子モード",
+   "インデックス"
+  ]
+ },
+ {
+  "id": "q-kn-006",
+  "domain": "knowledge",
+  "service": "親子モード",
+  "difficulty": 3,
+  "question": "親チャンクを「全文」モードにしたときの注意点として正しいものはどれですか。",
+  "choices": [
+   "文書が自動で10分割される",
+   "子チャンクが作られない",
+   "最初の10,000トークンのみ処理され、超えた分は切り捨てられる",
+   "画像も自動で文字にされる"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "全文モードでは文書全体が1つの親チャンクになりますが、最初の10,000トークンのみ処理され、超えた分は切り捨てられます。また親チャンクは作成後に編集できません。",
+  "wrongChoiceExplanations": {
+   "0": "分割はされない（全体で1つ）。",
+   "1": "子チャンクは作られる。",
+   "3": "そういう機能ではない。"
+  },
+  "source": "Dify公式ドキュメント「チャンク設定」",
+  "beginnerNote": "全文モードは短くまとまった文書向け。",
+  "tags": [
+   "親子モード"
+  ]
+ },
+ {
+  "id": "q-kn-007",
+  "domain": "knowledge",
+  "service": "インデックス方法",
+  "difficulty": 2,
+  "question": "「高品質」と「エコノミー」のインデックス方法について正しいものはどれですか。",
+  "choices": [
+   "エコノミーはトークンを多く消費する",
+   "高品質で作ったナレッジベースは後からエコノミーに切り替えられる",
+   "エコノミーはベクトル検索とハイブリッド検索に対応する",
+   "高品質は埋め込みモデルでベクトル化し、意味の近さで検索できる"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "高品質は埋め込みモデルでチャンクをベクトルに変換し、意味的な類似性で検索します。エコノミーは各チャンク10個のキーワードと逆引きインデックスで検索し、精度は下がりますがトークンを消費しません。高品質からエコノミーへは切り替えられません（エコノミーから高品質へは可能）。",
+  "wrongChoiceExplanations": {
+   "2": "エコノミーは逆引きインデックスのみ。",
+   "1": "高品質→エコノミーには戻せない。",
+   "0": "エコノミーはトークンを消費しない。"
+  },
+  "source": "Dify公式ドキュメント「インデックス方法と検索設定を指定」",
+  "beginnerNote": "高品質＝意味で探す、エコノミー＝キーワードで探す（無料）。",
+  "tags": [
+   "インデックス"
+  ]
+ },
+ {
+  "id": "q-kn-008",
+  "domain": "knowledge",
+  "service": "検索設定",
+  "difficulty": 2,
+  "question": "「高品質」インデックスで選べる3つの検索方法の組み合わせはどれですか。",
+  "choices": [
+   "ベクトル検索・逆引き検索・正規表現検索",
+   "ベクトル検索・全文検索・ハイブリッド検索",
+   "キーワード検索・画像検索・音声検索",
+   "全文検索・SQL検索・ハイブリッド検索"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "高品質インデックスでは、ベクトル検索、全文検索、ハイブリッド検索の3つの検索設定が使えます。",
+  "wrongChoiceExplanations": {
+   "2": "この組み合わせではない。",
+   "0": "この組み合わせではない。",
+   "3": "SQL検索はない。"
+  },
+  "source": "Dify公式ドキュメント「インデックス方法と検索設定を指定」",
+  "beginnerNote": "意味で探す・言葉で探す・両方、の3つ。",
+  "tags": [
+   "検索設定"
+  ]
+ },
+ {
+  "id": "q-kn-009",
+  "domain": "knowledge",
+  "service": "検索設定",
+  "difficulty": 3,
+  "question": "検索設定のトップKとScoreしきい値のデフォルト値の組み合わせはどれですか。",
+  "choices": [
+   "トップK 3／しきい値 0.5",
+   "トップK 10／しきい値 0.3",
+   "トップK 5／しきい値 0.7",
+   "トップK 1／しきい値 0.9"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "トップKのデフォルト値は3、Scoreしきい値のデフォルト値は0.5です。しきい値を高くするほど類似度の要求が厳しくなり、取得されるチャンクは減ります。",
+  "wrongChoiceExplanations": {
+   "2": "デフォルトではない。",
+   "1": "デフォルトではない。",
+   "3": "デフォルトではない。"
+  },
+  "source": "Dify公式ドキュメント「インデックス方法と検索設定を指定」",
+  "beginnerNote": "3件・0.5点が初期値。",
+  "tags": [
+   "検索設定"
+  ]
+ },
+ {
+  "id": "q-kn-010",
+  "domain": "knowledge",
+  "service": "検索設定",
+  "difficulty": 3,
+  "question": "ハイブリッド検索の「重み付け設定」で「意味」の値を1にしたときの動きはどれですか。",
+  "choices": [
+   "意味検索（ベクトル検索）だけになる",
+   "両方を半分ずつ使う",
+   "Rerankモデルが必須になる",
+   "キーワード検索だけになる"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "意味値を1にすると意味検索モードのみ、キーワード値を1にするとキーワード検索モードのみが有効になります。両方の重みを調整して最適な比率を探すこともできます。",
+  "wrongChoiceExplanations": {
+   "3": "キーワード値を1にしたとき。",
+   "1": "半分ずつにするなら重みを調整する。",
+   "2": "重み付け設定ではRerankモデルAPIは不要。"
+  },
+  "source": "Dify公式ドキュメント「インデックス方法と検索設定を指定」",
+  "beginnerNote": "意味1＝意味だけ、キーワード1＝言葉だけ。",
+  "tags": [
+   "ハイブリッド検索"
+  ]
+ },
+ {
+  "id": "q-kn-011",
+  "domain": "knowledge",
+  "service": "Rerank",
+  "difficulty": 2,
+  "question": "Rerankモデルの役割として正しいものはどれですか。",
+  "choices": [
+   "文書を翻訳する",
+   "チャンクを要約する",
+   "検索で返ったチャンクを質問との関連度で並べ替える",
+   "文書をチャンクに分ける"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "Rerankモデルは検索で返されたテキストチャンクを並べ替えて結果を最適化します。有効にするとRerankモデルのトークンを消費します。デフォルトでは無効です。",
+  "wrongChoiceExplanations": {
+   "3": "分割はチャンク設定の役割。",
+   "0": "翻訳はしない。",
+   "1": "要約はしない。"
+  },
+  "source": "Dify公式ドキュメント「インデックス方法と検索設定を指定」",
+  "beginnerNote": "見つかった候補を、より合っている順に並べ直す係。",
+  "tags": [
+   "Rerank"
+  ]
+ },
+ {
+  "id": "q-kn-012",
+  "domain": "knowledge",
+  "service": "知識検索ノード",
+  "difficulty": 2,
+  "question": "知識検索ノードの出力変数名はどれですか。",
+  "choices": [
+   "context",
+   "result",
+   "text",
+   "chunks"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "知識検索ノードの出力は result という変数で、検索されたチャンクの配列です。各チャンクには内容・メタデータ・タイトルなどが含まれます。",
+  "wrongChoiceExplanations": {
+   "2": "テキスト抽出などの出力名。",
+   "0": "LLMノード側の入力欄の名前。",
+   "3": "そういう名前ではない。"
+  },
+  "source": "Dify公式ドキュメント「従来型の知識検索」",
+  "beginnerNote": "検索結果は result に入る。",
+  "tags": [
+   "知識検索"
+  ]
+ },
+ {
+  "id": "q-kn-013",
+  "domain": "knowledge",
+  "service": "知識検索ノード",
+  "difficulty": 3,
+  "question": "検索設定の「ナレッジベースレベル」と「ノードレベル」の関係として正しいものはどれですか。",
+  "choices": [
+   "どちらか片方しか使えない",
+   "同じ設定なので区別はない",
+   "ノードの設定が先に効き、ナレッジベースの設定が後で絞り込む",
+   "ナレッジベースの設定が最初の結果を決め、ノードの設定がさらに並べ替え・絞り込みをする"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "検索設定には2つのレイヤーがあり、連続した2つのフィルターのように働きます。ナレッジベースの設定が最初の結果プールを決め、ノードの設定がさらに再ランク付けや絞り込みをします。",
+  "wrongChoiceExplanations": {
+   "2": "順番が逆。",
+   "0": "両方が順に効く。",
+   "1": "別のレイヤー。"
+  },
+  "source": "Dify公式ドキュメント「従来型の知識検索」",
+  "beginnerNote": "1段目のふるい＝ナレッジベース、2段目のふるい＝ノード。",
+  "tags": [
+   "知識検索",
+   "検索設定"
+  ]
+ },
+ {
+  "id": "q-kn-014",
+  "domain": "knowledge",
+  "service": "メタデータ",
+  "difficulty": 2,
+  "question": "ナレッジベースのメタデータで使える値タイプの組み合わせはどれですか。",
+  "choices": [
+   "数値・画像・時間",
+   "文字列・真偽値・配列",
+   "文字列・オブジェクト・ファイル",
+   "文字列・数値・時間"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "メタデータは文字列（String）・数値（Number）・時間（Time）の3種類の値タイプに対応しています。",
+  "wrongChoiceExplanations": {
+   "1": "真偽値・配列はない。",
+   "0": "画像はない。",
+   "2": "オブジェクト・ファイルはない。"
+  },
+  "source": "Dify公式ドキュメント「ドキュメントのメタデータを管理」",
+  "beginnerNote": "文字・数・日時の3つ。",
+  "tags": [
+   "メタデータ"
+  ]
+ },
+ {
+  "id": "q-kn-015",
+  "domain": "knowledge",
+  "service": "メタデータ",
+  "difficulty": 3,
+  "question": "メタデータのフィールド名に使える文字として正しいものはどれですか。",
+  "choices": [
+   "小文字・数字・アンダースコア",
+   "大文字・小文字・スペース",
+   "日本語を含む任意の文字",
+   "英数字とハイフン"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "フィールド名は小文字、数字、アンダースコア（_）のみ使え、スペースや大文字は使えません。",
+  "wrongChoiceExplanations": {
+   "1": "大文字・スペースは使えない。",
+   "2": "使える文字は限られる。",
+   "3": "ハイフンではなくアンダースコア。"
+  },
+  "source": "Dify公式ドキュメント「ドキュメントのメタデータを管理」",
+  "beginnerNote": "doc_type のように小文字＋_ で書く。",
+  "tags": [
+   "メタデータ"
+  ]
+ },
+ {
+  "id": "q-kn-016",
+  "domain": "knowledge",
+  "service": "メタデータ",
+  "difficulty": 3,
+  "question": "ビルトインメタデータについて正しいものはどれですか。",
+  "choices": [
+   "ユーザーが手で値を入れる",
+   "デフォルトは無効で、有効にするとシステムが自動で値を作り、その値は修正できない",
+   "新しく上げた文書にだけ付く",
+   "最初から有効で、自由に値を書き換えられる"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ビルトインメタデータはデフォルトでは無効で、有効にするとdocument_name、uploader、upload_dateなどの値をシステムが自動で抽出します。一度生成されるとフィールドと値は修正できず、既存と新規のすべての文書に適用されます。",
+  "wrongChoiceExplanations": {
+   "3": "デフォルトは無効で、値は修正できない。",
+   "0": "手で入れるのはカスタムメタデータ。",
+   "2": "既存の文書にも適用される。"
+  },
+  "source": "Dify公式ドキュメント「ドキュメントのメタデータを管理」",
+  "beginnerNote": "ビルトイン＝自動で付く名札。書き換え不可。",
+  "tags": [
+   "メタデータ"
+  ]
+ },
+ {
+  "id": "q-kn-017",
+  "domain": "knowledge",
+  "service": "メタデータ",
+  "difficulty": 2,
+  "question": "知識検索ノードで「メタデータフィルタ」を有効にしたときの効果はどれですか。",
+  "choices": [
+   "メタデータの条件に合う文書だけを検索対象にする",
+   "メタデータを自動生成する",
+   "すべての文書を検索した後で並べ替える",
+   "検索結果にメタデータを付けない"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "メタデータフィルタを有効にすると、ナレッジベース全体ではなく指定したメタデータ条件に一致する文書だけを検索します。大きく多様なナレッジベースで狙いを絞った検索に役立ちます。",
+  "wrongChoiceExplanations": {
+   "1": "生成はしない。",
+   "3": "そういう機能ではない。",
+   "2": "検索する前に対象を絞る。"
+  },
+  "source": "Dify公式ドキュメント「従来型の知識検索」",
+  "beginnerNote": "「2026年版の規程だけ」のように探す範囲を先に絞る。",
+  "tags": [
+   "メタデータ",
+   "知識検索"
+  ]
+ },
+ {
+  "id": "q-kn-018",
+  "domain": "knowledge",
+  "service": "検索テスト",
+  "difficulty": 2,
+  "question": "ナレッジベースの「検索テスト」ページで変えた検索設定の扱いはどれですか。",
+  "choices": [
+   "ナレッジベースの設定として保存される",
+   "一時的なもので、そのテストセッションにだけ適用される",
+   "接続している全アプリに反映される",
+   "テスト後に自動で最適値が保存される"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "検索テストページで調整した検索設定は一時的なもので、現在のテストセッションにのみ適用されます。「記録」には、テストページのクエリとリンクされたアプリからの検索の両方が残ります。",
+  "wrongChoiceExplanations": {
+   "0": "保存されない。",
+   "2": "アプリには反映されない。",
+   "3": "自動保存はされない。"
+  },
+  "source": "Dify公式ドキュメント「ナレッジ検索テスト」",
+  "beginnerNote": "検索テストは試し打ち。本番の設定は別に変える。",
+  "tags": [
+   "検索テスト"
+  ]
+ },
+ {
+  "id": "q-kn-019",
+  "domain": "knowledge",
+  "service": "ナレッジベースの種類",
+  "difficulty": 2,
+  "question": "すでに社内で運用しているナレッジベースを、中身をDifyに移さずに使いたい。適した方法はどれですか。",
+  "choices": [
+   "ナレッジパイプラインで作り直す",
+   "すぐに使えるナレッジベースを作成する",
+   "DSLでインポートする",
+   "外部ナレッジベースとAPIで連携する"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "外部ナレッジベースとの連携では、すでに運用しているナレッジベースをAPI経由で検索します。コンテンツをDifyに移す必要はありません。",
+  "wrongChoiceExplanations": {
+   "1": "データをインポートして作る方法。",
+   "0": "取り込み処理を独自に設計する方法。",
+   "2": "DSLにナレッジベースのデータは含まれない。"
+  },
+  "source": "Dify公式ドキュメント「従来型ナレッジベース」",
+  "beginnerNote": "中身はそのまま、検索だけDifyから呼ぶ。",
+  "tags": [
+   "外部ナレッジ"
+  ]
+ },
+ {
+  "id": "q-op-009",
+  "domain": "ops",
+  "service": "公開",
+  "difficulty": 1,
+  "question": "作ったアプリをいちばん早く人に使ってもらう方法として公式ドキュメントが案内しているのはどれですか。",
+  "choices": [
+   "DSLを相手に送る",
+   "「公開する」をクリックし、アクセスポイントタブのWebアプリのリンクを共有する",
+   "APIを自分のサービスに組み込む",
+   "アプリをマーケットプレイスに申請する"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "共有への最速の道筋はWebアプリです。「公開する」で最新版を有効にし、「アクセスポイント」タブのWebアプリのリンクを送ればすぐ使ってもらえます。",
+  "wrongChoiceExplanations": {
+   "2": "製品に組み込むときの方法で、手間がかかる。",
+   "3": "最速の方法ではない。",
+   "0": "相手が自分で構築し直す必要がある。"
+  },
+  "source": "Dify公式ドキュメント「AI アプリの共有」",
+  "beginnerNote": "公開→リンクをコピー→送る、の3ステップ。",
+  "tags": [
+   "公開",
+   "Webアプリ"
+  ]
+ },
+ {
+  "id": "q-op-010",
+  "domain": "ops",
+  "service": "公開",
+  "difficulty": 2,
+  "question": "「公開」をクリックしたときに起きることとして正しいものはどれですか。",
+  "choices": [
+   "次の日に反映される",
+   "APIだけが更新される",
+   "Webアプリ・API・埋め込み・MCPサーバーのすべてで最新の設定が有効になる",
+   "Webアプリだけが更新される"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "公開すると、Difyはすべてのチャネル（Webアプリ・APIエンドポイント・埋め込みウィジェット・MCPサーバー）で最新の設定を有効にします。ユーザーは次の操作から変更を目にします。",
+  "wrongChoiceExplanations": {
+   "3": "すべてのチャネルに反映される。",
+   "1": "すべてのチャネルに反映される。",
+   "0": "即座に反映される。"
+  },
+  "source": "Dify公式ドキュメント「AI アプリの共有」",
+  "beginnerNote": "公開ボタン1つで、全部の出口が新しくなる。",
+  "tags": [
+   "公開"
+  ]
+ },
+ {
+  "id": "q-op-011",
+  "domain": "ops",
+  "service": "MCPサーバー",
+  "difficulty": 2,
+  "question": "DifyアプリをMCPサーバーとして公開したときのURLの扱いとして正しいものはどれですか。",
+  "choices": [
+   "Webアプリと同じURL",
+   "一度作ると変更できない",
+   "認証情報を含むのでAPIキーのように扱い、漏れたら再生成する",
+   "誰に見せても問題ない"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "MCPサーバーURLには認証資格情報が含まれるため、APIキーのように扱います。漏洩の疑いがあれば再生成ボタンで新しいURLを作り、古いURLはすぐに使えなくなります。MCPサーバーはデフォルトで無効です。",
+  "wrongChoiceExplanations": {
+   "3": "秘密として扱う。",
+   "1": "再生成できる。",
+   "0": "別のURL。"
+  },
+  "source": "Dify公式ドキュメント「MCP サーバー」",
+  "beginnerNote": "MCPのURL＝合鍵。人に見せない。",
+  "tags": [
+   "MCP",
+   "セキュリティ"
+  ]
+ },
+ {
+  "id": "q-op-012",
+  "domain": "ops",
+  "service": "埋め込み",
+  "difficulty": 2,
+  "question": "サイトの全ページから問い合わせボットを開けるようにしたい。公式ドキュメントのおすすめの埋め込み方法はどれですか。",
+  "choices": [
+   "Webアプリのリンクをメールで送る",
+   "MCPサーバー",
+   "チャットバブル",
+   "iframe埋め込み"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "チャットバブルはWebアプリをフローティングボタンとして表示し、1つの埋め込みコードですべてのページからアクセスできます。カスタマーサポート向けにも最適とされています。iframeはアプリが主役の専用ページ向けです。",
+  "wrongChoiceExplanations": {
+   "3": "ページの中に常に表示する方法で、専用ページ向け。",
+   "0": "サイトへの埋め込みではない。",
+   "1": "AIツールにつなぐ方法。"
+  },
+  "source": "Dify公式ドキュメント「Web アプリの埋め込み」",
+  "beginnerNote": "右下に浮かぶボタン＝チャットバブル。",
+  "tags": [
+   "埋め込み"
+  ]
+ },
+ {
+  "id": "q-op-013",
+  "domain": "ops",
+  "service": "埋め込み",
+  "difficulty": 2,
+  "question": "埋め込んだアプリに設定の変更を反映させるには何が必要ですか。",
+  "choices": [
+   "アプリを再公開する",
+   "何もしなくても編集した瞬間に反映される",
+   "ブラウザのキャッシュを消すだけ",
+   "埋め込みコードを毎回貼り直す"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "埋め込む前にWebアプリを公開しておく必要があり、アプリ設定を更新した場合は埋め込み版に反映するために再公開します。",
+  "wrongChoiceExplanations": {
+   "3": "コードの貼り直しは不要。",
+   "2": "再公開が必要。",
+   "1": "下書きの編集は公開されない。"
+  },
+  "source": "Dify公式ドキュメント「Web アプリの埋め込み」",
+  "beginnerNote": "直したら「公開」を押すまで外には出ない。",
+  "tags": [
+   "埋め込み",
+   "公開"
+  ]
+ },
+ {
+  "id": "q-op-014",
+  "domain": "ops",
+  "service": "ログ",
+  "difficulty": 2,
+  "question": "ログに表示されないものはどれですか。",
+  "choices": [
+   "Webアプリでの利用",
+   "ChatflowとWorkflowのエディタでの「プレビュー」と「テスト実行」",
+   "API経由の利用",
+   "トリガーで始まった実行"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ログはWebアプリ、API、トリガーなど実際の利用を記録しますが、ChatflowとWorkflowのエディタでのテスト（プレビューとテスト実行）はログに表示されません。",
+  "wrongChoiceExplanations": {
+   "0": "記録される。",
+   "2": "記録される。",
+   "3": "記録される。"
+  },
+  "source": "Dify公式ドキュメント「ログ」",
+  "beginnerNote": "作りながらの試し実行はログに残らない。",
+  "tags": [
+   "ログ"
+  ]
+ },
+ {
+  "id": "q-op-015",
+  "domain": "ops",
+  "service": "ログ",
+  "difficulty": 3,
+  "question": "Sandboxプランでのログの保持期間はどれですか。",
+  "choices": [
+   "7日間",
+   "30日間",
+   "3か月",
+   "無期限"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "Sandboxプランではすべての種類のログが30日間保持され、それより古いものは完全に削除されます。後からアップグレードしても復元できません。",
+  "wrongChoiceExplanations": {
+   "0": "7日ではない。",
+   "2": "3か月はProfessional/TeamでWorkflowログがアーカイブに移る目安。",
+   "3": "無期限ではない。"
+  },
+  "source": "Dify公式ドキュメント「ログ」",
+  "beginnerNote": "無料プランのログは30日で消える。",
+  "tags": [
+   "ログ",
+   "プラン"
+  ]
+ },
+ {
+  "id": "q-op-016",
+  "domain": "ops",
+  "service": "注釈",
+  "difficulty": 2,
+  "question": "注釈返信（アノテーション）を有効にしたときの動きとして正しいものはどれですか。",
+  "choices": [
+   "すべての質問でLLMを呼んだ後に注釈で上書きする",
+   "質問が注釈と意味的に一致し、しきい値を超えたらLLMを呼ばずに用意した回答を返す",
+   "注釈はログに残すだけで回答には使わない",
+   "キーワードが完全一致したときだけ使う"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "注釈返信は、ユーザーの質問が注釈と意味的に一致しスコアしきい値を超えると、LLMを呼び出さずに用意済みの回答を返します。一致しなければ通常どおりAIが生成します。",
+  "wrongChoiceExplanations": {
+   "0": "一致したらLLMは呼ばない。",
+   "2": "回答に使う。",
+   "3": "意味的な一致で判定する。"
+  },
+  "source": "Dify公式ドキュメント「アプリツールキット」「注釈システム」",
+  "beginnerNote": "よくある質問には、決めておいた模範解答を即答する。",
+  "tags": [
+   "注釈"
+  ]
+ },
+ {
+  "id": "q-op-017",
+  "domain": "ops",
+  "service": "アプリツールキット",
+  "difficulty": 2,
+  "question": "Chatflowの機能パネルで「引用と帰属」を有効にしたときの効果はどれですか。",
+  "choices": [
+   "不適切な表現がブロックされる",
+   "応答に、元の文書とチャンクへのリンク付きの番号付き引用が表示される",
+   "応答が音声で読み上げられる",
+   "次の質問の候補が表示される"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "引用と帰属を有効にすると、ナレッジベースから情報を引用した応答に、元のドキュメントとチャンクへのリンク付きの番号付き引用が表示されます。",
+  "wrongChoiceExplanations": {
+   "2": "テキストから音声へ。",
+   "0": "コンテンツモデレーション。",
+   "3": "フォローアップ。"
+  },
+  "source": "Dify公式ドキュメント「アプリツールキット」",
+  "beginnerNote": "答えの根拠（出典）を見せるスイッチ。",
+  "tags": [
+   "引用",
+   "機能"
+  ]
+ },
+ {
+  "id": "q-op-018",
+  "domain": "ops",
+  "service": "アプリツールキット",
+  "difficulty": 3,
+  "question": "「テキストから音声へ」が機能パネルに表示される条件はどれですか。",
+  "choices": [
+   "有料プランである",
+   "ナレッジベースが1つ以上ある",
+   "常に表示される",
+   "ワークスペースのデフォルトのTTS（テキスト読み上げ）モデルが設定されている"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "テキストから音声へはワークスペースのテキスト読み上げモデルを使い、デフォルトのTTSモデルが設定されている場合にのみ機能パネルに表示されます。",
+  "wrongChoiceExplanations": {
+   "2": "条件がある。",
+   "1": "関係ない。",
+   "0": "プランの条件としては案内されていない。"
+  },
+  "source": "Dify公式ドキュメント「アプリツールキット」",
+  "beginnerNote": "読み上げのモデルを先に決めておかないと出てこない。",
+  "tags": [
+   "機能",
+   "モデルプロバイダー"
+  ]
+ },
+ {
+  "id": "q-op-019",
+  "domain": "ops",
+  "service": "アプリツールキット",
+  "difficulty": 3,
+  "question": "機能パネルの「ファイルアップロード」でのファイルごとのサイズ上限として正しい組み合わせはどれですか。",
+  "choices": [
+   "画像20MB・ドキュメント20MB・音声100MB・動画500MB",
+   "画像10MB・ドキュメント15MB・音声50MB・動画100MB",
+   "すべて15MB",
+   "画像5MB・ドキュメント10MB・音声20MB・動画50MB"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "ファイルごとのサイズ上限は、画像10MB、ドキュメント15MB、音声50MB、動画100MBです。",
+  "wrongChoiceExplanations": {
+   "3": "値が違う。",
+   "2": "種類ごとに違う。",
+   "0": "値が違う。"
+  },
+  "source": "Dify公式ドキュメント「アプリツールキット」",
+  "beginnerNote": "10・15・50・100。",
+  "tags": [
+   "ファイル",
+   "上限"
+  ]
+ },
+ {
+  "id": "q-op-020",
+  "domain": "ops",
+  "service": "メンバー",
+  "difficulty": 2,
+  "question": "ワークスペースの「エディター」ロールができることはどれですか。",
+  "choices": [
+   "公開済みアプリの利用のみ",
+   "メンバーの招待とモデルプロバイダーの管理",
+   "所有権の移転",
+   "アプリとナレッジベースの作成・編集・削除"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "エディターはアプリとナレッジベースの作成・編集・削除ができます。メンバーとモデルプロバイダーの管理は管理者、所有権の移転はオーナー、公開済みアプリの利用のみはメンバーです。",
+  "wrongChoiceExplanations": {
+   "1": "管理者の権限。",
+   "2": "オーナーだけができる。",
+   "0": "「メンバー」ロールの範囲。"
+  },
+  "source": "Dify公式ドキュメント「メンバーの管理」",
+  "beginnerNote": "作る人＝エディター、人とモデルを管理する人＝管理者。",
+  "tags": [
+   "ロール"
+  ]
+ },
+ {
+  "id": "q-op-021",
+  "domain": "ops",
+  "service": "メンバー",
+  "difficulty": 2,
+  "question": "メンバー招待リンクの有効期限はどれですか。",
+  "choices": [
+   "72時間",
+   "48時間",
+   "7日間",
+   "24時間"
+  ],
+  "correctAnswers": [
+   0
+  ],
+  "explanation": "招待リンクは72時間後に期限切れになります。期限内に承諾されなかった場合は、もう一度招待して新しいリンクを送ります。",
+  "wrongChoiceExplanations": {
+   "3": "24時間ではない。",
+   "1": "48時間ではない。",
+   "2": "7日間ではない。"
+  },
+  "source": "Dify公式ドキュメント「メンバーの管理」",
+  "beginnerNote": "招待は3日で切れる。",
+  "tags": [
+   "メンバー"
+  ]
+ },
+ {
+  "id": "q-op-022",
+  "domain": "ops",
+  "service": "モデルプロバイダー",
+  "difficulty": 2,
+  "question": "モデルプロバイダー（APIキー）を管理できるロールの組み合わせはどれですか。",
+  "choices": [
+   "全メンバー",
+   "エディターのみ",
+   "オーナーと管理者",
+   "オーナーのみ"
+  ],
+  "correctAnswers": [
+   2
+  ],
+  "explanation": "プロバイダーを管理できるのはワークスペースのオーナーと管理者のみです。追加したキーはワークスペース全体で有効になり、そのプロバイダーの自分のアカウントに請求されます。",
+  "wrongChoiceExplanations": {
+   "0": "限られている。",
+   "1": "エディターはできない。",
+   "3": "管理者もできる。"
+  },
+  "source": "Dify公式ドキュメント「モデルプロバイダー」",
+  "beginnerNote": "お金に関わるキーは、オーナーと管理者だけ。",
+  "tags": [
+   "モデルプロバイダー",
+   "ロール"
+  ]
+ },
+ {
+  "id": "q-op-023",
+  "domain": "ops",
+  "service": "モデルプロバイダー",
+  "difficulty": 3,
+  "question": "アプリやノードでモデルを指定しなかった場合に使われるのはどれですか。",
+  "choices": [
+   "エラーになり実行できない",
+   "いちばん安いモデル",
+   "最後に使ったモデル",
+   "「システムモデル設定」で決めたワークスペースのデフォルトモデル"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "モデルを指定しないアプリやノードは、ワークスペースのデフォルトにフォールバックします。右上の「システムモデル設定」で、推論・埋め込み・Rerank・音声認識・読み上げのモデルをタスクごとに設定します。",
+  "wrongChoiceExplanations": {
+   "0": "デフォルトが使われる（未設定ならその機能が動かない）。",
+   "1": "そういう決まりはない。",
+   "2": "そういう決まりはない。"
+  },
+  "source": "Dify公式ドキュメント「モデルプロバイダー」",
+  "beginnerNote": "指定がなければ「いつものモデル」が使われる。",
+  "tags": [
+   "モデルプロバイダー"
+  ]
+ },
+ {
+  "id": "q-tr-004",
+  "domain": "nodes",
+  "service": "Webhookトリガー",
+  "difficulty": 3,
+  "question": "Webhookトリガーで、未公開の状態でテストのリクエストを受けたいときに最初に必要な操作はどれですか。",
+  "choices": [
+   "アプリを公開する",
+   "APIキーを発行する",
+   "Cron式を設定する",
+   "「このステップ実行」をクリックするか、ワークフロー全体をテスト実行してリスニング状態にする"
+  ],
+  "correctAnswers": [
+   3
+  ],
+  "explanation": "未公開のWebhookトリガーをテストするには、まず「このステップ実行」をクリックするか、ワークフロー全体をテスト実行します。これでトリガーがリスニング状態になり、外部リクエストを受け取れます。テストにはテスト用のWebhook URLを使います。",
+  "wrongChoiceExplanations": {
+   "0": "テストは公開前にできる。",
+   "2": "Cronはスケジュールトリガーの設定。",
+   "1": "必要な操作ではない。"
+  },
+  "source": "Dify公式ドキュメント「Webhook トリガー」",
+  "beginnerNote": "まず「待ち受け」状態にしてから外から呼ぶ。",
+  "tags": [
+   "Webhook",
+   "デバッグ"
+  ]
+ },
+ {
+  "id": "q-tr-005",
+  "domain": "nodes",
+  "service": "Webhookトリガー",
+  "difficulty": 3,
+  "question": "Webhookトリガーで受け取るリクエストのContent-Typeを application/json にした場合、ボディから取り出せない型はどれですか。",
+  "choices": [
+   "Array[Number]",
+   "File",
+   "Object",
+   "String"
+  ],
+  "correctAnswers": [
+   1
+  ],
+  "explanation": "application/jsonではString・Number・Boolean・Object・各種Array（Fileを除く）を取り出せますが、FileとArray[File]は取り出せません。Fileを受けるなら multipart/form-data です。",
+  "wrongChoiceExplanations": {
+   "3": "取り出せる。",
+   "2": "取り出せる。",
+   "0": "取り出せる。"
+  },
+  "source": "Dify公式ドキュメント「Webhook トリガー」",
+  "beginnerNote": "ファイルを受け取るなら multipart/form-data。",
+  "tags": [
+   "Webhook"
+  ]
+ }
+]

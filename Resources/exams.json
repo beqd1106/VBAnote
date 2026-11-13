@@ -1679,5 +1679,168 @@
   "lessonCount": 15,
   "applyUrl": "https://www.npmo.org/",
   "applyLabel": "日本PMO協会の公式サイトを開く"
+ },
+ {
+  "key": "dify",
+  "brandPrefix": "Dify",
+  "examShortName": "Dify実力チェック",
+  "examFullName": "Dify実力チェック（非公式・公式ドキュメント準拠）",
+  "group": "AI",
+  "blurb": "AIアプリ開発ツールDifyのワークフロー・ナレッジ・公開・運用を、公式ドキュメントをもとに確認",
+  "icon": "point.3.connected.trianglepath.dotted",
+  "officialSite": "Dify公式ドキュメント（docs.dify.ai）",
+  "organizerNotice": "Difyに公式の認定試験はありません。本セットはDify公式ドキュメント（2026年11月時点）をもとにした非公式の実力チェックで、Difyの開発元とは関係ありません。",
+  "mockCount": 40,
+  "mockMinutes": 40,
+  "passScore": 700,
+  "mockNote": "公式の認定試験はありません。40問・40分で、正答率7割を目安に実力を確かめます。画面や機能は更新されるので、最新は公式ドキュメントでご確認ください。",
+  "servicesTitle": "ノード・機能",
+  "servicesSubtitle": "よく使うノードと機能を分野別に確認",
+  "servicesSearchPlaceholder": "ノード・機能を検索",
+  "nextCerts": [
+   {
+    "title": "生成AIパスポート",
+    "subtitle": "生成AIの基礎とリスク",
+    "examKey": "aip"
+   },
+   {
+    "title": "G検定（JDLA）",
+    "subtitle": "AI・ディープラーニングの基礎",
+    "examKey": "g"
+   },
+   {
+    "title": "RPA技術者検定 アソシエイト",
+    "subtitle": "業務自動化をもう一歩",
+    "examKey": "wia"
+   }
+  ],
+  "finalChecklist": [
+   "WorkflowとChatflowの違い（入口・出口・トリガー）を説明できる",
+   "入力・出力・環境変数・会話変数の使い分けを言える",
+   "LLMノードのコンテキスト・メモリ・構造化出力を設定できる",
+   "質問分類器とIf-Elseを使い分け、変数集約器で道をまとめられる",
+   "反復処理とループの違い、失敗時の動きを説明できる",
+   "HTTPリクエストとエラー処理（デフォルト値・失敗分岐）を設定できる",
+   "チャンク（汎用・親子）とインデックス（高品質・エコノミー）を選べる",
+   "知識検索→LLM→回答のRAGを組み、検索テストで確かめられる",
+   "下書きと公開版、Webアプリ・埋め込み・MCPの公開方法を説明できる"
+  ],
+  "keyTermIds": [
+   "t-workflow",
+   "t-chatflow",
+   "t-variable",
+   "t-rag",
+   "t-chunk",
+   "t-publish"
+  ],
+  "domains": [
+   {
+    "id": "basics",
+    "title": "基本と変数",
+    "shortTitle": "基本",
+    "weight": 0.2,
+    "color": "blue",
+    "icon": "info.circle.fill"
+   },
+   {
+    "id": "nodes",
+    "title": "ノードとフロー設計",
+    "shortTitle": "ノード",
+    "weight": 0.45,
+    "color": "navy",
+    "icon": "point.3.connected.trianglepath.dotted"
+   },
+   {
+    "id": "knowledge",
+    "title": "ナレッジとRAG",
+    "shortTitle": "ナレッジ",
+    "weight": 0.15,
+    "color": "teal",
+    "icon": "books.vertical.fill"
+   },
+   {
+    "id": "ops",
+    "title": "公開と運用",
+    "shortTitle": "運用",
+    "weight": 0.2,
+    "color": "orange",
+    "icon": "paperplane.fill"
+   }
+  ],
+  "roadmap": [
+   {
+    "week": 1,
+    "title": "Difyとアプリの種類",
+    "detail": "Workflow/Chatflow・DSL・アプリの作り始め",
+    "domains": [
+     "basics"
+    ]
+   },
+   {
+    "week": 2,
+    "title": "変数とキャンバス",
+    "detail": "入力・出力・環境変数・会話変数、直列/並列と開始ノード",
+    "domains": [
+     "basics"
+    ]
+   },
+   {
+    "week": 3,
+    "title": "LLMノード",
+    "detail": "モデル設定・コンテキスト・メモリ・構造化出力",
+    "domains": [
+     "nodes"
+    ]
+   },
+   {
+    "week": 4,
+    "title": "分岐と繰り返し",
+    "detail": "質問分類器・If-Else・変数集約器・反復処理・ループ",
+    "domains": [
+     "nodes"
+    ]
+   },
+   {
+    "week": 5,
+    "title": "データ加工と外部連携",
+    "detail": "コード・テンプレート・抽出系ノード・HTTP・エラー処理・トリガー",
+    "domains": [
+     "nodes"
+    ]
+   },
+   {
+    "week": 6,
+    "title": "ナレッジベース",
+    "detail": "チャンク・インデックス・検索設定",
+    "domains": [
+     "knowledge"
+    ]
+   },
+   {
+    "week": 7,
+    "title": "RAGと公開",
+    "detail": "知識検索とLLMのつなぎ方、メタデータ、公開・埋め込み・MCP",
+    "domains": [
+     "knowledge",
+     "ops"
+    ]
+   },
+   {
+    "week": 8,
+    "title": "運用と総仕上げ",
+    "detail": "ログ・注釈・チーム運用、模試で確認",
+    "domains": [
+     "ops",
+     "basics",
+     "nodes",
+     "knowledge"
+    ]
+   }
+  ],
+  "questionCount": 116,
+  "lessonCount": 12,
+  "applyUrl": "https://docs.dify.ai/ja/cloud/use-dify/getting-started/introduction",
+  "applyTitle": "公式ドキュメント",
+  "applyLabel": "Dify公式ドキュメントを開く（認定試験はありません）"
  }
 ]
