@@ -25,6 +25,7 @@ struct HomeView: View {
                         weakAreaCard
                         categorySection
                         roadmapCard
+                        ApplyLinkCard()
                     }
                     .padding(.horizontal, Theme.Space.l)
                     .padding(.bottom, Theme.Space.l)
@@ -541,6 +542,35 @@ enum HomeRoute: Hashable {
     case oneQuestion
     /// 聞き流し
     case listening
+}
+
+/// 受験の申し込み（公式サイトを開く）。資格ごとの案内ページへ外部ブラウザで飛ぶ
+struct ApplyLinkCard: View {
+    var body: some View {
+        if let url = ExamInfo.applyURL {
+            Link(destination: url) {
+                HStack(spacing: Theme.Space.m) {
+                    Image(systemName: "calendar.badge.plus").font(.system(size: 20, weight: .semibold))
+                        .foregroundStyle(Theme.blue)
+                        .frame(width: 44, height: 44).background(Theme.blue.opacity(0.12))
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("受験の申し込み").font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
+                        Text(ExamInfo.applyLabel).captionStyle()
+                            .lineLimit(2).fixedSize(horizontal: false, vertical: true)
+                    }
+                    Spacer(minLength: 0)
+                    Image(systemName: "arrow.up.right").foregroundStyle(Theme.inkSoft)
+                }
+                .padding(Theme.Space.l)
+                .background(Theme.card)
+                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.card, style: .continuous))
+                .shadow(color: Theme.cardShadow(), radius: 8, x: 0, y: 3)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityHint("公式サイトをブラウザで開きます")
+        }
+    }
 }
 
 /// アプリ名ワードマークのヘッダー（アイコンのブランドに合わせたノート風）

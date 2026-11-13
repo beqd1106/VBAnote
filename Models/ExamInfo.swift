@@ -11,6 +11,9 @@ enum ExamInfo {
     static var examShortName: String { spec.examShortName }
     static var examFullName: String { spec.examFullName }
     static var officialSite: String { spec.officialSite }
+    /// 公式の受験申し込み案内ページ
+    static var applyURL: URL? { spec.applyUrl.flatMap(URL.init(string:)) }
+    static var applyLabel: String { spec.applyLabel ?? "公式サイトで申し込む" }
     static var organizerNotice: String { spec.organizerNotice }
     /// 本番模試の問題数と制限時間
     static var mockCount: Int { spec.mockCount }

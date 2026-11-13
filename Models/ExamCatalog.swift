@@ -35,6 +35,10 @@ struct ExamSpec: Codable, Identifiable, Hashable {
     /// 資格選択画面のSF Symbol
     let icon: String
     let officialSite: String
+    /// 公式の受験申し込み案内ページ（なければ nil）
+    let applyUrl: String?
+    /// 申し込みボタンの文言
+    let applyLabel: String?
     let organizerNotice: String
     let mockCount: Int
     let mockMinutes: Int

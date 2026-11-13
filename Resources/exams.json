@@ -206,7 +206,9 @@
    }
   ],
   "questionCount": 816,
-  "lessonCount": 27
+  "lessonCount": 27,
+  "applyUrl": "https://www3.jitec.ipa.go.jp/JitesCbt/index.html",
+  "applyLabel": "iパス公式サイトで申し込む"
  },
  {
   "key": "fe",
@@ -404,7 +406,9 @@
    }
   ],
   "questionCount": 960,
-  "lessonCount": 24
+  "lessonCount": 24,
+  "applyUrl": "https://www.ipa.go.jp/shiken/mousikomi/index.html",
+  "applyLabel": "IPA「受験申込み」ページを開く"
  },
  {
   "key": "aws",
@@ -569,7 +573,9 @@
    }
   ],
   "questionCount": 2269,
-  "lessonCount": 38
+  "lessonCount": 38,
+  "applyUrl": "https://aws.amazon.com/jp/certification/certified-cloud-practitioner/",
+  "applyLabel": "AWS公式ページで試験を予約する"
  },
  {
   "key": "aip",
@@ -740,7 +746,9 @@
    }
   ],
   "questionCount": 1051,
-  "lessonCount": 23
+  "lessonCount": 23,
+  "applyUrl": "https://guga.or.jp/generativeaiexam/",
+  "applyLabel": "GUGA公式サイトで申し込む"
  },
  {
   "key": "g",
@@ -928,7 +936,9 @@
    }
   ],
   "questionCount": 749,
-  "lessonCount": 21
+  "lessonCount": 21,
+  "applyUrl": "https://www.jdla.org/certificate/general/",
+  "applyLabel": "JDLA公式サイトで申し込む"
  },
  {
   "key": "mos",
@@ -1156,7 +1166,9 @@
    }
   ],
   "questionCount": 880,
-  "lessonCount": 22
+  "lessonCount": 22,
+  "applyUrl": "https://mos.odyssey-com.co.jp/exam/",
+  "applyLabel": "MOS公式「受験するには」を開く"
  },
  {
   "key": "vba",
@@ -1336,7 +1348,9 @@
    }
   ],
   "questionCount": 600,
-  "lessonCount": 15
+  "lessonCount": 15,
+  "applyUrl": "https://vbae.odyssey-com.co.jp/exam/",
+  "applyLabel": "VBAエキスパート公式「受験するには」を開く"
  },
  {
   "key": "wia",
@@ -1489,7 +1503,9 @@
    }
   ],
   "questionCount": 1139,
-  "lessonCount": 14
+  "lessonCount": 14,
+  "applyUrl": "https://winactor.com/rpa-kentei/",
+  "applyLabel": "WinActor公式「RPA技術者検定」を開く"
  },
  {
   "key": "pmos",
@@ -1660,6 +1676,8 @@
    }
   ],
   "questionCount": 600,
-  "lessonCount": 15
+  "lessonCount": 15,
+  "applyUrl": "https://www.npmo.org/",
+  "applyLabel": "日本PMO協会の公式サイトを開く"
  }
 ]
