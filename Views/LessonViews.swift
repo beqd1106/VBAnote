@@ -190,14 +190,8 @@ struct LessonDetailView: View {
                         }
                     }
 
-                    ForEach(Array(lesson.sections.enumerated()), id: \.offset) { _, section in
-                        Card {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(section.heading).font(.system(size: 16, weight: .bold)).foregroundStyle(Theme.navy)
-                                GlossaryText(text: section.body, size: 15, color: Theme.ink, lineSpacing: 4)
-                            }
-                        }
-                    }
+                    // 本文の節＋出題ポイント（言葉と意味のカード）
+                    LessonSectionsView(lesson: lesson)
 
                     // 基礎問題 → 確認問題 の順に解いてもらう。どちらも5問ずつのパターンA/B/Cから選ぶ
                     if !basicIds.isEmpty || !lesson.quizIds.isEmpty { stepsCard }

@@ -65,6 +65,8 @@ struct QuizPlayerView: View {
     /// 正解したが「自信なし」と押した問題（明日の復習に入れた）
     @State private var unsureIndices: Set<Int> = []
     @State private var doneAppeared = false
+    /// 問題の途中で開く教材シート
+    @State private var readerItem: LessonReaderItem?
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     /// 「要確認」の印を付けた問題
     @State private var flaggedIds: Set<String> = Set(QuestionFlags.ids(examKey: ExamContext.current.key))
@@ -98,6 +100,7 @@ struct QuizPlayerView: View {
         }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $readerItem) { LessonReaderSheet(item: $0) }
         // 答え合わせ・問題移動のたびに途中経過を保存（閉じても続きから戻れるように）
         .onChange(of: submittedIndices) { saveSession() }
         .onChange(of: index) { saveSession() }
@@ -127,6 +130,24 @@ struct QuizPlayerView: View {
                     Text(remainingLabel).font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
                     Spacer()
                     DomainChip(domain: current.domain)
+                    // 解いている途中でも教材を開ける（答える前は答えが分からないよう強調しない）
+                    if !isSubmitted, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
+                        Button {
+                            readerItem = LessonReaderItem(lesson: lesson, focusKey: nil)
+                        } label: {
+                            Label("教材", systemImage: "book")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundStyle(Theme.navy)
+                                .padding(.horizontal, 12)
+                                .frame(minHeight: 34)
+                                .background(Theme.card)
+                                .clipShape(Capsule())
+                                .overlay(Capsule().stroke(Theme.line, lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("この問題の教材を開く")
+                        .accessibilityIdentifier("openLesson")
+                    }
                 }
                 ProgressBar(value: Double(index) / Double(questions.count))
             }
@@ -384,13 +405,16 @@ struct QuizPlayerView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
-                // この問題に関連する解説レッスンへ
-                if showLessonLink, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
-                    NavigationLink { LessonDetailView(lesson: lesson) } label: {
+                // この問題の教材をシートで開く。答えの言葉が載っている所を強調してスクロールする。
+                // シートなので画面は移動せず、閉じればこの問題に戻る（レッスン画面から来ても入れ子にならない）。
+                if let lesson = ContentRepository.shared.lesson(forQuestion: current) {
+                    Button {
+                        readerItem = LessonReaderItem(lesson: lesson, focusKey: LessonText.answerKey(current))
+                    } label: {
                         HStack(spacing: Theme.Space.s) {
                             Image(systemName: "text.book.closed.fill").foregroundStyle(Theme.blue)
                             VStack(alignment: .leading, spacing: 1) {
-                                Text("解説レッスンで学び直す").font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.inkSoft)
+                                Text("この問題の教材を読む（答えの所に印）").font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.inkSoft)
                                 Text(lesson.title).font(.system(size: 14, weight: .bold)).foregroundStyle(Theme.blue)
                                     .fixedSize(horizontal: false, vertical: true)
                             }
