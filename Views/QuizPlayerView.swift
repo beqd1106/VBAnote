@@ -299,8 +299,29 @@ struct QuizPlayerView: View {
                     .buttonStyle(.plain)
                 }
             } else {
-                Text("明らかに違う選択肢を薄くしました。残りから選んでください。")
-                    .font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
+                eliminationReasons
+            }
+
+            // 3段目：それでも分からなければ教材へ（答える前なので強調はしない）
+            if hintLevel >= 1, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
+                Button {
+                    readerItem = LessonReaderItem(lesson: lesson, focusKey: nil)
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "book").font(.system(size: 13, weight: .semibold))
+                        Text("教材で確かめる").font(.system(size: 13, weight: .bold))
+                        Spacer(minLength: 0)
+                        Image(systemName: "chevron.right").font(.system(size: 11, weight: .bold))
+                    }
+                    .foregroundStyle(Theme.navy)
+                    .padding(.horizontal, Theme.Space.m)
+                    .frame(maxWidth: .infinity, minHeight: 40)
+                    .background(Theme.card)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Theme.navy.opacity(0.25), lineWidth: 1))
+                }
+                .buttonStyle(.plain)
+                .accessibilityHint("この問題のレッスンを開きます")
             }
         }
         .padding(Theme.Space.m)
@@ -311,6 +332,30 @@ struct QuizPlayerView: View {
             .stroke(Theme.orange.opacity(0.3), lineWidth: 1))
     }
 
+    /// 2段目：消した選択肢と「なぜ違うか」
+    private var eliminationReasons: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("違う選択肢を薄くしました。理由も読んでから、残りから選びましょう。")
+                .font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
+                .fixedSize(horizontal: false, vertical: true)
+            ForEach(eliminated.sorted(), id: \.self) { i in
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(current.choices[i])
+                        .font(.system(size: 12, weight: .semibold)).foregroundStyle(Theme.inkSoft)
+                        .strikethrough(true, color: Theme.inkSoft.opacity(0.6))
+                        .lineLimit(2)
+                    Text(HintBuilder.reason(for: i, in: current) ?? "この選択肢は当てはまりません。")
+                        .font(.system(size: 13)).foregroundStyle(Theme.ink)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.vertical, 6).padding(.horizontal, 10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Theme.card.opacity(0.8))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+        }
+    }
+
     /// ヒントを1段階進める
     private func revealHint() {
         guard !isSubmitted else { return }
@@ -318,7 +363,8 @@ struct QuizPlayerView: View {
             switch hintLevel {
             case 0:
                 hintTextByIndex[index] = HintBuilder.focusHint(
-                    for: current, glossary: ContentRepository.shared.glossary)
+                    for: current, glossary: ContentRepository.shared.glossary,
+                    hints: ContentRepository.shared.hints)
                 hintLevelByIndex[index] = 1
             default:
                 let drop = HintBuilder.eliminatedChoices(for: current)

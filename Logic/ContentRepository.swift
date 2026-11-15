@@ -16,6 +16,8 @@ final class ContentRepository {
     let services: [GenAIToolItem]
     /// 用語集（長い語を優先マッチできるよう term.count 降順で保持）
     let glossary: [GlossaryEntry]
+    /// 問題ごとのヒント（1段目「考え方」）。<key>_hints.json = {問題ID: ヒント}。無ければ空。
+    let hints: [String: String]
 
     private let questionsById: [String: QuizQuestion]
     /// 問題ID → その問題を確認問題に含むレッスン（レッスン→問題の逆引き）
@@ -32,6 +34,7 @@ final class ContentRepository {
         // glossary.json が無い環境でも落ちないよう任意ロード
         let g = Self.loadOptional("\(examKey)_glossary", as: [GlossaryEntry].self) ?? []
         self.glossary  = g.sorted { $0.term.count > $1.term.count }
+        self.hints     = Self.loadOptional("\(examKey)_hints", as: [String: String].self) ?? [:]
         let byId = Dictionary(uniqueKeysWithValues: questions.map { ($0.id, $0) })
         self.questionsById = byId
 

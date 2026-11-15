@@ -63,6 +63,33 @@ final class LogicTests: XCTestCase {
         XCTAssertFalse(hint.isEmpty)
     }
 
+    /// 問題ごとに書いたヒントがあれば最優先で使う
+    func testHintPrefersWrittenHint() {
+        let q = makeQuestion(beginnerNote: "まずは保存する期間に注目しましょう。")
+        XCTAssertEqual(HintBuilder.focusHint(for: q, hints: ["q-hint": "比べる軸は速さと値段です。"]),
+                       "比べる軸は速さと値段です。")
+    }
+
+    /// 「AWS Budgets」が正解なら「Budgets」だけでも答えを漏らしたとみなす
+    func testRevealsAnswerChecksCoreName() {
+        let q = makeQuestion(choices: ["AWS Budgets", "AWS Cost Explorer", "AWS Shield", "Amazon S3"])
+        XCTAssertTrue(HintBuilder.revealsAnswer("事前通知＝Budgets。", for: q))
+        XCTAssertFalse(HintBuilder.revealsAnswer("超える前に知らせる仕組みはどれか。", for: q))
+        XCTAssertEqual(HintBuilder.focusHint(for: q, hints: ["q-hint": "Budgetsを選ぶ。"]).contains("Budgets"), false)
+    }
+
+    /// 理由が正解の名前を出す選択肢は、なるべく消さずに残す
+    func testEliminationAvoidsReasonsThatRevealAnswer() {
+        let q = QuizQuestion(id: "q-r", question: "問", choices: ["AWS Budgets", "Cost Explorer", "Shield", "S3"],
+                             correctAnswers: [0], explanation: "", source: nil,
+                             wrongChoiceExplanations: ["1": "過去の分析用。事前通知はBudgets。", "2": "DDoS対策。", "3": "保存用。"],
+                             domain: ExamDomain.allCases[0], service: "", difficulty: 1, tags: [], beginnerNote: nil)
+        let dropped = HintBuilder.eliminatedChoices(for: q)
+        XCTAssertEqual(dropped, [2, 3])
+        XCTAssertNil(HintBuilder.reason(for: 1, in: q))
+        XCTAssertEqual(HintBuilder.reason(for: 2, in: q), "DDoS対策。")
+    }
+
     func testHintFallsBackToTheme() {
         let q = makeQuestion(beginnerNote: nil)
         XCTAssertTrue(HintBuilder.focusHint(for: q).contains("ストレージ"))

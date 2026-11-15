@@ -5,14 +5,21 @@ import Foundation
 /// 1699問すべてにヒント文を持たせるのは現実的でないため、
 /// 既存のデータ（初心者向け補足・用語集・分野/小テーマ）から**答えを明かさない範囲で**生成する。
 /// 段階は2つ。
-///   1. 着眼点（どこを見て考えるか）
-///   2. 選択肢をしぼる（明らかに違う選択肢を消す）
+///   1. 考え方（どこを見て考えるか）。問題ごとに書いた <exam>_hints.json があれば最優先
+///   2. 選択肢をしぼる（違う選択肢を消し、なぜ違うかも見せる）
+/// 3段目の「教材で確かめる」は画面側（QuizPlayerView）が担う。
 enum HintBuilder {
 
     // MARK: - 段階1：着眼点
 
     /// 答えそのものには触れずに、考える取っかかりを1つ返す。
-    static func focusHint(for q: QuizQuestion, glossary: [GlossaryEntry] = []) -> String {
+    static func focusHint(for q: QuizQuestion, glossary: [GlossaryEntry] = [],
+                          hints: [String: String] = [:]) -> String {
+        // 0) 問題ごとに書いたヒント（答えを漏らしていないかは作成時に機械チェック済み。念のためここでも確かめる）
+        if let h = hints[q.id]?.trimmingCharacters(in: .whitespacesAndNewlines),
+           !h.isEmpty, !revealsAnswer(h, for: q) {
+            return h
+        }
         // 1) 初心者向け補足があれば最優先。ただし正解を書いてしまっているものは使わない。
         if let note = q.beginnerNote?.trimmingCharacters(in: .whitespacesAndNewlines),
            !note.isEmpty, !revealsAnswer(note, for: q) {
@@ -47,15 +54,32 @@ enum HintBuilder {
             }
     }
 
-    /// ヒント文が正解選択肢をそのまま書いてしまっていないか
-    private static func revealsAnswer(_ text: String, for q: QuizQuestion) -> Bool {
-        for idx in q.correctAnswers where q.choices.indices.contains(idx) {
-            let answer = q.choices[idx].trimmingCharacters(in: .whitespacesAndNewlines)
-            // 短すぎる語（「はい」など）は偶然一致しやすいので判定から外す
-            guard answer.count >= 4 else { continue }
-            if text.contains(answer) { return true }
+    /// ヒント文が正解選択肢を書いてしまっていないか。
+    /// 「AWS Budgets（予算アラート）」なら「Budgets」「予算アラート」も見る（頭の AWS/Amazon と括弧の補足を外した芯）。
+    static func revealsAnswer(_ text: String, for q: QuizQuestion) -> Bool {
+        let wrong = q.choices.indices.filter { !q.correctAnswers.contains($0) }.map { q.choices[$0] }
+        for term in answerTerms(for: q) where !wrong.contains(where: { $0.contains(term) }) {
+            if text.contains(term) { return true }
         }
         return false
+    }
+
+    /// 正解選択肢から、ヒントに出てはいけない語（3字以上）を取り出す
+    static func answerTerms(for q: QuizQuestion) -> [String] {
+        var out: [String] = []
+        for idx in q.correctAnswers where q.choices.indices.contains(idx) {
+            let full = q.choices[idx].trimmingCharacters(in: .whitespacesAndNewlines)
+            var core = full.replacingOccurrences(of: "[（(][^）)]*[)）]", with: "", options: .regularExpression)
+            core = core.replacingOccurrences(of: "^(AWS|Amazon)\\s*", with: "", options: .regularExpression)
+                .trimmingCharacters(in: .whitespaces)
+            // 短すぎる語（「はい」など）は偶然一致しやすいので判定から外す
+            if core.count >= 3 { out.append(core) }
+            if let r = full.range(of: "[（(]([^）)]+)[)）]", options: .regularExpression) {
+                let inner = String(full[r].dropFirst().dropLast())
+                if inner.count >= 3 { out.append(inner) }
+            }
+        }
+        return out
     }
 
     // MARK: - 段階2：選択肢をしぼる
@@ -67,6 +91,7 @@ enum HintBuilder {
 
     /// 消してよい不正解選択肢。問題IDから決まる固定の結果で、開き直しても変わらない。
     /// 単一選択は「残り2択」まで、複数選択は不正解の半分を消す。
+    /// 理由の文が正解の名前を出してしまう選択肢は、なるべく消さずに残す（理由を見せると答えが分かるため）。
     static func eliminatedChoices(for q: QuizQuestion) -> Set<Int> {
         let wrong = q.choices.indices.filter { !q.correctAnswers.contains($0) }
         guard wrong.count >= 2 else { return [] }
@@ -77,7 +102,15 @@ enum HintBuilder {
         // 毎回「上から消える」と癖になるので、問題IDで開始位置をずらす
         let offset = stableHash(q.id) % wrong.count
         let rotated = Array(wrong[offset...] + wrong[..<offset])
-        return Set(rotated.prefix(removeCount))
+        let safeFirst = rotated.filter { reason(for: $0, in: q) != nil } + rotated.filter { reason(for: $0, in: q) == nil }
+        return Set(safeFirst.prefix(removeCount))
+    }
+
+    /// 消した選択肢が「なぜ違うか」。答えを明かす理由・空の理由は出さない（nil）。
+    static func reason(for index: Int, in q: QuizQuestion) -> String? {
+        guard let r = q.wrongReason(for: index)?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !r.isEmpty, !revealsAnswer(r, for: q) else { return nil }
+        return r
     }
 
     /// 端末やアプリの起動ごとに変わらないハッシュ（Swiftの hashValue は起動ごとに変わるため自前で持つ）
