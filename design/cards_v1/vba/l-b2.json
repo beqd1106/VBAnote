@@ -1,0 +1,105 @@
+{
+  "id": "l-b2",
+  "units": [
+    {
+      "title": "シートの集まり",
+      "goal": "シートの種類と枚数の数え方を区別する",
+      "cards": [
+        {"t":"point","head":"シートの集まり","body":"コレクションはシートの集まりです。グラフシートはグラフだけを大きく表示する専用シートです。"},
+        {"t":"point","head":"集まりの違い","body":"・Worksheets：ワークシートだけ\n・Sheets：ワークシートとグラフシート\n・Charts：グラフシートだけ\n非表示でも各コレクションに含まれます。"},
+        {"t":"quiz","q":"b-b2-01"},
+        {"t":"point","head":"枚数を数える","body":"ワークシートの枚数はWorksheets.Countです。Sheets.Countはグラフシートも数えます。Length、Number、Sizeは使いません。","ex":"ワークシート3枚とグラフシート1枚なら、順に3と4です。"},
+        {"t":"quiz","q":"b-b2-08"},
+        {"t":"point","head":"番号の違い","body":"番号は左端から1、2と数えます。Worksheetsはワークシートだけを数え、Sheetsはグラフシートも数えます。0は存在せずエラーです。","ex":"Sheet1、グラフ1、Sheet2の順なら、Worksheets(2)はSheet2、Sheets(2)はグラフ1です。"},
+        {"t":"quiz","q":"b-b2-10"},
+        {"t":"point","head":"最後まで繰り返す","body":"最後のワークシートはWorksheets(Worksheets.Count)です。Worksheets(i)のループは上限をWorksheets.Countにそろえます。"},
+        {"t":"point","head":"上限を間違えると","body":"Countより小さい上限では最後を処理できません。存在する枚数を超える上限や、グラフを含むSheets.Countでは存在しない番号を参照してエラーになることがあります。"}
+      ]
+    },
+    {
+      "title": "シートを指定する",
+      "goal": "名前・番号・コード名の違いを説明する",
+      "cards": [
+        {"t":"point","head":"名前と番号","body":"Worksheets(\"Sheet1\")は見出しの名前で指定します。見出しを変えると見つからずエラーです。番号は並べ替えや追加で別のシートを指すことがあります。"},
+        {"t":"point","head":"コード名","body":"コード名はVBEのプロジェクトエクスプローラーに表示されるオブジェクト名です。見出しのNameとは別で、VBEのプロパティで変更できます。","ex":"Sheet1.Range(\"A1\")と直接書きます。"},
+        {"t":"quiz","q":"b-b2-12"},
+        {"t":"point","head":"変わらない指定","body":"コード名は見出しの変更や並べ替えをしても同じシートを指します。ActiveSheetはその時点でアクティブなシートなので、切り替えると対象が変わります。"},
+        {"t":"point","head":"直接セルを操作","body":"シートを指定してRangeを書くと、アクティブでなくてもそのシートに書き込めます。ActivateやSelectは不要です。シートを省略するとActiveSheetが対象です。"}
+      ]
+    },
+    {
+      "title": "シートの追加",
+      "goal": "追加位置と引数の使い方を選ぶ",
+      "cards": [
+        {"t":"point","head":"Addで追加","body":"Worksheets.Addでシートを追加します。Insertは使いません。位置はBeforeで指定シートの前、Afterで後ろです。Nextという引数はありません。"},
+        {"t":"quiz","q":"b-b2-02"},
+        {"t":"point","head":"位置の省略","body":"引数なしのWorksheets.Addは、アクティブシートの直前に1枚追加します。右隣に入れるにはAfter:=ActiveSheetを使います。"},
+        {"t":"quiz","q":"b-b2-03"},
+        {"t":"point","head":"端に追加する","body":"右端はAfter:=Worksheets(Worksheets.Count)、左端はBefore:=Worksheets(1)です。最後のシートをBeforeで指定すると右端の一つ手前です。"},
+        {"t":"quiz","q":"b-b2-14"},
+        {"t":"point","head":"追加の引数","body":"BeforeとAfterは一方だけ指定します。両方同時なら実行時エラーで追加されません。AddのCount引数は追加枚数で、ブック内の枚数を返すWorksheets.Countとは別です。"},
+        {"t":"point","head":"追加後の並び","body":"追加のたびに番号は変わります。位置を追うときは、1回ごとに並びを書き換えます。","ex":"Sheet1、Sheet2、Sheet3に1番の後、次に1番の前へ追加すると、B、Sheet1、A、Sheet2、Sheet3です。"},
+        {"t":"point","head":"追加したシート","body":"Addの戻り値は追加されたWorksheetオブジェクトです。名前の文字列、位置の整数、成功を表すBoolean値ではありません。"},
+        {"t":"point","head":"戻り値の受け取り","body":"戻り値を変数に受け取るときはSetを使い、引数を括弧で囲みます。名前付き引数は:=で結びます。受け取った後はws.Nameなどを使えます。","ex":"Set ws = Worksheets.Add(After:=Worksheets(1))"}
+      ]
+    },
+    {
+      "title": "削除と確認",
+      "goal": "削除方法と確認メッセージの扱いを理解する",
+      "cards": [
+        {"t":"point","head":"Deleteで削除","body":"シート自体の削除はDeleteです。Removeはなく、Closeはブックやウィンドウを閉じます。Clearはセル範囲の内容や書式を消します。","ex":"Worksheets(\"Sheet2\").Delete"},
+        {"t":"quiz","q":"b-b2-04"},
+        {"t":"point","head":"確認を表示しない","body":"Deleteは通常、確認への回答までマクロを止めます。事前にApplication.DisplayAlerts = Falseとすると確認が出ず、削除の既定応答が適用されます。"},
+        {"t":"quiz","q":"b-b2-05"},
+        {"t":"point","head":"削除後に戻す","body":"削除後はDisplayAlertsをTrueに戻します。戻さないと後続の警告も出ません。削除は元に戻せないので、実行前にシート名を確認します。"},
+        {"t":"point","head":"設定値の違い","body":"DisplayAlertsにはブール値のFalseを使います。Trueは確認を表示します。vbNoはMsgBoxのボタンを表し、Nullはデータがないことを表す値です。"},
+        {"t":"point","head":"ほかの設定","body":"・ScreenUpdating：画面の再描画\n・EnableEvents：イベントの実行\n・Calculation：再計算の方法\nいずれも削除確認を抑止する設定ではありません。"},
+        {"t":"point","head":"最後の1枚","body":"ブックには少なくとも1枚のシートが必要です。最後の1枚のDeleteはDisplayAlertsがFalseでもエラーになり、削除されません。"}
+      ]
+    },
+    {
+      "title": "コピーと移動",
+      "goal": "複製と移動、行き先の指定を区別する",
+      "cards": [
+        {"t":"point","head":"CopyとMove","body":"Copyは複製を作り、元を残します。Moveは位置を変え、元の位置には残りません。空のシートも残らず、シートは1枚のままです。"},
+        {"t":"point","head":"動くシート","body":"メソッドを呼び出した側が複製・移動の対象です。BeforeやAfterで指定したシートは位置の基準で、動きません。","ex":"Sheet1をMove After:=Sheet3とすると、Sheet1がSheet3の後ろに移ります。"},
+        {"t":"quiz","q":"b-b2-13"},
+        {"t":"point","head":"前に複製する","body":"Sheet2のCopyにBefore:=Sheet3を指定すると、Sheet2の複製がSheet3の前に入ります。Afterなら後ろです。呼び出す側と基準を逆にしないようにします。"},
+        {"t":"quiz","q":"b-b2-15"},
+        {"t":"point","head":"行き先を省略","body":"CopyでBeforeとAfterを両方省略すると、新しいブックにコピーだけが入り、元も残ります。エラーにはなりません。"},
+        {"t":"quiz","q":"b-b2-06"},
+        {"t":"point","head":"Moveの省略","body":"Moveで行き先を省略すると新しいブックへ移り、元のブックからはなくなります。同じブック内でCopyやMoveをするにはBeforeかAfterを指定します。"},
+        {"t":"point","head":"引数名の省略","body":"CopyやAddで引数名を書かずに1つ渡すと、先頭のBeforeとして扱われます。後ろを指定するにはAfter:=と書きます。"},
+        {"t":"point","head":"複製後の操作","body":"Copyで作られたシートは直後にアクティブになります。右端への複製はCopy After:=Worksheets(Worksheets.Count)です。続くActiveSheet.Nameは複製の名前を変えます。"},
+        {"t":"point","head":"テンプレートの複製","body":"内容や書式を残して右端に複製するならCopyを使います。Moveは元を動かし、Addは空のシートを作ります。Before:=Worksheets(1)は左端です。"}
+      ]
+    },
+    {
+      "title": "シート名",
+      "goal": "名前の変更方法と使用できない名前を知る",
+      "cards": [
+        {"t":"point","head":"名前を変える","body":"シート見出しの名前はNameプロパティで取得・変更します。Caption、Title、Renameは使いません。Nameを変えてもコード名は変わりません。","ex":"Worksheets(\"Sheet1\").Name = \"売上\""},
+        {"t":"quiz","q":"b-b2-07"},
+        {"t":"point","head":"使えない文字","body":"シート名にはコロン、円記号、スラッシュ、疑問符、アスタリスク、大括弧を使えません。含むと実行時エラーです。"},
+        {"t":"point","head":"使える名前","body":"丸括弧や空白を含む名前、数字から始まる名前は使えます。空の名前と31文字を超える名前は使えません。","ex":"集計(月次)、集計 月次、2024集計は使えます。"},
+        {"t":"point","head":"名前の重複","body":"同じブックにある名前をNameに代入すると実行時エラーになり、名前は変わりません。既存シートも変わらず、内容も統合されません。"},
+        {"t":"point","head":"コピー時の名前","body":"同じブックへのCopyでは、重複を避けるため名前の末尾に空白と括弧付き連番が自動で付きます。Nameへの代入時には付きません。","ex":"Sheet1のコピーはSheet1 (2)のようになります。"}
+      ]
+    },
+    {
+      "title": "表示と選択",
+      "goal": "非表示と再表示、選択の順序を理解する",
+      "cards": [
+        {"t":"point","head":"Visibleで切替","body":"シートの表示・非表示はVisibleで切り替えます。FalseはxlSheetHiddenと同じで非表示、TrueはxlSheetVisibleと同じで再表示です。Hidden、Display、Enabledは使いません。"},
+        {"t":"quiz","q":"b-b2-09"},
+        {"t":"point","head":"深い非表示","body":"xlSheetVeryHiddenはExcelの［再表示］一覧に出ない非表示です。VBAかVBEのプロパティでVisibleを変えて再表示します。通常の非表示は一覧から戻せます。"},
+        {"t":"point","head":"表示は最低1枚","body":"表示中のシートが1枚だけなら、それを非表示にするとエラーで表示されたままです。先に別のシートをTrueで再表示してから隠します。"},
+        {"t":"point","head":"ActivateとSelect","body":"Activateは指定した1枚をアクティブにして前面に出します。表示状態を変えたり、別ブックへ移したりはしません。"},
+        {"t":"quiz","q":"b-b2-11"},
+        {"t":"point","head":"複数を選択","body":"Selectはシートを選択状態にします。Arrayで複数を指定すると作業グループとして同時に選択できますが、アクティブなシートは1枚です。","ex":"Worksheets(Array(\"Sheet1\", \"Sheet3\")).Select"},
+        {"t":"point","head":"非表示中の操作","body":"非表示のシートはActivateもSelectもできずエラーです。一方、直接指定したセルへの代入やセルのCopy、シートのName変更はできます。"},
+        {"t":"point","head":"再表示して選ぶ","body":"非表示シートをアクティブにするには、先にVisible = Trueで再表示し、その後Activateします。逆順では最初にエラーです。xlSheetHiddenは隠す設定です。"}
+      ]
+    }
+  ]
+}

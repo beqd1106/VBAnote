@@ -1,0 +1,124 @@
+{
+  "id": "l-f3",
+  "units": [
+    {
+      "title": "メッセージとボタン",
+      "goal": "MsgBoxの役割とボタンの指定が分かる",
+      "cards": [
+        {"t":"point","head":"MsgBoxの役割","body":"MsgBoxは通知や確認の窓を表示し、押されたボタンを戻り値として返します。入力欄はありません。"},
+        {"t":"point","head":"ほかの関数との違い","body":"文字の入力にはInputBox、型名の確認にはTypeNameを使います。セルの値はRange(...).Value、範囲の合計はWorksheetFunction.Sumで取得します。"},
+        {"t":"quiz","q":"b-f3-01"},
+        {"t":"point","head":"引数の順番","body":"MsgBoxの引数は、メッセージ、ボタンとアイコン、タイトルの順です。第3引数はタイトルバーに表示され、本文やアイコンの注釈ではありません。"},
+        {"t":"point","head":"ボタンの種類","body":"・vbOKOnly：OKのみ\n・vbOKCancel：OKとキャンセル\n・vbYesNo：はいといいえ\n・vbYesNoCancel：はい、いいえ、キャンセル"},
+        {"t":"point","head":"中止などのボタン","body":"vbAbortRetryIgnoreは、中止・再試行・無視の3つを表示します。vbYesNoにはキャンセルがありません。"},
+        {"t":"quiz","q":"b-f3-02"}
+      ]
+    },
+    {
+      "title": "アイコンと戻り値",
+      "goal": "アイコンの指定と押したボタンの判定が分かる",
+      "cards": [
+        {"t":"point","head":"アイコンの種類","body":"・vbInformation：iの情報\n・vbExclamation：黄色い三角形に感嘆符の警告\n・vbQuestion：？の問い合わせ\n・vbCritical：赤い×の重大エラー"},
+        {"t":"quiz","q":"b-f3-03"},
+        {"t":"point","head":"指定を組み合わせる","body":"ボタンとアイコンの定数は、第2引数で + を使って足します。定数は数値です。カンマで区切ると後ろは第3引数のタイトルになり、vbQuestionなら32と表示されます。","ex":"vbYesNo + vbQuestion"},
+        {"t":"point","head":"演算子の違い","body":"定数の組合せに * を使うと別の数値になります。& は文字列を連結する演算子なので、数値を足す + の代わりにはなりません。"},
+        {"t":"point","head":"ボタンの戻り値","body":"・はい：vbYes\n・いいえ：vbNo\n・OK：vbOK\n・キャンセル：vbCancel"},
+        {"t":"quiz","q":"b-f3-04"},
+        {"t":"point","head":"閉じたときの値","body":"vbYesNoCancelの窓を右上の×やEscで閉じると、キャンセル扱いでvbCancelが返ります。vbYesとvbNoは各ボタンを押したときの値です。"},
+        {"t":"point","head":"無視の戻り値","body":"vbIgnoreはvbAbortRetryIgnoreの無視ボタンの値です。vbYesNoCancelには無視ボタンはありません。"}
+      ]
+    },
+    {
+      "title": "MsgBoxの書き方",
+      "goal": "戻り値の有無による書き方と条件分岐を使い分ける",
+      "cards": [
+        {"t":"point","head":"表示だけの場合","body":"戻り値を使わず表示だけする場合は、引数を括弧で囲まずに書きます。このステートメント形式では戻り値を変数に受け取れません。","ex":"MsgBox \"処理が完了しました\""},
+        {"t":"point","head":"誤った書き方","body":"MsgBoxは変数ではないため、MsgBox = の形で代入できません。Callを使うときは引数を括弧で囲みます。括弧なしのCallは構文エラーです。"},
+        {"t":"quiz","q":"b-f3-05"},
+        {"t":"point","head":"戻り値を受け取る","body":"戻り値を受け取るときは引数全体を括弧で囲みます。値は右辺から左辺の変数へ入ります。","ex":"ans = MsgBox(\"削除しますか\", vbYesNo)"},
+        {"t":"point","head":"代入の注意","body":"戻り値を受けるときに括弧を省くと構文エラーです。MsgBoxの呼出しを左辺に置くと代入の向きが逆です。受け取る変数ansを関数のようには呼びません。"},
+        {"t":"quiz","q":"b-f3-06"},
+        {"t":"point","head":"戻り値で分岐","body":"MsgBoxの戻り値をIfの条件に使えます。vbYesと比較した条件で「いいえ」を押すとvbNoなので条件内は実行されず、End Ifの後は実行されます。","ex":"If MsgBox(\"保存しますか\", vbYesNo) = vbYes Then"}
+      ]
+    },
+    {
+      "title": "既定ボタンと入力",
+      "goal": "既定ボタンとInputBoxの入力・戻り値が分かる",
+      "cards": [
+        {"t":"point","head":"既定のボタン","body":"Enterで選ばれる既定ボタンはvbDefaultButton1〜4で左からの位置を指定します。vbYesNoでは1が「はい」、2が「いいえ」です。"},
+        {"t":"point","head":"既定以外の指定","body":"vbCriticalはアイコンの指定です。vbApplicationModalは窓を閉じるまでExcelの操作を止める指定です。どちらも既定ボタンを変更しません。"},
+        {"t":"point","head":"InputBoxの役割","body":"InputBoxは入力欄のある小窓を出し、入力された文字を受け取ります。引数はメッセージ、タイトル、既定値の順です。"},
+        {"t":"point","head":"入力欄の既定値","body":"第2引数はタイトルバー、第3引数は入力欄の初期値です。初期値を変えずにOKを押すと、その値が返ります。文字数を制限する引数はありません。","ex":"InputBox(\"氏名を入力\", \"登録\", \"山田\")"},
+        {"t":"point","head":"キャンセルの値","body":"キャンセルすると空文字列、つまり長さ0の文字列が返ります。空欄でOKを押した場合も同じで、区別できません。0、Null、Emptyではありません。"},
+        {"t":"quiz","q":"b-f3-07"},
+        {"t":"point","head":"戻り値の型","body":"InputBoxの戻り値はString（文字列型）です。数字や日付を入力しても文字列であり、Integer、Date、Booleanにはなりません。","ex":"100を入力すると文字列の \"100\" が返ります。"},
+        {"t":"quiz","q":"b-f3-08"},
+        {"t":"point","head":"空文字列の判定","body":"文字列型の変数sで受けた値は、If s = \"\" Thenで空文字列か判定できます。空欄でOKの場合も同じ扱いです。"},
+        {"t":"point","head":"不適切な判定","body":"s = 0は数字でない文字列で型の不一致になり得ます。String型はNullにならないためIsNull(s)はFalseです。Nothingはオブジェクト変数用で文字列比較には使えません。"}
+      ]
+    },
+    {
+      "title": "数値と日付の判定",
+      "goal": "判定関数の役割と入力チェックが分かる",
+      "cards": [
+        {"t":"point","head":"判定関数とは","body":"判定関数は値を調べ、TrueかFalseを返します。値の型を変換する関数ではありません。"},
+        {"t":"point","head":"IsNumeric","body":"IsNumericは値が数値として扱えるかを判定します。数値への変換はCLngやCDbl、文字数を数えるのはLenです。"},
+        {"t":"quiz","q":"b-f3-09"},
+        {"t":"point","head":"数値判定の例","body":"IsNumericでは、符号と小数点を含む\"-3.5\"はTrueです。\"12abc\"、空文字列、漢数字の\"三十\"は数値と解釈できずFalseです。"},
+        {"t":"point","head":"IsDate","body":"IsDateは値が日付として扱えるか判定します。\"2026/10/13\"はTrueです。存在しない13月45日や10月33日、英字を含む\"10/13/ABC\"はFalseです。"},
+        {"t":"quiz","q":"b-f3-10"},
+        {"t":"point","head":"数値入力の確認","body":"入力値sが数値ならLong型のnに入れるには、If IsNumeric(s) Then n = CLng(s)とします。調べるのは入力値sで、代入先nではありません。"},
+        {"t":"point","head":"判定の使い分け","body":"IsDateは日付、IsEmptyは未代入の判定です。どちらも数値入力の確認には使えません。"}
+      ]
+    },
+    {
+      "title": "未代入と空欄",
+      "goal": "Emptyと空文字列などの違いを説明できる",
+      "cards": [
+        {"t":"point","head":"IsEmpty","body":"IsEmptyはVariant型の変数が未代入かを調べます。一度も値が入っていなければTrueです。Variantは型を省略した変数の型です。"},
+        {"t":"point","head":"代入済みとの違い","body":"空文字列、数値の0、Nullを代入した場合は、いずれも値が入っているのでIsEmptyはFalseです。Nullは無効なデータを表す特殊な値です。"},
+        {"t":"quiz","q":"b-f3-11"},
+        {"t":"point","head":"型を省略した変数","body":"Dim vだけで宣言し未代入なら、vはVariant型でEmptyという状態です。TypeName(v)はEmpty、IsEmpty(v)はTrueです。Nullや空文字列とは異なります。"},
+        {"t":"point","head":"空白セルの値","body":"何も入力されていないセルのValueはEmptyです。IsEmptyはTrueになり、空文字列との比較もTrueです。数値比較では0とも等しく扱われます。","ex":"空白のA1ではIsEmpty(Range(\"A1\").Value)とRange(\"A1\").Value = \"\"はどちらもTrueです。"}
+      ]
+    },
+    {
+      "title": "型変換と計算",
+      "goal": "型変換と文字列の連結、数値の計算を区別する",
+      "cards": [
+        {"t":"point","head":"型変換の種類","body":"型変換関数は値を別のデータ型に変えます。CStrはString（文字列型）、CLngはLong（長整数型）、CDateはDate（日付型）に変換します。"},
+        {"t":"point","head":"文字数はLen","body":"CStrは値を文字列型に変換します。文字数を数えるのはLenです。CDateやCLngはそれぞれ日付型や長整数型に変換します。"},
+        {"t":"quiz","q":"b-f3-12"},
+        {"t":"point","head":"CLngの役割","body":"CLngは値をLong型に変換します。文字列の長さを返す関数ではありません。数字の文字列を変換すると、数値として計算できます。"},
+        {"t":"quiz","q":"b-f3-13"},
+        {"t":"point","head":"連結と足し算","body":"文字列どうしの + は連結です。InputBoxで3と4を入力した文字列を + すると34になり、エラーにはなりません。足し算にはCLng(a) + CLng(b)と変換します。"},
+        {"t":"point","head":"変換して足す","body":"CLng(\"12\") + CLng(\"30\")は数値どうしの足し算なので42です。変換しない文字列どうしなら1230と連結されます。数字だけの文字列はCLngで変換できます。"},
+        {"t":"point","head":"偶数への丸め","body":"CLngは小数を整数に変換します。ちょうど .5 の場合は偶数側へ丸め、2.5は2、3.5は4です。小数部は残らず、切り捨てるIntやFixとは異なります。"},
+        {"t":"point","head":"日付の変換手順","body":"日付の文字列sは、先にIsDate(s)で確認し、TrueのときだけCDate(s)で変換します。先にCDateを使うと、日付でない入力で実行時エラーになります。"},
+        {"t":"point","head":"日付確認の注意","body":"IsNumericは数値の判定で、日付の文字列の確認には使えません。IsDateは判定だけで変換しません。文字列sをCStrで変えても日付型にはなりません。"}
+      ]
+    },
+    {
+      "title": "型名を調べる",
+      "goal": "TypeNameが返す実際の型名を判断できる",
+      "cards": [
+        {"t":"point","head":"TypeNameの役割","body":"TypeNameは値の実際のデータ型名を文字列で返します。バイト数や変数名は返しません。数値かどうかの真偽値を返すのはIsNumericです。"},
+        {"t":"point","head":"実際の中身の型","body":"TypeNameは宣言上のVariantではなく中身の型名を返すため、結果にVariantは現れません。日付文字列をCDateで変換した後の型名はDateです。"},
+        {"t":"quiz","q":"b-f3-14"},
+        {"t":"point","head":"整数と型名","body":"整数リテラルがIntegerの範囲−32768〜32767を超えるとLongとして扱われます。70000の型名はLongです。小数点を含む数値の型名はDoubleです。"},
+        {"t":"point","head":"引用符と宣言","body":"引用符で囲んだ\"5\"の型名はStringです。Long型で宣言したnに5を入れても型名はLongです。型名を & で連結するとLongStringになります。"}
+      ]
+    },
+    {
+      "title": "シート関数",
+      "goal": "VBAからシート関数を正しい名前で呼び出す",
+      "cards": [
+        {"t":"point","head":"シート関数を呼ぶ","body":"Excelのシート関数はWorksheetFunction.関数名で呼びます。範囲rngの合計はWorksheetFunction.Sum(rng)、最大値はWorksheetFunction.Max(rng)です。"},
+        {"t":"point","head":"似た名前に注意","body":"WorksheetFunctionは単数形です。WorksheetFunctionsは存在せず、Worksheetはシートを表すオブジェクトでSumメソッドを持ちません。Application.Totalもありません。"},
+        {"t":"quiz","q":"b-f3-15"},
+        {"t":"point","head":"関数名の違い","body":"最大値を求める関数名はMaxです。WorksheetFunction.MaximumやApplication.Maximumは存在せず、rng.WorksheetFunctionというRangeのプロパティもありません。"},
+        {"t":"point","head":"VBA自身の関数","body":"LenはVBA自身の関数なのでそのまま呼べます。Sum、Average、MaxはVBA自身にはなく、単独ではエラーです。WorksheetFunctionを付けて呼びます。","ex":"Len(Range(\"A1\").Value)"}
+      ]
+    }
+  ]
+}

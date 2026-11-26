@@ -1,0 +1,115 @@
+{
+  "id": "l-r2",
+  "units": [
+    {
+      "title": "Offsetの方向",
+      "goal": "基準セルから移動先を求める",
+      "cards": [
+        {"t":"point","head":"位置をずらす","body":"Offsetは基準セルや範囲から、指定した行数と列数だけ離れた位置を指すプロパティです。引数は行、列の順です。"},
+        {"t":"point","head":"符号と方向","body":"行のプラスは下、マイナスは上です。列のプラスは右、マイナスは左です。0ならその方向には動きません。","ex":"A1のOffset(1, 0)はA2、Offset(0, 1)はB1です。"},
+        {"t":"quiz","q":"b-r2-01"},
+        {"t":"point","head":"行と列を読む","body":"Offsetでは行と列を別々に数えます。両方に値があれば両方向に動きます。","ex":"B3のOffset(0, 2)はD3、Offset(2, 0)はB5です。"},
+        {"t":"quiz","q":"b-r2-02"},
+        {"t":"point","head":"負の数で移動","body":"負の行数や列数も指定でき、エラーにはなりません。行なら上、列なら左へ動きます。","ex":"C5のOffset(-1, 0)はC4です。C3のOffset(0, -1)はB3です。"},
+        {"t":"quiz","q":"b-r2-03"},
+        {"t":"point","head":"セルへの入力","body":"Offsetで指したセルにValueを使って値を入力できます。Cellsでも同じように基準からずらします。","ex":"B2のOffset(2, 1)はC4です。Cells(5, 1)のOffset(-2, 3)はD3です。"}
+      ]
+    },
+    {
+      "title": "省略と範囲の移動",
+      "goal": "省略した引数と複数セルの移動を読める",
+      "cards": [
+        {"t":"point","head":"引数の省略","body":"Offsetで省略した引数は0として扱われます。行を省略して列を指定するときは、カンマを残します。","ex":"B2のOffset(, 1)はOffset(0, 1)と同じC2です。Offset(, -1)はA2です。"},
+        {"t":"quiz","q":"b-r2-15"},
+        {"t":"point","head":"範囲をそのまま移動","body":"複数セルにOffsetを使うと、大きさは変わらず範囲全体が動きます。範囲が広がることはありません。","ex":"A1:B2のOffset(1, 1)はB2:C3です。Offset(1, 0)ならA2:B3です。"},
+        {"t":"point","head":"位置と大きさ","body":"Offsetは位置を動かします。範囲の左上を変えずに大きさを変えるのはResizeです。","ex":"A1のOffset(3, 2)は単一セルのC4です。A1:B3にはなりません。"}
+      ]
+    },
+    {
+      "title": "Resizeで範囲変更",
+      "goal": "左上と行数・列数から範囲を求める",
+      "cards": [
+        {"t":"point","head":"大きさを指定","body":"Resizeは左上のセルを動かさず、範囲の大きさを指定し直すプロパティです。引数は行数、列数の順です。","ex":"A1のResize(2, 3)は2行3列のA1:C2です。"},
+        {"t":"quiz","q":"b-r2-04"},
+        {"t":"point","head":"似た操作との違い","body":"Offsetは位置を動かします。CurrentRegionは基準セルを含む連続した表を取得し、End(xlUp)は上方向のデータの端を探します。"},
+        {"t":"quiz","q":"b-r2-05"},
+        {"t":"point","head":"列数を省略","body":"Resizeの第2引数を省略すると、列数は元のままです。第1引数は行数です。","ex":"A1:C3のResize(2)は3列を保ち、2行のA1:C2になります。"},
+        {"t":"point","head":"順につなぐ","body":"OffsetとResizeを続けると左から順に評価します。移動後の左上を保って大きさを変えます。","ex":"B2のOffset(1, 1).Resize(2, 2)はC3:D4です。"}
+      ]
+    },
+    {
+      "title": "Copyと貼り付け",
+      "goal": "コピー元と貼り付け先を区別する",
+      "cards": [
+        {"t":"point","head":"Copyの向き","body":"Copyはセルの内容と書式をコピーします。ピリオドの前がコピー元、Destinationが貼り付け先です。","ex":"Range(\"A1\").Copy Destination:=Range(\"C1\")はA1からC1へコピーします。"},
+        {"t":"point","head":"元の内容は残る","body":"Copyでは元のセルにも内容が残ります。切り取って移動するのはCutです。値だけを貼る場合はPasteSpecialで指定します。"},
+        {"t":"quiz","q":"b-r2-06"},
+        {"t":"point","head":"貼り付け先の指定","body":"Destinationには貼り付け先の左上セルを1つ指定できます。コピー元と同じ行数・列数で貼り付けます。","ex":"A1:B3をD1にコピーすると、3行2列のD1:E3に貼られます。"},
+        {"t":"point","head":"貼り付け先の省略","body":"Destinationを省略するとクリップボードにコピーするだけで、自動では貼り付けません。PasteかPasteSpecialを別に実行します。"},
+        {"t":"quiz","q":"b-r2-07"}
+      ]
+    },
+    {
+      "title": "貼り付け内容の選択",
+      "goal": "PasteSpecialの種類とコピー枠の解除を知る",
+      "cards": [
+        {"t":"point","head":"値だけ貼る","body":"PasteSpecialは貼り付ける内容を選ぶ方法です。xlPasteValuesは数式ではなく計算結果の値だけを貼ります。"},
+        {"t":"point","head":"ほかの貼り付け","body":"・xlPasteFormulas：数式だけ\n・xlPasteFormats：罫線や色、表示形式など書式だけ\n・xlPasteColumnWidths：列幅だけ"},
+        {"t":"quiz","q":"b-r2-08"},
+        {"t":"point","head":"書式だけ貼る例","body":"コピー後、貼り付け先にPasteSpecialとxlPasteFormatsを指定すると、書式だけを貼れます。","ex":"Range(\"E1\").PasteSpecial xlPasteFormats"},
+        {"t":"point","head":"点滅枠を解除","body":"コピー後の点滅枠はApplication.CutCopyMode = Falseで解除します。PasteSpecialの後によく使います。"},
+        {"t":"point","head":"Applicationの違い","body":"ScreenUpdatingは画面更新、DisplayAlertsは確認メッセージ、EnableEventsはイベントの発生を制御します。点滅枠の解除とは別です。"}
+      ]
+    },
+    {
+      "title": "Endの方向",
+      "goal": "Endの移動方向と空白の手前での動きを知る",
+      "cards": [
+        {"t":"point","head":"Endとキー操作","body":"EndはCtrlと矢印キーを使った移動と同じ動きをするプロパティです。定数で方向を指定します。"},
+        {"t":"point","head":"方向の定数","body":"・xlUp：上、Ctrl+↑\n・xlDown：下、Ctrl+↓\n・xlToRight：右、Ctrl+→\n・xlToLeft：左"},
+        {"t":"quiz","q":"b-r2-10"},
+        {"t":"point","head":"連続データの端","body":"データのあるセルから下や右へEndで進むと、連続したデータの端で止まります。途中に空白があれば、その空白の手前です。","ex":"A1:A5とA7:A9に値がありA6が空なら、A1からxlDownでA5に止まります。"},
+        {"t":"quiz","q":"b-r2-12"},
+        {"t":"point","head":"右方向の例","body":"End(xlToRight)は必ずシートの最終列まで進むわけではありません。Ctrl+HomeはA1に戻る操作で、Endとは対応しません。","ex":"A1:D1に値がありE1が空なら、A1からxlToRightでD1に止まります。"}
+      ]
+    },
+    {
+      "title": "最終行を求める",
+      "goal": "最下行から上に探して最終行と追加位置を求める",
+      "cards": [
+        {"t":"point","head":"A列の最終行","body":"Cells(Rows.Count, 1).End(xlUp).Rowは、A列でデータがある最終行の行番号を返します。Rows.Countはシートの最下行の番号です。"},
+        {"t":"point","head":"下から探す理由","body":"A列の最下行から上へ進み、最初にデータがあるセルで止まります。途中に空白行があっても最終行を取得できます。","ex":"A1:A8、A10、A12に値があれば、結果は12です。"},
+        {"t":"quiz","q":"b-r2-11"},
+        {"t":"point","head":"最終列との違い","body":"この式は最初の空白行やシート全体の使用行数を求めるものではありません。最終列は右端から左へ探します。","ex":"Cells(1, Columns.Count).End(xlToLeft).Column"},
+        {"t":"point","head":"上から探す場合","body":"A1からのxlDownやCurrentRegionは空白行で区切られ、最終行に届かないことがあります。A1から右へ進んでも行番号は1のままです。"},
+        {"t":"point","head":"次の行へ追加","body":"最下行からEnd(xlUp)で最終セルを探し、Offset(1, 0)で1行下に移動して入力します。","ex":"Cells(Rows.Count, 1).End(xlUp).Offset(1, 0).Value = \"新\""},
+        {"t":"point","head":"追加時の注意","body":"Offsetを省くと最終セルを上書きします。A1から上へ探すとA1のままで、1行下はA2です。最下行からxlDownでは追加位置を求められません。"}
+      ]
+    },
+    {
+      "title": "表の範囲を取る",
+      "goal": "CurrentRegionとUsedRangeの基準を区別する",
+      "cards": [
+        {"t":"point","head":"CurrentRegion","body":"CurrentRegionは基準セルを含み、空白行と空白列で囲まれた連続範囲を返します。Ctrl+Shift+*と同じ範囲取得です。"},
+        {"t":"point","head":"空白行で区切る","body":"CurrentRegionは連続する行と列を含みます。空白行の先は含まず、1列だけに限りません。","ex":"A1:C5とA7:C9に値があり6行目が空なら、A1のCurrentRegionはA1:C5です。"},
+        {"t":"quiz","q":"b-r2-09"},
+        {"t":"point","head":"UsedRange","body":"UsedRangeは基準セルに依存せず、シートで使われたセルを含む範囲を返します。引数は取りません。行数や列数も調べられます。"},
+        {"t":"point","head":"選択範囲との違い","body":"選択中の範囲を返すのはSelectionです。UsedRangeは最後にコピーした範囲を返すものでもありません。"},
+        {"t":"quiz","q":"b-r2-13"},
+        {"t":"point","head":"列全体との違い","body":"EntireColumnは基準セルを含む列全体を返します。CurrentRegionのように連続した表の広がりを取得するものではありません。"}
+      ]
+    },
+    {
+      "title": "使用済み範囲の端",
+      "goal": "書式の影響と使用済み範囲の最後のセルを知る",
+      "cards": [
+        {"t":"point","head":"書式も使用済み","body":"UsedRangeは値が空でも書式や罫線のあるセルを使用済みとみなすため、見た目より大きくなることがあります。","ex":"A1:C5に値、A100に罫線だけがあると、UsedRangeはA1:C100で行数は100です。"},
+        {"t":"point","head":"先頭はA1とは限らない","body":"UsedRangeは使用済みセルを囲む範囲です。Addressは絶対参照の形式で返します。","ex":"B2:D6だけに値があり、他に書式もなければ、Addressは$B$2:$D$6です。"},
+        {"t":"point","head":"最後のセル","body":"SpecialCells(xlCellTypeLastCell)は使用済み範囲の最終行と最終列の交点を返します。そのセル自体は空でも構いません。","ex":"A1:D6とF2に値があれば、交点のF6を返します。"},
+        {"t":"quiz","q":"b-r2-14"},
+        {"t":"point","head":"最終行の使い分け","body":"SpecialCellsは数式や空白など種類を指定してセルを絞り込めます。最後のセルには書式も影響するため、列の実データの最終行にはEnd(xlUp)が適しています。"},
+        {"t":"point","head":"最終行から範囲へ","body":"Resizeの行数には最終行を求める式も渡せます。データ量に合わせて範囲を変えられます。","ex":"A1:A8に値があるとき、A1のResize(Cells(Rows.Count, 1).End(xlUp).Row, 3)はA1:C8です。"}
+      ]
+    }
+  ]
+}

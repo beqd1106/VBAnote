@@ -67,11 +67,12 @@ final class StudyStore: ObservableObject {
             if correct && !usedHint && item.reviewLevel >= SpacedRepetition.intervals.count - 1 {
                 context.delete(item)
             }
-        } else if !correct {
-            // 間違えた問題を新規に復習キューへ
-            let r = SpacedRepetition.next(currentLevel: 0, correct: false)
+        } else if !correct || usedHint {
+            // 間違えた問題、またはヒント・教材を見て正解した問題を新規に復習キューへ
+            // （ヒントつきの正解は自力ではないので、明日もう一度出す）
+            let r = SpacedRepetition.next(currentLevel: 0, correct: correct, usedHint: usedHint)
             context.insert(ReviewItem(questionId: questionId, nextReviewDate: r.nextDate,
-                                      reviewLevel: 0, lastResultCorrect: false))
+                                      reviewLevel: 0, lastResultCorrect: correct))
         }
     }
 

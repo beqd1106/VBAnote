@@ -98,3 +98,34 @@ struct GlossaryEntry: Codable, Identifiable, Hashable {
     let source: String?
     var id: String { term }
 }
+
+// MARK: - カード教材（長文を1枚150字以内のカードに分け、約3分の区切りごとに問題をはさむ）
+
+/// <key>_cards.json = { レッスンID: { units: [...] } }。Web版と同じデータ。
+struct LessonCards: Codable, Hashable {
+    let units: [CardUnit]
+}
+
+struct CardUnit: Codable, Hashable {
+    let title: String
+    let goal: String?
+    let cards: [CardItem]
+
+    var points: [CardItem] { cards.filter { $0.t == "point" } }
+    var quizIds: [String] { cards.compactMap { $0.t == "quiz" ? $0.q : nil } }
+    /// 読む目安：1分400字＋1問20秒（1分未満は1分）
+    var minutes: Int {
+        let chars = points.reduce(0) { $0 + ($1.body?.count ?? 0) + ($1.ex?.count ?? 0) }
+        let sec = Double(chars) / 400 * 60 + Double(quizIds.count) * 20
+        return max(1, Int((sec / 60).rounded()))
+    }
+}
+
+/// t = "point"（head・body・ex）か "quiz"（q = 問題ID）
+struct CardItem: Codable, Hashable {
+    let t: String
+    let head: String?
+    let body: String?
+    let ex: String?
+    let q: String?
+}

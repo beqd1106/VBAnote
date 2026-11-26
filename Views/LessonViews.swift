@@ -149,6 +149,16 @@ struct LessonDetailView: View {
     @State private var showDrill = false
     /// ドリルは毎回シャッフルして一定数だけ出題する。タップ時に確定してここへ入れる。
     @State private var drillQuestions: [QuizQuestion] = []
+    /// 教材の読み方（サクッと／ふつう／じっくり）。全レッスン共通で覚えておく。
+    @AppStorage(LessonMode.storageKey) private var modeRaw = LessonMode.card.rawValue
+    /// カードのモードで、下の長文を開いているか
+    @State private var showLongText = false
+
+    private var mode: LessonMode { LessonMode(rawValue: modeRaw) ?? .card }
+    private var cards: LessonCards? {
+        guard let c = ContentRepository.shared.cards[lesson.id], !c.units.isEmpty else { return nil }
+        return c
+    }
 
     /// 1回のドリルで出題する問題数
     private let drillSessionSize = 10
@@ -183,6 +193,11 @@ struct LessonDetailView: View {
                     }
                     Text(lesson.title).titleStyle()
 
+                    // 読み方の切り替え（カード教材があるレッスンだけ）
+                    if cards != nil {
+                        LessonModeSwitch(mode: Binding(get: { mode }, set: { modeRaw = $0.rawValue }))
+                    }
+
                     Card {
                         HStack(alignment: .top, spacing: Theme.Space.s) {
                             Image(systemName: "sparkles").foregroundStyle(Theme.orange)
@@ -190,8 +205,15 @@ struct LessonDetailView: View {
                         }
                     }
 
-                    // 本文の節＋出題ポイント（言葉と意味のカード）
-                    LessonSectionsView(lesson: lesson)
+                    // 本文：カードのモードなら区切りの一覧＋長文（たたんで置く）、じっくりなら今までの長文
+                    if let cards, mode != .long {
+                        CardUnitsSection(lesson: lesson, cards: cards, mode: mode)
+                        longTextToggle
+                        if showLongText { LessonSectionsView(lesson: lesson) }
+                    } else {
+                        // 本文の節＋出題ポイント（言葉と意味のカード）
+                        LessonSectionsView(lesson: lesson)
+                    }
 
                     // 基礎問題 → 確認問題 の順に解いてもらう。どちらも5問ずつのパターンA/B/Cから選ぶ
                     if !basicIds.isEmpty || !lesson.quizIds.isEmpty { stepsCard }
@@ -260,6 +282,28 @@ struct LessonDetailView: View {
                            questions: drillQuestions,
                            showLessonLink: false)
         }
+    }
+
+    /// カードのモードでも長文はいつでも読める（たたんだ状態で置く）
+    private var longTextToggle: some View {
+        Button {
+            withAnimation(.easeOut(duration: 0.2)) { showLongText.toggle() }
+        } label: {
+            HStack(spacing: Theme.Space.s) {
+                Image(systemName: "doc.text").font(.system(size: 14, weight: .semibold))
+                Text(showLongText ? "長文の教材をたたむ" : "長文の教材も読む").font(.system(size: 14, weight: .semibold))
+                Spacer()
+                Image(systemName: "chevron.down").font(.system(size: 12, weight: .bold))
+                    .rotationEffect(.degrees(showLongText ? 180 : 0))
+            }
+            .foregroundStyle(Theme.navy)
+            .padding(.horizontal, Theme.Space.l).padding(.vertical, 12)
+            .frame(maxWidth: .infinity)
+            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).stroke(Theme.line, lineWidth: 1.2))
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("longTextToggle")
     }
 
     // 基礎問題（STEP 1）→ 確認問題（STEP 2）の2段構え。どちらも5問ずつのパターンA/B/Cから選ぶ

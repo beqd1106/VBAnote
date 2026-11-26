@@ -1,4 +1,5 @@
 import XCTest
+import SwiftData
 @testable import VBAnote
 
 /// 純粋ロジックのユニットテスト（永続化やバンドルに依存しない部分を検証）。
@@ -440,5 +441,51 @@ final class LogicTests: XCTestCase {
         XCTAssertEqual(ListeningScript.thinkPause(base: 10, mastery: .weak), 13)   // 長くなりすぎない
         XCTAssertEqual(ListeningScript.thinkPause(base: 1, mastery: .solid), 1)    // 1秒より短くしない
         XCTAssertEqual(ListeningScript.thinkPause(base: 0, mastery: .weak), 0)     // 聞くだけはそのまま
+    }
+
+    // MARK: - カード教材
+
+    /// カード教材の問題IDはすべて実在し、どの区切りにも読むカードがある（全資格）
+    func testCardLessonsReferToRealQuestions() {
+        let original = ExamContext.current
+        defer { ExamContext.activate(original) }
+        var total = 0
+        for exam in ExamContext.all {
+            ExamContext.activate(exam)
+            let repo = ContentRepository.shared
+            let lessonIds = Set(repo.lessons.map(\.id))
+            for (lid, c) in repo.cards {
+                total += 1
+                XCTAssertTrue(lessonIds.contains(lid), "\(exam.key): カードのレッスン \(lid) が無い")
+                XCTAssertFalse(c.units.isEmpty, "\(exam.key)/\(lid): 区切りが空")
+                for u in c.units {
+                    XCTAssertFalse(u.points.isEmpty, "\(exam.key)/\(lid): 区切り「\(u.title)」に読むカードが無い")
+                    XCTAssertTrue(u.cards.allSatisfy { $0.t == "point" || $0.t == "quiz" }, "\(exam.key)/\(lid): 不明なカード")
+                    for q in u.quizIds {
+                        XCTAssertNotNil(repo.question(id: q), "\(exam.key)/\(lid): 問題 \(q) が無い")
+                    }
+                    XCTAssertGreaterThanOrEqual(u.minutes, 1)
+                }
+            }
+        }
+        XCTAssertGreaterThan(total, 0, "カード教材が1本も読めていない")
+    }
+
+    /// 教材やヒントを見て「初めて」正解した問題も、復習リストに入る（自力の正解とは区別する）
+    @MainActor
+    func testPeekedFirstCorrectGoesToReview() throws {
+        let container = try ModelContainer(
+            for: UserProfile.self, AnswerRecord.self, ReviewItem.self, QuestionMeta.self,
+            MockExamResult.self, LessonProgress.self, StudyDayLog.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        let store = StudyStore(context: container.mainContext)
+        let peeked = makeQuestion(id: "q-peek")
+        let plain = makeQuestion(id: "q-plain")
+        store.recordAnswer(question: peeked, correct: true, usedHint: true)
+        store.recordAnswer(question: plain, correct: true, usedHint: false)
+        let items = try container.mainContext.fetch(FetchDescriptor<ReviewItem>())
+        XCTAssertEqual(Set(items.map(\.questionId)), ["q-peek"], "見て正解は復習に入り、自力の正解は入らない")
+        XCTAssertEqual(items.first?.reviewLevel, 0)
+        XCTAssertGreaterThan(items.first?.nextReviewDate ?? .distantPast, Date(), "見て正解は明日以降に出す")
     }
 }

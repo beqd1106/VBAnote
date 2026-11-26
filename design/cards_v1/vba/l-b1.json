@@ -1,0 +1,125 @@
+{
+  "id": "l-b1",
+  "units": [
+    {
+      "title": "ブックを開く・作る",
+      "goal": "ブックの集まりと、開く・作る操作を区別する",
+      "cards": [
+        {"t":"point","head":"ブックの集まり","body":"ブックはExcelのファイルで、VBAではWorkbookオブジェクトとして扱います。Workbooksは、開いているブックの集まりです。"},
+        {"t":"point","head":"ほかの集まり","body":"WorksheetsやSheetsはブック内のシートの集まりです。Windowsはウィンドウの集まりです。"},
+        {"t":"quiz","q":"b-b1-14"},
+        {"t":"point","head":"OpenとAdd","body":"Workbooks.Openは保存済みの既存ファイルを開きます。Workbooks.Addは空の新しいブックを作ります。"},
+        {"t":"point","head":"似た操作との違い","body":"Workbooks.Itemは開いているブックを取り出します。Closeは閉じる操作です。どちらもファイルを開きません。"},
+        {"t":"quiz","q":"b-b1-01"},
+        {"t":"point","head":"新規ブックの名前","body":"Addで作ったブックには、保存までBook2のような仮の連番名が付きます。Sheet1のような名前はシートの名前です。"},
+        {"t":"point","head":"シートの追加","body":"Worksheets.Addはシートを1枚追加します。ブック自体は作りません。"},
+        {"t":"quiz","q":"b-b1-02"}
+      ]
+    },
+    {
+      "title": "開く場所を指定",
+      "goal": "Openの引数と、ファイルがない場合を理解する",
+      "cards": [
+        {"t":"point","head":"Filenameの指定","body":"Workbooks.OpenのFilenameには、場所と名前を含むフルパスを文字列で渡します。整数やシート名ではありません。","ex":"Workbooks.Open Filename:=\"C:\\Data\\売上.xlsx\""},
+        {"t":"point","head":"名前付き引数","body":"名前付き引数は「引数名:=値」と書き、パスは円記号で区切ります。パスワードはFilenameではなくPasswordに渡します。"},
+        {"t":"quiz","q":"b-b1-03"},
+        {"t":"point","head":"存在しないパス","body":"存在しないパスでOpenを実行すると、実行時エラーでマクロが中断します。空のブックや同名ファイルは自動作成されません。"},
+        {"t":"point","head":"新しく作るには","body":"新しいファイルを作るときは、Workbooks.Addでブックを作り、SaveAsで名前を付けて保存します。"},
+        {"t":"quiz","q":"b-b1-15"},
+        {"t":"point","head":"戻り値を受け取る","body":"Openで開いたブックを変数に受け取るときはSetを使い、引数を括弧で囲みます。Filenameの指定は必要です。","ex":"Set wb = Workbooks.Open(Filename:=\"...\")"},
+        {"t":"point","head":"括弧の使い分け","body":"Openの戻り値を使わない場合は、引数を括弧なしで書けます。括弧の有無で読み取り専用になったり引数が無視されたりはしません。"}
+      ]
+    },
+    {
+      "title": "保存方法を選ぶ",
+      "goal": "上書き、名前を付けた保存、控えの作成を区別する",
+      "cards": [
+        {"t":"point","head":"Saveで上書き","body":"Saveは今のファイル名と保存場所のまま上書き保存します。Filename引数はなく、名前を変える用途には使えません。"},
+        {"t":"point","head":"名前を付けて保存","body":"SaveAsはFilenameに新しい保存先のフルパスを渡して保存します。保存後は開いているブックの名前も変わり、ブックは閉じません。"},
+        {"t":"quiz","q":"b-b1-04"},
+        {"t":"point","head":"控えだけを作る","body":"SaveCopyAsは別名の控えを作ります。開いているブックの名前は変わらず、そのブック自体は上書きされません。"},
+        {"t":"point","head":"SaveAsの書き方","body":"SaveAsの第1引数はFilenameです。名前付きで指定でき、Filename:=を省いて値だけを渡すこともできます。","ex":"ActiveWorkbook.SaveAs \"C:\\Data\\新規.xlsx\""},
+        {"t":"point","head":"保存と開く操作","body":"ファイルを開くのはWorkbooks.Openです。WorkbookのOpenではありません。Activateは最前面にするだけで、保存機能もFilename引数もありません。"},
+        {"t":"quiz","q":"b-b1-05"},
+        {"t":"point","head":"同名ファイルの確認","body":"SaveAsで同名ファイルがあると、既定では上書きするか確認が表示されます。DisplayAlertsがFalseなら確認なしで上書きされます。"}
+      ]
+    },
+    {
+      "title": "閉じるときの変更",
+      "goal": "変更を保存するか指定してブックを閉じる",
+      "cards": [
+        {"t":"point","head":"Closeの引数","body":"Closeはブックを閉じます。SaveChangesにTrueを指定すると確認なしで保存して閉じ、Falseなら変更を破棄して閉じます。"},
+        {"t":"point","head":"保存せず閉じる","body":"SaveにはSaveChanges引数がありません。DisplayAlertsは確認表示の設定で、ブックを閉じる命令ではありません。","ex":"ActiveWorkbook.Close SaveChanges:=False"},
+        {"t":"quiz","q":"b-b1-06"},
+        {"t":"point","head":"引数を省略すると","body":"SaveChangesを省略して変更が残っていると、保存の確認が表示され、利用者が答えるまでマクロは止まります。省略は構文エラーではありません。"},
+        {"t":"point","head":"保存して閉じる","body":"確認なしで保存して閉じるには、Close SaveChanges:=Trueと明示するのが最も確実です。別名で保存するにはSaveAsを使います。"},
+        {"t":"quiz","q":"b-b1-07"},
+        {"t":"point","head":"Excel本体は残る","body":"Closeはブックだけを閉じ、Excel本体は動いたままです。Application.QuitはExcel本体を終了します。SaveとActivateは閉じません。"}
+      ]
+    },
+    {
+      "title": "確認メッセージ",
+      "goal": "確認の抑止と他の設定を区別する",
+      "cards": [
+        {"t":"point","head":"確認を表示しない","body":"Application.DisplayAlertsをFalseにすると、確認が表示されず、既定の応答で処理が進みます。保存すると決める設定ではありません。"},
+        {"t":"point","head":"ほかの設定との違い","body":"画面更新の停止はApplication.ScreenUpdating、エラーを無視して次に進むのはOn Error Resume Nextです。DisplayAlertsは読み取り専用にも変更しません。"},
+        {"t":"quiz","q":"b-b1-13"},
+        {"t":"point","head":"設定する順番","body":"確認を消す手順は、Falseにする、SaveAsなどの処理をする、Trueに戻す、の順です。処理後にFalseにしても、その確認には間に合いません。"},
+        {"t":"point","head":"処理後に戻す","body":"DisplayAlertsをTrueに戻さないと、後続の処理でも警告が出ない状態が続きます。同名ファイルへのSaveAsでは別名にならず上書きされます。"}
+      ]
+    },
+    {
+      "title": "自分と前面のブック",
+      "goal": "ThisWorkbookとActiveWorkbookの指す先を見分ける",
+      "cards": [
+        {"t":"point","head":"マクロ自身","body":"ThisWorkbookはマクロが書かれたブック自身を指します。別のブックを前面にしても指す先は変わりません。"},
+        {"t":"point","head":"前面のブック","body":"ActiveWorkbookは最前面で操作中のブックを指します。Workbooks(1)は最初に開いたブック、ActiveSheetは操作中のシートです。"},
+        {"t":"quiz","q":"b-b1-08"},
+        {"t":"point","head":"開くと前面に","body":"Openで開いたブックやAddで作ったブックは自動的にアクティブになります。アクティブなブックは同時に1つです。"},
+        {"t":"point","head":"指す先の例","body":"マクロのブックAからBを開くと、ThisWorkbookはAのまま、ActiveWorkbookはBになります。Addの後にOpenすると最後に開いたほうが前面です。"},
+        {"t":"point","head":"使い分け","body":"自身の場所や保存にはThisWorkbook、利用者が前面に出したブックの操作にはActiveWorkbookを使います。保存済みか新規かによる違いではありません。"},
+        {"t":"point","head":"閉じた後の前面","body":"開いたブックを閉じると残ったブックが前面に戻ります。マクロのブックだけが残れば、ActiveWorkbook.Nameはそのブックの名前です。"}
+      ]
+    },
+    {
+      "title": "ブックの指定と操作",
+      "goal": "指すブックを確かめてコピーや保存を行う",
+      "cards": [
+        {"t":"point","head":"セルの書き込み先","body":"マクロのブックMからNを開いた後は、ThisWorkbookのA1はM、ActiveWorkbookのA1はNです。それぞれに別の値を書き込めます。"},
+        {"t":"quiz","q":"b-b1-09"},
+        {"t":"point","head":"新規ブックへコピー","body":"Addの後のActiveWorkbookは新規ブックです。ThisWorkbookのシートからコピーし、DestinationにActiveWorkbookのシートを指定できます。"},
+        {"t":"point","head":"自身を確実に保存","body":"他のブックを開閉した後もマクロ自身を上書き保存するならThisWorkbook.Saveです。ActiveWorkbook.Saveはその時点の前面のブックを保存します。"},
+        {"t":"point","head":"自身を閉じると","body":"ThisWorkbook.Closeはマクロ自身のブックを閉じます。実行中のコードも閉じられ、次の行のMsgBoxなどは実行されません。"}
+      ]
+    },
+    {
+      "title": "場所と名前を取得",
+      "goal": "Path・Name・FullNameの範囲を見分ける",
+      "cards": [
+        {"t":"point","head":"ブックのPath","body":"Pathはブックの保存フォルダのパスを返します。ファイル名も末尾の円記号も付きません。"},
+        {"t":"point","head":"名前とフルパス","body":"Nameはファイル名だけ、FullNameは保存場所とファイル名を含むフルパスを返します。Application.PathはExcel本体のフォルダです。"},
+        {"t":"quiz","q":"b-b1-10"},
+        {"t":"point","head":"Application","body":"ApplicationプロパティはExcel本体を表すオブジェクトを返します。パスの文字列を返すものではありません。"},
+        {"t":"point","head":"同じフォルダを開く","body":"Pathの末尾には円記号がないため、&で円記号とファイル名をつなぎます。省くとフォルダ名とファイル名がくっつき、見つかりません。","ex":"Workbooks.Open ThisWorkbook.Path & \"\\売上.xlsx\""},
+        {"t":"point","head":"連結の間違い","body":"Nameはフォルダの場所ではありません。FullNameはすでにファイル名を含むため、その後に別のファイル名をつないでも正しいパスになりません。"},
+        {"t":"quiz","q":"b-b1-11"},
+        {"t":"point","head":"未保存のPath","body":"一度も保存していないブックのPathは空文字列です。エラーや既定フォルダにはなりません。Pathを使うマクロは先に保存します。"},
+        {"t":"point","head":"未保存時の連結","body":"空のPathに「\\売上.xlsx」をつなぐと、フォルダのない不完全なパスになり、ファイルを開けません。"}
+      ]
+    },
+    {
+      "title": "複数ブックを指定",
+      "goal": "名前と番号での指定、およびブック数を理解する",
+      "cards": [
+        {"t":"point","head":"名前で指定","body":"Workbooks(\"売上.xlsx\")は開いているブックを名前で指定します。保存済みなら拡張子まで書きます。括弧内はフォルダ名やシート名、パスワードではありません。"},
+        {"t":"point","head":"名前が違うと","body":"名前が一致しないと実行時エラーになります。拡張子を省いても見つかりません。前面かどうか、読み取り専用か、DisplayAlertsの設定は検索に関係しません。"},
+        {"t":"quiz","q":"b-b1-12"},
+        {"t":"point","head":"番号で指定","body":"Workbooks(1)の番号は開いた順です。閉じると残りの番号は前に詰まるため、状況によって指すブックが変わります。"},
+        {"t":"point","head":"番号が詰まる例","body":"A、B、Cの順に開いてAを閉じると、Bが1番、Cが2番です。3番や4番を指定すると範囲外のエラーになります。"},
+        {"t":"point","head":"ブックの数","body":"Workbooks.Countは、保存やマクロの有無に関係なく、今開いているブックの数を返します。シートの数はWorksheets.Countです。"},
+        {"t":"point","head":"対象を明示する","body":"複数ブックの操作はWorkbooks(\"名前\")から明示すると、前面の変化に左右されません。省略するとアクティブなブックが対象です。"},
+        {"t":"point","head":"コピー元とコピー先","body":"Copyの前がコピー元、Destinationがコピー先です。ブック名から明示すれば前面に左右されません。Copyでは元が残り、元を空にするのはCutです。"}
+      ]
+    }
+  ]
+}

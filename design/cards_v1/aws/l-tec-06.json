@@ -1,0 +1,117 @@
+{
+  "id": "l-tec-06",
+  "units": [
+    {
+      "title": "データの形",
+      "goal": "RDBとNoSQLの形と選び方を説明する",
+      "cards": [
+        {"t":"point","head":"表で扱うRDB","body":"リレーショナルデータベース（RDB）は、表と行でデータを管理します。列構成を事前に決め、複数の表を結合して使います。","ex":"Excelのシートのような表と行です。"},
+        {"t":"quiz","q":"b-tec-06-11"},
+        {"t":"point","head":"SQLとは","body":"SQLはデータベースの検索・追加・更新に使う言語です。サーバー起動、画像圧縮、通信の暗号化の方式ではありません。"},
+        {"t":"quiz","q":"b-tec-06-12"},
+        {"t":"point","head":"柔軟なNoSQL","body":"NoSQLはSQLを主に使わないDBの総称です。スキーマ（データの構造）を事前に厳密に固定せず、柔軟に変更できます。"},
+        {"t":"quiz","q":"b-tec-06-10"},
+        {"t":"point","head":"形と目的で選ぶ","body":"DBの種類は、表・キー・グラフなどのデータの形と、分析・高速化などの目的から選びます。人数、設置場所、請求日は第一の軸ではありません。"},
+        {"t":"quiz","q":"b-tec-06-13"}
+      ]
+    },
+    {
+      "title": "RDSと運用",
+      "goal": "RDSの対応エンジンと運用分担を説明する",
+      "cards": [
+        {"t":"point","head":"RDSは表形式DB","body":"Amazon RDSは、AWSに運用を任せられるリレーショナルDBです。表形式のデータをSQLで扱いたいときに使います。"},
+        {"t":"point","head":"対応エンジン","body":"RDSはMySQL、PostgreSQL、MariaDB、Oracle、SQL Serverなどに対応します。単一の独自エンジンだけではありません。"},
+        {"t":"quiz","q":"b-tec-06-09"},
+        {"t":"point","head":"AWSと利用者の分担","body":"RDSではAWSがDBソフトのパッチ適用、バックアップ、障害復旧を行います。テーブル設計、画面デザイン、データ入力は利用者の仕事です。"},
+        {"t":"quiz","q":"b-tec-06-14"},
+        {"t":"point","head":"EC2との違い","body":"EC2は仮想サーバーで、DBサービスそのものではありません。EC2に自分でDBを入れる場合は、DBの運用も利用者が行います。"},
+        {"t":"point","head":"Auroraの特徴","body":"Amazon AuroraはAWSが最適化した高性能・高可用なRDBです。MySQLとPostgreSQLに互換性があり、RDSの一種として提供されます。"}
+      ]
+    },
+    {
+      "title": "RDSの運用機能",
+      "goal": "障害対策と読み取り性能の機能を区別する",
+      "cards": [
+        {"t":"point","head":"マルチAZ配置","body":"マルチAZ配置は、別のアベイラビリティーゾーン（AZ）に待機用の複製を持ちます。障害時に自動で切り替え、可用性を高めます。"},
+        {"t":"quiz","q":"b-tec-06-03"},
+        {"t":"point","head":"リードレプリカ","body":"リードレプリカは、読み取り専用の複製を増やして読み取りの負荷を分散し、性能を高めます。障害時の自動切り替えはマルチAZの目的です。"},
+        {"t":"quiz","q":"b-tec-06-04"},
+        {"t":"point","head":"自動バックアップ","body":"自動バックアップやスナップショットは、ある時点のデータ状態を保存し、障害時などに復元するために使います。"},
+        {"t":"quiz","q":"b-tec-06-06"},
+        {"t":"point","head":"接続の負荷を抑える","body":"Amazon RDS Proxyは、アプリとRDS・Auroraの間でDB接続をプール・共有します。多数の接続による負荷を抑え、可用性を高めます。"}
+      ]
+    },
+    {
+      "title": "Auroraの構成",
+      "goal": "負荷に応じた増減と同時書き込みを区別する",
+      "cards": [
+        {"t":"point","head":"Serverless","body":"Aurora Serverlessは、アクセス量などの負荷に応じて処理能力を自動で増減する構成です。使った分だけの運用がしやすくなります。"},
+        {"t":"point","head":"同時書き込み","body":"Aurora Multi-Masterは、複数ノードで同時に書き込みを受け付ける構成の名称です。負荷に応じた能力の増減とは区別します。"},
+        {"t":"quiz","q":"b-tec-06-07"}
+      ]
+    },
+    {
+      "title": "DynamoDB",
+      "goal": "高速なNoSQLと関連機能を説明する",
+      "cards": [
+        {"t":"point","head":"キーと値で管理","body":"Amazon DynamoDBは、キーと値の組で管理するNoSQLです。ドキュメントも扱え、柔軟なデータ構造を使えます。"},
+        {"t":"point","head":"高速・自動スケール","body":"DynamoDBはフルマネージドでサーバーレスです。ミリ秒単位で応答し、アクセスの急増にも自動でスケールするため、サーバー管理は不要です。"},
+        {"t":"point","head":"DAXは専用キャッシュ","body":"DAX（DynamoDB Accelerator）はDynamoDB専用のインメモリキャッシュです。メモリ上の一時記憶で、マイクロ秒級の応答を実現します。"},
+        {"t":"quiz","q":"b-tec-06-05"},
+        {"t":"point","head":"複数地域で使う","body":"DynamoDBのグローバルテーブルは、複数リージョンに自動でデータを複製します。各地で低遅延の読み書きと高可用性を実現します。"},
+        {"t":"point","head":"変更を検知する","body":"DynamoDB Streamsは、DynamoDBのデータ変更を検知して連携する仕組みです。"}
+      ]
+    },
+    {
+      "title": "メモリで高速化",
+      "goal": "キャッシュとインメモリDBの役割を区別する",
+      "cards": [
+        {"t":"point","head":"ElastiCache","body":"Amazon ElastiCacheはRedis・Memcached互換のインメモリキャッシュです。よく使うデータをサーバーのメモリに置きます。"},
+        {"t":"quiz","q":"b-tec-06-15"},
+        {"t":"point","head":"読み取りを高速化","body":"ElastiCacheはよく使うデータをDBの手前に置き、問い合わせを減らします。読み取りが集中してDBが遅いとき、負荷を下げて応答を速くできます。"},
+        {"t":"point","head":"保存場所の違い","body":"ElastiCacheの一時記憶はメモリ上です。RDSなどのDBはディスクに保存し、S3はオブジェクトを保存するストレージです。"},
+        {"t":"point","head":"MemoryDB","body":"Amazon MemoryDBはRedis互換で耐久性も備えたインメモリDBです。マイクロ秒級の超高速な読み書きに使います。"},
+        {"t":"point","head":"似た対策との違い","body":"Glacierはアーカイブ、Athenaは分析用です。VPCをサブネットに分けることも、読み取り負荷を下げるキャッシュの代わりにはなりません。"}
+      ]
+    },
+    {
+      "title": "用途別のDB",
+      "goal": "分析・関係性・文書向けのDBを選ぶ",
+      "cards": [
+        {"t":"point","head":"関係性はNeptune","body":"Amazon NeptuneはグラフDBです。人と人のつながりのような点と線の関係を扱い、ノードとエッジを高速にたどれます。"},
+        {"t":"point","head":"文書はDocumentDB","body":"Amazon DocumentDBはMongoDB互換のドキュメント型DBです。文書の集まりとして、JSONに近い柔軟な形式のデータを扱います。"},
+        {"t":"quiz","q":"b-tec-06-02"},
+        {"t":"point","head":"分析はRedshift","body":"Amazon Redshiftは大規模な集計・分析に特化したデータウェアハウス（分析用データの倉庫）です。列指向で保存し、複雑な分析クエリを高速に処理します。","ex":"全社の売上データをまとめて集計・分析します。"},
+        {"t":"point","head":"運用と分析の違い","body":"RDSは日常の取引処理向け、DynamoDBは運用系NoSQLです。大規模分析にはRedshiftを使い、ElastiCacheはキャッシュに使います。"}
+      ]
+    },
+    {
+      "title": "さらに用途別に選ぶ",
+      "goal": "時系列・ワイドカラム・台帳の用途を区別する",
+      "cards": [
+        {"t":"point","head":"時系列はTimestream","body":"Amazon Timestreamは時系列データの保存・分析に特化したDBです。Redshiftは汎用の分析用データウェアハウスで、時系列専用ではありません。","ex":"IoTセンサーの計測値や運用メトリクスを扱います。"},
+        {"t":"point","head":"Keyspaces","body":"Amazon KeyspacesはApache Cassandra互換のマネージドなワイドカラム型DBです。DocumentDBの文書型やNeptuneのグラフ型とは異なります。"},
+        {"t":"quiz","q":"b-tec-06-01"},
+        {"t":"point","head":"台帳はQLDB","body":"Amazon QLDBは、すべての変更を改ざん不能・検証可能な形で完全に記録する台帳型DBです。監査証跡が重要な用途に適します。"},
+        {"t":"point","head":"DBの組合せ","body":"・RDS：リレーショナル\n・DynamoDB：キー・バリューのNoSQL\n・Neptune：グラフ\n・Redshift：分析用データウェアハウス"},
+        {"t":"point","head":"キャッシュとの違い","body":"ElastiCacheはインメモリキャッシュです。Redshiftはキャッシュでもキー・バリュー型NoSQLでもなく、DynamoDBは分析特化の倉庫ではありません。"}
+      ]
+    },
+    {
+      "title": "移行と周辺サービス",
+      "goal": "DBの移行と検索・処理サービスを区別する",
+      "cards": [
+        {"t":"point","head":"構造を変換する","body":"AWS SCTは、異なる種類のDB間でテーブル構造などのスキーマを変換するツールです。データそのものの移行は担いません。"},
+        {"t":"quiz","q":"b-tec-06-08"},
+        {"t":"point","head":"データを移行する","body":"AWS DMSは、稼働中のDBを止めずに、または最小限の停止時間でAWSへ移行します。同種・異種DB間に対応し、SCTと併用されることもあります。"},
+        {"t":"point","head":"検索とバッチ処理","body":"Kendraは機械学習を活用し、社内文書などを自然言語で検索します。AWS Batchは計算資源を自動確保し、大量のバッチジョブを実行します。"},
+        {"t":"point","head":"ログを検索・分析","body":"Amazon OpenSearch Serviceは、ログやテキストの全文検索・分析と、ダッシュボードでの可視化に使うマネージドサービスです。"},
+        {"t":"point","head":"周辺サービス①","body":"・SQS：メッセージキュー\n・Budgets：予算アラート\n・EBS：EC2用のブロックストレージ\n・Route 53：DNSと名前解決"},
+        {"t":"point","head":"周辺サービス②","body":"・CloudWatch：監視とログ収集\n・Athena：S3への分析クエリ\n・Kinesis：リアルタイムデータ処理\n・Macie：機密データの検出"},
+        {"t":"point","head":"周辺サービス③","body":"・Cognito：アプリ認証\n・KMS：暗号鍵の管理\n・Artifact：コンプライアンス文書\n・IAM：権限管理"},
+        {"t":"point","head":"周辺サービス④","body":"・WAF：Webアプリ防御\n・CloudFront：コンテンツ配信\n・SNS：通知\n・Lambda：コード実行"},
+        {"t":"point","head":"VPCとS3","body":"VPCは仮想ネットワークを構築するサービスです。S3はファイルなどのオブジェクト保存に使い、S3 Glacierはアーカイブに使います。"}
+      ]
+    }
+  ]
+}

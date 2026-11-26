@@ -133,6 +133,8 @@ struct QuizPlayerView: View {
                     // 解いている途中でも教材を開ける（答える前は答えが分からないよう強調しない）
                     if !isSubmitted, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
                         Button {
+                            // 答える前に教材を見たら、正解しても「自力」とは数えない（復習に残す）
+                            hintUsedIndices.insert(index)
                             readerItem = LessonReaderItem(lesson: lesson, focusKey: nil)
                         } label: {
                             Label("教材", systemImage: "book")
@@ -305,6 +307,7 @@ struct QuizPlayerView: View {
             // 3段目：それでも分からなければ教材へ（答える前なので強調はしない）
             if hintLevel >= 1, let lesson = ContentRepository.shared.lesson(forQuestion: current) {
                 Button {
+                    hintUsedIndices.insert(index)
                     readerItem = LessonReaderItem(lesson: lesson, focusKey: nil)
                 } label: {
                     HStack(spacing: 6) {
@@ -401,7 +404,7 @@ struct QuizPlayerView: View {
 
                 // ヒントつきの正解は「自力」ではないので、復習リストに残すことを伝える
                 if usedHint && isCorrect {
-                    Text("ヒントを使ったので、この問題は復習リストに残します。")
+                    Text("ヒントや教材を使ったので、この問題は復習リストに残します。")
                         .font(.system(size: 12)).foregroundStyle(Theme.inkSoft)
                 }
 

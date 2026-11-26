@@ -1,0 +1,110 @@
+{
+  "id": "l-tec-12",
+  "units": [
+    {
+      "title": "分析の流れとデータ",
+      "goal": "分析の流れとデータの保存先を説明できる",
+      "cards": [
+        {"t":"point","head":"分析の流れ","body":"データ分析は、集める→ためる→整える→調べる→見せる、の順に進みます。"},
+        {"t":"point","head":"データレイク","body":"データレイクは、表に整える前のものも含め、形式を問わずデータをそのまま大量にためる場所です。"},
+        {"t":"quiz","q":"b-tec-12-08"},
+        {"t":"point","head":"レイクの置き場","body":"データレイクには、大量のデータを保存できるオブジェクトストレージのAmazon S3がよく使われます。"},
+        {"t":"point","head":"分析用の倉庫","body":"データウェアハウス（DWH）は、分析しやすく整理した大量のデータをため、集計・分析する保管庫です。"},
+        {"t":"point","head":"湖と倉庫の違い","body":"データレイクは整える前のデータもそのままためます。DWHは整理したデータを集計・分析します。"}
+      ]
+    },
+    {
+      "title": "SQLとAthena",
+      "goal": "S3を直接調べる方法と必要なものが分かる",
+      "cards": [
+        {"t":"point","head":"問い合わせる言語","body":"SQLは、データベースやS3のデータに問い合わせ、集計・分析する言語です。AthenaとRedshiftはSQLを使います。"},
+        {"t":"quiz","q":"b-tec-12-13"},
+        {"t":"point","head":"Athenaで直接分析","body":"Amazon Athenaは、S3のデータをSQLで直接分析するサービスです。サーバーやデータベースの事前構築、データの移動は不要です。"},
+        {"t":"quiz","q":"b-tec-12-01"},
+        {"t":"point","head":"利用者が用意する物","body":"Athenaでは分析用サーバーの用意は不要です。S3上の分析データ、SQL文、結果をどう使うかの判断は利用者が用意します。"},
+        {"t":"quiz","q":"b-tec-12-07"},
+        {"t":"point","head":"手軽な都度分析","body":"Athenaはサーバーレスで、都度の手軽な分析に向きます。実行したクエリ（問い合わせ）に対して課金されます。","ex":"S3のアクセスログをDBへ移さず集計します。"},
+        {"t":"point","head":"SQL以外の書式","body":"HTMLはWebページの構造、YAMLは設定など、JSONはデータを表すためのものです。いずれも問い合わせ言語ではありません。"}
+      ]
+    },
+    {
+      "title": "大規模分析と可視化",
+      "goal": "RedshiftとQuickSightの役割を区別できる",
+      "cards": [
+        {"t":"point","head":"RedshiftはDWH","body":"Amazon Redshiftは、大量のデータを蓄積し、継続的に集計・分析するデータウェアハウスです。"},
+        {"t":"quiz","q":"b-tec-12-02"},
+        {"t":"point","head":"手軽と本格","body":"AthenaはS3のデータを手軽に都度分析します。Redshiftは全社の大量データなどを継続的に分析する本格的な基盤です。"},
+        {"t":"point","head":"BIとは","body":"BIはBusiness Intelligenceの略です。データの分析・可視化を経営や業務の判断に生かす考え方です。"},
+        {"t":"quiz","q":"b-tec-12-11"},
+        {"t":"point","head":"QuickSightで見せる","body":"Amazon QuickSightは、分析結果をグラフやダッシュボードにして共有するBIサービスです。","ex":"経営層に分析結果をグラフで共有します。"},
+        {"t":"quiz","q":"b-tec-12-05"},
+        {"t":"point","head":"分析と可視化","body":"AthenaとRedshiftは分析を担う別々のサービスです。可視化専用ではなく、QuickSightも分析クエリ自体は行いません。"}
+      ]
+    },
+    {
+      "title": "流れるデータと一括処理",
+      "goal": "KinesisとEMRの処理方式を区別できる",
+      "cards": [
+        {"t":"point","head":"Kinesisで取り込む","body":"Amazon Kinesisは、センサーやログなど絶え間なく流れるデータをリアルタイムに取り込み、処理します。"},
+        {"t":"point","head":"リアルタイム処理","body":"リアルタイム処理（ストリーム処理）は、発生したデータをその場で逐次処理する方式です。Kinesisが担います。"},
+        {"t":"point","head":"バッチ処理","body":"バッチ処理は、ためたデータを一括でまとめて処理する方式です。Amazon EMRが得意とします。"},
+        {"t":"quiz","q":"b-tec-12-15"},
+        {"t":"point","head":"EMRの分散処理","body":"Amazon EMRは、HadoopやSparkという分散処理の仕組みを使い、ためた大量データをまとめて分析するマネージドサービスです。"},
+        {"t":"quiz","q":"b-tec-12-06"},
+        {"t":"point","head":"その場とまとめて","body":"Kinesisは流れるデータをその場で処理し、EMRはためたデータをまとめて処理します。Redshiftはバッチ的な分析向けです。"},
+        {"t":"quiz","q":"b-tec-12-10"}
+      ]
+    },
+    {
+      "title": "分析の下ごしらえ",
+      "goal": "GlueのETLと分析・可視化の役割を区別できる",
+      "cards": [
+        {"t":"point","head":"Glueで整える","body":"AWS Glueは、分析前にデータを抽出・変換・統合するETLを行い、分析しやすい形に整えます。"},
+        {"t":"quiz","q":"b-tec-12-04"},
+        {"t":"point","head":"ETLの中身","body":"ETLは、データを取り出し（抽出）、使いやすい形に変え（変換）、まとめる（統合）処理です。異なる形式のデータを分析基盤へ渡します。"},
+        {"t":"point","head":"整えるから見せるへ","body":"Glueで整えた後、QuickSightで見せます。QuickSightはETLを行わず、Glueは可視化を担当しません。"},
+        {"t":"quiz","q":"b-tec-12-09"},
+        {"t":"point","head":"分析の工程と担当","body":"・集める：Kinesis\n・ためる：S3\n・整える：Glue\n・調べる：Athena、Redshift、EMR"},
+        {"t":"point","head":"最後は見せる","body":"分析結果を見せる役はQuickSightです。Kinesisはリアルタイム取込、AthenaはS3のSQL分析を担います。"}
+      ]
+    },
+    {
+      "title": "監視とログの区別",
+      "goal": "監視、操作履歴、ログ検索のサービスを選べる",
+      "cards": [
+        {"t":"point","head":"性能を監視","body":"Amazon CloudWatchは、EC2などのCPU使用率やメモリ使用状況を継続監視します。しきい値を超えると通知や自動アクションを起こせます。"},
+        {"t":"point","head":"ログを集める","body":"Amazon CloudWatch Logsは、アプリやシステムのログを収集・保存し、検索やフィルタリングに使います。"},
+        {"t":"quiz","q":"b-tec-12-03"},
+        {"t":"point","head":"操作履歴を記録","body":"AWS CloudTrailは、API操作の履歴を記録する監査ログです。性能監視やログの全文検索とは役割が違います。"},
+        {"t":"point","head":"ログを全文検索","body":"Amazon OpenSearch Serviceは、ログの全文検索、リアルタイム分析、ダッシュボードでの可視化に適したマネージドサービスです。"}
+      ]
+    },
+    {
+      "title": "DBと保存先の区別",
+      "goal": "分析以外のDBやストレージの用途を区別できる",
+      "cards": [
+        {"t":"point","head":"複数地域のDB","body":"Amazon Aurora Global Databaseは、複数リージョンへ低遅延で複製するリレーショナルDBです。地理的な災害対策と各地での高速な読み取りに使います。"},
+        {"t":"point","head":"容量が変動するDB","body":"Amazon Aurora Serverlessは、需要に応じて容量を自動増減し、使った分だけ課金します。使用量が読みにくい変動的・断続的な用途に向きます。"},
+        {"t":"point","head":"固定容量との違い","body":"容量固定のインスタンス構成では、容量を手動で決めます。Aurora Serverlessのように需要に応じて自動増減しません。"},
+        {"t":"point","head":"DBとキャッシュ","body":"DynamoDBはキーと値で扱う高速なNoSQLです。RDSは業務処理向けのリレーショナルDB、ElastiCacheはDBを高速化するインメモリキャッシュです。"},
+        {"t":"point","head":"保存先の違い","body":"EBSはEC2に接続する仮想ディスクです。S3 Glacierは長期アーカイブ向けで、リアルタイム処理には使いません。"},
+        {"t":"quiz","q":"b-tec-12-14"}
+      ]
+    },
+    {
+      "title": "周辺サービスの役割",
+      "goal": "分析以外の選択肢を役割から見分けられる",
+      "cards": [
+        {"t":"point","head":"ライセンス管理","body":"AWS License Managerは、ソフトウェアライセンスの割り当て、利用状況の追跡、上限管理を行い、違反やコスト超過を防ぎます。"},
+        {"t":"point","head":"認証と通知","body":"Amazon Cognitoはアプリ利用者の認証を行います。SNSはメッセージの発行と一斉通知、SQSはメッセージキューです。"},
+        {"t":"point","head":"攻撃への防御","body":"AWS WAFはWebアプリへの攻撃を防ぎ、AWS ShieldはDDoS攻撃を防ぎます。"},
+        {"t":"point","head":"鍵と権限","body":"AWS KMSは暗号鍵を管理し、AWS IAMはアクセス権限を管理します。"},
+        {"t":"point","head":"費用と監査資料","body":"AWS Budgetsは予算アラートなどのコスト管理、AWS Artifactは監査資料の入手に使います。"},
+        {"t":"point","head":"配信と名前解決","body":"Amazon CloudFrontはコンテンツ配信（CDN）、Amazon Route 53はDNSのサービスです。エッジロケーションは利用者の近くから配信する拠点です。"},
+        {"t":"point","head":"その他の役割","body":"Amazon Rekognitionは画像認識、EC2は仮想サーバーです。Auto Scalingはサーバー台数を増減します。"},
+        {"t":"point","head":"運用と接続","body":"Systems ManagerはOSの更新配布などのパッチ管理に使います。VPNは暗号化トンネルによる接続です。リードレプリカはDBの読み取りを分散する複製です。"},
+        {"t":"quiz","q":"b-tec-12-12"}
+      ]
+    }
+  ]
+}

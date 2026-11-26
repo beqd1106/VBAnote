@@ -1,0 +1,104 @@
+{
+  "id": "l-tec-13",
+  "units": [
+    {
+      "title": "モデルを作る・使う",
+      "goal": "SageMakerとBedrockを使い分ける",
+      "cards": [
+        {"t":"point","head":"独自モデルを作る","body":"Amazon SageMakerは、機械学習モデルの構築・学習・デプロイを一貫して行う土台です。デプロイとは本番で使えるように公開することです。"},
+        {"t":"point","head":"学習済みモデルを使う","body":"Amazon Bedrockは、複数の生成AIの基盤モデルを選び、APIで利用するサービスです。自作せずにチャットや文章生成をアプリに組み込めます。"},
+        {"t":"quiz","q":"b-tec-13-01"},
+        {"t":"point","head":"基盤モデルとは","body":"基盤モデルは、大量のデータで事前に学習済みの大規模なモデルです。文章生成・要約・チャットなど幅広い用途に使えます。"},
+        {"t":"point","head":"用途を取り違えない","body":"文書画像の文字を読むのはTextract、料金の見積もりはAWS Pricing Calculatorです。基盤モデルは利用者が毎回一から学習させるものではありません。"},
+        {"t":"quiz","q":"b-tec-13-02"},
+        {"t":"point","head":"Bedrockで行うこと","body":"利用者は使うモデルを選び、アプリからAPIを呼び出します。生成したい内容を指示しますが、基盤モデルを一から学習させる必要はありません。"},
+        {"t":"quiz","q":"b-tec-13-10"}
+      ]
+    },
+    {
+      "title": "完成したAIを使う",
+      "goal": "完成済みAIとアシスタントの特徴を知る",
+      "cards": [
+        {"t":"point","head":"すぐ使えるAI","body":"完成済みのAIサービスは、専門知識がなくてもAPIで使えます。自分でモデルを学習させる必要はありません。"},
+        {"t":"point","head":"利用時の条件","body":"すぐ使えるAIサービスは、利用した分の料金がかかり、ネットワーク経由で使います。独自モデルが必要ならSageMakerを使います。"},
+        {"t":"quiz","q":"b-tec-13-07"},
+        {"t":"point","head":"生成AIの助手","body":"Amazon Qは、業務の質問への回答や開発・業務の作業を手伝う生成AIアシスタントです。"},
+        {"t":"point","head":"用途で選ぶ","body":"SageMakerはモデル自作の土台、Rekognitionは画像認識、Pollyは文字を音声にする完成APIです。"},
+        {"t":"quiz","q":"b-tec-13-06"}
+      ]
+    },
+    {
+      "title": "音声と画像を扱う",
+      "goal": "音声変換と画像認識を使い分ける",
+      "cards": [
+        {"t":"point","head":"音声を文字に","body":"Amazon Transcribeは、通話や録音の音声を文字に起こします。Amazon Pollyは逆に、文字を自然な音声で読み上げます。"},
+        {"t":"point","head":"翻訳と文書の読取","body":"Amazon Translateは文章を別の言語に翻訳します。Amazon Textractは文書画像やPDFから文字や表を読み取ります。"},
+        {"t":"quiz","q":"b-tec-13-03"},
+        {"t":"point","head":"画像や動画を認識","body":"Amazon Rekognitionは、画像や動画から物体や顔を認識します。写真に不適切な画像や特定の物体が含まれるかも判定できます。"},
+        {"t":"point","head":"入力の違い","body":"Rekognitionは映像を解析します。通話などの音声はTranscribe、請求書の文字情報はTextractが扱います。Amazon Forecastは予測のサービスです。"},
+        {"t":"quiz","q":"b-tec-13-11"}
+      ]
+    },
+    {
+      "title": "文章と書類を扱う",
+      "goal": "文章解析・翻訳・書類の読み取りを区別する",
+      "cards": [
+        {"t":"point","head":"文章の内容を解析","body":"Amazon Comprehendは、文章の感情やキーフレーズ、エンティティを取り出す自然言語処理サービスです。", "ex":"商品レビューが肯定的か否定的かを判定します。"},
+        {"t":"point","head":"書類から情報を抽出","body":"Amazon Textractは文書の画像やPDFから文字・表・項目の値を取り出します。Transcribeは画像ではなく音声を文字にします。", "ex":"請求書のスキャンから日付や金額を読み取ります。"},
+        {"t":"quiz","q":"b-tec-13-04"},
+        {"t":"quiz","q":"b-tec-13-05"},
+        {"t":"point","head":"文章を翻訳","body":"Amazon Translateは文章を別の言語に訳します。Comprehendは文章の感情などを解析し、Rekognitionは画像の物体などを認識します。", "ex":"英語の文章を日本語に翻訳します。"},
+        {"t":"quiz","q":"b-tec-13-13"}
+      ]
+    },
+    {
+      "title": "検索とおすすめ",
+      "goal": "検索・会話・おすすめのサービスを選ぶ",
+      "cards": [
+        {"t":"point","head":"社内文書を検索","body":"Amazon Kendraは、社内文書を自然な質問文で検索できるエンタープライズ検索サービスです。"},
+        {"t":"point","head":"会話を作る","body":"Amazon Lexは、音声やテキストで会話するチャットボットを構築します。Kendraの検索やTranslateの翻訳とは役割が異なります。"},
+        {"t":"quiz","q":"b-tec-13-09"},
+        {"t":"point","head":"好みに合わせて提案","body":"Amazon Personalizeは、利用者の好みに合わせておすすめ商品を表示します。"},
+        {"t":"point","head":"処理の対象を区別","body":"Rekognitionは画像、Comprehendは文章、Transcribeは音声を扱います。Personalizeは利用者に合わせたおすすめに使います。"},
+        {"t":"quiz","q":"b-tec-13-12"}
+      ]
+    },
+    {
+      "title": "機械学習の流れ",
+      "goal": "学習から推論までの工程を説明する",
+      "cards": [
+        {"t":"point","head":"データの準備","body":"学習前にデータを収集し、前処理で整えます。データセットは学習や評価に使うデータのまとまりです。"},
+        {"t":"point","head":"学習と公開","body":"学習は用意したデータからモデルを作り、育てる工程です。その後、デプロイでモデルを本番用に公開します。"},
+        {"t":"quiz","q":"b-tec-13-15"},
+        {"t":"point","head":"推論と監視","body":"推論は学習済みモデルに新しいデータを入れ、予測や結果を出す処理です。監視は動いているシステムの状態を見守ることです。"},
+        {"t":"point","head":"モデルの接続先","body":"エンドポイントは、モデルを呼び出すための接続先です。前処理は学習前のデータ準備で、推論とは異なります。"},
+        {"t":"point","head":"生成AIへの指示","body":"プロンプトは、生成AIに回答や文章を作らせるために入力する指示や質問の文です。推論という処理とは別の言葉です。"}
+      ]
+    },
+    {
+      "title": "別分野のサービス①",
+      "goal": "インフラ・管理・通信の役割を区別する",
+      "cards": [
+        {"t":"point","head":"地理的な構成","body":"AWSのグローバルインフラはリージョンとアベイラビリティーゾーン（AZ）で構成されます。"},
+        {"t":"point","head":"通信と権限","body":"セキュリティグループは通信の許可・拒否を制御する仮想ファイアウォールです。IAMロールはアクセス権限の仕組みです。"},
+        {"t":"quiz","q":"b-tec-13-08"},
+        {"t":"point","head":"リソースの管理","body":"AWS Resource Groupsとタグエディタは、タグでリソースをまとめて管理・操作しやすくします。"},
+        {"t":"point","head":"料金と台数","body":"リザーブドインスタンスは長期利用で料金が割引される購入方式です。Auto Scalingは需要に応じて台数を自動で増減します。"},
+        {"t":"point","head":"APIとファイル転送","body":"Amazon API GatewayはLambdaなどへのREST/HTTP APIの受け口を管理します。AWS Transfer FamilyはSFTP/FTPSなどでS3やEFSへファイルを転送します。"},
+        {"t":"point","head":"高速化と配信","body":"Amazon ElastiCacheは読み取り負荷を減らすインメモリキャッシュです。Kinesis Data FirehoseはストリーミングデータをS3やRedshiftへほぼリアルタイムに配信します。"}
+      ]
+    },
+    {
+      "title": "別分野のサービス②",
+      "goal": "保存・分析・セキュリティなどの役割を区別する",
+      "cards": [
+        {"t":"point","head":"保存と計算","body":"S3はデータ保存、S3 Glacierは長期アーカイブ用です。EBSはEC2用の仮想ディスク、EC2は仮想サーバーです。"},
+        {"t":"point","head":"分析と可視化","body":"AthenaはS3データのSQL分析、Redshiftは分析用データウェアハウス、QuickSightは可視化のBIです。"},
+        {"t":"quiz","q":"b-tec-13-14"},
+        {"t":"point","head":"ネットワークと配信","body":"VPCは仮想ネットワーク、Route 53はDNSによる名前解決、CloudFrontはコンテンツ配信です。SQSはメッセージキューです。"},
+        {"t":"point","head":"守る対象の違い","body":"KMSは暗号鍵を管理し、WAFはWebアプリを防御し、ShieldはDDoSを防御します。"},
+        {"t":"point","head":"そのほかの役割","body":"Budgetsは予算超過の通知、RDSはデータベース、SNSは通知の配信、Artifactはコンプライアンス文書の取得に使います。"}
+      ]
+    }
+  ]
+}

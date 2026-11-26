@@ -19,6 +19,22 @@ enum LessonText {
         let desc: String
     }
 
+    /// 文に一番近い本文の節（2文字の組の重なりが最多）。重なりが無ければ nil。
+    static func nearestSection(_ lesson: Lesson, to text: String) -> Int? {
+        func grams(_ s: String) -> Set<String> {
+            let c = Array(s.filter { !$0.isWhitespace })
+            guard c.count >= 2 else { return [] }
+            return Set((0..<(c.count - 1)).map { String(c[$0...$0 + 1]) })
+        }
+        let g = grams(text)
+        var best: (i: Int, n: Int)? = nil
+        for (i, s) in lesson.sections.enumerated() where s.heading != pointsHeading {
+            let n = grams(s.heading + s.body).intersection(g).count
+            if n > (best?.n ?? 0) { best = (i, n) }
+        }
+        return best?.i
+    }
+
     static func points(_ body: String) -> [Point] {
         body.split(separator: "\n").compactMap { raw in
             var line = String(raw)
@@ -35,6 +51,8 @@ enum LessonText {
 struct LessonSectionsView: View {
     let lesson: Lesson
     var focusKey: String? = nil
+    /// カードから開いたとき：この文に一番近い節へスクロールして枠で示す（答えの強調ではない）
+    var nearText: String? = nil
 
     /// 強調する場所。出題ポイントにあればそれを優先し、無ければ言葉を含む最初の本文の節。
     private var hitPoint: String? {
@@ -45,6 +63,7 @@ struct LessonSectionsView: View {
         return nil
     }
     private var hitSection: Int? {
+        if focusKey == nil, let near = nearText { return LessonText.nearestSection(lesson, to: near) }
         guard let key = focusKey, hitPoint == nil else { return nil }
         return lesson.sections.firstIndex { $0.heading != LessonText.pointsHeading && $0.body.contains(key) }
     }
@@ -61,11 +80,14 @@ struct LessonSectionsView: View {
                         if hit, let key = focusKey {
                             Label("「\(key)」はこの節に出てきます", systemImage: "arrow.down.circle.fill")
                                 .font(.system(size: 12, weight: .bold)).foregroundStyle(Theme.orange)
+                        } else if hit {
+                            Label("いま読んでいたカードは、このあたりです", systemImage: "arrow.down.circle.fill")
+                                .font(.system(size: 12, weight: .bold)).foregroundStyle(Theme.blue)
                         }
                         GlossaryText(text: section.body, size: 15, color: Theme.ink, lineSpacing: 4)
                     }
                 }
-                .overlay(RoundedRectangle(cornerRadius: Theme.Radius.card).stroke(hit ? Theme.orange : .clear, lineWidth: 2))
+                .overlay(RoundedRectangle(cornerRadius: Theme.Radius.card).stroke(hit ? (focusKey == nil ? Theme.blue : Theme.orange) : .clear, lineWidth: 2))
                 .id(hit ? "lesson-hit" : "section-\(i)")
             }
         }
@@ -102,7 +124,11 @@ struct LessonReaderItem: Identifiable {
     let lesson: Lesson
     /// 答え合わせ後だけ渡す（答える前に開いたときは答えが分からないよう強調しない）
     let focusKey: String?
-    var id: String { lesson.id + "|" + (focusKey ?? "") }
+    /// 下のボタンの文言（カードから開いたときは「カードに戻る」）
+    var backTitle: String = "問題に戻る"
+    /// カードから開いたとき、いま読んでいた所に近い節へスクロールする
+    var nearText: String? = nil
+    var id: String { lesson.id + "|" + (focusKey ?? "") + "|" + (nearText ?? "") }
 }
 
 struct LessonReaderSheet: View {
@@ -124,13 +150,13 @@ struct LessonReaderSheet: View {
                                     GlossaryText(text: item.lesson.summary, size: 14, weight: .medium, color: Theme.ink)
                                 }
                             }
-                            LessonSectionsView(lesson: item.lesson, focusKey: item.focusKey)
+                            LessonSectionsView(lesson: item.lesson, focusKey: item.focusKey, nearText: item.nearText)
                         }
                         .padding(Theme.Space.l)
                         .padding(.bottom, 96)
                     }
                     .onAppear {
-                        guard item.focusKey != nil else { return }
+                        guard item.focusKey != nil || item.nearText != nil else { return }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
                             withAnimation(.easeOut(duration: 0.3)) { proxy.scrollTo("lesson-hit", anchor: .center) }
                         }
@@ -138,7 +164,7 @@ struct LessonReaderSheet: View {
                 }
                 VStack {
                     Spacer()
-                    PrimaryButton(title: "問題に戻る") { dismiss() }
+                    PrimaryButton(title: item.backTitle) { dismiss() }
                         .padding(.horizontal, Theme.Space.l)
                         .padding(.bottom, Theme.Space.s)
                         .accessibilityIdentifier("lessonSheetBack")

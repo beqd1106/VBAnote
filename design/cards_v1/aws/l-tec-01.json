@@ -1,0 +1,94 @@
+{
+  "id": "l-tec-01",
+  "units": [
+    {"title":"仮想サーバー","goal":"EC2の役割と関連する用語を説明できる","cards":[
+      {"t":"point","head":"サービスの分類","body":"AWSのサービスは、計算・保存・データベース・ネットワークなどの技術分野で分類できます。"},
+      {"t":"point","head":"EC2とインスタンス","body":"Amazon EC2は、OSやアプリを自由に構成できる仮想サーバーです。起動したサーバー1台をインスタンスと呼びます。"},
+      {"t":"quiz","q":"b-tec-01-11"},
+      {"t":"point","head":"EC2の管理","body":"EC2はOSから自分で管理できます。OS更新やディスク増設、再起動も利用者が行います。"},
+      {"t":"point","head":"EC2の使いどころ","body":"常時起動のWebサーバーや、既存アプリをほぼ改修せず移行しOSを管理し続ける場合に向きます。常時起動中は未使用の時間も課金されます。"},
+      {"t":"point","head":"起動のひな形","body":"AMIはOSや初期ソフトを含むEC2起動用のひな形です。EBSスナップショットはボリュームのバックアップで、起動のひな形ではありません。"},
+      {"t":"point","head":"ディスクの用語","body":"Amazon EBSはEC2用のディスクです。EC2に接続するディスクのような保存領域をボリュームと呼びます。"}
+    ]},
+    {"title":"実行と自動調整","goal":"LambdaとEC2の動き方を区別できる","cards":[
+      {"t":"point","head":"Lambdaの実行","body":"AWS Lambdaは、イベントをきっかけにコードを自動実行し、処理が終わると終了します。","ex":"S3にファイルがアップロードされたときに処理を実行します。"},
+      {"t":"point","head":"関数とイベント","body":"Lambdaで実行するコードの単位は関数です。リクエストやファイルのアップロードなどが実行のきっかけになります。"},
+      {"t":"quiz","q":"b-tec-01-14"},
+      {"t":"point","head":"サーバーレス","body":"サーバーレスでも裏側にサーバーはあります。準備やOS更新、台数調整をAWSが担い、利用者はコードに集中できます。"},
+      {"t":"quiz","q":"b-tec-01-15"},
+      {"t":"point","head":"Lambdaの料金と用途","body":"Lambdaは実行回数や時間など使った分だけ課金され、待機コストがありません。不定期で短時間の処理に向き、常駐アプリには不向きです。"},
+      {"t":"point","head":"台数と負荷の調整","body":"EC2 Auto Scalingは需要に合わせてインスタンスの台数を増減します。ELBは複数のインスタンスにアクセスを振り分けます。"},
+      {"t":"quiz","q":"b-tec-01-06"},
+      {"t":"point","head":"組み合わせて使う","body":"Auto ScalingとELBは別の役割です。台数調整とアクセスの振り分けを組み合わせ、可用性を高めます。"}
+    ]},
+    {"title":"ファイルの保存","goal":"S3の保存方法と関連サービスを区別できる","cards":[
+      {"t":"point","head":"S3の保存先","body":"Amazon S3はファイルをオブジェクトとして高い耐久性で保存します。まずバケットという入れ物を作り、その中に保存します。"},
+      {"t":"point","head":"バケットの名前","body":"S3のバケット名は世界中で重複しない名前にします。S3には大量のデータを容量を気にせず格納できます。"},
+      {"t":"quiz","q":"b-tec-01-12"},
+      {"t":"point","head":"保存の種類","body":"S3 Glacierはアーカイブ用、EFSは共有ファイル用のストレージです。EBSはEC2用のディスクです。"},
+      {"t":"point","head":"保存とネットワーク","body":"Amazon VPCはAWS上に作る自分専用の仮想ネットワークです。ファイル保存はVPCではなくS3の役割です。"},
+      {"t":"point","head":"保存と配信","body":"S3単体は保存を担います。世界中の利用者に近い拠点からコンテンツを高速配信するのはCloudFrontです。"}
+    ]},
+    {"title":"表形式のDB","goal":"RDSと分析用DBなどを使い分けられる","cards":[
+      {"t":"point","head":"RDSの役割","body":"Amazon RDSは表形式のリレーショナルデータベースを扱うサービスです。構築やパッチ適用、バックアップなどをAWSに任せられます。"},
+      {"t":"point","head":"利用できるエンジン","body":"RDSではMySQLやPostgreSQLなどのデータベースエンジンを使えます。EC2にMySQLを自前構築すると運用は自己管理です。"},
+      {"t":"quiz","q":"b-tec-01-13"},
+      {"t":"point","head":"Auroraの特徴","body":"Amazon AuroraはMySQL・PostgreSQL互換のRDSファミリーです。標準より高い性能と可用性を持ち、表形式のSQLデータを扱います。"},
+      {"t":"point","head":"分析とグラフ","body":"Redshiftは大量データを集計・分析するデータウェアハウスです。Neptuneはつながりを表すグラフデータに特化したDBです。"},
+      {"t":"point","head":"NoSQLと配信","body":"DynamoDBはキーと値の組み合わせを扱うNoSQLです。SQSはメッセージをため、CloudFrontはコンテンツを配信します。"},
+      {"t":"quiz","q":"b-tec-01-02"},
+      {"t":"point","head":"記録と集計の違い","body":"RDSは注文や会員情報など日々の業務データを記録・更新します。Redshiftは大量データの集計・分析に使い、常時稼働なら常時課金されます。"},
+      {"t":"quiz","q":"b-tec-01-03"},
+      {"t":"point","head":"テーブル","body":"データベースでデータを表形式で持つ単位をテーブルと呼びます。"}
+    ]},
+    {"title":"高速なデータ処理","goal":"NoSQLとキャッシュの用途を区別できる","cards":[
+      {"t":"point","head":"ElastiCache","body":"Amazon ElastiCacheはよく使うデータを高速なメモリに一時的に置き、DBへの問い合わせを減らして応答を速くします。"},
+      {"t":"point","head":"永続保存との違い","body":"ElastiCacheは一時的な高速アクセス用です。ディスクベースで永続化するRDS・DynamoDB・S3とは用途が異なります。"},
+      {"t":"quiz","q":"b-tec-01-09"},
+      {"t":"point","head":"DynamoDB","body":"Amazon DynamoDBはキーと値の組み合わせで扱うNoSQLデータベースです。RDSやAuroraのような表形式のSQLデータベースとは異なります。"},
+      {"t":"point","head":"高速応答と拡張","body":"DynamoDBはミリ秒単位で応答し、自動でスケールします。大量アクセスが発生するゲームのスコア保存などに向きます。"},
+      {"t":"point","head":"分析のサービス","body":"Amazon Athenaはデータのクエリ分析に使います。Amazon EMRはSparkやHadoopを使う大規模データ処理・分析をマネージドで実行します。"}
+    ]},
+    {"title":"通知とメッセージ","goal":"ためる仕組みと一斉通知を区別できる","cards":[
+      {"t":"point","head":"SQSはためる","body":"Amazon SQSはメッセージをキューという待ち行列にためます。受け取る側が自分のペースで取り出し、アプリ同士を疎結合にします。"},
+      {"t":"point","head":"SNSは一斉に配る","body":"Amazon SNSは1つのメッセージをメール・SMS・アプリなど複数の宛先に一斉配信する通知サービスです。"},
+      {"t":"quiz","q":"b-tec-01-04"},
+      {"t":"quiz","q":"b-tec-01-05"},
+      {"t":"point","head":"メールと販促","body":"Amazon SESはメール送信に特化します。Amazon Pinpointはマーケティング配信に特化します。"},
+      {"t":"point","head":"SNSとSQSの違い","body":"SNSは複数の宛先に通知を配ります。SQSはメッセージをため、受信側が取り出して処理します。"}
+    ]},
+    {"title":"名前と配信","goal":"名前解決と高速配信の役割を説明できる","cards":[
+      {"t":"point","head":"Route 53","body":"Amazon Route 53はドメイン名をIPアドレスに変換するDNSサービスです。ドメイン名そのものの登録・管理もできます。"},
+      {"t":"point","head":"担当外の役割","body":"Route 53はIAMユーザー管理、EC2の台数調整、S3の容量管理を担当しません。"},
+      {"t":"quiz","q":"b-tec-01-07"},
+      {"t":"point","head":"CloudFront","body":"Amazon CloudFrontは、拠点にコンテンツをキャッシュし、利用者の近くから高速配信するCDNです。CDNはコンテンツ配信ネットワークです。"},
+      {"t":"point","head":"接続の高速化","body":"AWS Global Acceleratorは世界中からの接続を高速化します。AWS Direct Connectは専用線でオンプレミスとAWSを接続します。"},
+      {"t":"point","head":"監視と権限","body":"CloudWatchはメトリクスやログを集めて監視し、アラーム通知の基盤になります。IAMは利用者やアプリの権限を管理します。"}
+    ]},
+    {"title":"APIと認証","goal":"APIの窓口と処理の実行を区別できる","cards":[
+      {"t":"point","head":"API Gateway","body":"Amazon API Gatewayはアプリが呼び出すAPIを作成・公開・管理する窓口です。認証やアクセス制御も扱います。"},
+      {"t":"point","head":"窓口と実行","body":"API GatewayはLambdaなどのバックエンドと連携できます。APIの窓口と、処理を実行するLambdaは別の役割です。"},
+      {"t":"quiz","q":"b-tec-01-10"},
+      {"t":"point","head":"APIと利用者認証","body":"AWS AppSyncはGraphQL APIに特化します。Amazon Cognitoは利用者やアプリの認証を担います。"},
+      {"t":"point","head":"暗号鍵と防御","body":"AWS KMSは暗号鍵を作成・管理します。AWS WAFはWebアプリを防御します。"}
+    ]},
+    {"title":"開発と公開","goal":"コードの保管から公開までの役割を区別できる","cards":[
+      {"t":"point","head":"環境ごと任せる","body":"Elastic Beanstalkはコードをアップロードするだけで、サーバー構築や環境設定、運用をAWSに任せてアプリを公開できます。"},
+      {"t":"point","head":"他の管理手段","body":"CloudFormationはテンプレートでインフラを構築し、Systems ManagerはEC2などの運用を管理します。Direct Connectは専用線で接続します。"},
+      {"t":"quiz","q":"b-tec-01-01"},
+      {"t":"point","head":"開発の工程","body":"CodeCommitはGitリポジトリにソースコードを保管します。CodeBuildはコンパイル・テスト・成果物作成を自動化します。"},
+      {"t":"point","head":"アプリの配布","body":"CodeDeployはビルド済みアプリをEC2やLambda、ECSなどへ自動で配布・展開します。ビルド自体はCodeBuildの役割です。"},
+      {"t":"point","head":"手軽な公開","body":"Lightsailはサーバー・ストレージ・固定IPなどをまとめたプランです。小規模サイトやブログ、個人開発を手軽に始められます。"},
+      {"t":"point","head":"アプリの実行環境","body":"App Runnerはコンテナ化したアプリやソースからWebアプリやAPIを公開し、自動スケールします。Fargateはサーバー管理なしのコンテナ実行環境です。"},
+      {"t":"point","head":"ブラウザで開発","body":"AWS Cloud9はブラウザで使う統合開発環境です。コードの記述・実行・デバッグをまとめて行えます。"}
+    ]},
+    {"title":"インフラの管理","goal":"テンプレートによる構築と運用管理を区別できる","cards":[
+      {"t":"point","head":"CloudFormation","body":"AWS CloudFormationはテンプレートに書いたとおりにインフラを自動構築・管理します。構成をコード化し、繰り返し再現できます。"},
+      {"t":"point","head":"IaCとは","body":"IaCはインフラをコードで管理する仕組みです。CloudFormationのテンプレートによる構築はIaCにあたります。"},
+      {"t":"quiz","q":"b-tec-01-08"},
+      {"t":"point","head":"構築と運用","body":"Elastic Beanstalkはコードを渡して環境ごと任せます。CloudFormationはテンプレートどおりにインフラを再現します。"},
+      {"t":"point","head":"運用管理","body":"Systems ManagerはEC2などの運用管理をまとめて行います。OpsWorksは構成管理ツールを使ったサーバー管理サービスです。"},
+      {"t":"point","head":"その他の役割","body":"Budgetsは予算アラート、Artifactは監査文書の入手・閲覧、Macieは機密データ検出、Pricing Calculatorは費用の見積もりを担います。"}
+    ]}
+  ]
+}
